@@ -31,6 +31,38 @@ def load_json(path: Path) -> Any:
         ) from exc
 
 
+def validate_url_collection(value: Any, label: str, field: str) -> list[str]:
+    """Validate URL collections used by both legacy and newer catalog records.
+
+    Catalog files historically used two equivalent shapes:
+    - a list of URL strings; or
+    - a mapping of descriptive names to URL strings.
+
+    Both are preserved because named mappings carry useful provenance while compact
+    catalogs often only need an ordered list.
+    """
+    if value is None:
+        return []
+
+    if isinstance(value, list):
+        if all(isinstance(url, str) and url.strip() for url in value):
+            return []
+        return [f"{label}: {field} list entries must be non-empty strings"]
+
+    if isinstance(value, dict):
+        if all(
+            isinstance(name, str)
+            and name.strip()
+            and isinstance(url, str)
+            and url.strip()
+            for name, url in value.items()
+        ):
+            return []
+        return [f"{label}: {field} mapping keys and values must be non-empty strings"]
+
+    return [f"{label}: {field} must be a list of strings or a string-to-string mapping"]
+
+
 def validate_hardware_record(record: Any, source: Path, index: int) -> list[str]:
     """Validate the minimum normalized shape of one hardware record."""
     errors: list[str] = []
@@ -49,11 +81,7 @@ def validate_hardware_record(record: Any, source: Path, index: int) -> list[str]
         errors.append(f"{label}: pricing must be a list when present")
 
     for url_field in ("vendor_urls", "source_urls"):
-        urls = record.get(url_field)
-        if urls is None:
-            continue
-        if not isinstance(urls, list) or any(not isinstance(url, str) for url in urls):
-            errors.append(f"{label}: {url_field} must be a list of strings")
+        errors.extend(validate_url_collection(record.get(url_field), label, url_field))
 
     return errors
 
