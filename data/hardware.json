@@ -1,7 +1,15 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "last_updated": "2026-08-15",
-  "currency_note": "Prices are point-in-time observations and must include region/date before comparison.",
+  "pricing_policy": {
+    "observed_at": "2026-08-15",
+    "notes": [
+      "Prices are point-in-time observations and must be compared with currency, region, configuration, tax, shipping and availability.",
+      "Official manufacturer/vendor pricing is preferred. Secondary-market pricing should be stored separately as observed_used or observed_refurbished.",
+      "Null price means no defensible public price was found, not that the product is free."
+    ],
+    "price_types": ["msrp", "vendor_sale", "vendor_store", "observed_new", "observed_used", "quote_only", "unavailable"]
+  },
   "hardware": [
     {
       "id": "amd-ryzen-ai-max-pro-400-family",
@@ -16,14 +24,12 @@
       "memory_gb_max": 192,
       "gpu_addressable_memory_gb_max": 160,
       "memory_type": "unified system memory",
-      "memory_bandwidth_gbps": null,
       "power_w": {"min": 45, "max": 120, "kind": "platform_class_configurable"},
-      "software": ["ROCm expected", "Vulkan expected", "PyTorch ecosystem"],
-      "price": null,
-      "availability_note": "AMD announced next-generation Ryzen AI Halo developer platform availability beginning Q3 2026.",
-      "evidence": "manufacturer",
+      "pricing": [{"kind": "unavailable", "availability": "not_yet_public", "observed_at": "2026-08-15", "note": "Platform announced; OEM system pricing not yet established."}],
+      "vendor_urls": {"manufacturer_product": "https://www.amd.com/en/blogs/2026/amd-powers-next-generation-agent-computers-with-new-ryzen-ai-hal.html"},
+      "technical_documentation": {"ryzen_ai_software": "https://ryzenai.docs.amd.com/en/latest/"},
       "research_priority": "very_high",
-      "source_urls": ["https://www.amd.com/en/blogs/2026/amd-powers-next-generation-agent-computers-with-new-ryzen-ai-hal.html"]
+      "evidence": "manufacturer"
     },
     {
       "id": "minisforum-ms-s1-max-128gb",
@@ -48,8 +54,13 @@
       "power_modes_w": {"quiet": 60, "balanced": 95, "performance": 130},
       "networking": ["10GbE", "10GbE"],
       "software": ["Linux", "Windows", "ROCm", "Vulkan"],
-      "evidence": "manufacturer",
-      "source_urls": ["https://store.minisforum.com/en-ca/products/minisforum-ms-s1-max-mini-pc"]
+      "pricing": [
+        {"amount": 3639, "currency": "USD", "region": "US", "kind": "vendor_sale", "availability": "orderable", "observed_at": "2026-08-15", "url": "https://store.minisforum.com/products/minisforum-ms-s1-max-mini-pc", "note": "128GB RAM + 2TB SSD observed vendor sale price."},
+        {"amount": 5241.44, "currency": "CAD", "region": "Canada", "kind": "vendor_sale", "availability": "orderable", "observed_at": "2026-08-15", "url": "https://store.minisforum.com/en-ca/products/minisforum-ms-s1-max-mini-pc", "note": "Canadian storefront observed price; storefront prices can fluctuate."}
+      ],
+      "vendor_urls": {"manufacturer_product": "https://www.minisforum.com/products/ms-s1-max", "us_store": "https://store.minisforum.com/products/minisforum-ms-s1-max-mini-pc", "canada_store": "https://store.minisforum.com/en-ca/products/minisforum-ms-s1-max-mini-pc"},
+      "technical_documentation": {"product_specification": "https://www.minisforum.com/products/ms-s1-max", "amd_ryzen_ai_software": "https://ryzenai.docs.amd.com/en/latest/"},
+      "evidence": "manufacturer"
     },
     {
       "id": "minisforum-n5-max-64gb",
@@ -70,9 +81,14 @@
       "cpu_tdp_w": {"min": 70, "max": 90},
       "networking": ["10GbE", "10GbE"],
       "power_adapter_w": 250,
-      "availability_note": "64GB listing is orderable in some storefronts; Canadian availability has varied. A 128GB selector exists but has been shown out of stock/sold out.",
-      "evidence": "manufacturer",
-      "source_urls": ["https://store.minisforum.com/en-ca/products/minisforum-n5-max-ai-nas", "https://ca.minisforum.com/products/minisforum-n5-max-ai-nas"]
+      "pricing": [
+        {"amount": 2599, "currency": "USD", "region": "US", "kind": "vendor_sale", "availability": "orderable", "observed_at": "2026-08-15", "url": "https://store.minisforum.com/products/minisforum-n5-max-ai-nas", "note": "64GB LPDDR5X + 128GB OS storage."},
+        {"amount": 3560.90, "currency": "CAD", "region": "Canada", "kind": "vendor_sale", "availability": "sold_out", "observed_at": "2026-08-15", "url": "https://ca.minisforum.com/products/minisforum-n5-max-ai-nas", "note": "64GB Canadian listing observed sold out."},
+        {"amount": 3999, "currency": "USD", "region": "US", "kind": "vendor_sale", "availability": "out_of_stock", "observed_at": "2026-08-15", "url": "https://store.minisforum.com/products/minisforum-n5-max-ai-nas", "note": "128GB variant listed at this price but out of stock."}
+      ],
+      "vendor_urls": {"us_store": "https://store.minisforum.com/products/minisforum-n5-max-ai-nas", "canada_store": "https://ca.minisforum.com/products/minisforum-n5-max-ai-nas"},
+      "technical_documentation": {"product_specification": "https://store.minisforum.com/products/minisforum-n5-max-ai-nas", "amd_ryzen_ai_software": "https://ryzenai.docs.amd.com/en/latest/"},
+      "evidence": "manufacturer"
     },
     {
       "id": "asus-nuc-16-pro-96gb",
@@ -89,8 +105,10 @@
       "memory_gb_max": 96,
       "memory_type": "LPDDR5X",
       "software": ["OpenVINO", "Vulkan", "SYCL ecosystem"],
-      "evidence": "manufacturer",
-      "source_urls": ["https://www.asus.com/ca-en/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-16-pro/"]
+      "pricing": [{"kind": "unavailable", "availability": "configuration_and_channel_dependent", "observed_at": "2026-08-15", "note": "No single defensible price is stored because NUC 16 Pro pricing varies materially by processor/RAM/storage configuration and region."}],
+      "vendor_urls": {"manufacturer_product": "https://www.asus.com/ca-en/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-16-pro/"},
+      "technical_documentation": {"support": "https://www.asus.com/ca-en/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-16-pro/helpdesk/", "openvino_docs": "https://docs.openvino.ai/"},
+      "evidence": "manufacturer"
     },
     {
       "id": "nvidia-dgx-spark",
@@ -112,8 +130,10 @@
       "networking": ["10GbE", "ConnectX-7 200Gbps"],
       "storage_tb": 4,
       "software": ["DGX OS", "CUDA", "TensorRT", "PyTorch"],
-      "evidence": "manufacturer",
-      "source_urls": ["https://www.nvidia.com/en-us/products/workstations/dgx-spark/"]
+      "pricing": [{"amount": 4699, "currency": "USD", "region": "global MSRP basis", "kind": "msrp", "availability": "available", "observed_at": "2026-08-15", "url": "https://www.nvidia.com/en-us/products/workstations/dgx-spark/", "note": "NVIDIA raised Founders Edition MSRP from US$3,999 to US$4,699 in February 2026 due to memory supply constraints."}],
+      "vendor_urls": {"manufacturer_product": "https://www.nvidia.com/en-us/products/workstations/dgx-spark/", "support": "https://www.nvidia.com/en-us/support/dgx-spark/"},
+      "technical_documentation": {"user_guide": "https://docs.nvidia.com/dgx/dgx-spark/", "hardware_overview": "https://docs.nvidia.com/dgx/dgx-spark/hardware.html", "uefi_guide": "https://docs.nvidia.com/dgx/dgx-spark-uefi/", "dgx_os": "https://docs.nvidia.com/dgx/dgx-spark/dgx-os.html"},
+      "evidence": "manufacturer"
     },
     {
       "id": "hp-zgx-nano-g1n",
@@ -128,9 +148,10 @@
       "power_supply_w": 240,
       "wall_idle_w_approx": 36,
       "wall_busy_max_w_approx": 226,
-      "power_measurement_note": "HP QuickSpecs reports AC values varying by input voltage for a documented configuration.",
-      "evidence": "manufacturer",
-      "source_urls": ["https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c09212373"]
+      "pricing": [{"kind": "unavailable", "availability": "store_configuration_dependent", "observed_at": "2026-08-15", "url": "https://www.hp.com/us-en/shop/slp/hp-workstations/zgx-nano", "note": "HP store exposes purchasable configurations, but a stable single price was not captured in this research pass."}],
+      "vendor_urls": {"manufacturer_product": "https://www.hp.com/us-en/shop/slp/hp-workstations/zgx-nano"},
+      "technical_documentation": {"quickspecs": "https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c09212373"},
+      "evidence": "manufacturer"
     },
     {
       "id": "lenovo-thinkstation-pgx-30kl0002us",
@@ -146,8 +167,10 @@
       "storage_tb": 1,
       "power_supply_w": 240,
       "software": ["NVIDIA DGX OS"],
-      "evidence": "manufacturer",
-      "source_urls": ["https://www.lenovo.com/ca/en/p/workstations/thinkstation-p-series/Lenovo-ThinkStation-PGX-SFF/30kl0002us"]
+      "pricing": [{"amount": 5849, "currency": "USD", "region": "US", "kind": "vendor_store", "availability": "orderable", "observed_at": "2026-08-15", "url": "https://www.lenovo.com/us/en/", "note": "Observed Lenovo US listing for part 30KL0002US; Lenovo dynamic pricing can vary by page/session."}],
+      "vendor_urls": {"manufacturer_product": "https://www.lenovo.com/ca/en/p/workstations/thinkstation-p-series/Lenovo-ThinkStation-PGX-SFF/30kl0002us", "us_store": "https://www.lenovo.com/us/en/"},
+      "technical_documentation": {"product_page": "https://www.lenovo.com/ca/en/p/workstations/thinkstation-p-series/Lenovo-ThinkStation-PGX-SFF/30kl0002us"},
+      "evidence": "manufacturer"
     },
     {
       "id": "asus-ascent-gx10",
@@ -155,14 +178,19 @@
       "product": "Ascent GX10",
       "compute_platform": "nvidia-gb10-grace-blackwell",
       "category": "compact_ai_workstation",
-      "status": "available_or_channel_dependent",
+      "status": "available",
       "tier": "A",
       "memory_gb": 128,
       "memory_type": "LPDDR5X coherent unified",
-      "networking": ["ConnectX-7"],
-      "multi_node_note": "ASUS documents linking two GX10 systems for larger-model workflows.",
-      "evidence": "manufacturer",
-      "source_urls": ["https://www.asus.com/event/brochure/asus-business-product-guide-2026-q1.pdf"]
+      "networking": ["10GbE", "ConnectX-7"],
+      "power_supply_w": 240,
+      "pricing": [
+        {"amount": 3999, "currency": "USD", "region": "US", "kind": "vendor_store", "availability": "in_stock_channels", "observed_at": "2026-08-15", "url": "https://www.asus.com/us/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/where-to-buy/"},
+        {"amount": 5499, "currency": "CAD", "region": "Canada", "kind": "vendor_store", "availability": "mixed_stock", "observed_at": "2026-08-15", "url": "https://www.asus.com/ca-en/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/where-to-buy/"}
+      ],
+      "vendor_urls": {"manufacturer_product": "https://www.asus.com/us/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/", "us_store": "https://www.asus.com/us/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/where-to-buy/", "canada_store": "https://www.asus.com/ca-en/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/where-to-buy/"},
+      "technical_documentation": {"technical_specs": "https://www.asus.com/us/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/techspec/", "manuals": "https://www.asus.com/ca-en/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/helpdesk_manual?model2Name=ASUS-Ascent-GX10", "drivers_and_dgx_os": "https://www.asus.com/us/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/helpdesk_download?model2Name=ASUS-Ascent-GX10"},
+      "evidence": "manufacturer"
     },
     {
       "id": "amd-kria-ai-som-x100",
@@ -179,9 +207,10 @@
       "memory_gb_max": 128,
       "memory_type": "LPDDR5X unified",
       "networking": ["10GbE QSFP"],
-      "evidence": "manufacturer",
-      "research_priority": "very_high",
-      "source_urls": ["https://www.amd.com/en/products/system-on-modules/kria/ai.html", "https://www.amd.com/en/blogs/2026/amd-ryzen-ai-embedded-x100-series-consolidating-compute.html"]
+      "pricing": [{"kind": "quote_only", "availability": "partner_ecosystem", "observed_at": "2026-08-15", "note": "AMD directs buyers to partner SOM solutions; no single public AMD retail price."}],
+      "vendor_urls": {"manufacturer_product": "https://www.amd.com/en/products/system-on-modules/kria/ai.html", "kria_portfolio": "https://www.amd.com/en/products/system-on-modules/kria.html"},
+      "technical_documentation": {"kria_documentation_hub": "https://www.amd.com/en/products/system-on-modules/kria.html", "ryzen_ai_software": "https://ryzenai.docs.amd.com/en/latest/", "embedded_x100_overview": "https://www.amd.com/en/products/embedded/ryzen-ai/x100-advantage.html"},
+      "evidence": "manufacturer"
     },
     {
       "id": "nvidia-jetson-t3000",
@@ -199,8 +228,27 @@
       "memory_bandwidth_gbps": 273,
       "networking": ["25GbE"],
       "software": ["JetPack", "CUDA", "TensorRT"],
-      "evidence": "manufacturer",
-      "source_urls": ["https://blogs.nvidia.com/blog/jetson-thor-robotics-edge-ai-agent/"]
+      "pricing": [{"kind": "unavailable", "availability": "planned_q1_2027", "observed_at": "2026-08-15", "note": "No public retail price yet."}],
+      "vendor_urls": {"announcement": "https://blogs.nvidia.com/blog/jetson-thor-robotics-edge-ai-agent/"},
+      "technical_documentation": {"jetson_docs": "https://docs.nvidia.com/jetson/index.html"},
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "nvidia-jetson-t2000",
+      "manufacturer": "NVIDIA",
+      "product": "Jetson T2000",
+      "compute_platform": "nvidia-thor-t2000",
+      "category": "embedded_ai_module",
+      "status": "announced",
+      "tier": "B",
+      "gpu_architecture": "Blackwell",
+      "fp4_tflops": 400,
+      "memory_gb": 16,
+      "software": ["JetPack", "CUDA", "TensorRT"],
+      "pricing": [{"kind": "unavailable", "availability": "planned_q1_2027", "observed_at": "2026-08-15", "note": "No public retail price yet."}],
+      "vendor_urls": {"announcement": "https://blogs.nvidia.com/blog/jetson-thor-robotics-edge-ai-agent/"},
+      "technical_documentation": {"jetson_docs": "https://docs.nvidia.com/jetson/index.html"},
+      "evidence": "manufacturer"
     },
     {
       "id": "lucebox-r9700-strix-halo",
@@ -222,12 +270,13 @@
       "discrete_gpu_compute_units": 64,
       "system_idle_w_vendor": 40,
       "system_sustained_w_vendor": 500,
-      "price_usd_observed": 6499,
-      "price_observed_at": "2026-08-15",
-      "price_note": "Vendor advertises launch price through 2026-08-31 and US$7,900 afterward.",
-      "benchmark_evidence": [{"model": "DeepSeek V4 Flash", "parameters_b": 284, "decode_tps_median": 50.65, "source_type": "vendor-benchmark"}],
-      "evidence": "manufacturer_and_vendor_benchmark",
-      "source_urls": ["https://www.lucebox.com/", "https://www.lucebox.com/blog/deepseek-v4-asymmetric-parallelism"]
+      "pricing": [
+        {"amount": 6499, "currency": "USD", "region": "global", "kind": "vendor_sale", "availability": "limited", "observed_at": "2026-08-15", "url": "https://www.lucebox.com/", "note": "Vendor launch price advertised through 2026-08-31; vendor states US$7,900 afterward."},
+        {"amount": 7900, "currency": "USD", "region": "global", "kind": "msrp", "availability": "future_after_2026-08-31", "observed_at": "2026-08-15", "url": "https://www.lucebox.com/"}
+      ],
+      "vendor_urls": {"manufacturer_product": "https://www.lucebox.com/"},
+      "technical_documentation": {"benchmark_deepseek_v4": "https://www.lucebox.com/blog/deepseek-v4-asymmetric-parallelism"},
+      "evidence": "manufacturer_and_vendor_benchmark"
     },
     {
       "id": "nymph-ax1",
@@ -241,19 +290,19 @@
       "memory_gb": 16,
       "memory_type": "dedicated AI memory",
       "peak_power_w_vendor": 16,
-      "price_usd_vendor": 1190,
-      "vendor_model_capacity_claim": "26B-class",
+      "pricing": [{"amount": 1190, "currency": "USD", "region": "vendor", "kind": "vendor_store", "availability": "vendor_claim", "observed_at": "2026-08-15", "url": "https://nymphtech.com/"}],
+      "vendor_urls": {"manufacturer_product": "https://nymphtech.com/"},
+      "technical_documentation": {"public_detail": "https://nymphtech.com/"},
       "software_maturity": "unverified/proprietary",
-      "evidence": "vendor_claim",
-      "source_urls": ["https://nymphtech.com/"]
+      "evidence": "vendor_claim"
     },
     {
       "id": "tenstorrent-wormhole-n150",
       "manufacturer": "Tenstorrent",
-      "product": "Wormhole n150",
+      "product": "Wormhole n150 Series",
       "compute_platform": "tenstorrent-wormhole",
       "category": "ai_asic_pcie",
-      "status": "available_watch",
+      "status": "available",
       "tier": "B",
       "tensix_cores": 72,
       "memory_gb": 12,
@@ -263,18 +312,23 @@
       "fp16_tflops": 74,
       "board_power_w": 160,
       "host_interface": "PCIe 4.0 x16",
-      "interconnect": ["Warp 100", "QSFP-DD high-speed fabric"],
-      "evidence": "manufacturer",
-      "source_urls": ["https://docs.tenstorrent.com/aibs/wormhole/specifications.html"]
+      "pricing": [
+        {"amount": 999, "currency": "USD", "region": "US/global store", "kind": "vendor_store", "availability": "in_stock", "observed_at": "2026-08-15", "url": "https://tenstorrent.com/hardware/cards", "note": "n150s passive."},
+        {"amount": 1099, "currency": "USD", "region": "US/global store", "kind": "vendor_store", "availability": "in_stock", "observed_at": "2026-08-15", "url": "https://tenstorrent.com/hardware/cards", "note": "n150d active cooling."}
+      ],
+      "vendor_urls": {"manufacturer_product": "https://tenstorrent.com/hardware/cards", "open_hardware_page": "https://open.tenstorrent.com/hardware/wormhole"},
+      "technical_documentation": {"specifications": "https://docs.tenstorrent.com/docs-test/core/latest/aibs/wormhole/specifications.html"},
+      "evidence": "manufacturer"
     },
     {
       "id": "tenstorrent-wormhole-n300",
       "manufacturer": "Tenstorrent",
-      "product": "Wormhole n300",
+      "product": "Wormhole n300 Series",
       "compute_platform": "tenstorrent-wormhole",
       "category": "ai_asic_pcie",
-      "status": "available_watch",
+      "status": "available",
       "tier": "B",
+      "tensix_cores": 128,
       "memory_gb": 24,
       "memory_type": "GDDR6",
       "memory_bandwidth_gbps": 576,
@@ -282,8 +336,13 @@
       "fp16_tflops": 131,
       "board_power_w": 300,
       "host_interface": "PCIe 4.0 x16",
-      "evidence": "manufacturer",
-      "source_urls": ["https://docs.tenstorrent.com/aibs/wormhole/specifications.html"]
+      "pricing": [
+        {"amount": 1399, "currency": "USD", "region": "US/global store", "kind": "vendor_store", "availability": "in_stock", "observed_at": "2026-08-15", "url": "https://tenstorrent.com/hardware/cards", "note": "n300s passive."},
+        {"amount": 1449, "currency": "USD", "region": "US/global store", "kind": "vendor_store", "availability": "in_stock", "observed_at": "2026-08-15", "url": "https://tenstorrent.com/hardware/cards", "note": "n300d active cooling."}
+      ],
+      "vendor_urls": {"manufacturer_product": "https://tenstorrent.com/hardware/cards", "open_hardware_page": "https://open.tenstorrent.com/hardware/wormhole"},
+      "technical_documentation": {"specifications": "https://docs.tenstorrent.com/docs-test/core/latest/aibs/wormhole/specifications.html"},
+      "evidence": "manufacturer"
     },
     {
       "id": "amd-instinct-mi210",
@@ -304,8 +363,10 @@
       "interconnect": ["3x Infinity Fabric links"],
       "cooling": "passive server airflow required",
       "software": ["ROCm"],
-      "evidence": "manufacturer",
-      "source_urls": ["https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html"]
+      "pricing": [{"kind": "unavailable", "availability": "secondary_market_variable", "observed_at": "2026-08-15", "note": "No single used-market value stored because price varies rapidly by seller/condition; future observations should be recorded with marketplace, condition and date."}],
+      "vendor_urls": {"manufacturer_product": "https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html"},
+      "technical_documentation": {"product_brochure": "https://www.amd.com/content/dam/amd/en/documents/instinct-business-docs/product-briefs/instinct-mi210-brochure.pdf", "rocm_docs": "https://rocm.docs.amd.com/"},
+      "evidence": "manufacturer"
     },
     {
       "id": "amd-versal-ai-edge-gen2",
@@ -313,27 +374,28 @@
       "product": "Versal AI Edge Series Gen 2",
       "compute_platform": "amd-versal-ai-edge-gen2",
       "category": "adaptive_soc",
-      "status": "watch",
+      "status": "production_mixed_by_sku",
       "tier": "Experimental",
+      "accelerators": ["programmable logic", "AIE-ML v2", "Arm processing system"],
       "dense_int8_tops_max": 184,
       "sparse_int8_tops_max": 369,
-      "ai_engine": "AIE-ML v2",
-      "software": ["Vitis/Versal toolchain"],
-      "evidence": "manufacturer",
-      "source_urls": ["https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal/gen2/ai-edge-series.html"]
+      "pricing": [{"kind": "quote_only", "availability": "distributor_and_sku_dependent", "observed_at": "2026-08-15", "note": "Pricing is device/SKU/volume dependent and generally distributor or quote based."}],
+      "vendor_urls": {"manufacturer_product": "https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal/ai-edge-series-gen-2.html"},
+      "technical_documentation": {"technical_reference_manual": "https://docs.amd.com/r/en-US/am026-versal-ai-edge-prime-gen2-trm", "dc_ac_datasheet": "https://docs.amd.com/r/en-US/ds1021-versal-ai-edge-gen2", "aie_ml_v2_architecture": "https://docs.amd.com/r/en-US/am027-versal-aie-ml-v2"},
+      "evidence": "manufacturer"
     },
     {
       "id": "altera-fpga-ai-suite-2026-1-1",
       "manufacturer": "Altera",
-      "product": "FPGA AI Suite 2026.1.1 + supported FPGA families",
-      "compute_platform": "altera-fpga-ai-suite",
-      "category": "fpga_ai_platform",
-      "status": "watch",
+      "product": "FPGA AI Suite 2026.1.1 / Agilex ecosystem",
+      "compute_platform": "altera-agilex-fpga",
+      "category": "fpga_toolchain",
+      "status": "available_software",
       "tier": "Experimental",
-      "software_feature": "beta spatial compiler with MLP support",
-      "software": ["FPGA AI Suite", "OpenVINO integration", "Quartus Prime"],
-      "evidence": "manufacturer",
-      "source_urls": ["https://www.altera.com/products/development-tools/fpga-ai-suite"]
+      "pricing": [{"kind": "quote_only", "availability": "board_and_device_dependent", "observed_at": "2026-08-15", "note": "Pricing depends on target FPGA/device/development kit."}],
+      "vendor_urls": {"manufacturer_product": "https://www.altera.com/products/development-tools/fpga-ai-suite"},
+      "technical_documentation": {"fpga_ai_suite": "https://www.altera.com/products/development-tools/fpga-ai-suite"},
+      "evidence": "manufacturer"
     }
   ]
 }
