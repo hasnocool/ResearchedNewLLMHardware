@@ -9,6 +9,7 @@ This file tracks hardware that could become important to local or distributed LL
 | Candidate | Current state | Trigger for promotion / alert |
 |---|---|---|
 | AMD Ryzen AI Max PRO 400 systems | Announced for Q3 2026 platform rollout | First orderable 192 GB systems; exact memory bandwidth; ROCm support; measured wall power; real decode benchmarks; street price. |
+| Acrab Agent Box / GΞLIX 1 | Announced / early product rollout | Public exact memory capacity, orderable price, system power, decode throughput, developer/runtime documentation, supported-model matrix and independent validation. |
 | AMD Kria AI SOM / Ryzen AI Embedded X100 | Announced / ecosystem rollout | Developer kit/SOM pricing, Linux GPU/NPU software details, memory bandwidth and measured LLM throughput. |
 | NVIDIA Jetson T3000 | Announced | Retail/dev-kit pricing, module power envelope and real TensorRT/llama.cpp LLM results. |
 | NYMPH AX1 | Vendor-announced specialty ASIC | Independent benchmark, public runtime documentation, shipping confirmation and supported-model matrix. |
@@ -17,7 +18,41 @@ This file tracks hardware that could become important to local or distributed LL
 | AMD Versal AI Edge Gen 2 | Adaptive SoC | Reproducible decoder-transformer/LLM deployment with external-memory and wall-power measurements. |
 | Altera FPGA AI Suite / Agilex | FPGA | Modern transformer benchmark from spatial compiler path and measured energy efficiency. |
 
+## Acrab Agent Box / GΞLIX 1 watch
+
+Acrab publicly announced GΞLIX 1 and Agent Box in July 2026. Manufacturer material describes a 5 nm heterogeneous edge-AI SoC with a 20-core Arm CPU, GPU/NPU resources, unified memory architecture and **273 GB/s memory bandwidth**, targeting local models in the **100B-parameter class**.
+
+The vendor also reports **1,416.8 tok/s prefill** for Gemma 26B A4B with a 40K KV cache and 10K-token input. This is useful evidence but remains a vendor benchmark and should not be treated as an independent cross-platform result.
+
+Do not assign a normal buying rank until the following are public and defensible:
+
+- exact installed/maximum unified-memory capacity;
+- retail or channel price;
+- measured whole-system idle and inference power;
+- decode tokens/sec as well as prefill;
+- supported quantization/model/runtime matrix;
+- developer SDK/runtime documentation;
+- independent reproducible testing;
+- orderable/shipping status by region.
+
+Official sources:
+
+- https://www.acrab.ai/
+- https://www.acrab.ai/news.html
+
 ## Price and availability watches
+
+### Apple Silicon
+
+Apple Canada currently advertises **Mac mini from CA$1,099** and **Mac Studio from CA$3,499**. Preserve older launch observations separately because 2026 memory/storage price changes have materially moved acquisition cost.
+
+Alert when:
+
+- Apple changes the maximum unified-memory configurations;
+- Mac mini or Mac Studio pricing changes by >=15%;
+- refurbished/official-channel high-memory systems materially improve RAM-per-dollar;
+- new Apple Silicon generations materially increase unified-memory capacity or bandwidth;
+- MLX/Metal/llama.cpp changes materially improve large-model inference.
 
 ### Ryzen AI Max+ 395 / 128 GB
 
