@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-16",
+  "purpose": "Secondary-market and legacy accelerators whose memory capacity, bandwidth, software lifecycle, or used pricing can make them relevant to local LLM inference.",
+  "notes": [
+    "Used-market prices are point-in-time observations and must be compared with shipping, taxes, import fees, seller reputation, cooling requirements and software lifecycle.",
+    "A low purchase price does not imply low total cost: passive datacenter cards often require server-class forced airflow and may need older software stacks.",
+    "Legacy CUDA and ROCm compatibility is treated as a first-class constraint rather than assuming current frameworks support every older accelerator."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-tesla-p100-pcie-16gb-secondary-market",
+      "manufacturer": "NVIDIA",
+      "product": "Tesla P100 PCIe 16GB",
+      "category": "datacenter_gpu_secondary_market",
+      "status": "secondary-market",
+      "compute_platform": "nvidia-pascal-gp100",
+      "gpu_architecture": "Pascal",
+      "cuda_cores": 3584,
+      "fp16_tflops_peak": 18.7,
+      "fp32_tflops_peak": 9.3,
+      "fp64_tflops_peak": 4.7,
+      "memory_gb": 16,
+      "memory_type": "HBM2 ECC",
+      "memory_bandwidth_gbps": 732,
+      "board_power_w": 250,
+      "host_interface": "PCIe 3.0 x16",
+      "form_factor": "full-height/full-length passive datacenter card",
+      "cooling": "passive; server-class forced airflow required",
+      "software": [
+        "CUDA 12.x legacy-compatible toolchain",
+        "llama.cpp CUDA builds compiled for Pascal",
+        "older PyTorch/CUDA combinations where Pascal binaries remain available"
+      ],
+      "software_lifecycle_warning": "CUDA Toolkit 13.x removed offline compilation and library support for Pascal. CUDA 12.x remains the practical native build ceiling, so modern framework support must be verified before purchase.",
+      "model_size_practicality": "16GB HBM2 is useful for smaller and mid-sized quantized models, but capacity is the main limitation. The 732 GB/s memory bandwidth is unusually high at current used prices and can make the card interesting for models that fit entirely in VRAM.",
+      "quantization_compatibility": [
+        "GGUF/llama.cpp with Pascal-compatible CUDA builds",
+        "FP16 hardware support",
+        "no Tensor Cores; modern tensor-core-specific low-bit acceleration paths are unavailable"
+      ],
+      "off_grid_suitability": "low; 250W board power plus required forced airflow outweighs the strong bandwidth-per-dollar for solar-constrained systems.",
+      "performance_per_watt_status": "poor by current standards; value proposition is purchase price and HBM2 bandwidth, not energy efficiency",
+      "pricing": [
+        {
+          "amount": 200,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_used",
+          "availability": "listing_available_when_observed",
+          "observed_at": "2026-08-16",
+          "vendor": "eBay marketplace - Canada seller",
+          "url": "https://www.cafr.ebay.ca/sch/i.html?_nkw=tesla+p100+16gb&_sop=12",
+          "note": "Canada-located used 16GB P100 listing observed at CA$200; other visible listings ranged lower before shipping/import costs."
+        }
+      ],
+      "observed_price_per_memory_gb_cad": 12.5,
+      "vendor_urls": [
+        "https://www.nvidia.com/en-au/data-center/tesla-p100/"
+      ],
+      "technical_documentation": [
+        "https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-product-literature/nvidia-tesla-p100-PCIe-datasheet.pdf",
+        "https://docs.nvidia.com/cuda/archive/13.0.0/cuda-toolkit-release-notes/index.html"
+      ],
+      "evidence": "manufacturer_plus_secondary_market"
+    },
+    {
+      "id": "amd-instinct-mi100-32gb-secondary-market",
+      "manufacturer": "AMD",
+      "product": "Instinct MI100 32GB",
+      "category": "datacenter_gpu_secondary_market",
+      "status": "secondary-market",
+      "compute_platform": "amd-cdna-mi100",
+      "gpu_architecture": "CDNA",
+      "compute_units": 120,
+      "stream_processors": 7680,
+      "fp16_tflops_peak": 184.6,
+      "fp32_tflops_peak": 23.1,
+      "fp64_tflops_peak": 11.5,
+      "int8_tops_peak": 92.3,
+      "memory_gb": 32,
+      "memory_type": "HBM2 ECC",
+      "memory_bus_bits": 4096,
+      "memory_bandwidth_gbps": 1228.8,
+      "board_power_w": 300,
+      "host_interface": "PCIe 4.0 x16 / PCIe 3.0 x16 compatible",
+      "interconnect": ["3x Infinity Fabric links", "92 GB/s peak Infinity Fabric link bandwidth"],
+      "form_factor": "full-height dual-slot passive datacenter card",
+      "dimensions_in": {"length": 10.5},
+      "cooling": "passive; server-class forced airflow required",
+      "software": ["ROCm", "Linux", "HIP"],
+      "software_lifecycle_warning": "Unlike MI50/gfx906, MI100 remains present in current ROCm compatibility/install documentation as an Instinct compute target. Exact OS, framework and ROCm release combinations still need verification.",
+      "model_size_practicality": "32GB HBM2 can hold many 30B-class quantized models depending on context and runtime overhead. The roughly 1.2 TB/s bandwidth is exceptional, but current used pricing is high enough that newer 32GB workstation GPUs may offer a better overall ownership experience.",
+      "quantization_compatibility": [
+        "FP16 and BF16 matrix operations",
+        "INT8 matrix operations",
+        "GGUF/llama.cpp through compatible HIP/ROCm builds",
+        "no native FP8 matrix support"
+      ],
+      "off_grid_suitability": "low; 300W board power and passive cooling requirements make it a poor fit for constrained solar systems despite excellent memory bandwidth.",
+      "performance_per_watt_status": "legacy datacenter class; bandwidth is strong but power draw is high",
+      "pricing": [
+        {
+          "amount": 1407.29,
+          "currency": "CAD",
+          "region": "eBay Canada localized",
+          "kind": "observed_used",
+          "availability": "more_than_10_available_when_observed",
+          "observed_at": "2026-08-16",
+          "vendor": "eBay marketplace - egoods.supply",
+          "url": "https://www.cafr.ebay.ca/itm/285796378466",
+          "note": "Used MI100 listing at US$999, approximately CA$1,407.29 when observed; cross-border shipping/import charges can materially increase delivered cost."
+        }
+      ],
+      "observed_price_per_memory_gb_cad": 43.98,
+      "vendor_urls": [
+        "https://www.amd.com/en/products/accelerators/instinct/mi100.html"
+      ],
+      "technical_documentation": [
+        "https://instinct.docs.amd.com/latest/gpu-arch/mi100.html",
+        "https://rocm.docs.amd.com/en/7.12.0-preview/compatibility/compatibility-matrix.html",
+        "https://rocm.docs.amd.com/en/7.12.0-preview/install/rocm.html"
+      ],
+      "evidence": "manufacturer_plus_secondary_market"
+    },
+    {
+      "id": "nvidia-a40-48gb-secondary-market",
+      "manufacturer": "NVIDIA",
+      "product": "A40 48GB",
+      "category": "datacenter_gpu_secondary_market",
+      "status": "secondary-market",
+      "compute_platform": "nvidia-ampere-ga102-a40",
+      "gpu_architecture": "Ampere",
+      "cuda_cores": 10752,
+      "tensor_cores": 336,
+      "fp32_tflops_peak": 37.4,
+      "fp16_tensor_tflops_dense": 149.7,
+      "int8_tensor_tops_dense": 299.3,
+      "memory_gb": 48,
+      "memory_type": "GDDR6 ECC",
+      "memory_bandwidth_gbps": 696,
+      "board_power_w": 300,
+      "power_connector": "8-pin CPU",
+      "host_interface": "PCIe 4.0 x16",
+      "interconnect": "NVLink 112.5 GB/s bidirectional",
+      "form_factor": "4.4 in H x 10.5 in L, dual slot",
+      "cooling": "passive; server-class airflow required",
+      "software": ["CUDA", "PyTorch", "TensorRT", "llama.cpp CUDA"],
+      "model_size_practicality": "48GB ECC VRAM is highly useful for larger quantized models and multi-card inference, but the current Canadian used-market asking prices observed in this pass make it poor value compared with newer workstation and unified-memory alternatives.",
+      "quantization_compatibility": ["CUDA tensor-core ecosystem", "FP16", "BF16", "INT8", "GGUF/llama.cpp CUDA"],
+      "off_grid_suitability": "low; 300W passive datacenter card requiring strong chassis airflow.",
+      "cost_effectiveness_status": "poor_at_observed_market_price",
+      "pricing": [
+        {
+          "amount": 6250,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_used",
+          "availability": "listing_available_when_observed",
+          "observed_at": "2026-08-16",
+          "vendor": "eBay marketplace",
+          "url": "https://www.ebay.ca/sch/i.html?_dcat=27386&_nkw=nvidia+a40+48gb",
+          "note": "Lowest clearly identified Canada-located A40 48GB listing visible in the observed search results was CA$6,250; many imported listings were higher. This is recorded as a market warning rather than a buying recommendation."
+        }
+      ],
+      "observed_price_per_memory_gb_cad": 130.21,
+      "vendor_urls": [
+        "https://www.nvidia.com/en-gb/data-center/a40/"
+      ],
+      "technical_documentation": [
+        "https://images.nvidia.com/content/Solutions/data-center/a40/nvidia-a40-datasheet.pdf"
+      ],
+      "evidence": "manufacturer_plus_secondary_market"
+    }
+  ]
+}
