@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-15",
+  "hardware": [
+    {
+      "id": "acrab-agent-box-gelix-1",
+      "manufacturer": "Acrab",
+      "product": "Agent Box",
+      "compute_platform": "acrab-gelix-1",
+      "category": "specialty_edge_ai_system",
+      "status": "announced_early_rollout",
+      "tier": "watch_high_priority",
+      "soc_process_nm": 5,
+      "cpu": "20-core Arm",
+      "accelerators": ["integrated GPU", "multicore NPU"],
+      "memory_architecture": "unified memory",
+      "memory_gb": null,
+      "memory_bandwidth_gbps": 273,
+      "model_capacity_claim": "up to 100B-parameter-class open-source models",
+      "power_w": null,
+      "pricing": [],
+      "software": ["vendor optimized runtime", "developer toolchain", "agent orchestration stack"],
+      "benchmark_evidence": [
+        {
+          "model": "Gemma 26B A4B",
+          "metric": "prefill_tokens_per_second",
+          "value": 1416.8,
+          "kv_cache_tokens": 40000,
+          "input_tokens": 10000,
+          "source_type": "vendor_benchmark",
+          "comparison_note": "Acrab reports up to 7.5x the prefill rate of a Mac mini M4 Pro under its stated test configuration. Treat as vendor evidence pending independent reproduction."
+        }
+      ],
+      "evidence": "manufacturer_and_vendor_benchmark",
+      "software_maturity": "early_proprietary_public_details_limited",
+      "research_priority": "very_high",
+      "missing_fields": [
+        "exact unified-memory capacity",
+        "retail price",
+        "regional orderability",
+        "whole-system idle power",
+        "whole-system inference power",
+        "decode tokens/sec",
+        "public SDK/runtime documentation",
+        "supported model/quantization matrix",
+        "independent benchmarks"
+      ],
+      "vendor_urls": [
+        "https://www.acrab.ai/",
+        "https://www.acrab.ai/news.html"
+      ],
+      "technical_documentation": [
+        {
+          "title": "Acrab launch announcement / product news",
+          "url": "https://www.acrab.ai/news.html",
+          "kind": "manufacturer_announcement"
+        },
+        {
+          "title": "Acrab GΞLIX 1 and Agent Box press release",
+          "url": "https://www.prnewswire.com/news-releases/acrab-unveils-glix-1-soc-and-agent-box-bringing-state-of-the-art-ai-to-the-edge-302833081.html",
+          "kind": "vendor_press_release"
+        }
+      ],
+      "notes": "Do not use unverified third-party claims of exact price, TOPS, memory capacity, or power as catalog facts until Acrab publishes them or independent evidence is available."
+    }
+  ]
+}
