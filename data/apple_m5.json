@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-16",
+  "purpose": "Current Apple M5 Pro and M5 Max hardware and inference-software evidence relevant to local LLM workloads.",
+  "hardware": [
+    {
+      "id": "apple-macbook-pro-m5-pro-2026",
+      "manufacturer": "Apple",
+      "product": "MacBook Pro (M5 Pro, 2026)",
+      "category": "portable_unified_memory_workstation",
+      "status": "available",
+      "compute_platform": "apple-m5-pro",
+      "cpu_cores": {"min": 15, "max": 18},
+      "gpu_cores": {"min": 16, "max": 20},
+      "neural_engine_cores": 16,
+      "gpu_neural_accelerators": true,
+      "memory_bandwidth_gbps": 307,
+      "memory_gb_max": 64,
+      "io": ["Thunderbolt 5"],
+      "networking": ["Wi-Fi 7", "Bluetooth 6"],
+      "software": ["Metal 4", "MLX", "llama.cpp", "BaseRT"],
+      "pricing": [
+        {
+          "kind": "manufacturer_store_from",
+          "amount": 4199,
+          "currency": "CAD",
+          "region": "CA",
+          "observed_at": "2026-08-16",
+          "source_url": "https://www.apple.com/ca/shop/buy-mac/macbook-pro",
+          "note": "Apple Canada currently shows the 16-inch M5 Pro family from CA$4,199. Exact 14-inch M5 Pro configurations vary and may be lower."
+        }
+      ],
+      "vendor_urls": ["https://www.apple.com/ca/shop/buy-mac/macbook-pro"],
+      "technical_documentation": [
+        "https://support.apple.com/en-ca/126318",
+        "https://www.apple.com/ca/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/",
+        "https://developer.apple.com/metal/",
+        "https://ml-explore.github.io/mlx/build/html/index.html",
+        "https://github.com/basecompute/baseRT"
+      ],
+      "evidence": "manufacturer_plus_independent_research",
+      "research_priority": "high"
+    },
+    {
+      "id": "apple-macbook-pro-m5-max-2026",
+      "manufacturer": "Apple",
+      "product": "MacBook Pro (M5 Max, 2026)",
+      "category": "portable_high_bandwidth_unified_memory_workstation",
+      "status": "available",
+      "compute_platform": "apple-m5-max",
+      "cpu_cores": 18,
+      "gpu_cores": {"standard": 32, "max": 40},
+      "neural_engine_cores": 16,
+      "gpu_neural_accelerators": true,
+      "memory_bandwidth_gbps": {"standard": 460, "max": 614},
+      "memory_gb_max": 128,
+      "io": ["Thunderbolt 5"],
+      "networking": ["Wi-Fi 7", "Bluetooth 6"],
+      "software": ["Metal 4", "MLX", "llama.cpp", "BaseRT"],
+      "pricing": [
+        {
+          "kind": "manufacturer_store_from",
+          "amount": 5999,
+          "currency": "CAD",
+          "region": "CA",
+          "observed_at": "2026-08-16",
+          "source_url": "https://www.apple.com/ca/shop/buy-mac/macbook-pro",
+          "note": "Apple Canada currently shows 16-inch M5 Max configurations from CA$5,999."
+        },
+        {
+          "kind": "manufacturer_exact_configuration",
+          "amount": 9999,
+          "currency": "CAD",
+          "region": "CA",
+          "observed_at": "2026-08-16",
+          "source_url": "https://www.apple.com/ca/shop/buy-mac/macbook-pro/16-inch-space-black-standard-display-apple-m5-max-chip-18-core-cpu-40-core-gpu-128gb-memory-2tb-storage",
+          "note": "Observed 16-inch M5 Max 18-core CPU / 40-core GPU / 128GB unified memory / 2TB SSD configuration."
+        }
+      ],
+      "vendor_urls": ["https://www.apple.com/ca/shop/buy-mac/macbook-pro"],
+      "technical_documentation": [
+        "https://support.apple.com/en-ca/126318",
+        "https://www.apple.com/ca/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/",
+        "https://developer.apple.com/metal/",
+        "https://ml-explore.github.io/mlx/build/html/index.html",
+        "https://github.com/basecompute/baseRT"
+      ],
+      "evidence": "manufacturer_plus_independent_research",
+      "research_priority": "very_high"
+    }
+  ],
+  "software_evidence": [
+    {
+      "runtime": "BaseRT",
+      "platform": "Apple M5 Pro",
+      "published": "2026-07-21",
+      "source": "https://arxiv.org/abs/2607.19438",
+      "source_type": "research_preprint",
+      "summary": "BaseRT reports using the M5 GPU Neural Accelerators through Metal 4 tensor APIs. Across fifteen model configurations, the authors report up to 6.4x prompt-processing throughput versus llama.cpp and up to 3.9x versus MLX, with decode gains up to 1.75x versus llama.cpp and 1.33x versus MLX. Treat these as paper-reported results pending broader independent replication."
+    }
+  ]
+}
