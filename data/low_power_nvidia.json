@@ -1,0 +1,249 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-17",
+  "purpose": "Current NVIDIA Jetson systems and low-power PCIe accelerators relevant to local, edge, and off-grid LLM inference.",
+  "notes": [
+    "Manufacturer specifications are authoritative for hardware fields; marketplace prices are point-in-time observations.",
+    "TOPS/TFLOPS figures use vendor-stated precisions and sparsity assumptions and are not directly comparable across products.",
+    "Passive datacenter cards require deliberate chassis airflow even when their board power is low."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-jetson-agx-thor-developer-kit",
+      "manufacturer": "NVIDIA",
+      "product": "Jetson AGX Thor Developer Kit",
+      "compute_platform": "nvidia-thor-t5000-blackwell",
+      "category": "embedded_ai_developer_kit",
+      "status": "available",
+      "tier": "A-high-capacity-edge",
+      "gpu_architecture": "Blackwell",
+      "cuda_cores": 2560,
+      "cpu": "14-core Arm Neoverse V3AE",
+      "ai_performance_fp4_sparse_tflops": 2070,
+      "memory_gb": 128,
+      "memory_type": "LPDDR5X unified",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 273,
+      "power_w": {"min": 40, "max": 130},
+      "storage": "1TB NVMe included in developer kit",
+      "networking": ["5GbE RJ45", "QSFP28 4x25GbE"],
+      "io": ["PCIe Gen5 NVMe", "USB 3.2", "USB-C", "HDMI", "DisplayPort", "CAN", "MIPI CSI-2"],
+      "dimensions_mm": [243.19, 112.40, 56.88],
+      "software": ["JetPack 7", "CUDA", "TensorRT", "PyTorch", "NVIDIA Isaac", "NVIDIA Holoscan"],
+      "llm_fit": "High-capacity edge platform. 128GB unified memory is large enough for many 70B-class quantized models and larger low-bit experiments, but actual usable capacity and throughput depend on runtime, KV cache, context and model architecture.",
+      "off_grid_suitability": "good_for_high_end_edge_when_power_budget_allows",
+      "pricing": [
+        {
+          "amount": 5499,
+          "currency": "USD",
+          "region": "US",
+          "kind": "current_msrp",
+          "availability": "available",
+          "observed_at": "2026-08-17",
+          "url": "https://developer.nvidia.com/embedded/faq",
+          "note": "NVIDIA's current Jetson FAQ lists the developer kit at US$5,499; older launch material showing US$3,499 is stale."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/",
+        "buy": "https://developer.nvidia.com/embedded/buy-jetson"
+      },
+      "technical_documentation": {
+        "technical_blog": "https://developer.nvidia.com/blog/introducing-nvidia-jetson-thor-the-ultimate-platform-for-physical-ai/",
+        "jetson_docs": "https://docs.nvidia.com/jetson/",
+        "pricing_faq": "https://developer.nvidia.com/embedded/faq"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "nvidia-jetson-orin-nano-super-devkit",
+      "manufacturer": "NVIDIA",
+      "product": "Jetson Orin Nano Super Developer Kit",
+      "compute_platform": "nvidia-orin-nano-ampere",
+      "category": "low_power_edge_ai_developer_kit",
+      "status": "available",
+      "tier": "A-low-power",
+      "gpu_architecture": "Ampere",
+      "cuda_cores": 1024,
+      "tensor_cores": 32,
+      "cpu": "6-core Arm Cortex-A78AE",
+      "ai_performance_int8_tops": 67,
+      "memory_gb": 8,
+      "memory_type": "LPDDR5 unified",
+      "memory_bus_bits": 128,
+      "memory_bandwidth_gbps": 102,
+      "power_w": {"min": 7, "max": 25},
+      "storage": ["microSD", "external NVMe via M.2 Key M"],
+      "networking": ["1GbE"],
+      "software": ["JetPack", "CUDA", "TensorRT", "PyTorch", "llama.cpp CUDA builds"],
+      "llm_fit": "Best suited to compact 3B-8B quantized models, embeddings, vision-language edge workloads and routing/control. 8GB memory is the main capacity limit.",
+      "off_grid_suitability": "excellent",
+      "pricing": [
+        {
+          "amount": 399,
+          "currency": "USD",
+          "region": "US",
+          "kind": "current_msrp",
+          "availability": "available",
+          "observed_at": "2026-08-17",
+          "url": "https://developer.nvidia.com/embedded/faq",
+          "note": "Current NVIDIA MSRP. This replaces the older US$249 launch-era price still quoted by many articles."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/nano-super-developer-kit/",
+        "buy": "https://developer.nvidia.com/embedded/buy-jetson"
+      },
+      "technical_documentation": {
+        "product_specs": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/nano-super-developer-kit/",
+        "pricing_faq": "https://developer.nvidia.com/embedded/faq",
+        "jetson_docs": "https://docs.nvidia.com/jetson/"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "nvidia-jetson-agx-orin-64gb-devkit",
+      "manufacturer": "NVIDIA",
+      "product": "Jetson AGX Orin Developer Kit (64GB)",
+      "compute_platform": "nvidia-orin-agx-ampere",
+      "category": "embedded_ai_developer_kit",
+      "status": "available",
+      "tier": "A-efficient-capacity",
+      "gpu_architecture": "Ampere",
+      "cuda_cores": 2048,
+      "tensor_cores": 64,
+      "cpu": "12-core Arm Cortex-A78AE",
+      "ai_performance_int8_tops": 275,
+      "memory_gb": 64,
+      "memory_type": "LPDDR5 unified",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 204.8,
+      "power_w": {"min": 15, "max": 60},
+      "networking": ["up to 10GbE"],
+      "software": ["JetPack", "CUDA", "TensorRT", "PyTorch"],
+      "llm_fit": "Very strong capacity-per-watt for an embedded CUDA platform. 64GB unified memory can host many 30B-class quantized models and some larger low-bit models; decode speed remains memory-bandwidth bound.",
+      "off_grid_suitability": "very_good",
+      "pricing": [
+        {
+          "amount": 3499,
+          "currency": "USD",
+          "region": "US",
+          "kind": "current_msrp",
+          "availability": "available",
+          "observed_at": "2026-08-17",
+          "url": "https://developer.nvidia.com/embedded/faq",
+          "note": "Current developer-kit MSRP from NVIDIA's pricing FAQ."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_family": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/",
+        "buy": "https://developer.nvidia.com/embedded/buy-jetson"
+      },
+      "technical_documentation": {
+        "technical_brief": "https://www.nvidia.com/content/dam/en-zz/Solutions/gtcf21/jetson-orin/nvidia-jetson-agx-orin-technical-brief.pdf",
+        "power_modes": "https://docs.nvidia.com/jetson/archives/r39.2/DeveloperGuide/SD/PlatformPowerAndPerformance/JetsonOrinNanoSeriesJetsonOrinNxSeriesAndJetsonAgxOrinSeries.html",
+        "pricing_faq": "https://developer.nvidia.com/embedded/faq"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "nvidia-tesla-t4-16gb",
+      "manufacturer": "NVIDIA",
+      "product": "Tesla T4 16GB",
+      "compute_platform": "nvidia-turing-tu104-t4",
+      "category": "datacenter_gpu_secondary_market_low_power",
+      "status": "secondary-market",
+      "tier": "A-low-power-used",
+      "gpu_architecture": "Turing",
+      "cuda_cores": 2560,
+      "tensor_cores": 320,
+      "fp32_tflops": 8.1,
+      "fp16_tensor_tflops": 65,
+      "int8_tops": 130,
+      "int4_tops": 260,
+      "memory_gb": 16,
+      "memory_type": "GDDR6",
+      "memory_bandwidth_gbps": 320,
+      "board_power_w": 70,
+      "host_interface": "PCIe 3.0 x16",
+      "form_factor": "single-slot low-profile passive",
+      "cooling": "passive; server-style directed airflow required",
+      "software": ["CUDA", "TensorRT", "PyTorch", "llama.cpp CUDA"],
+      "llm_fit": "Still useful for 7B-14B-class quantized models and smaller batched inference. Turing Tensor Cores and current CUDA ecosystem make it substantially easier to deploy than many similarly priced legacy accelerators, but 16GB VRAM limits larger models.",
+      "off_grid_suitability": "good_if_forced_air_cooling_overhead_is_acceptable",
+      "pricing": [
+        {
+          "amount": 597.90,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "used",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-17",
+          "url": "https://www.ebay.ca/p/10062338992?iid=800384984635",
+          "note": "Observed used Dell/NVIDIA T4 listing around CA$597.90 before shipping; marketplace prices vary rapidly."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/data-center/tesla-t4/"
+      },
+      "technical_documentation": {
+        "manufacturer_specs": "https://www.nvidia.com/en-us/data-center/tesla-t4/",
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/solutions/resources/documents1/Datasheet_NVIDIA_T4_Virtualization.pdf"
+      },
+      "cost_metrics": {
+        "observed_cad_per_gb_vram": 37.37,
+        "board_w_per_gb_vram": 4.375
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    },
+    {
+      "id": "nvidia-a2-16gb",
+      "manufacturer": "NVIDIA",
+      "product": "A2 Tensor Core GPU 16GB",
+      "compute_platform": "nvidia-ampere-a2",
+      "category": "datacenter_gpu_secondary_market_ultra_low_power",
+      "status": "secondary-market_and_channel",
+      "tier": "A-ultra-low-power",
+      "gpu_architecture": "Ampere",
+      "fp32_tflops": 4.5,
+      "fp16_tensor_tflops_dense": 18,
+      "int8_tops_dense": 36,
+      "int4_tops_dense": 72,
+      "memory_gb": 16,
+      "memory_type": "GDDR6",
+      "memory_bandwidth_gbps": 200,
+      "board_power_w": {"min": 40, "max": 60, "configurable": true},
+      "host_interface": "PCIe 4.0 x8",
+      "form_factor": "single-slot low-profile",
+      "software": ["CUDA", "TensorRT", "PyTorch", "NVIDIA AI Enterprise"],
+      "llm_fit": "Capacity is limited to 16GB and bandwidth is lower than T4, but the 40-60W configurable envelope makes A2 unusually attractive for always-on inference, embeddings, rerankers and small local models in constrained systems.",
+      "off_grid_suitability": "excellent_for_small_models",
+      "pricing": [
+        {
+          "amount": 602.92,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "used",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-17",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=nvidia+a2+16gb",
+          "note": "Representative used A2 listing observed near CA$603; several listings clustered roughly CA$600-650. Seller location and shipping vary."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/data-center/products/a2/"
+      },
+      "technical_documentation": {
+        "manufacturer_specs": "https://www.nvidia.com/en-us/data-center/products/a2/",
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/solutions/data-center/a2/pdf/a2-datasheet.pdf"
+      },
+      "cost_metrics": {
+        "observed_cad_per_gb_vram": 37.68,
+        "max_board_w_per_gb_vram": 3.75
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    }
+  ]
+}
