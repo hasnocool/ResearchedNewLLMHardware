@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-16",
+  "purpose": "Cost-effective current systems and secondary-market accelerators with unusually useful memory capacity for local LLM inference.",
+  "notes": [
+    "Retail and marketplace prices are point-in-time observations; shipping, tax, import fees and configuration differences can materially change delivered cost.",
+    "Secondary-market accelerators may require server airflow, custom cooling/ducting, legacy software stacks or unusual power cabling.",
+    "Price-per-memory-GB is a capacity metric only; it is not a substitute for tokens/sec, software maturity, power efficiency or total-system cost."
+  ],
+  "hardware": [
+    {
+      "id": "framework-desktop-ryzen-ai-max-plus-395-128gb",
+      "manufacturer": "Framework",
+      "product": "Framework Desktop DIY Edition - Ryzen AI Max+ 395 / 128GB",
+      "category": "compact_unified_memory_desktop",
+      "status": "available",
+      "compute_platform": "amd-strix-halo-ryzen-ai-max-plus-395",
+      "cpu": "AMD Ryzen AI Max+ 395",
+      "cpu_cores": 16,
+      "cpu_threads": 32,
+      "gpu": "Radeon 8060S",
+      "gpu_compute_units": 40,
+      "npu_tops_vendor": 50,
+      "memory_gb": 128,
+      "gpu_addressable_memory_gb_documented": 96,
+      "memory_type": "LPDDR5X-8000 unified",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 256,
+      "processor_power_w": {"sustained": 120, "boost": 140},
+      "power_supply_w": 400,
+      "networking": ["5GbE", "Wi-Fi 7"],
+      "io": ["2x USB4", "PCIe x4 slot", "2x M.2 PCIe 4.0 x4"],
+      "form_factor": "4.5 L Mini-ITX desktop",
+      "dimensions_mm": [96.8, 205.5, 226.1],
+      "software": ["Linux", "Windows 11", "ROCm", "Vulkan", "llama.cpp RPC", "LM Studio"],
+      "llm_benchmarks": [
+        {
+          "model": "OpenAI gpt-oss-20b",
+          "quantization": "MXFP4",
+          "runtime": "LM Studio",
+          "os": "Fedora 42",
+          "decode_tokens_per_second_vendor": 58,
+          "evidence": "manufacturer"
+        },
+        {
+          "model": "OpenAI gpt-oss-120b",
+          "quantization": "MXFP4",
+          "runtime": "LM Studio",
+          "os": "Fedora 42",
+          "decode_tokens_per_second_vendor": 38,
+          "evidence": "manufacturer"
+        }
+      ],
+      "model_size_practicality": "128GB unified memory is suitable for large quantized models; Framework publishes a 38 tok/s gpt-oss-120b MXFP4 result on this configuration. Exact context length and KV-cache requirements still reduce usable model capacity.",
+      "quantization_compatibility": ["MXFP4 demonstrated by vendor", "GGUF/llama.cpp ecosystem", "other ROCm/Vulkan-supported quantizations runtime dependent"],
+      "clusterability": "5GbE plus USB4; Framework explicitly documents multi-node llama.cpp RPC use and Mini-ITX density of two mainboards per 2U chassis.",
+      "off_grid_suitability": "medium-high for the memory capacity; 120W sustained processor power is far below multi-GPU servers, but whole-system wall power should be measured before energy budgeting.",
+      "performance_per_watt_status": "vendor LLM throughput exists, but comparable wall-power benchmark is not published on the cited configuration",
+      "pricing": [
+        {
+          "amount": 3149,
+          "currency": "CAD",
+          "region": "Canada-localized storefront",
+          "kind": "vendor_store",
+          "availability": "ships_within_5_business_days_when_observed",
+          "observed_at": "2026-08-16",
+          "url": "https://frame.work/products/framework-desktop-mainboard-amd-ryzen-ai-max-300-series?v=FRAFMK0002",
+          "note": "128GB Ryzen AI Max+ 395 mainboard display price observed on the localized Framework storefront; mainboard includes the pre-installed heatsink/fan mount but requires storage and other system parts."
+        },
+        {
+          "amount": 2929,
+          "currency": "CAD",
+          "region": "Canada-localized storefront",
+          "kind": "observed_refurbished",
+          "availability": "orderable_when_observed",
+          "observed_at": "2026-08-16",
+          "url": "https://frame.work/products/refurbished-framework-desktop-diy-edition-amd-ryzen-ai-max-300-series?v=FRAMDB0006R",
+          "note": "Refurbished 128GB Desktop DIY Edition observed below the standalone 128GB mainboard price; storage, AC cable, fan, tiles, expansion cards and OS are not included."
+        }
+      ],
+      "observed_price_per_memory_gb_cad": {"refurbished_full_system": 22.88, "mainboard": 24.6},
+      "vendor_urls": [
+        "https://frame.work/desktop?tab=machine-learning",
+        "https://frame.work/products/framework-desktop-mainboard-amd-ryzen-ai-max-300-series?v=FRAFMK0002",
+        "https://frame.work/products/refurbished-framework-desktop-diy-edition-amd-ryzen-ai-max-300-series?v=FRAMDB0006R"
+      ],
+      "technical_documentation": [
+        "https://frame.work/product_specs/framework-desktop-mainboard-amd-ryzen-ai-max-300-series",
+        "https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "nvidia-tesla-p40-24gb-secondary-market",
+      "manufacturer": "NVIDIA",
+      "product": "Tesla P40 24GB",
+      "category": "datacenter_gpu_secondary_market",
+      "status": "secondary-market",
+      "compute_platform": "nvidia-pascal-gp102",
+      "gpu_architecture": "Pascal",
+      "cuda_cores": 3840,
+      "fp32_tflops_peak": 12,
+      "int8_tops_peak": 47,
+      "memory_gb": 24,
+      "memory_type": "GDDR5 ECC",
+      "memory_bandwidth_gbps": 346,
+      "board_power_w": 250,
+      "host_interface": "PCIe 3.0 x16",
+      "form_factor": "full-height dual-slot passive datacenter card",
+      "dimensions_in": {"height": 4.4, "length": 10.5},
+      "cooling": "passive; forced server-class airflow required",
+      "software": ["CUDA 12.x legacy-compatible toolchain", "llama.cpp CUDA builds when compiled for Pascal", "TensorRT versions compatible with Pascal"],
+      "software_lifecycle_warning": "CUDA Toolkit 13.x removed offline compilation and library support for Pascal. CUDA 12.x remains the practical build ceiling for native Pascal targets, so long-term software compatibility is a material risk.",
+      "model_size_practicality": "24GB VRAM is useful for roughly 20B-30B class quantized models depending on quantization, context and runtime overhead; larger models generally require CPU offload or multiple GPUs.",
+      "quantization_compatibility": ["GGUF/llama.cpp CUDA subject to Pascal-compatible builds", "INT8 hardware acceleration", "modern low-bit tensor-core paths unavailable because Pascal predates Tensor Cores"],
+      "off_grid_suitability": "low-medium; memory-per-dollar is attractive but 250W board power and required forced airflow make it less suitable than modern SFF or unified-memory systems for constrained solar budgets.",
+      "pricing": [
+        {
+          "amount": 336.89,
+          "currency": "CAD",
+          "region": "eBay Canada",
+          "kind": "observed_used",
+          "availability": "listing_available_when_observed",
+          "observed_at": "2026-08-16",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=nvidia+p40+24gb&_sop=12",
+          "note": "Representative used P40 24GB listing price visible in eBay Canada search results; shipping, taxes and seller condition vary."
+        }
+      ],
+      "observed_price_per_memory_gb_cad": 14.04,
+      "vendor_urls": [
+        "https://www.nvidia.com/en-us/data-center/tesla-p40/"
+      ],
+      "technical_documentation": [
+        "https://images.nvidia.com/content/pdf/tesla/184427-Tesla-P40-Datasheet-NV-Final-Letter-Web.pdf",
+        "https://docs.nvidia.com/cuda/archive/13.2.2/cuda-toolkit-release-notes/index.html"
+      ],
+      "evidence": "manufacturer_plus_secondary_market"
+    },
+    {
+      "id": "amd-instinct-mi50-32gb-secondary-market",
+      "manufacturer": "AMD",
+      "product": "Instinct MI50 32GB",
+      "category": "datacenter_gpu_secondary_market",
+      "status": "secondary-market",
+      "compute_platform": "amd-vega20-gfx906",
+      "gpu_architecture": "GCN 5.1 / Vega 20",
+      "compute_units": 60,
+      "stream_processors": 3840,
+      "fp16_tflops_peak": 26.5,
+      "fp32_tflops_peak": 13.3,
+      "fp64_tflops_peak": 6.6,
+      "int8_tops_peak": 53,
+      "memory_gb": 32,
+      "memory_type": "HBM2 ECC",
+      "memory_bus_bits": 4096,
+      "memory_bandwidth_gbps": 1000,
+      "board_power_w": 300,
+      "external_power": "2x 8-pin",
+      "host_interface": "PCIe 4.0 x16 / PCIe 3.0 x16 compatible",
+      "interconnect": ["2x Infinity Fabric links", "92 GB/s peak aggregate link bandwidth vendor specification"],
+      "form_factor": "full-height dual-slot passive datacenter card",
+      "dimensions_in": {"length": 10.5},
+      "cooling": "passive; server-class forced airflow required unless safely adapted by the system builder",
+      "software": ["ROCm/gfx906 legacy ecosystem", "Linux", "OpenCL", "Vulkan"],
+      "software_lifecycle_warning": "MI50/gfx906 appears in current ROCm architecture references, but older ROCm support matrices have marked MI50 deprecated/limited. Verify the exact ROCm release and framework before purchase.",
+      "model_size_practicality": "32GB HBM2 provides enough capacity for many 30B-class quantized models and the 1 TB/s bandwidth is excellent for decode, but unsupported runtime combinations can erase the hardware advantage.",
+      "quantization_compatibility": ["GGUF/llama.cpp with compatible HIP/ROCm builds", "FP16", "INT8 hardware capability", "runtime-specific lower-bit support must be verified"],
+      "off_grid_suitability": "low; exceptional bandwidth-per-dollar is offset by 300W board power, passive cooling requirements and older software support.",
+      "pricing": [
+        {
+          "amount": 600,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_used",
+          "availability": "multiple_available_when_observed",
+          "observed_at": "2026-08-16",
+          "url": "https://www.ebay.ca/itm/127770835842",
+          "note": "Calgary-based used MI50 32GB listing showed CA$600 with more than 10 available; marketplace condition and availability can change quickly."
+        }
+      ],
+      "observed_price_per_memory_gb_cad": 18.75,
+      "vendor_urls": [
+        "https://www.amd.com/en/support/downloads/drivers.html/accelerators/instinct/instinct-mi-series/instinct-mi50-32gb.html"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/en/support/downloads/drivers.html/accelerators/instinct/instinct-mi-series/instinct-mi50-32gb.html",
+        "https://rocm.docs.amd.com/en/latest/reference/gpu-specs.html"
+      ],
+      "evidence": "manufacturer_plus_secondary_market"
+    }
+  ]
+}
