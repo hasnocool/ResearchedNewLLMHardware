@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0.0",
-  "last_updated": "2026-08-16",
+  "schema_version": "1.0.1",
+  "last_updated": "2026-08-17",
   "purpose": "Current Apple M5 Pro and M5 Max hardware and inference-software evidence relevant to local LLM workloads.",
   "hardware": [
     {
@@ -21,19 +21,30 @@
       "software": ["Metal 4", "MLX", "llama.cpp", "BaseRT"],
       "pricing": [
         {
-          "kind": "manufacturer_store_from",
-          "amount": 4199,
+          "kind": "manufacturer_launch_from",
+          "amount": 2999,
           "currency": "CAD",
           "region": "CA",
-          "observed_at": "2026-08-16",
-          "source_url": "https://www.apple.com/ca/shop/buy-mac/macbook-pro",
-          "note": "Apple Canada currently shows the 16-inch M5 Pro family from CA$4,199. Exact 14-inch M5 Pro configurations vary and may be lower."
+          "form_factor": "14-inch",
+          "observed_at": "2026-08-17",
+          "source_url": "https://www.apple.com/ca/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/",
+          "note": "Apple's March 3, 2026 Canadian launch pricing for the 14-inch M5 Pro MacBook Pro."
+        },
+        {
+          "kind": "manufacturer_launch_from",
+          "amount": 3599,
+          "currency": "CAD",
+          "region": "CA",
+          "form_factor": "16-inch",
+          "observed_at": "2026-08-17",
+          "source_url": "https://www.apple.com/ca/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/",
+          "note": "Apple's March 3, 2026 Canadian launch pricing for the 16-inch M5 Pro MacBook Pro; this corrects the previously stored CA$4,199 family-from observation."
         }
       ],
       "vendor_urls": ["https://www.apple.com/ca/shop/buy-mac/macbook-pro"],
       "technical_documentation": [
-        "https://support.apple.com/en-ca/126318",
-        "https://www.apple.com/ca/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/",
+        "https://www.apple.com/ca/macbook-pro/specs/",
+        "https://www.apple.com/ca/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/",
         "https://developer.apple.com/metal/",
         "https://ml-explore.github.io/mlx/build/html/index.html",
         "https://github.com/basecompute/baseRT"
@@ -59,13 +70,24 @@
       "software": ["Metal 4", "MLX", "llama.cpp", "BaseRT"],
       "pricing": [
         {
-          "kind": "manufacturer_store_from",
-          "amount": 5999,
+          "kind": "manufacturer_launch_from",
+          "amount": 4999,
           "currency": "CAD",
           "region": "CA",
-          "observed_at": "2026-08-16",
-          "source_url": "https://www.apple.com/ca/shop/buy-mac/macbook-pro",
-          "note": "Apple Canada currently shows 16-inch M5 Max configurations from CA$5,999."
+          "form_factor": "14-inch",
+          "observed_at": "2026-08-17",
+          "source_url": "https://www.apple.com/ca/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/",
+          "note": "Apple's March 3, 2026 Canadian launch pricing for the 14-inch M5 Max MacBook Pro."
+        },
+        {
+          "kind": "manufacturer_launch_from",
+          "amount": 5399,
+          "currency": "CAD",
+          "region": "CA",
+          "form_factor": "16-inch",
+          "observed_at": "2026-08-17",
+          "source_url": "https://www.apple.com/ca/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/",
+          "note": "Apple's March 3, 2026 Canadian launch pricing for the 16-inch M5 Max MacBook Pro; this corrects the previously stored CA$5,999 family-from observation."
         },
         {
           "kind": "manufacturer_exact_configuration",
@@ -74,13 +96,13 @@
           "region": "CA",
           "observed_at": "2026-08-16",
           "source_url": "https://www.apple.com/ca/shop/buy-mac/macbook-pro/16-inch-space-black-standard-display-apple-m5-max-chip-18-core-cpu-40-core-gpu-128gb-memory-2tb-storage",
-          "note": "Observed 16-inch M5 Max 18-core CPU / 40-core GPU / 128GB unified memory / 2TB SSD configuration."
+          "note": "Previously observed 16-inch M5 Max 18-core CPU / 40-core GPU / 128GB unified memory / 2TB SSD configuration; retained as a dated exact-configuration observation."
         }
       ],
       "vendor_urls": ["https://www.apple.com/ca/shop/buy-mac/macbook-pro"],
       "technical_documentation": [
-        "https://support.apple.com/en-ca/126318",
-        "https://www.apple.com/ca/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/",
+        "https://www.apple.com/ca/macbook-pro/specs/",
+        "https://www.apple.com/ca/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/",
         "https://developer.apple.com/metal/",
         "https://ml-explore.github.io/mlx/build/html/index.html",
         "https://github.com/basecompute/baseRT"
