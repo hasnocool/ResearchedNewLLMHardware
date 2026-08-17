@@ -1,8 +1,8 @@
 # SBC and Apple Silicon LLM Hardware
 
-Last updated: **2026-08-15**
+Last updated: **2026-08-17**
 
-This section covers **single-board computers (SBCs), compute modules, compact ARM systems, and Apple Silicon desktops** that may be useful for local or distributed LLM inference.
+This section covers **single-board computers (SBCs), compute modules, compact ARM systems, SBC-attached accelerators, and Apple Silicon desktops** that may be useful for local or distributed LLM inference.
 
 The same rules used elsewhere in the project apply here: memory capacity and bandwidth matter more than headline TOPS alone; prices are dated point-in-time observations; and software/runtime maturity is part of the score.
 
@@ -43,6 +43,35 @@ The increase is material and should be treated as a dated market observation, no
 - https://www.raspberrypi.com/documentation/computers/raspberry-pi.html
 - https://www.raspberrypi.com/documentation/computers/processors.html
 - https://www.raspberrypi.com/documentation/computers/configuration.html
+
+### Raspberry Pi AI HAT+ 2 / Hailo-10H
+
+**Category:** SBC-attached generative-AI accelerator  
+**Host:** Raspberry Pi 5  
+**Accelerator:** Hailo-10H  
+**Compute:** **40 TOPS INT4 / 20 TOPS INT8**  
+**Dedicated accelerator memory:** **8 GB LPDDR4X**  
+**Model capacity:** Raspberry Pi documents LLM/VLM support up to roughly **6B parameters**  
+**Typical accelerator-module power:** **2.5 W** for Hailo's Hailo-10H M.2 module; whole Pi + HAT wall power is higher  
+**Software:** HailoRT, hailo-ollama, Hailo Model Zoo, Raspberry Pi OS integration  
+**Current official price checked 2026-08-17:** **US$200**  
+**Status:** available
+
+**Why it matters:** this is one of the clearest genuinely low-power generative-AI accelerators in the SBC category because it has its own memory rather than relying entirely on host RAM. It can free the Pi CPU and RAM for orchestration while the Hailo device handles supported LLM/VLM work.
+
+**Important benchmark nuance:** TOPS does not translate directly into decoder speed. Raspberry Pi/Hailo publish a Qwen2.5 1.5B 4-bit **96-token time-to-first-token result of about 320 ms on Hailo-10H versus 2039 ms on Pi 5 CPU**, which is a strong prefill/latency result. Independent CNX Software testing, however, measured lower token-generation rates on Hailo-10H than on the Pi 5 CPU for several 1.5B-3B models. The current evidence therefore suggests the HAT is strongest for **TTFT/prefill, VLM pipelines, CPU offload, host-memory relief, and always-on edge-agent workloads**, not universally faster autoregressive decode.
+
+**Vendor / purchase:**
+
+- https://www.raspberrypi.com/products/ai-hat-plus-2/
+- https://hailo.ai/products/ai-accelerators/hailo-10h-m-2-ai-acceleration-module/
+
+**Technical documentation:**
+
+- https://www.raspberrypi.com/documentation/accessories/ai-hat-plus.html
+- https://www.raspberrypi.com/documentation/computers/ai.html
+- https://pip.raspberrypi.com/categories/1319-raspberry-pi-ai-hat-2
+- https://hailo.ai/products/ai-accelerators/hailo-10h-ai-accelerator/
 
 ### Raspberry Pi Compute Module 5
 
@@ -200,6 +229,7 @@ The M3 Ultra remains exceptional for model capacity: up to 512 GB coherent unifi
 | Platform | Model-capacity role | Distributed role | Software maturity |
 |---|---|---|---|
 | Raspberry Pi 5 16GB | small | helper/control node | high Linux maturity; limited acceleration |
+| Raspberry Pi AI HAT+ 2 | small (~6B max vendor guidance) | low-power edge inference / prefill / VLM helper | moderate/high for supported Hailo models; constrained model compatibility |
 | Compute Module 5 | small | embedded/control cluster | high Linux maturity |
 | Orange Pi 5 Plus 32GB | small/medium experimental | good due to dual 2.5GbE | moderate/experimental |
 | ROCK 5B+ 32GB | small/medium experimental | good | moderate/experimental |
