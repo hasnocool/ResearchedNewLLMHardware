@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-17",
+  "purpose": "Purchasable OEM/system variants that share compute platforms already represented in the main catalog. These records must not be counted as independent silicon architectures.",
+  "hardware": [
+    {
+      "id": "dell-pro-max-gb10-fcm1253-4tb",
+      "manufacturer": "Dell",
+      "product": "Dell Pro Max with GB10",
+      "model": "FCM1253",
+      "compute_platform": "nvidia-gb10-grace-blackwell",
+      "category": "compact_ai_workstation",
+      "status": "available_region_dependent",
+      "cpu": "NVIDIA GB10 Grace CPU, 10 Cortex-X925 + 10 Cortex-A725 cores",
+      "gpu": "NVIDIA GB10 Blackwell",
+      "memory_gb": 128,
+      "memory_type": "LPDDR5X unified",
+      "storage_tb": 4,
+      "os": "NVIDIA DGX OS 7",
+      "power_supply_w": 280,
+      "pricing": [
+        {
+          "amount": 8703.69,
+          "currency": "CAD",
+          "region": "CA",
+          "kind": "manufacturer_store",
+          "availability": "available_when_indexed",
+          "observed_at": "2026-08-17",
+          "url": "https://www.dell.com/en-ca/shop/dell-desktops-workstations/dell-pro-max-with-gb10/spd/dell-pro-max-fcm1253-micro/xcto_fcm1253_cax"
+        }
+      ],
+      "vendor_urls": ["https://www.dell.com/en-ca/lp/dell-pro-max-nvidia-ai-dev-premier", "https://www.dell.com/en-ca/shop/dell-desktops-workstations/dell-pro-max-with-gb10/spd/dell-pro-max-fcm1253-micro/xcto_fcm1253_cax"],
+      "technical_documentation": ["https://www.dell.com/en-ca/lp/dell-pro-max-nvidia-ai-dev-premier"],
+      "evidence": "manufacturer",
+      "notes": "Shared GB10 platform. Compare OEM variants mainly by delivered price, storage, thermals, warranty, PSU and exposed networking rather than treating them as separate silicon performance classes."
+    },
+    {
+      "id": "acer-veriton-gn100-ud11",
+      "manufacturer": "Acer",
+      "product": "Veriton GN100 AI Mini Workstation",
+      "model": "GN100-UD11",
+      "part_number": "DT.R6LAA.001",
+      "compute_platform": "nvidia-gb10-grace-blackwell",
+      "category": "compact_ai_workstation",
+      "status": "available_region_dependent",
+      "cpu": "NVIDIA GB10, 20-core Arm",
+      "gpu": "NVIDIA GB10 Blackwell",
+      "memory_gb": 128,
+      "memory_type": "LPDDR5X unified",
+      "storage_tb": 4,
+      "networking": ["10GbE", "ConnectX-7 200G x2 QSFP"],
+      "os": "DGX OS",
+      "power_supply_w": 170,
+      "pricing": [
+        {
+          "amount": 3999,
+          "currency": "USD",
+          "region": "North America",
+          "kind": "manufacturer_launch_from",
+          "availability": "region_dependent",
+          "observed_at": "2026-08-17",
+          "url": "https://news.acer.com/acer-unveils-the-veriton-gn100-ai-mini-workstation-built-on-the-nvidia-gb10-superchip",
+          "note": "Acer announced North American pricing from US$3,999; exact current channel price can vary."
+        }
+      ],
+      "vendor_urls": ["https://www.acer.com/ca-en/desktops-and-all-in-ones/veriton-workstations/veriton-gn100-ai-mini-workstation/pdp/DT.R6LAA.001"],
+      "technical_documentation": ["https://www.acer.com/ca-en/desktops-and-all-in-ones/veriton-workstations/veriton-gn100-ai-mini-workstation/pdp/DT.R6LAA.001", "https://news.acer.com/acer-unveils-the-veriton-gn100-ai-mini-workstation-built-on-the-nvidia-gb10-superchip"],
+      "evidence": "manufacturer",
+      "notes": "Acer's published 170 W maximum PSU figure is notable versus several 240-280 W GB10 OEM adapters, but it is not a measured wall-power benchmark."
+    },
+    {
+      "id": "gmktec-evo-x2-ryzen-ai-max-plus-395",
+      "manufacturer": "GMKtec",
+      "product": "EVO-X2 AI Mini PC",
+      "compute_platform": "amd-strix-halo-ryzen-ai-max-plus-395",
+      "category": "mini_pc",
+      "status": "available",
+      "cpu": "AMD Ryzen AI Max+ 395, 16C/32T",
+      "gpu": "Radeon 8060S",
+      "gpu_compute_units": 40,
+      "npu_tops_vendor": 50,
+      "memory_options_gb": [64, 128],
+      "memory_type": "LPDDR5X-8000 unified",
+      "networking": ["2.5GbE", "Wi-Fi 7"],
+      "storage": "dual M.2 2280 PCIe 4.0 slots",
+      "power": {"sustained_package_w_vendor": 120, "peak_package_w_vendor": 140, "adapter_w_approx": 230.1},
+      "pricing": [
+        {
+          "amount": 1999.99,
+          "currency": "USD",
+          "region": "US",
+          "kind": "manufacturer_store",
+          "configuration": "64GB RAM + 1TB SSD selector",
+          "availability": "add_to_cart_when_checked",
+          "observed_at": "2026-08-17",
+          "url": "https://www.gmktec.com/products/amd-ryzen%E2%84%A2-ai-max-395-evo-x2-ai-mini-pc",
+          "note": "The page exposes 128GB selectors but did not expose a defensible variant-specific 128GB price in the indexed page, so no 128GB price is invented here."
+        }
+      ],
+      "vendor_benchmarks": [
+        {"model": "GPT-OSS 120B", "metric": "decode_tokens_per_second", "value": 19.25, "configuration": "128GB version", "evidence": "vendor_benchmark"},
+        {"model": "Qwen3 235B", "metric": "decode_tokens_per_second", "value": 11.0, "configuration": "128GB version", "evidence": "vendor_benchmark"},
+        {"model": "Llama4 109B-Q4KM", "metric": "decode_tokens_per_second", "value": 13.83, "configuration": "128GB version", "evidence": "vendor_benchmark"}
+      ],
+      "vendor_urls": ["https://www.gmktec.com/products/amd-ryzen%E2%84%A2-ai-max-395-evo-x2-ai-mini-pc"],
+      "technical_documentation": ["https://www.gmktec.com/products/amd-ryzen%E2%84%A2-ai-max-395-evo-x2-ai-mini-pc"],
+      "evidence": "manufacturer_plus_vendor_benchmark",
+      "notes": "Vendor benchmarks are useful evidence but are not independent. Preserve exact model/runtime/quantization metadata when independent reproductions become available."
+    }
+  ]
+}
