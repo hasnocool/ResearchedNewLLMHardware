@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-16",
+  "purpose": "Refurbished high-memory Apple Silicon and legacy NVIDIA Volta hardware whose memory capacity, bandwidth, energy profile, or secondary-market pricing makes it relevant to local LLM inference.",
+  "notes": [
+    "Apple Certified Refurbished prices are point-in-time configuration prices from Apple Canada; storage capacity can materially inflate a system price and should not be treated as a pure compute-price comparison.",
+    "Model-size practicality statements are conservative estimates based on memory capacity and common quantized-weight footprints; exact fit depends on runtime, context length, KV cache, model architecture and OS overhead.",
+    "Volta is a legacy CUDA target: CUDA 13 removed offline compilation and library support for Volta, so CUDA 12.x-era application stacks must be verified before purchase."
+  ],
+  "hardware": [
+    {
+      "id": "apple-mac-studio-m1-max-64gb-refurbished",
+      "manufacturer": "Apple",
+      "product": "Mac Studio (2022) M1 Max 64GB - Apple Certified Refurbished",
+      "category": "refurbished_unified_memory_workstation",
+      "status": "refurbished_limited_inventory",
+      "compute_platform": "apple-m1-max",
+      "cpu": "10-core CPU (8 performance + 2 efficiency)",
+      "gpu_cores": 32,
+      "neural_engine_cores": 16,
+      "memory_gb": 64,
+      "memory_type": "unified memory",
+      "memory_bandwidth_gbps": 400,
+      "storage_tb": 0.5,
+      "networking": ["10GbE", "Wi-Fi 6"],
+      "io": ["4x Thunderbolt 4", "2x USB-A", "2x front USB-C", "HDMI", "SDXC"],
+      "dimensions_cm": {"height": 9.5, "width": 19.7, "depth": 19.7},
+      "weight_kg": 2.7,
+      "system_power_w": {
+        "idle_reference_config": 11,
+        "max_reference_config": 115,
+        "note": "Apple wall-power reference is for a 32GB M1 Max Mac Studio; the 64GB refurb configuration may differ."
+      },
+      "software": ["macOS", "Metal", "MLX", "llama.cpp", "Ollama ecosystem"],
+      "model_size_practicality": "Estimate: strong fit for 7B-30B quantized models and many larger low-bit models; 64GB unified memory leaves less than the full nominal capacity available to model weights after macOS/runtime/KV-cache overhead.",
+      "quantization_compatibility": ["GGUF/llama.cpp", "MLX quantized models", "Metal-accelerated inference"],
+      "off_grid_suitability": "high for workstation-class inference; Apple documents about 11W idle and 115W maximum wall power for a reference M1 Max Mac Studio, substantially below many discrete-GPU workstations.",
+      "pricing": [
+        {
+          "amount": 3359,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "manufacturer_refurbished",
+          "condition": "Apple Certified Refurbished",
+          "availability": "limited_inventory_when_observed",
+          "observed_at": "2026-08-16",
+          "vendor": "Apple Canada",
+          "url": "https://www.apple.com/ca_smb_en/shop/product/g14jell/a/refurbished-mac-studio-apple-m1-max-chip-with-10%E2%80%91core-cpu-and-32%E2%80%91core-gpu",
+          "note": "64GB unified memory / 512GB SSD configuration."
+        }
+      ],
+      "observed_price_per_memory_gb_cad": 52.48,
+      "vendor_urls": ["https://www.apple.com/ca_smb_en/shop/product/g14jell/a/refurbished-mac-studio-apple-m1-max-chip-with-10%E2%80%91core-cpu-and-32%E2%80%91core-gpu"],
+      "technical_documentation": [
+        "https://support.apple.com/en-us/111900",
+        "https://support.apple.com/en-us/102027",
+        "https://developer.apple.com/metal/",
+        "https://ml-explore.github.io/mlx/build/html/index.html"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "apple-mac-studio-m1-ultra-refurbished",
+      "manufacturer": "Apple",
+      "product": "Mac Studio (2022) M1 Ultra - Apple Certified Refurbished",
+      "category": "refurbished_high_capacity_unified_memory_workstation",
+      "status": "refurbished_limited_inventory",
+      "compute_platform": "apple-m1-ultra",
+      "cpu": "20-core CPU (16 performance + 4 efficiency)",
+      "gpu_cores": {"base": 48, "max": 64},
+      "neural_engine_cores": 32,
+      "memory_gb": {"observed_configs": [64, 128], "platform_max": 128},
+      "memory_type": "unified memory",
+      "memory_bandwidth_gbps": 800,
+      "networking": ["10GbE", "Wi-Fi 6"],
+      "io": ["4x rear Thunderbolt 4", "2x front Thunderbolt 4", "2x USB-A", "HDMI", "SDXC"],
+      "dimensions_cm": {"height": 9.5, "width": 19.7, "depth": 19.7},
+      "weight_kg": 3.6,
+      "system_power_w": {
+        "idle_reference_config": 13,
+        "max_reference_config": 215,
+        "max_continuous_platform_rating": 370,
+        "note": "Apple wall-power reference is for M1 Ultra 48-core GPU / 64GB / 1TB; 128GB and 64-core-GPU configurations may differ."
+      },
+      "software": ["macOS", "Metal", "MLX", "llama.cpp", "Ollama ecosystem"],
+      "model_size_practicality": "Estimate: 64GB configurations are strong for 30B-class quantized models; 128GB configurations can hold many 70B-class quantized models with room for runtime/KV cache, subject to exact quantization, context and software overhead.",
+      "quantization_compatibility": ["GGUF/llama.cpp", "MLX quantized models", "Metal-accelerated inference"],
+      "off_grid_suitability": "medium-high for its memory bandwidth/capacity; Apple documents 13W idle and 215W maximum wall draw for a reference 64GB M1 Ultra system.",
+      "pricing": [
+        {
+          "amount": 6549,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "manufacturer_refurbished",
+          "condition": "Apple Certified Refurbished",
+          "availability": "limited_inventory_when_observed",
+          "observed_at": "2026-08-16",
+          "vendor": "Apple Canada",
+          "url": "https://www.apple.com/ca/shop/product/g14kall/a/refurbished-mac-studio-apple-m1-ultra-chip-with-20%E2%80%91core-cpu-and-64%E2%80%91core-gpu",
+          "note": "64GB unified memory / 1TB SSD / 64-core GPU configuration."
+        },
+        {
+          "amount": 9319,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "manufacturer_refurbished",
+          "condition": "Apple Certified Refurbished",
+          "availability": "limited_inventory_when_observed",
+          "observed_at": "2026-08-16",
+          "vendor": "Apple Canada",
+          "url": "https://www.apple.com/ca/shop/product/g14k8ll/a/refurbished-mac-studio-apple-m1-ultra-chip-with-20%E2%80%91core-cpu-and-48%E2%80%91core-gpu",
+          "note": "128GB unified memory / 8TB SSD / 48-core GPU configuration; large SSD materially inflates price, so this is not a clean compute-only value comparison."
+        }
+      ],
+      "observed_price_per_memory_gb_cad": {"64gb_config": 102.33, "128gb_8tb_config": 72.80},
+      "vendor_urls": [
+        "https://www.apple.com/ca/shop/product/g14kall/a/refurbished-mac-studio-apple-m1-ultra-chip-with-20%E2%80%91core-cpu-and-64%E2%80%91core-gpu",
+        "https://www.apple.com/ca/shop/product/g14k8ll/a/refurbished-mac-studio-apple-m1-ultra-chip-with-20%E2%80%91core-cpu-and-48%E2%80%91core-gpu"
+      ],
+      "technical_documentation": [
+        "https://support.apple.com/en-us/111900",
+        "https://support.apple.com/en-us/102027",
+        "https://developer.apple.com/metal/",
+        "https://ml-explore.github.io/mlx/build/html/index.html"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "nvidia-tesla-v100-pcie-32gb-secondary-market",
+      "manufacturer": "NVIDIA",
+      "product": "Tesla V100 PCIe 32GB",
+      "category": "datacenter_gpu_secondary_market",
+      "status": "secondary-market_legacy",
+      "compute_platform": "nvidia-volta-gv100",
+      "gpu_architecture": "Volta",
+      "cuda_cores": 5120,
+      "tensor_cores": 640,
+      "fp32_tflops_peak": 14,
+      "deep_learning_tflops_vendor": 112,
+      "memory_gb": 32,
+      "memory_type": "HBM2 ECC",
+      "memory_bus_bits": 4096,
+      "memory_bandwidth_gbps": 900,
+      "board_power_w": 250,
+      "host_interface": "PCIe 3.0 x16",
+      "form_factor": "full-height/full-length passive datacenter card",
+      "cooling": "passive; server-class forced airflow required",
+      "software": ["CUDA 12.x legacy-compatible stack", "llama.cpp CUDA builds targeting sm_70", "compatible older PyTorch/CUDA combinations"],
+      "software_lifecycle_warning": "NVIDIA lists Volta's last CUDA Toolkit support as CUDA 12.x and last driver branch as R580. CUDA 13 removed offline compilation and library support for Volta; verify application binaries and dependencies before purchase.",
+      "model_size_practicality": "32GB HBM2 can hold many 30B-class quantized models depending on context/runtime overhead. Its 900GB/s bandwidth is exceptional for the observed used price, but legacy software and 250W passive cooling materially increase operational friction.",
+      "quantization_compatibility": ["GGUF/llama.cpp via Volta-compatible CUDA 12.x builds", "FP16 Tensor Cores", "INT8 Tensor Core paths where supported by legacy-compatible runtimes"],
+      "off_grid_suitability": "low; 250W board power plus forced-air cooling offsets the excellent bandwidth-per-dollar.",
+      "pricing": [
+        {
+          "amount": 911.06,
+          "currency": "CAD",
+          "region": "eBay Canada localized",
+          "kind": "observed_used",
+          "condition": "used",
+          "availability": "34_available_44_sold_when_indexed",
+          "observed_at": "2026-08-16",
+          "vendor": "eBay marketplace - E-deals Global7",
+          "url": "https://www.ebay.ca/itm/206345870653",
+          "note": "US$645 listing localized to about CA$911.06 with free international shipping when indexed; taxes/import exposure and seller condition still apply."
+        }
+      ],
+      "observed_price_per_memory_gb_cad": 28.47,
+      "vendor_urls": ["https://www.nvidia.com/en-gb/data-center/tesla-v100/"],
+      "technical_documentation": [
+        "https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-product-literature/Tesla-V100-PCIe-Product-Brief.pdf",
+        "https://docs.nvidia.com/datacenter/tesla/drivers/latest/cuda-toolkit-driver-and-architecture-matrix.html",
+        "https://docs.nvidia.com/cuda/archive/13.1.0/cuda-toolkit-release-notes/index.html"
+      ],
+      "evidence": "manufacturer_plus_secondary_market"
+    }
+  ]
+}
