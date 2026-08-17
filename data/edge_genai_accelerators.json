@@ -1,0 +1,251 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-17",
+  "scope": "edge_genai_and_low_power_accelerators",
+  "notes": [
+    "Manufacturer specifications are preferred for hardware capabilities; current store observations are recorded separately and time-stamped.",
+    "TOPS values across vendors are not directly comparable because datatype, sparsity and workload differ.",
+    "Accelerator memory capacity and supported model/runtime ecosystem are treated as first-class constraints for LLM suitability."
+  ],
+  "hardware": [
+    {
+      "id": "raspberry-pi-ai-hat-plus-2-hailo10h-8gb",
+      "manufacturer": "Raspberry Pi",
+      "product": "AI HAT+ 2",
+      "model_identifier": "SC2166",
+      "compute_platform": "hailo-10h",
+      "category": "sbc_ai_accelerator_hat",
+      "status": "available",
+      "tier": "A-small-genai-offgrid",
+      "accelerator": "Hailo-10H",
+      "int4_tops": 40,
+      "accelerator_memory_gb": 8,
+      "accelerator_memory_type": "LPDDR4X",
+      "host_requirement": "Raspberry Pi 5",
+      "host_interface": "Raspberry Pi 5 PCIe via HAT+ connector",
+      "supported_frameworks": ["HailoRT", "Hailo Model Zoo GenAI", "Hailo-Ollama", "PyTorch/ONNX models via Hailo toolchain"],
+      "supported_genai_examples": ["Llama 3.2 1B/3B-class", "Qwen2/Qwen2.5 1.5B-class", "Qwen2-VL 2B-class", "DeepSeek-R1-Distill-Qwen 1.5B", "Whisper Base"],
+      "model_size_practicality": "Raspberry Pi documentation states support for LLM/VLM workloads up to approximately 6B parameters; Hailo's currently published GenAI model catalog is concentrated around roughly 1B-3B-class models.",
+      "quantization_compatibility": "Hailo-compiled models/HEF; accelerator peak figure is INT4. This is not a drop-in arbitrary GGUF/llama.cpp GPU replacement.",
+      "llm_inference_suitability": "Good for purpose-built offline assistants, document/chat appliances, VLM and speech workloads when a supported compiled model fits. Less flexible than CPU/GPU backends for arbitrary models.",
+      "power_efficiency": "Very high accelerator efficiency; Hailo-10H typical accelerator power is approximately 2.5 W, excluding Raspberry Pi 5 host power.",
+      "off_grid_suitability": "excellent_for_supported_models",
+      "physical_constraints": "HAT+ form factor; supplied heatsink and stacking hardware; Raspberry Pi 5 host and adequate cooling/power still required.",
+      "pricing": [
+        {
+          "amount": 200,
+          "currency": "USD",
+          "region": "manufacturer product page",
+          "kind": "manufacturer_store",
+          "availability": "available",
+          "observed_at": "2026-08-17",
+          "url": "https://www.raspberrypi.com/products/ai-hat-plus-2/",
+          "note": "Current Raspberry Pi product page displays US$200; this supersedes the US$130 launch price published in January 2026."
+        },
+        {
+          "amount": 252,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "ships_in_2_to_4_business_days_when_observed",
+          "observed_at": "2026-08-17",
+          "url": "https://www.pishop.ca/product/raspberry-pi-ai-hat-2/",
+          "note": "PiShop.ca current product price when observed."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.raspberrypi.com/products/ai-hat-plus-2/",
+        "canada_reseller": "https://www.pishop.ca/product/raspberry-pi-ai-hat-2/"
+      },
+      "source_urls": {
+        "raspberry_pi_documentation": "https://www.raspberrypi.com/documentation/accessories/ai-hat-plus.html",
+        "hailo_genai_model_explorer": "https://hailo.ai/products/hailo-software/model-explorer/generative-ai/type/llm/",
+        "hailo_apps": "https://github.com/hailo-ai/hailo-apps"
+      },
+      "evidence": "manufacturer_plus_authorized_reseller"
+    },
+    {
+      "id": "hailo-10h-m2-8gb",
+      "manufacturer": "Hailo",
+      "product": "Hailo-10H M.2 AI Acceleration Module 8GB",
+      "compute_platform": "hailo-10h",
+      "category": "m2_genai_accelerator",
+      "status": "available_channel_dependent",
+      "tier": "A-low-power-specialized",
+      "accelerator": "Hailo-10H",
+      "int4_tops": 40,
+      "int8_tops": 20,
+      "accelerator_memory_gb": 8,
+      "accelerator_memory_type": "LPDDR4/LPDDR4X",
+      "typical_power_w": 2.5,
+      "form_factor": "M.2 Key M 2242/2280",
+      "host_interface": "PCIe Gen 3 x4",
+      "supported_host_architectures": ["x86", "Arm"],
+      "supported_operating_systems": ["Linux", "Windows", "Android"],
+      "supported_frameworks": ["TensorFlow", "TensorFlow Lite", "Keras", "PyTorch", "ONNX", "HailoRT", "Hailo-Ollama"],
+      "model_size_practicality": "Best suited to small LLM/VLM models that fit the 8GB local memory and have Hailo compiler/runtime support. Current published Hailo GenAI examples are mostly 1B-3B class.",
+      "quantization_compatibility": "Hailo compiled execution format; INT4 is the peak GenAI performance mode. Arbitrary GGUF compatibility should not be assumed.",
+      "llm_inference_suitability": "Excellent power efficiency for supported small GenAI models and embedded appliances; constrained by proprietary compilation/runtime path and smaller model ecosystem than CUDA/ROCm/Metal.",
+      "off_grid_suitability": "excellent",
+      "pricing": [
+        {
+          "kind": "quote_or_distributor_dependent",
+          "availability": "channel_dependent",
+          "observed_at": "2026-08-17",
+          "note": "No stable public 8GB module price captured in this pass. Mouser announced global Hailo distribution in July 2026 and lists Hailo-10H starter kits; exact memory configuration must be checked before purchase."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://hailo.ai/products/ai-accelerators/hailo-10h-m-2-ai-acceleration-module/",
+        "manufacturer_buying_information": "https://hailo.ai/products/ai-accelerators/hailo-10h-ai-accelerator/"
+      },
+      "source_urls": {
+        "model_explorer": "https://hailo.ai/products/hailo-software/model-explorer/generative-ai/type/llm/",
+        "genai_model_zoo": "https://github.com/hailo-ai/hailo_model_zoo_genai",
+        "mouser_distribution_announcement": "https://www.mouser.ca/en/newsroom/publicrelations-hailo-new-manufacturer-2026final/"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "axelera-metis-m2-1gb",
+      "manufacturer": "Axelera AI",
+      "product": "Metis M.2 AI Inference Acceleration Card",
+      "compute_platform": "axelera-metis-aipu",
+      "category": "m2_edge_ai_accelerator",
+      "status": "available",
+      "tier": "B-vision-not-general-llm",
+      "accelerator": "Metis AIPU",
+      "int8_tops": 214,
+      "accelerator_memory_gb": 1,
+      "accelerator_memory_type": "LPDDR4X",
+      "typical_power_w": {"min": 3.5, "max": 9},
+      "tdp_w": 10,
+      "form_factor": "M.2 2280 M-key",
+      "dimensions_mm": [22, 80],
+      "host_interface": "PCIe Gen 3 x4",
+      "supported_hosts": ["Intel Core/Xeon", "AMD Ryzen", "Arm64"],
+      "supported_operating_systems": ["Ubuntu 22.04/24.04", "Debian 12/13", "RHEL 9/10", "Yocto", "Windows 10/11", "Windows Server 2025"],
+      "software": ["Voyager SDK"],
+      "model_size_practicality": "The 1GB local DRAM strongly limits general LLM weight residency. Treat as a high-efficiency vision/edge inference accelerator rather than a general local-LLM card unless Axelera publishes a supported GenAI path.",
+      "quantization_compatibility": "Vendor quantization toolchain for supported neural networks; 214 TOPS is an INT8 peak figure.",
+      "llm_inference_suitability": "low_for_general_llm_high_for_edge_vision",
+      "performance_per_watt_note": "Vendor advertises up to 214 INT8 TOPS at 3.5-9 W typical card power; workload-realized efficiency depends on model utilization and host overhead.",
+      "off_grid_suitability": "excellent_for_supported_edge_models",
+      "physical_constraints": "No-cooling variant is not suitable for deployment without a user-designed thermal solution; active-cooled version is available.",
+      "pricing": [
+        {
+          "amount": 229.95,
+          "currency": "EUR",
+          "region": "Axelera online store",
+          "kind": "vendor_store",
+          "availability": "orderable",
+          "observed_at": "2026-08-17",
+          "url": "https://store.axelera.ai/products/metis-m-2-card-the-most-performant-m-2-edge-ai-accelerator",
+          "note": "Base no-cooling option; active cooling costs more."
+        }
+      ],
+      "vendor_urls": {
+        "vendor_store": "https://store.axelera.ai/products/metis-m-2-card-the-most-performant-m-2-edge-ai-accelerator"
+      },
+      "source_urls": {
+        "datasheet": "https://docs.axelera.ai/assets/files/metis-m2-datasheet-7aaabc0fd72cba4edff377cbbe276c09.pdf"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "axelera-metis-compute-board-16gb",
+      "manufacturer": "Axelera AI",
+      "product": "Metis Compute Board 16GB",
+      "compute_platform": "rk3588-plus-axelera-metis",
+      "category": "edge_ai_sbc",
+      "status": "available",
+      "tier": "B-edge-vision",
+      "cpu": "Rockchip RK3588, 4x Cortex-A76 + 4x Cortex-A55",
+      "host_memory_gb": 16,
+      "accelerator": "Metis AIPU",
+      "accelerator_memory_gb": 16,
+      "accelerator_memory_type": "LPDDR4X",
+      "int8_tops": 214,
+      "typical_system_power_w": {"min": 9, "max": 20},
+      "power_input": "12 V DC",
+      "form_factor": "mini-ITX 170x170 mm",
+      "networking": ["1GbE", "1GbE"],
+      "storage": ["64GB eMMC", "2x SATA", "microSD"],
+      "host_interface": "PCIe Gen 3 x4 between RK3588 and Metis AIPU",
+      "operating_system": "Yocto-based Linux",
+      "software": ["Voyager SDK"],
+      "model_size_practicality": "Large accelerator-memory option is notable, but Axelera currently markets Metis primarily for computer vision and multi-model edge inference. Do not infer broad LLM support from RAM capacity or TOPS alone.",
+      "llm_inference_suitability": "experimental_until_vendor_genai_support_is_public",
+      "off_grid_suitability": "excellent_for_supported_edge_workloads",
+      "pricing": [
+        {
+          "amount": 965.95,
+          "currency": "EUR",
+          "region": "Axelera online store",
+          "kind": "vendor_store",
+          "availability": "orderable",
+          "observed_at": "2026-08-17",
+          "url": "https://store.axelera.ai/products/metis-compute-board",
+          "note": "16GB accelerator-memory configuration; vendor store lists the family from EUR 699.95 to EUR 965.95 depending on memory configuration."
+        }
+      ],
+      "vendor_urls": {
+        "vendor_store": "https://store.axelera.ai/products/metis-compute-board"
+      },
+      "source_urls": {
+        "product_brief": "https://axelera.ai/hubfs/Axelera_February2025/pdfs/axelera-metis-compute-board-product-brief.pdf?hsLang=en"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "orange-pi-6-plus-64gb",
+      "manufacturer": "Orange Pi",
+      "product": "Orange Pi 6 Plus 64GB",
+      "compute_platform": "cix-cd8180-cd8160",
+      "category": "high_memory_arm_sbc",
+      "status": "available_region_and_configuration_dependent",
+      "tier": "A-potential-arm-llm",
+      "cpu": "12-core Arm (Cortex-A720/A520 family)",
+      "gpu": "Arm Immortalis-G720 MC10",
+      "npu_tops": 28.8,
+      "vendor_combined_ai_tops": 45,
+      "memory_gb": 64,
+      "memory_type": "128-bit LPDDR5",
+      "memory_data_rate_mt_s": 6000,
+      "memory_bandwidth_gbps_theoretical": 96,
+      "storage_interfaces": ["2x M.2 M-key 2280 PCIe 4.0 x4 NVMe", "microSD", "SPI flash"],
+      "networking": ["5GbE", "5GbE"],
+      "power_supply_w": 100,
+      "power_input": "USB-C PD 20V",
+      "dimensions_mm": [115, 100],
+      "weight_g": 132,
+      "supported_operating_systems": ["Debian", "Ubuntu", "Android", "Windows", "ROS2"],
+      "npu_datatypes": ["INT4", "INT8", "INT16", "FP16", "BF16", "TF32"],
+      "model_size_practicality": "64GB host memory makes 22B-30B-class quantized CPU/GPU inference plausible by capacity. NPU acceleration depends on CIX software/model support and should not be assumed to work with arbitrary GGUF models.",
+      "quantization_compatibility": "NPU documentation advertises INT4/INT8/INT16/FP16/BF16/TF32 acceleration; general llama.cpp/GGUF use may fall back to CPU/GPU paths unless a compatible CIX runtime exists for the model.",
+      "llm_inference_suitability": "promising_high_memory_arm_sbc_but_needs_independent_llm_benchmarks",
+      "off_grid_suitability": "good_if_actual_system_power_is_kept_well_below_100w_adapter_rating",
+      "pricing": [
+        {
+          "amount": 458.57,
+          "currency": "USD",
+          "region": "AliExpress listing tracked by Pricearchive",
+          "kind": "observed_new",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-01",
+          "url": "https://www.pricearchive.org/aliexpress.com/item/1005010193448725",
+          "note": "Recent tracked price for the listing's cheapest configuration; exact RAM/configuration represented by that price is not guaranteed, so do not treat this as a verified 64GB price."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-6-Plus.html",
+        "manufacturer_support": "https://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-6-Plus.html"
+      },
+      "source_urls": {
+        "linux_user_manual": "https://orangepi.net/wp-content/uploads/2026/01/OrangePi_6_Plus_Cix_Linux-System_User-Manual_v0.7.pdf",
+        "recent_market_price_tracker": "https://www.pricearchive.org/aliexpress.com/item/1005010193448725"
+      },
+      "evidence": "manufacturer_plus_market_price_tracker"
+    }
+  ]
+}
