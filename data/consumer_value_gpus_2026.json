@@ -1,0 +1,233 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-17",
+  "scope": "consumer_value_gpus",
+  "notes": [
+    "Consumer GPUs are ranked here for local-LLM practicality rather than gaming performance. VRAM capacity, memory bandwidth, runtime support, board power, acquisition cost and physical integration matter more than gaming FPS.",
+    "Prices are point-in-time Canadian observations. Retailer stock and pricing can change quickly.",
+    "Vendor AI TOPS figures are datatype- and implementation-dependent and are not directly comparable across Intel, NVIDIA and AMD.",
+    "Model-size guidance is approximate and assumes quantized inference with additional headroom required for KV cache, context and runtime overhead."
+  ],
+  "hardware": [
+    {
+      "id": "intel-arc-b580-12gb-consumer",
+      "manufacturer": "Intel",
+      "product": "Arc B580 12GB",
+      "model_number": "B580",
+      "compute_platform": "intel-battlemage-xe2",
+      "category": "consumer_gpu",
+      "status": "available_region_dependent",
+      "tier": "A-value",
+      "gpu_architecture": "Xe2",
+      "xe_cores": 20,
+      "xmx_engines": 160,
+      "int8_peak_tops_vendor": 233,
+      "memory_gb": 12,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 192,
+      "memory_speed_gbps": 19,
+      "memory_bandwidth_gbps": 456,
+      "board_power_w": 190,
+      "host_interface": "PCIe 4.0 x8",
+      "reference_dimensions_mm": {"length": 272, "height": 115},
+      "reference_slots": 2,
+      "reference_power_connector": "1x 8-pin",
+      "software": ["oneAPI", "OpenVINO", "Intel Extension for PyTorch", "Vulkan", "OpenCL"],
+      "quantization_compatibility": "Strongest with runtimes that explicitly support Intel GPU/XMX paths; Vulkan offers a broader fallback. GGUF compatibility depends on the selected inference engine rather than the GPU alone.",
+      "model_size_practicality": "Best suited to roughly 7B-class models at higher-quality quantization and some 12B-14B-class models at tighter quantization/context settings. 12GB VRAM is the principal capacity limit.",
+      "llm_inference_suitability": "Excellent acquisition-cost-to-bandwidth ratio for a new actively cooled card, but less mature and less universally supported than CUDA.",
+      "performance_per_watt_notes": "456 GB/s at 190W is approximately 2.40 GB/s of memory bandwidth per watt using reference TBP; this is only a coarse hardware ratio, not measured LLM efficiency.",
+      "cost_efficiency": {"observed_cad_per_vram_gb": 33.32, "observed_cad_per_gbps_bandwidth": 0.88},
+      "off_grid_suitability": "moderate",
+      "off_grid_notes": "190W reference board power is manageable compared with high-end GPUs, but whole-system draw still requires substantially more energy than embedded or 70W workstation cards.",
+      "pricing": [
+        {
+          "amount": 399.88,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "retailer_stock_region_dependent",
+          "observed_at": "2026-08-17",
+          "vendor": "Canada Computers",
+          "url": "https://www.canadacomputers.com/en/powered-by-intel/268209/sparkle-intel-arc-b580-titan-luna-oc-graphics-card-12gb-gddr6-sb580t-12goc.html",
+          "note": "Sparkle B580 12GB clearance listing; an open-box unit was also listed for less."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.intel.com/content/www/us/en/products/sku/241598/intel-arc-b580-graphics/specifications.html",
+        "desktop_family": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/arc/desktop/b-series.html",
+        "retailer_observation": "https://www.canadacomputers.com/en/powered-by-intel/268209/sparkle-intel-arc-b580-titan-luna-oc-graphics-card-12gb-gddr6-sb580t-12goc.html"
+      },
+      "technical_documentation": {
+        "quick_reference_guide": "https://cdrdv2-public.intel.com/839907/Intel%20Arc%20B-Series%20Graphics%20Quick%20Reference%20Guide%20V1.1.pdf",
+        "support": "https://www.intel.com/content/www/us/en/support/products/241598/graphics/intel-arc-dedicated-graphics-family/intel-arc-b-series-graphics/intel-arc-b580-graphics.html"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    },
+    {
+      "id": "nvidia-geforce-rtx-5060-ti-16gb",
+      "manufacturer": "NVIDIA",
+      "product": "GeForce RTX 5060 Ti 16GB",
+      "compute_platform": "nvidia-blackwell-geforce",
+      "category": "consumer_gpu",
+      "status": "available",
+      "tier": "A-cuda-value",
+      "gpu_architecture": "Blackwell",
+      "cuda_cores": 4608,
+      "tensor_cores_generation": 5,
+      "ai_tops_vendor": 759,
+      "cuda_compute_capability": "12.0",
+      "memory_gb": 16,
+      "memory_type": "GDDR7",
+      "memory_bus_bits": 128,
+      "memory_bandwidth_gbps": 448,
+      "board_power_w": 180,
+      "required_system_power_w_reference": 600,
+      "power_connector_reference": "1x PCIe 8-pin or PCIe Gen 5 cable; partner cards vary",
+      "software": ["CUDA", "TensorRT", "PyTorch", "llama.cpp CUDA", "vLLM ecosystem"],
+      "quantization_compatibility": "Broad support for common CUDA-backed FP16/BF16, INT8/INT4 and GGUF quantized inference paths; exact kernel support depends on runtime/version.",
+      "model_size_practicality": "16GB VRAM is comfortable for many 7B-14B quantized models and can fit some larger models only with aggressive quantization/offload. Context and KV cache can materially reduce usable weight capacity.",
+      "llm_inference_suitability": "Strong general-purpose local-LLM choice when CUDA compatibility is valued more than maximum VRAM-per-dollar.",
+      "performance_per_watt_notes": "448 GB/s at 180W is approximately 2.49 GB/s of memory bandwidth per watt using reference TGP; actual inference efficiency depends strongly on clocks, kernels and quantization.",
+      "cost_efficiency": {"observed_cad_per_vram_gb": 51.87, "observed_cad_per_gbps_bandwidth": 1.85},
+      "off_grid_suitability": "moderate",
+      "off_grid_notes": "180W reference TGP is workable for a solar-backed desktop but far above dedicated low-power inference accelerators; idle and whole-system measurements should be captured separately.",
+      "pricing": [
+        {
+          "amount": 829.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "listed",
+          "observed_at": "2026-08-17",
+          "vendor": "Canada Computers",
+          "url": "https://www.canadacomputers.com/en/914/graphics-cards?q=GPU-GeForce+RTX+5060+Ti%2FMemory+Size-16GB",
+          "note": "MSI 16GB listing observed at CA$829.99; partner-card prices vary."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5060-family/",
+        "retailer_observation": "https://www.canadacomputers.com/en/914/graphics-cards?q=GPU-GeForce+RTX+5060+Ti%2FMemory+Size-16GB"
+      },
+      "technical_documentation": {
+        "manufacturer_specifications": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5060-family/",
+        "cuda_docs": "https://docs.nvidia.com/cuda/"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    },
+    {
+      "id": "amd-radeon-rx-9060-xt-16gb",
+      "manufacturer": "AMD",
+      "product": "Radeon RX 9060 XT 16GB",
+      "compute_platform": "amd-rdna4-rx9000",
+      "category": "consumer_gpu",
+      "status": "available",
+      "tier": "A-low-power-value",
+      "gpu_architecture": "RDNA 4",
+      "compute_units": 32,
+      "ai_accelerators": 64,
+      "stream_processors": 2048,
+      "fp32_tflops_peak": 25.6,
+      "fp16_matrix_tflops_dense": 103,
+      "fp8_matrix_tflops_dense": 205,
+      "int8_matrix_tops_dense": 205,
+      "int4_matrix_tops_dense": 410,
+      "memory_gb": 16,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 128,
+      "memory_speed_gbps": 20,
+      "memory_bandwidth_gbps": 320,
+      "board_power_w": 160,
+      "minimum_psu_w_reference": 450,
+      "power_connector_reference": "1x 8-pin",
+      "software": ["ROCm where supported", "Vulkan", "Linux", "Windows", "llama.cpp Vulkan/HIP paths depending build"],
+      "quantization_compatibility": "GGUF/Vulkan paths are broadly practical; ROCm/HIP acceleration depends on the installed ROCm and runtime support matrix for this consumer RDNA 4 GPU.",
+      "model_size_practicality": "16GB VRAM targets many 7B-14B quantized models well. Larger models generally require tighter quantization and/or CPU/system-memory offload.",
+      "llm_inference_suitability": "Compelling for inexpensive 16GB local inference when Vulkan/ROCm compatibility has been verified for the intended stack; lower bandwidth than RX 9070 but lower power and purchase cost.",
+      "performance_per_watt_notes": "320 GB/s at 160W is 2.00 GB/s of memory bandwidth per watt using AMD reference TBP.",
+      "cost_efficiency": {"observed_cad_per_vram_gb": 40.62, "observed_cad_per_gbps_bandwidth": 2.03},
+      "off_grid_suitability": "moderate_to_good_for_desktop_gpu",
+      "off_grid_notes": "160W TBP is relatively restrained for a 16GB desktop GPU, making it one of the more plausible consumer cards for power-constrained systems if software compatibility is acceptable.",
+      "pricing": [
+        {
+          "amount": 649.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "listed",
+          "observed_at": "2026-08-17",
+          "vendor": "Canada Computers",
+          "url": "https://www.canadacomputers.com/914/graphics-cards?a=0&b=0&classify%3Aob=0&clearance=0&free_shipping=0&id_category=914&id_manufacturer=0&on_sale=0&q=GPU-GeForce+RTX+4080+Super-GT+700+Series-INTEL+ARC-Radeon+RX+6400-Radeon+RX+9060+XT&refurbished=0&s=0",
+          "note": "Sapphire Pulse RX 9060 XT 16GB listing observed at CA$649.99 sale price; other partner variants differed."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html",
+        "retailer_observation": "https://www.canadacomputers.com/914/graphics-cards?a=0&b=0&classify%3Aob=0&clearance=0&free_shipping=0&id_category=914&id_manufacturer=0&on_sale=0&q=GPU-GeForce+RTX+4080+Super-GT+700+Series-INTEL+ARC-Radeon+RX+6400-Radeon+RX+9060+XT&refurbished=0&s=0"
+      },
+      "technical_documentation": {
+        "manufacturer_specifications": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html",
+        "rocm_docs": "https://rocm.docs.amd.com/"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    },
+    {
+      "id": "amd-radeon-rx-9070-16gb",
+      "manufacturer": "AMD",
+      "product": "Radeon RX 9070 16GB",
+      "compute_platform": "amd-rdna4-rx9000",
+      "category": "consumer_gpu",
+      "status": "available",
+      "tier": "A-bandwidth",
+      "gpu_architecture": "RDNA 4",
+      "compute_units": 56,
+      "ai_accelerators": 112,
+      "stream_processors": 3584,
+      "fp32_tflops_peak": 36.1,
+      "fp16_matrix_tflops_dense": 145,
+      "fp8_matrix_tflops_dense": 289,
+      "int8_matrix_tops_dense": 289,
+      "int4_matrix_tops_dense": 578,
+      "memory_gb": 16,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 256,
+      "memory_speed_gbps": 20,
+      "memory_bandwidth_gbps": 640,
+      "board_power_w": 220,
+      "minimum_psu_w_reference": 650,
+      "power_connector_reference": "2x 8-pin",
+      "host_interface": "PCIe 5.0 x16",
+      "software": ["ROCm where supported", "Vulkan", "Linux", "Windows", "llama.cpp Vulkan/HIP paths depending build"],
+      "quantization_compatibility": "16GB capacity is the limiting factor; Vulkan/GGUF paths can be practical while ROCm/HIP support should be checked against the exact runtime version.",
+      "model_size_practicality": "Similar capacity class to RTX 5060 Ti 16GB and RX 9060 XT 16GB, but 640 GB/s bandwidth makes it substantially more attractive for memory-bandwidth-bound decode when the model fits entirely or mostly in VRAM.",
+      "llm_inference_suitability": "One of the strongest current consumer 16GB candidates on raw memory bandwidth and reasonable 220W TBP, provided the target inference stack supports RDNA 4 well.",
+      "performance_per_watt_notes": "640 GB/s at 220W is approximately 2.91 GB/s of memory bandwidth per watt using AMD reference TBP.",
+      "cost_efficiency": {"observed_cad_per_vram_gb": 56.24, "observed_cad_per_gbps_bandwidth": 1.41},
+      "off_grid_suitability": "moderate",
+      "off_grid_notes": "220W is materially higher than RX 9060 XT but still below many high-end workstation/consumer GPUs; the doubled bandwidth can justify the additional power for bandwidth-bound inference.",
+      "pricing": [
+        {
+          "amount": 899.88,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "clearance_listing",
+          "observed_at": "2026-08-17",
+          "vendor": "Canada Computers",
+          "url": "https://www.canadacomputers.com/en/search?s=AMD+RX+9070+XT+16GB+graphic+card",
+          "note": "Acer Nitro RX 9070 OC 16GB clearance listing observed at CA$899.88."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html",
+        "retailer_observation": "https://www.canadacomputers.com/en/search?s=AMD+RX+9070+XT+16GB+graphic+card"
+      },
+      "technical_documentation": {
+        "manufacturer_specifications": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070.html",
+        "rx9000_reference_guide": "https://www.amd.com/content/dam/amd/en/documents/partner-hub/radeon/radeon-rx-9000-series-quick-reference-guide-non-competitive.pdf",
+        "rocm_docs": "https://rocm.docs.amd.com/"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    }
+  ]
+}
