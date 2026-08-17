@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.1.0",
-  "last_updated": "2026-08-15",
-  "purpose": "SBC, compute-module, compact ARM, and Apple Silicon candidates for local/distributed LLM inference.",
+  "schema_version": "1.2.0",
+  "last_updated": "2026-08-17",
+  "purpose": "SBC, compute-module, compact ARM, Apple Silicon, and SBC-attached accelerator candidates for local/distributed LLM inference.",
   "hardware": [
     {
       "id": "raspberry-pi-5-16gb",
@@ -25,6 +25,44 @@
         "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html",
         "https://www.raspberrypi.com/documentation/computers/processors.html"
       ]
+    },
+    {
+      "id": "raspberry-pi-ai-hat-plus-2-hailo-10h",
+      "manufacturer": "Raspberry Pi / Hailo",
+      "product": "Raspberry Pi AI HAT+ 2",
+      "category": "sbc_attached_genai_accelerator",
+      "status": "available",
+      "compute_platform": "hailo-10h",
+      "host": "Raspberry Pi 5",
+      "accelerator": "Hailo-10H",
+      "ai_performance": {"int4_tops": 40, "int8_tops": 20},
+      "dedicated_memory_gb": 8,
+      "memory_type": "LPDDR4X",
+      "model_capacity_vendor": "LLM/VLM support up to approximately 6B parameters",
+      "module_power_w_typical": 2.5,
+      "module_power_note": "2.5W typical is Hailo's specification for the Hailo-10H M.2 module; whole Pi 5 + HAT wall power is higher and should be benchmarked separately.",
+      "software": ["Raspberry Pi OS", "HailoRT", "hailo-ollama", "Hailo Model Zoo", "PyTorch/ONNX conversion ecosystem"],
+      "cluster_role": ["small_llm_inference", "vlm_inference", "prefill_acceleration", "edge_agent", "always_on_low_power_inference"],
+      "pricing": [
+        {"kind": "manufacturer_store", "amount": 200, "currency": "USD", "region": "US", "observed_at": "2026-08-17", "availability": "available", "source_url": "https://www.raspberrypi.com/products/ai-hat-plus-2/"}
+      ],
+      "benchmark_evidence": [
+        {"source_type": "manufacturer", "model": "Qwen2.5 1.5B 4-bit", "metric": "time_to_first_token_ms", "value": 320, "prompt_tokens": 96, "comparison": "Raspberry Pi 5 CPU 2039ms", "source_url": "https://www.raspberrypi.com/news/when-and-why-you-might-need-the-raspberry-pi-ai-hat-plus-2/"},
+        {"source_type": "independent", "summary": "CNX Software measured generation rates below Pi 5 CPU for several 1.5B-3B models while confirming CPU offload and dedicated-memory benefits; treat Hailo-10H as latency/prefill/VLM-specialized rather than a universally faster decoder.", "source_url": "https://www.cnx-software.com/2026/01/20/raspberry-pi-ai-hat-2-review-a-40-tops-ai-accelerator-tested-with-computer-vision-llm-and-vlm-workloads/"}
+      ],
+      "vendor_urls": [
+        "https://www.raspberrypi.com/products/ai-hat-plus-2/",
+        "https://hailo.ai/products/ai-accelerators/hailo-10h-m-2-ai-acceleration-module/"
+      ],
+      "technical_documentation": [
+        "https://www.raspberrypi.com/documentation/accessories/ai-hat-plus.html",
+        "https://www.raspberrypi.com/documentation/computers/ai.html",
+        "https://pip.raspberrypi.com/categories/1319-raspberry-pi-ai-hat-2",
+        "https://hailo.ai/products/ai-accelerators/hailo-10h-ai-accelerator/"
+      ],
+      "evidence": "manufacturer_plus_independent",
+      "research_priority": "high",
+      "research_note": "Compelling as an ultra-low-power dedicated-memory edge accelerator, but decode throughput should not be inferred from TOPS; current evidence suggests its strongest advantages are TTFT/prefill, VLM pipelines, host-RAM relief, and CPU offload."
     },
     {
       "id": "raspberry-pi-cm5",
