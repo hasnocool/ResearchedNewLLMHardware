@@ -1,0 +1,230 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-17",
+  "scope": "high_capacity_workstation_48gb",
+  "notes": [
+    "This catalog slice focuses on 48 GB workstation GPUs that can bridge the gap between 24-32 GB cards and 64-128+ GB unified-memory or datacenter systems.",
+    "Manufacturer specifications are used for architecture, memory, bandwidth, power and interfaces. Marketplace and reseller prices are point-in-time observations and are not treated as MSRP.",
+    "LLM model-fit guidance is approximate because runtime overhead, KV cache, context length, quantization format and offload strategy materially affect usable capacity."
+  ],
+  "hardware": [
+    {
+      "id": "amd-radeon-pro-w7800-48gb",
+      "manufacturer": "AMD",
+      "product": "Radeon PRO W7800 48GB",
+      "model_identifier": "32353-01-20G",
+      "compute_platform": "amd-rdna3-navi31-workstation",
+      "category": "workstation_gpu",
+      "status": "available_channel_dependent",
+      "tier": "A-capacity",
+      "release_context": "48GB W7800 configuration appeared in channel listings in 2026",
+      "gpu_architecture": "RDNA 3",
+      "compute_units": 70,
+      "ai_accelerators": 140,
+      "stream_processors": 4480,
+      "fp32_tflops": 45.2,
+      "fp16_matrix_tflops": 90.4,
+      "int8_matrix_tops": 90.4,
+      "int4_matrix_tops": 181,
+      "memory_gb": 48,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 864,
+      "board_power_w": 260,
+      "host_interface": "PCIe 4.0 x16",
+      "power_connectors": ["2x 8-pin"],
+      "cooling": "active",
+      "software": ["ROCm", "HIP", "Vulkan", "Linux", "Windows"],
+      "model_size_practicality": "Approximately 30B-class 4-bit models fit comfortably; some larger weight-only quantizations may fit, but 70B-class operation is runtime/context dependent and should not be assumed from VRAM capacity alone.",
+      "quantization_compatibility": "Runtime dependent; practical paths include ROCm/HIP and Vulkan-based engines. Verify the exact ROCm support matrix and model backend before purchase.",
+      "llm_inference_suitability": "High memory bandwidth plus 48GB capacity make this more LLM-relevant than the original 32GB W7800. The primary risk is software/backend maturity versus CUDA.",
+      "performance_per_watt_note": "864 GB/s at 260W is strong for a 48GB active-cooled workstation card; decode performance still requires model-specific benchmarking.",
+      "cost_efficiency_note": "Current Canadian channel pricing is substantially below observed 48GB NVIDIA Ampere listings, but software compatibility can outweigh hardware price for CUDA-dependent workloads.",
+      "off_grid_suitability": "medium-low; 260W board power is manageable in a workstation but materially heavier than 70-130W edge/SFF options.",
+      "pricing": [
+        {
+          "amount": 3248,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "backordered_when_observed",
+          "observed_at": "2026-08-17",
+          "vendor": "DirectDial Canada",
+          "url": "https://www.directdial.com/ca/item/althon-sapphire-amd-radeon-pro-w7800-48gb-gddr6-384-bit/32353-01-20g",
+          "note": "Backordered reseller listing; another Canadian channel listing was CA$3,410.18 with availability by email."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/products/graphics/workstations/radeon-pro/w7800-48gb.html",
+        "canadian_reseller": "https://www.directdial.com/ca/item/althon-sapphire-amd-radeon-pro-w7800-48gb-gddr6-384-bit/32353-01-20g"
+      },
+      "technical_documentation": {
+        "amd_professional_gpu_specs": "https://www.amd.com/en/products/specifications/professional-graphics.html",
+        "rocm_docs": "https://rocm.docs.amd.com/"
+      },
+      "evidence": "manufacturer_plus_reseller"
+    },
+    {
+      "id": "amd-radeon-pro-w7900-48gb",
+      "manufacturer": "AMD",
+      "product": "Radeon PRO W7900 48GB",
+      "compute_platform": "amd-rdna3-navi31-workstation",
+      "category": "workstation_gpu",
+      "status": "available",
+      "tier": "A-high-bandwidth",
+      "gpu_architecture": "RDNA 3",
+      "compute_units": 96,
+      "ai_accelerators": 192,
+      "stream_processors": 6144,
+      "fp32_tflops": 61.3,
+      "fp16_matrix_tflops": 123,
+      "int8_matrix_tops": 123,
+      "int4_matrix_tops": 245,
+      "memory_gb": 48,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 864,
+      "board_power_w": 295,
+      "host_interface": "PCIe 4.0 x16",
+      "power_connectors": ["2x 8-pin"],
+      "cooling": "active",
+      "physical_constraints": "11 in / 280 mm full-height card; AMD currently lists both double-slot and triple-slot W7900 variants, so exact board variant must be checked.",
+      "software": ["ROCm", "HIP", "Vulkan", "Linux", "Windows"],
+      "model_size_practicality": "48GB capacity is well suited to 30B-class quantized models and large-context smaller models; 70B-class 4-bit fit depends on runtime overhead and context/KV cache.",
+      "quantization_compatibility": "ROCm/HIP and Vulkan engines support common quantized inference paths, but exact model/runtime support should be validated before purchase.",
+      "llm_inference_suitability": "Excellent raw memory subsystem for a workstation GPU; acquisition cost and ROCm/backend maturity are the main tradeoffs.",
+      "performance_per_watt_note": "Same 864 GB/s memory bandwidth as W7800 48GB at a higher 295W board power, with substantially more compute.",
+      "cost_efficiency_note": "The current Canada-located used asking price observed in this pass is poor relative to the W7800 48GB and should be treated as a market warning, not a recommendation.",
+      "off_grid_suitability": "low; nearly 300W board power plus workstation host overhead.",
+      "pricing": [
+        {
+          "amount": 5500,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_used",
+          "availability": "listing_available_when_observed",
+          "observed_at": "2026-08-17",
+          "vendor": "eBay Canada marketplace",
+          "url": "https://www.ebay.ca/itm/318302587651",
+          "note": "Canada-located used-like-new listing; no returns accepted. This is an asking price, not a completed-sale valuation."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/support/downloads/drivers.html/graphics/radeon-pro/radeon-pro-w7000-series/amd-radeon-pro-w7900.html",
+        "market_observation": "https://www.ebay.ca/itm/318302587651"
+      },
+      "technical_documentation": {
+        "datasheet": "https://www.amd.com/content/dam/amd/en/documents/products/graphics/workstation/radeon-pro-w7900-datasheet.pdf",
+        "amd_professional_gpu_specs": "https://www.amd.com/en/products/specifications/professional-graphics.html",
+        "rocm_docs": "https://rocm.docs.amd.com/"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    },
+    {
+      "id": "nvidia-rtx-a6000-48gb-secondary-market",
+      "manufacturer": "NVIDIA",
+      "product": "RTX A6000 48GB",
+      "compute_platform": "nvidia-ampere-ga102",
+      "category": "workstation_gpu_secondary_market",
+      "status": "secondary-market",
+      "tier": "A-cuda-capacity",
+      "gpu_architecture": "Ampere",
+      "cuda_cores": 10752,
+      "tensor_cores": 336,
+      "rt_cores": 84,
+      "fp32_tflops": 38.7,
+      "fp16_tensor_tflops_dense": 154.8,
+      "int8_tensor_tops_dense": 309.7,
+      "memory_gb": 48,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 768,
+      "board_power_w": 300,
+      "host_interface": "PCIe 4.0 x16",
+      "nvlink": "2-way; NVIDIA documents up to 96GB combined memory for supported applications",
+      "cooling": "active dual-slot",
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "NVIDIA vGPU"],
+      "model_size_practicality": "48GB is a strong single-GPU capacity tier for 30B-class quantized models and large contexts; some larger quantized models can fit depending on runtime overhead.",
+      "quantization_compatibility": "Broad CUDA ecosystem support for FP16/BF16 and common INT8/INT4/GGUF quantized inference paths; application support varies by engine.",
+      "llm_inference_suitability": "Still technically attractive because 48GB ECC VRAM, 768GB/s bandwidth and mature CUDA support remove many integration risks found on cheaper alternatives.",
+      "performance_per_watt_note": "300W is high for off-grid use, but the mature CUDA stack can deliver better effective utilization than less-supported hardware.",
+      "cost_efficiency_note": "Current used Canadian-visible asking prices remain high; compare against newer 32GB cards and 128GB unified-memory systems before buying.",
+      "off_grid_suitability": "low; 300W GPU power plus host load.",
+      "pricing": [
+        {
+          "amount": 5350,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "availability": "listing_available_when_observed",
+          "observed_at": "2026-08-17",
+          "vendor": "eBay Canada marketplace",
+          "url": "https://www.ebay.ca/sch/260033/i.html?_nkw=rtx+a6000",
+          "note": "Representative pre-owned RTX A6000 listing visible around CA$5,350; seller, shipping and condition vary."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/products/workstations/rtx-a6000/",
+        "market_search": "https://www.ebay.ca/sch/260033/i.html?_nkw=rtx+a6000"
+      },
+      "technical_documentation": {
+        "ampere_ga102_whitepaper": "https://www.nvidia.com/content/PDF/nvidia-ampere-ga-102-gpu-architecture-whitepaper-v2.pdf",
+        "manufacturer_product": "https://www.nvidia.com/en-us/products/workstations/rtx-a6000/"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    },
+    {
+      "id": "nvidia-quadro-rtx-8000-48gb-secondary-market",
+      "manufacturer": "NVIDIA",
+      "product": "Quadro RTX 8000 48GB",
+      "compute_platform": "nvidia-turing-tu102",
+      "category": "workstation_gpu_secondary_market",
+      "status": "secondary-market",
+      "tier": "B-used-capacity",
+      "gpu_architecture": "Turing",
+      "cuda_cores": 4608,
+      "tensor_cores": 576,
+      "rt_cores": 72,
+      "fp32_tflops": 16.3,
+      "tensor_tflops_vendor": 130.5,
+      "memory_gb": 48,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 672,
+      "total_graphics_power_w": 260,
+      "total_board_power_w": 295,
+      "host_interface": "PCIe 3.0 x16",
+      "nvlink": "2-way; NVIDIA documents up to 96GB combined GDDR6 and up to 100GB/s transfer for supported applications",
+      "cooling": "variant dependent; workstation cards are active while server variants can be passive and require directed airflow",
+      "software": ["CUDA", "TensorRT", "PyTorch", "llama.cpp CUDA"],
+      "model_size_practicality": "48GB remains useful for 30B-class quantized models and capacity-heavy workloads even though Turing compute is now several generations old.",
+      "quantization_compatibility": "Mature CUDA-era support for common quantized inference paths, but newer kernels/features may increasingly target Ampere and later architectures.",
+      "llm_inference_suitability": "A capacity-first used option. It is slower and less efficient than newer 48GB GPUs, but can make sense if acquisition price drops far enough.",
+      "performance_per_watt_note": "672GB/s at roughly 260W graphics power is respectable for its generation but trails newer cards in compute efficiency.",
+      "cost_efficiency_note": "The current representative used listing is materially cheaper than RTX A6000 asking prices, making RTX 8000 worth tracking when 48GB capacity matters more than newest-generation kernels.",
+      "off_grid_suitability": "low; high board power and potentially passive server cooling on some secondary-market variants.",
+      "pricing": [
+        {
+          "amount": 2813.11,
+          "currency": "CAD",
+          "region": "eBay Canada localized / UK seller",
+          "kind": "observed_used",
+          "availability": "listing_available_when_observed",
+          "observed_at": "2026-08-17",
+          "vendor": "eBay marketplace - Techbuyer",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=rtx+quadro+8000",
+          "note": "Representative pre-owned 48GB RTX 8000 server card listing. Cross-border taxes, warranty, cooling variant and condition must be checked."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-au/products/workstations/quadro/rtx-8000/",
+        "market_search": "https://www.ebay.ca/sch/i.html?_nkw=rtx+quadro+8000"
+      },
+      "technical_documentation": {
+        "workstation_datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/quadro-rtx-8000-us-nvidia-876688-r5-web.pdf",
+        "server_card_product_brief": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/NVIDIA-Quadro-RTX-8000-PCIe-Server-Card-PB-FINAL-1219.pdf"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    }
+  ]
+}
