@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-18",
+  "purpose": "Power- and form-factor-efficient NVIDIA 20-24GB GPUs that are particularly relevant to always-on, compact, edge, and off-grid local LLM inference.",
+  "notes": [
+    "Manufacturer specifications are authoritative for hardware fields; retailer and marketplace prices are point-in-time observations.",
+    "Tensor TOPS/TFLOPS figures are vendor peak figures and are not directly comparable across precisions or sparsity modes.",
+    "Passive datacenter accelerators such as L4 and A10 require deliberate chassis airflow; board TDP alone understates whole-system cooling power.",
+    "Model-size guidance is practical guidance rather than a guaranteed fit because KV cache, context length, runtime, quantization format and GPU-resident overhead vary materially."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-l4-24gb",
+      "manufacturer": "NVIDIA",
+      "product": "L4 Tensor Core GPU 24GB",
+      "manufacturer_model": "900-2G193-0000-001",
+      "compute_platform": "nvidia-ada-lovelace-l4",
+      "category": "datacenter_gpu_low_power_inference",
+      "status": "available_channel",
+      "tier": "A-ultra-efficient-cuda",
+      "gpu_architecture": "Ada Lovelace",
+      "fp32_tflops": 30.3,
+      "tf32_tensor_tflops_sparse": 120,
+      "fp16_tensor_tflops_sparse": 242,
+      "bf16_tensor_tflops_sparse": 242,
+      "fp8_tensor_tflops_sparse": 485,
+      "int8_tensor_tops_sparse": 485,
+      "memory_gb": 24,
+      "memory_type": "GDDR6",
+      "memory_bandwidth_gbps": 300,
+      "board_power_w": 72,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "single-slot low-profile PCIe accelerator",
+      "cooling": "passive; requires directed server-style airflow",
+      "display_outputs": 0,
+      "media_engines": {"nvenc": 2, "nvdec": 4, "jpeg_decoders": 4},
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "NVIDIA AI Enterprise"],
+      "quantization_compatibility": ["GGUF Q4/Q5/Q8 via llama.cpp CUDA", "AWQ/GPTQ runtime-dependent", "FP8 via supported CUDA/TensorRT stacks", "INT8/INT4 via supported TensorRT kernels"],
+      "llm_fit": "24GB is comfortable for many 7B-14B models at high precision or low-bit quantization and can support many 20B-30B-class models at 4-bit when runtime overhead and KV cache fit. It is not a practical single-card 70B-class device except with aggressive partial offload or unusually compact quantization/context settings.",
+      "llm_inference_suitability": "excellent_for_continuous_small_to_mid_size_cuda_inference",
+      "off_grid_suitability": "excellent_if_passive_airflow_overhead_is_engineered",
+      "efficiency_metrics": {
+        "memory_bandwidth_gbps_per_board_w": 4.17,
+        "board_w_per_gb_vram": 3.0
+      },
+      "pricing": [
+        {
+          "amount": 3949.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "orderable",
+          "observed_at": "2026-08-18",
+          "vendor": "Newegg.ca",
+          "url": "https://www.newegg.ca/p/N82E16888892004",
+          "note": "NVIDIA OEM-package L4 listing observed on Newegg Canada; channel pricing is substantially higher than many used-market alternatives."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/data-center/l4/",
+        "newegg_canada": "https://www.newegg.ca/p/N82E16888892004"
+      },
+      "technical_documentation": {
+        "manufacturer_specs": "https://www.nvidia.com/en-us/data-center/l4/",
+        "technical_blog": "https://developer.nvidia.com/blog/supercharging-ai-video-and-ai-inference-performance-with-nvidia-l4-gpus/"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    },
+    {
+      "id": "nvidia-a10-24gb",
+      "manufacturer": "NVIDIA",
+      "product": "A10 Tensor Core GPU 24GB",
+      "manufacturer_model": "900-2G133 family",
+      "compute_platform": "nvidia-ampere-a10",
+      "category": "datacenter_gpu_inference_secondary_market",
+      "status": "available_channel_and_secondary_market",
+      "tier": "A-bandwidth-efficient-cuda",
+      "gpu_architecture": "Ampere",
+      "fp32_tflops": 31.2,
+      "tf32_tensor_tflops_dense": 62.5,
+      "tf32_tensor_tflops_sparse": 125,
+      "fp16_tensor_tflops_dense": 125,
+      "fp16_tensor_tflops_sparse": 250,
+      "bf16_tensor_tflops_dense": 125,
+      "bf16_tensor_tflops_sparse": 250,
+      "int8_tensor_tops_dense": 250,
+      "int8_tensor_tops_sparse": 500,
+      "int4_tensor_tops_dense": 500,
+      "int4_tensor_tops_sparse": 1000,
+      "memory_gb": 24,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 600,
+      "board_power_w": 150,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "single-slot full-height full-length PCIe accelerator",
+      "cooling": "passive; requires directed server-style airflow",
+      "display_outputs": 0,
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "NVIDIA AI Enterprise"],
+      "quantization_compatibility": ["GGUF Q4/Q5/Q8 via llama.cpp CUDA", "AWQ/GPTQ runtime-dependent", "FP16/BF16", "INT8/INT4 via supported TensorRT kernels"],
+      "llm_fit": "The same 24GB capacity class as L4 but with double the memory bandwidth. Strong for 7B-14B and many 20B-30B-class 4-bit models when capacity permits; much better suited to memory-bandwidth-bound decode than low-bandwidth 24GB cards, at the cost of higher power and server airflow requirements.",
+      "llm_inference_suitability": "very_good_when_24gb_is_enough_and_server_airflow_is_available",
+      "off_grid_suitability": "moderate_due_to_150w_board_power_and_forced_airflow",
+      "efficiency_metrics": {
+        "memory_bandwidth_gbps_per_board_w": 4.0,
+        "board_w_per_gb_vram": 6.25
+      },
+      "pricing": [
+        {
+          "amount": 2159,
+          "currency": "USD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "used",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-18",
+          "vendor": "eBay",
+          "url": "https://www.ebay.ca/itm/285732416930",
+          "note": "Used A10 listing observed on eBay Canada. Marketplace asking prices vary widely and should not be treated as fair-market value without recent sold-comparable data."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/data-center/products/a10-gpu/",
+        "used_market_observation": "https://www.ebay.ca/itm/285732416930"
+      },
+      "technical_documentation": {
+        "manufacturer_specs": "https://www.nvidia.com/en-us/data-center/products/a10-gpu/"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    },
+    {
+      "id": "nvidia-rtx-4000-ada-20gb",
+      "manufacturer": "NVIDIA",
+      "product": "RTX 4000 Ada Generation 20GB",
+      "manufacturer_model": "PNY VCNRTX4000ADA-PB representative retail SKU",
+      "compute_platform": "nvidia-ada-lovelace-rtx4000",
+      "category": "workstation_gpu_power_efficient",
+      "status": "available_channel",
+      "tier": "A-compact-active-cuda",
+      "gpu_architecture": "Ada Lovelace",
+      "cuda_cores": 6144,
+      "tensor_cores": 192,
+      "rt_cores": 48,
+      "fp32_tflops": 26.7,
+      "memory_gb": 20,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 160,
+      "memory_bandwidth_gbps": 360,
+      "board_power_w": 130,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "4.4 in H x 9.5 in L, single-slot",
+      "cooling": "active blower",
+      "display_outputs": ["4x DisplayPort 1.4a"],
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA"],
+      "quantization_compatibility": ["GGUF Q4/Q5/Q8 via llama.cpp CUDA", "AWQ/GPTQ runtime-dependent", "FP8-capable Ada Tensor Cores via supported frameworks", "FP16/BF16/INT8 runtime-dependent"],
+      "llm_fit": "20GB comfortably hosts common 7B-14B quantized models and can fit some 20B-30B-class 4-bit models when context and runtime overhead are controlled. Active single-slot cooling and standard workstation integration are major practical advantages over passive datacenter cards.",
+      "llm_inference_suitability": "very_good_compact_workstation_cuda_option",
+      "off_grid_suitability": "good",
+      "efficiency_metrics": {
+        "memory_bandwidth_gbps_per_board_w": 2.77,
+        "board_w_per_gb_vram": 6.5
+      },
+      "pricing": [
+        {
+          "amount": 2049.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "limited_stock",
+          "observed_at": "2026-08-18",
+          "vendor": "Memory Express",
+          "url": "https://www.memoryexpress.com/Products/MX00130072",
+          "note": "PNY RTX 4000 Ada observed at CA$2,049.99 with limited regional stock."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/products/workstations/rtx-4000/",
+        "memory_express": "https://www.memoryexpress.com/Products/MX00130072"
+      },
+      "technical_documentation": {
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/products/workstations/nvidia-rtx-4000-datasheet.pdf",
+        "manufacturer_specs": "https://www.nvidia.com/en-us/products/workstations/rtx-4000/"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    },
+    {
+      "id": "nvidia-rtx-4000-sff-ada-20gb",
+      "manufacturer": "NVIDIA",
+      "product": "RTX 4000 SFF Ada Generation 20GB",
+      "manufacturer_model": "PNY VCNRTX4000ADALP-PB representative retail SKU",
+      "compute_platform": "nvidia-ada-lovelace-rtx4000-sff",
+      "category": "workstation_gpu_ultra_low_power_sff",
+      "status": "available_channel",
+      "tier": "A-ultra-low-power-active-cuda",
+      "gpu_architecture": "Ada Lovelace",
+      "cuda_cores": 6144,
+      "tensor_cores": 192,
+      "rt_cores": 48,
+      "fp32_tflops": 19.2,
+      "tensor_performance_fp8_sparse_tops": 306.8,
+      "memory_gb": 20,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 160,
+      "memory_bandwidth_gbps": 280,
+      "board_power_w": 70,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "2.7 in H x 6.6 in L, dual-slot low-profile",
+      "cooling": "active",
+      "display_outputs": ["4x mini DisplayPort 1.4a"],
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA"],
+      "quantization_compatibility": ["GGUF Q4/Q5/Q8 via llama.cpp CUDA", "AWQ/GPTQ runtime-dependent", "FP8-capable Ada Tensor Cores via supported frameworks", "FP16/BF16/INT8 runtime-dependent"],
+      "llm_fit": "20GB gives the same model-capacity class as the full RTX 4000 Ada while cutting board power to 70W. It is especially compelling for 7B-14B models, embeddings, rerankers and some 20B-30B-class 4-bit workloads where compact chassis and continuous power consumption matter more than peak throughput.",
+      "llm_inference_suitability": "excellent_for_sff_and_off_grid_cuda_nodes",
+      "off_grid_suitability": "excellent",
+      "efficiency_metrics": {
+        "memory_bandwidth_gbps_per_board_w": 4.0,
+        "board_w_per_gb_vram": 3.5
+      },
+      "pricing": [
+        {
+          "amount": 2999.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "orderable",
+          "observed_at": "2026-08-18",
+          "vendor": "Newegg.ca marketplace",
+          "url": "https://www.newegg.ca/p/pl?d=rtx+4000+sff+ada",
+          "note": "PNY/marketplace listings observed around CA$2,999.99; seller and fulfillment vary, so this is a channel observation rather than a stable MSRP."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/products/workstations/rtx-4000-sff/",
+        "newegg_canada_search": "https://www.newegg.ca/p/pl?d=rtx+4000+sff+ada"
+      },
+      "technical_documentation": {
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/products/workstations/nvidia-rtx-4000-sff-datasheet.pdf",
+        "manufacturer_specs": "https://www.nvidia.com/en-us/products/workstations/rtx-4000-sff/"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    }
+  ]
+}
