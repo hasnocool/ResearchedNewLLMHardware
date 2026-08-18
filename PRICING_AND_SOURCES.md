@@ -1,8 +1,8 @@
 # Pricing, Vendor URLs, and Technical Documentation
 
-Last updated: **2026-08-15**
+Last updated: **2026-08-18**
 
-This page is the human-readable buying and documentation index for the hardware catalog. The machine-readable source of truth is [`data/hardware.json`](data/hardware.json).
+This page is the human-readable buying and documentation index for the hardware catalog. The machine-readable data is split by platform family under `data/`.
 
 > Prices are point-in-time observations. Always compare currency, region, exact RAM/storage configuration, tax, shipping, stock state, warranty, and seller condition. A missing price means no defensible public price was found; it does not mean the hardware is free.
 
@@ -27,6 +27,9 @@ This page is the human-readable buying and documentation index for the hardware 
 | Minisforum MS-S1 MAX 128GB + 2TB | **US$3,639** / about **CA$5,241.44** observed | Orderable when checked | [US store](https://store.minisforum.com/products/minisforum-ms-s1-max-mini-pc) · [Canada store](https://store.minisforum.com/en-ca/products/minisforum-ms-s1-max-mini-pc) | [Product/specification](https://www.minisforum.com/products/ms-s1-max) · [AMD Ryzen AI docs](https://ryzenai.docs.amd.com/en/latest/) |
 | Minisforum N5 MAX 64GB | **US$2,599** / **CA$3,560.90** observed | US orderable; Canadian listing observed sold out | [US store](https://store.minisforum.com/products/minisforum-n5-max-ai-nas) · [Canada store](https://ca.minisforum.com/products/minisforum-n5-max-ai-nas) | [Product specification](https://store.minisforum.com/products/minisforum-n5-max-ai-nas) · [AMD Ryzen AI docs](https://ryzenai.docs.amd.com/en/latest/) |
 | Minisforum N5 MAX 128GB | **US$3,999** | Listed but out of stock when checked | [US store](https://store.minisforum.com/products/minisforum-n5-max-ai-nas) | [Product specification](https://store.minisforum.com/products/minisforum-n5-max-ai-nas) |
+| Qualcomm Dragonwing IQ-9075 EVK | No stable public price captured | Available via Qualcomm/channel buy path | [Qualcomm EVK](https://www.qualcomm.com/developer/hardware/qualcomm-iq-9075-evaluation-kit-evk) · [IQ-9075 platform](https://www.qualcomm.com/internet-of-things/products/iq9-series/iq-9075) | [IQ-9075 module brief](https://docs.qualcomm.com/doc/87-97354-1/87-97354-1_REV_C_Qualcomm_Dragonwing_IQ-9075_Module_Product_Brief.pdf) · [IQ9 product brief](https://docs.qualcomm.com/doc/87-83840-1/87-83840-1_REV_A_Qualcomm_IQ9_Series_Product_Brief.pdf) |
+| Qualcomm Dragonwing IQ-8275 EVK | No stable public price captured | Available via Qualcomm/channel buy path | [Qualcomm EVK](https://www.qualcomm.com/developer/hardware/qualcomm-iq-8275-evaluation-kit-evk) · [IQ-8275 platform](https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275) | [IQ-8275 platform documentation](https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275) |
+| Arduino VENTUNO Q | No defensible public price captured | Announced/channel availability developing | [Qualcomm developer hardware](https://www.qualcomm.com/developer/hardware) · [Qualcomm IoT developer page](https://www.qualcomm.com/developer/iot) | [IQ-8275 platform documentation](https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275) |
 | Tenstorrent Wormhole n150s | **US$999** | In stock when checked | [Tenstorrent cards](https://tenstorrent.com/hardware/cards) | [Wormhole specifications](https://docs.tenstorrent.com/docs-test/core/latest/aibs/wormhole/specifications.html) |
 | Tenstorrent Wormhole n150d | **US$1,099** | In stock when checked | [Tenstorrent cards](https://tenstorrent.com/hardware/cards) | [Wormhole specifications](https://docs.tenstorrent.com/docs-test/core/latest/aibs/wormhole/specifications.html) |
 | Tenstorrent Wormhole n300s | **US$1,399** | In stock when checked | [Tenstorrent cards](https://tenstorrent.com/hardware/cards) | [Wormhole specifications](https://docs.tenstorrent.com/docs-test/core/latest/aibs/wormhole/specifications.html) |
@@ -54,6 +57,10 @@ This page is the human-readable buying and documentation index for the hardware 
 
 ## Important pricing notes
 
+### Qualcomm Dragonwing pricing
+
+Qualcomm exposes current EVK buy paths, but this pass did not find a stable public numeric price that could be recorded defensibly for IQ-9075 or IQ-8275. These entries remain `no_stable_public_price_captured`; future maintenance should promote a price only when the exact EVK/module, currency, region, stock state and seller can be dated.
+
 ### DGX Spark price change
 
 NVIDIA increased the DGX Spark Founders Edition MSRP from **US$3,999 to US$4,699** in February 2026. This is a good example of why this repository stores `observed_at` and `kind` instead of treating a price as an immutable hardware specification.
@@ -64,37 +71,8 @@ ASUS currently exposes GX10 pricing in both USD and CAD. Minisforum also has mat
 
 ### Used accelerators need price history
 
-Cards such as MI210 can become exceptional LLM values when decommissioned hardware reaches the secondary market, but their useful price is not an MSRP. Used observations should eventually include:
+Cards such as MI210 can become exceptional LLM values when decommissioned hardware reaches the secondary market, but their useful price is not an MSRP. Used observations should eventually include seller or marketplace, condition, tested state, cooling hardware, shipping, region, observation date, quantity, and sold/listed status.
 
-- seller or marketplace;
-- item condition;
-- tested/untested status;
-- cooling hardware included or missing;
-- shipping price;
-- region;
-- observed date;
-- quantity available;
-- whether the listing actually sold.
+## Price-history format
 
-## Planned price-history format
-
-The next data layer should be append-only `data/price-history.jsonl`. Each observation should resemble:
-
-```json
-{
-  "hardware_id": "amd-instinct-mi210",
-  "observed_at": "2026-08-15T18:00:00-07:00",
-  "amount": 0,
-  "currency": "USD",
-  "region": "US",
-  "kind": "observed_used",
-  "condition": "used_tested",
-  "availability": "in_stock",
-  "vendor": "example seller",
-  "url": "https://example.invalid/listing",
-  "shipping_amount": 0,
-  "notes": "Example schema only; not a real listing."
-}
-```
-
-This will allow automatic calculation of **current price, lowest seen price, 7/30/90-day change, memory-per-dollar, bandwidth-per-dollar, power-adjusted value, and price-drop alerts** without overwriting earlier observations.
+The append-only `data/price-history.jsonl` layer is intended to preserve historical observations rather than overwrite them. New observations should include hardware ID, timestamp, amount, currency, region, kind, condition, availability, vendor, URL, shipping and notes whenever those fields are known.
