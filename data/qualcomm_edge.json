@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-18",
+  "purpose": "Qualcomm Dragonwing embedded and industrial AI candidates with public LLM evidence.",
+  "hardware": [
+    {
+      "id": "qualcomm-dragonwing-iq-9075-evk",
+      "manufacturer": "Qualcomm",
+      "product": "Dragonwing IQ-9075 Evaluation Kit",
+      "category": "embedded_ai_evaluation_kit",
+      "status": "available_channel_dependent",
+      "compute_platform": "qualcomm-dragonwing-iq-9075",
+      "part_number": "EVK-IQ9075M-STARTER-1.2",
+      "cpu": "8-core Qualcomm Kryo, up to 2.36 GHz",
+      "gpu": "Qualcomm Adreno 663",
+      "npu": "Dual Qualcomm Hexagon Tensor Processors",
+      "npu_tops_dense_int8_max": 100,
+      "memory_gb": 36,
+      "memory_type": "LPDDR5 with link ECC",
+      "memory_bus": "6x16-bit LPDDR5 @ 3200 MHz",
+      "storage_gb": 128,
+      "storage_type": "UFS",
+      "soc_power_w": {"min": 3.8, "max": 20, "kind": "soc_only"},
+      "networking": ["2x 2.5GbE with TSN on IQ-9075 platform", "Wi-Fi 6E via companion module", "Bluetooth 5.3 via companion module"],
+      "pcie": ["PCIe Gen4 x4 expansion", "PCIe Gen4 x2 on platform"],
+      "software": ["Ubuntu", "Upstream Linux with Yocto support", "Qualcomm AI Stack", "ONNX Runtime", "TensorFlow Lite", "PyTorch"],
+      "llm_evidence": [
+        {
+          "model": "Llama 2",
+          "parameters_b": 7,
+          "decode_tps_max": 22,
+          "source_type": "manufacturer_specification",
+          "note": "Qualcomm platform product brief lists up to 22 tokens/s for Llama 2 7B."
+        },
+        {
+          "model": "Llama 2",
+          "parameters_b": 13,
+          "decode_tps": 12,
+          "source_type": "manufacturer_module_brief",
+          "note": "Qualcomm IQ-9075 module brief states Llama 2 13B at 12 tokens/s."
+        }
+      ],
+      "pricing": [],
+      "price_status": "no_stable_public_price_captured",
+      "evidence": "manufacturer",
+      "research_priority": "high_for_edge",
+      "vendor_urls": [
+        "https://www.qualcomm.com/developer/hardware/qualcomm-iq-9075-evaluation-kit-evk",
+        "https://www.qualcomm.com/internet-of-things/products/iq9-series/iq-9075"
+      ],
+      "technical_documentation": [
+        "https://docs.qualcomm.com/doc/87-97354-1/87-97354-1_REV_C_Qualcomm_Dragonwing_IQ-9075_Module_Product_Brief.pdf",
+        "https://docs.qualcomm.com/doc/87-83840-1/87-83840-1_REV_A_Qualcomm_IQ9_Series_Product_Brief.pdf"
+      ],
+      "notes": "Interesting because Qualcomm publishes both SoC power and named LLM throughput. Do not compare dense INT8 TOPS directly with GPU FP4/FP8 figures."
+    },
+    {
+      "id": "qualcomm-dragonwing-iq-8275-evk",
+      "manufacturer": "Qualcomm",
+      "product": "Dragonwing IQ-8275 Evaluation Kit",
+      "category": "embedded_ai_evaluation_kit",
+      "status": "available_channel_dependent",
+      "compute_platform": "qualcomm-dragonwing-iq-8275",
+      "part_number": "EVK-IQ8275-STARTER-1.0",
+      "cpu": "8-core Qualcomm Kryo Gen 6",
+      "gpu": "Qualcomm Adreno 623",
+      "npu": "Qualcomm Hexagon",
+      "npu_tops_dense_int8": {"min": 20, "max": 40},
+      "memory_gb": 12,
+      "memory_type": "LPDDR5 with link ECC",
+      "platform_memory_gb_max": 32,
+      "storage_gb": 128,
+      "networking": ["2.5GbE", "Wi-Fi 6E via companion module", "Bluetooth 5.3 via companion module"],
+      "pcie": ["PCIe x4 expansion", "M.2 E-key"],
+      "software": ["Ubuntu", "Upstream Linux with Yocto support", "Qualcomm AI Stack", "ONNX Runtime", "TensorFlow Lite", "PyTorch"],
+      "llm_evidence": [
+        {
+          "model": "unspecified 13B-class supported model",
+          "parameters_b": 13,
+          "decode_tps": 9,
+          "source_type": "manufacturer_evk_page",
+          "note": "Qualcomm states the IQ-8275 EVK runs 13B-parameter models and generates 9 tokens/s; exact model/quantization is not stated on the EVK page."
+        }
+      ],
+      "pricing": [],
+      "price_status": "no_stable_public_price_captured",
+      "evidence": "manufacturer",
+      "research_priority": "medium_high_for_edge",
+      "vendor_urls": [
+        "https://www.qualcomm.com/developer/hardware/qualcomm-iq-8275-evaluation-kit-evk",
+        "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275"
+      ],
+      "technical_documentation": [
+        "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275"
+      ],
+      "notes": "The 12GB EVK is capacity-constrained for general LLM use, but the IQ-8275 platform supports up to 32GB and has unusually explicit edge-LLM evidence."
+    },
+    {
+      "id": "arduino-ventuno-q",
+      "manufacturer": "Arduino",
+      "product": "VENTUNO Q",
+      "category": "sbc_edge_ai_robotics",
+      "status": "announced_or_channel_limited",
+      "compute_platform": "qualcomm-dragonwing-iq-8275",
+      "soc": "Qualcomm Dragonwing IQ-8275",
+      "realtime_mcu": "STM32H5",
+      "npu_tops_dense_int8_max": 40,
+      "memory_gb": 16,
+      "storage_gb": 64,
+      "storage_type": "eMMC",
+      "storage_expansion": ["M.2 NVMe Gen4"],
+      "networking": ["2.5GbE", "Wi-Fi 6", "Bluetooth 5.3"],
+      "software": ["Linux", "ROS 2", "Qualcomm AI software ecosystem", "Arduino ecosystem"],
+      "pricing": [],
+      "price_status": "no_defensible_public_price_captured",
+      "evidence": "manufacturer_and_platform_vendor",
+      "research_priority": "medium_high_for_edge",
+      "vendor_urls": [
+        "https://www.qualcomm.com/developer/iot",
+        "https://www.qualcomm.com/developer/hardware"
+      ],
+      "technical_documentation": [
+        "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275"
+      ],
+      "notes": "A practical SBC-style packaging of IQ-8275 with 16GB RAM, 2.5GbE and NVMe expansion. Track price, broad retail availability and reproducible LLM benchmarks before assigning a normal buying rank."
+    }
+  ]
+}
