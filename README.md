@@ -36,6 +36,7 @@ A device is not ranked from TOPS alone. Priority is given to:
 | Apple M5 Max MacBook Pro | portable unified-memory workstation | up to 128 GB | up to 614 GB/s | portable system | available | Very high memory bandwidth for a portable system; Metal/MLX/BaseRT software paths are improving. |
 | NVIDIA GB10 / DGX Spark class | compact AI supercomputer | 128 GB LPDDR5X | 273 GB/s | 140 W SoC; OEM PSU varies | available | Mature CUDA stack, coherent memory and ConnectX-7 make it unusually cluster-friendly. |
 | AMD Kria AI SOM / Ryzen AI Embedded X100 | embedded SOM | up to 128 GB LPDDR5X | TBD | TBD | announced/sampling | CPU + RDNA 3.5 GPU + XDNA 2 NPU in an embedded form factor. |
+| Qualcomm Dragonwing IQ-9075 EVK | embedded/industrial AI kit | 36 GB LPDDR5 ECC | platform-specific | 3.8–20 W SoC | available/channel-dependent | Qualcomm publishes named LLM results up to 22 tok/s for Llama 2 7B and 12 tok/s for 13B, making it unusually measurable for edge inference. |
 | NVIDIA Jetson T3000 | embedded AI module | 32 GB LPDDR5X | 273 GB/s | platform dependent | announced | Strong CUDA/TensorRT ecosystem and 25GbE for an embedded node. |
 | AMD Instinct MI210 | datacenter GPU | 64 GB HBM2e | 1.6 TB/s | 300 W | secondary market | Excellent bandwidth/capacity when used pricing and integration cost are favorable. |
 
@@ -65,6 +66,10 @@ Apple Silicon should be scored on unified-memory capacity, bandwidth, GPU/runtim
 
 GB10 systems combine 128 GB coherent LPDDR5X, 273 GB/s memory bandwidth, Blackwell tensor hardware, CUDA tooling and ConnectX-7-class networking. OEM boxes should be compared by price, storage, cooling, warranty, PSU and exposed networking rather than counted as different compute architectures.
 
+### Qualcomm Dragonwing edge AI
+
+Qualcomm Dragonwing IQ8/IQ9 platforms are tracked as low-power embedded/industrial LLM candidates. The IQ-9075 platform reaches 36 GB ECC memory and Qualcomm publishes both SoC power (3.8–20 W) and named Llama 2 throughput; IQ-8275 reaches up to 32 GB platform memory and is also used by Arduino's VENTUNO Q. See [`QUALCOMM_EDGE_AI.md`](QUALCOMM_EDGE_AI.md) and [`data/qualcomm_edge.json`](data/qualcomm_edge.json).
+
 ### Embedded and edge
 
 Embedded hardware is promoted when it has enough memory and software support to be relevant to language models. Many edge NPUs have excellent TOPS/W but too little accessible memory for general LLM use.
@@ -91,12 +96,14 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 ├── PRICING_AND_SOURCES.md
 ├── WATCHLIST.md
 ├── APPLE_M5.md
+├── QUALCOMM_EDGE_AI.md
 ├── SBC_AND_APPLE_SILICON.md
 ├── SPECIALTY_EDGE_AI.md
 ├── data/
 │   ├── hardware.json
 │   ├── current_system_variants.json
 │   ├── apple_m5.json
+│   ├── qualcomm_edge.json
 │   ├── sbc_apple.json
 │   ├── specialty_edge.json
 │   ├── cost_effective_hardware.json
@@ -111,7 +118,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 
 ## Research dates
 
-Initial structured catalog assembled **2026-08-15**. Current maintenance pass: **2026-08-17**. Prices and availability are snapshots and can change rapidly.
+Initial structured catalog assembled **2026-08-15**. Current maintenance pass: **2026-08-18**. Prices and availability are snapshots and can change rapidly.
 
 ## Scope note
 
