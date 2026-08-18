@@ -1,6 +1,6 @@
 # Hardware Watchlist
 
-Last updated: **2026-08-15**
+Last updated: **2026-08-18**
 
 This file tracks hardware that could become important to local or distributed LLM inference after a price, availability, software or benchmark milestone.
 
@@ -9,6 +9,7 @@ This file tracks hardware that could become important to local or distributed LL
 | Candidate | Current state | Trigger for promotion / alert |
 |---|---|---|
 | AMD Ryzen AI Max PRO 400 systems | Announced for Q3 2026 platform rollout | First orderable 192 GB systems; exact memory bandwidth; ROCm support; measured wall power; real decode benchmarks; street price. |
+| Qualcomm Dragonwing IQ-9075 / IQ-8275 | Available through developer/partner channels | Stable public EVK/module pricing, wall-power measurements, exact quantization/context for published LLM results, and independent tokens/watt reproduction. |
 | Acrab Agent Box / GΞLIX 1 | Announced / early product rollout | Public exact memory capacity, orderable price, system power, decode throughput, developer/runtime documentation, supported-model matrix and independent validation. |
 | AMD Kria AI SOM / Ryzen AI Embedded X100 | Announced / ecosystem rollout | Developer kit/SOM pricing, Linux GPU/NPU software details, memory bandwidth and measured LLM throughput. |
 | NVIDIA Jetson T3000 | Announced | Retail/dev-kit pricing, module power envelope and real TensorRT/llama.cpp LLM results. |
@@ -17,6 +18,27 @@ This file tracks hardware that could become important to local or distributed LL
 | Tenstorrent Wormhole | Available specialist ASIC | Broader transformer support, easier model conversion and independent LLM tokens/watt evidence. |
 | AMD Versal AI Edge Gen 2 | Adaptive SoC | Reproducible decoder-transformer/LLM deployment with external-memory and wall-power measurements. |
 | Altera FPGA AI Suite / Agilex | FPGA | Modern transformer benchmark from spatial compiler path and measured energy efficiency. |
+
+## Qualcomm Dragonwing watch
+
+Qualcomm now publishes unusually useful edge-LLM evidence for its industrial Dragonwing platforms:
+
+- **IQ-9075:** up to 36 GB LPDDR5 with ECC, 50/100 dense INT8 TOPS variants, 3.8–20 W SoC-only range, and manufacturer results up to 22 tok/s for Llama 2 7B plus 12 tok/s for Llama 2 13B.
+- **IQ-8275:** up to 32 GB platform memory, 20/40 dense INT8 TOPS, with the 12 GB EVK advertised for 13B-class models at about 9 tok/s.
+- **Arduino VENTUNO Q:** IQ-8275 + STM32H5, 16 GB RAM, 64 GB eMMC, NVMe Gen4 expansion and 2.5GbE in an SBC/robotics form factor.
+
+These are not normal workstation-class capacity devices, but they are strong candidates for always-on local agents, robotics, industrial edge inference and low-power distributed helpers.
+
+Track:
+
+- public delivered EVK/module/VENTUNO pricing;
+- exact board/system wall power;
+- model quantization, context and runtime details behind vendor token rates;
+- independent reproducible LLM/VLM benchmarks;
+- software support changes in Qualcomm AI Stack, ONNX Runtime and Linux tooling;
+- availability of 32–36 GB production modules and systems.
+
+See `QUALCOMM_EDGE_AI.md` and `data/qualcomm_edge.json`.
 
 ## Acrab Agent Box / GΞLIX 1 watch
 
