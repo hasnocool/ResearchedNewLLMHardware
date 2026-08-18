@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-17",
+  "scope": "24gb_prosumer_and_workstation_gpus",
+  "notes": [
+    "This dataset compares 24 GB GPUs that remain relevant to local LLM inference because capacity, bandwidth, software maturity, power, and acquisition cost differ materially.",
+    "Manufacturer specifications are treated separately from retailer observations. Prices are point-in-time Canadian observations and are not normalized across new, refurbished, in-stock, and out-of-stock conditions.",
+    "Model-fit guidance is approximate and depends on quantization, context/KV cache, runtime overhead, batching, and whether weights are fully GPU-resident."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-geforce-rtx-3090-24gb",
+      "manufacturer": "NVIDIA",
+      "product": "GeForce RTX 3090 24GB",
+      "compute_platform": "nvidia-ampere-ga102-sm86",
+      "category": "consumer_gpu_secondary_market",
+      "status": "secondary-market",
+      "tier": "A-value-when-cheap",
+      "gpu_architecture": "Ampere",
+      "cuda_compute_capability": "8.6",
+      "cuda_cores": 10496,
+      "tensor_core_generation": 3,
+      "memory_gb": 24,
+      "memory_type": "GDDR6X",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 936,
+      "board_power_w": 350,
+      "bandwidth_per_watt_gbps": 2.674,
+      "host_interface": "PCIe 4.0",
+      "interconnect": ["NVLink supported on RTX 3090 family"],
+      "reference_form_factor": "313 mm length, 138 mm width, 3-slot Founders Edition",
+      "reference_psu_w": 750,
+      "reference_power_connectors": "2x PCIe 8-pin via included 12-pin adapter on Founders Edition",
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "Vulkan"],
+      "software_lifecycle": "Ampere remains an ongoing CUDA architecture in NVIDIA's current CUDA architecture matrix; unlike Pascal/Volta, it is not capped at CUDA 12.x.",
+      "model_size_practicality": "Strong single-card target for 7B-14B models at high precision/longer context and many 20B-35B-class models at 4-5 bit quantization when runtime overhead and KV cache fit. Larger models require CPU offload or multiple GPUs.",
+      "quantization_compatibility": ["GGUF k-quants through llama.cpp", "GPTQ/AWQ through compatible CUDA runtimes", "FP16/BF16/INT8 workload support is runtime dependent"],
+      "llm_inference_suitability": "High. Mature CUDA ecosystem, 24 GB capacity, 936 GB/s bandwidth and widespread community support continue to make used RTX 3090 cards useful inference nodes.",
+      "multi_gpu_notes": "Two-card and larger systems are common, but framework tensor-parallel behavior and NVLink use are application-dependent; do not assume transparent pooled VRAM.",
+      "physical_constraints": ["High 350 W board power", "Large 3-slot reference card; partner cards may be larger", "750 W minimum reference system PSU", "Used cards may have unknown thermal/mining history"],
+      "off_grid_suitability": "low_to_medium",
+      "off_grid_notes": "Excellent performance and bandwidth, but 350 W board power makes sustained solar/battery operation materially harder than 70-230 W alternatives. Power limiting can improve practicality but is workload-specific and should be benchmarked separately.",
+      "cost_efficiency_notes": "The key opportunity is secondary-market pricing, not current inflated reseller stock. Recent Canadian refurbished listings span roughly CA$800-2,000 depending on stock and seller, so condition and availability must be retained with every observation.",
+      "pricing": [
+        {
+          "amount": 1999.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_refurbished",
+          "condition": "refurbished",
+          "availability": "orderable_listing",
+          "observed_at": "2026-08-17",
+          "vendor": "Newegg.ca marketplace",
+          "url": "https://www.newegg.ca/p/pl?d=rtx+3090+refurbished",
+          "note": "MSI RTX 3090 Suprim X 24G refurbished listing. Marketplace pricing is unusually high and should not be treated as fair used-market value."
+        },
+        {
+          "amount": 799.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_refurbished",
+          "condition": "refurbished",
+          "availability": "out_of_stock",
+          "observed_at": "2026-08-17",
+          "vendor": "Newegg.ca marketplace",
+          "url": "https://www.newegg.ca/p/pl?d=rtx3090",
+          "note": "Recent out-of-stock refurbished RTX 3090 listings around CA$799.99 provide a useful acquisition target/floor reference, not a currently orderable price."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090-3090ti/",
+        "canada_refurbished_search": "https://www.newegg.ca/p/pl?d=rtx+3090+refurbished"
+      },
+      "technical_documentation": {
+        "cuda_architecture_matrix": "https://docs.nvidia.com/datacenter/tesla/drivers/latest/cuda-toolkit-driver-and-architecture-matrix.html",
+        "rtx_blackwell_architecture_comparison": "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    },
+    {
+      "id": "amd-radeon-rx-7900-xtx-24gb",
+      "manufacturer": "AMD",
+      "product": "Radeon RX 7900 XTX 24GB",
+      "compute_platform": "amd-rdna3-gfx1100",
+      "category": "consumer_gpu",
+      "status": "available",
+      "tier": "A-bandwidth-value",
+      "gpu_architecture": "RDNA 3",
+      "llvm_target": "gfx1100",
+      "compute_units": 96,
+      "ai_accelerators": 192,
+      "stream_processors": 6144,
+      "memory_gb": 24,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 960,
+      "board_power_w": 355,
+      "bandwidth_per_watt_gbps": 2.704,
+      "host_interface": "PCIe 4.0 x16",
+      "reference_form_factor": "2.5-slot reference class; partner designs vary and can exceed 3 slots",
+      "reference_psu_w": 800,
+      "reference_power_connectors": "2x 8-pin on AMD reference specification; partner cards may differ",
+      "software": ["ROCm/HIP", "PyTorch on supported ROCm configurations", "llama.cpp HIP", "llama.cpp Vulkan", "Vulkan", "OpenCL"],
+      "software_lifecycle": "AMD's current ROCm 7.2 Windows support matrix lists RX 7900 XTX (gfx1100) with supported Runtime and HIP SDK. Linux ROCm support is also established, but exact framework/library support remains release-dependent.",
+      "model_size_practicality": "24 GB capacity is suitable for many 20B-35B-class models at 4-5 bit quantization when context/KV cache fit. 70B-class dense models generally require partial CPU offload, aggressive quantization, or multiple GPUs.",
+      "quantization_compatibility": ["GGUF k-quants through llama.cpp HIP/Vulkan", "PyTorch quantized paths depend on ROCm/runtime support", "Do not assume CUDA-only GPTQ/AWQ kernels have equivalent AMD support"],
+      "llm_inference_suitability": "High for users willing to validate ROCm/Vulkan runtime compatibility. The 960 GB/s memory bandwidth is particularly attractive for memory-bound token generation.",
+      "physical_constraints": ["355 W typical board power", "800 W AMD reference PSU recommendation", "Partner cards can be physically very large", "ROCm support is materially better than early RDNA3 launch-era guidance but remains framework/version dependent"],
+      "off_grid_suitability": "low_to_medium",
+      "off_grid_notes": "Bandwidth is excellent, but 355 W TBP is a large continuous load. Better suited to surplus-solar/high-production windows than always-on battery operation unless power-limited and benchmarked.",
+      "cost_efficiency": {
+        "cad_per_vram_gb_at_observed_new_price": 58.33,
+        "cad_per_memory_bandwidth_gbps_at_observed_new_price": 1.458
+      },
+      "pricing": [
+        {
+          "amount": 1399.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "condition": "new",
+          "availability": "in_stock_listing",
+          "observed_at": "2026-08-17",
+          "vendor": "Newegg.ca",
+          "model": "ASRock Radeon RX 7900 XTX 24GB OEM",
+          "url": "https://www.newegg.ca/p/pl?d=rx+7900+xtx+24gb",
+          "note": "Current Canadian search result showed an orderable ASRock 24 GB OEM listing at CA$1,399.99. Partner-card pricing varies substantially."
+        },
+        {
+          "amount": 1099.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_refurbished",
+          "condition": "refurbished",
+          "availability": "out_of_stock",
+          "observed_at": "2026-08-17",
+          "vendor": "Newegg.ca marketplace",
+          "model": "Sapphire Nitro+ RX 7900 XTX 24GB",
+          "url": "https://www.newegg.ca/p/pl?d=rx+7900+xtx+24gb",
+          "note": "Out-of-stock refurbished observation retained as a secondary-market target, not current availability."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product_family": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series.html",
+        "canada_store_search": "https://www.newegg.ca/p/pl?d=rx+7900+xtx+24gb"
+      },
+      "technical_documentation": {
+        "amd_rx7000_reference": "https://www.amd.com/content/dam/amd/en/documents/partner-hub/radeon/amd-radeon-rx-7000-series-quick-reference-competitive.pdf",
+        "rocm_windows_system_requirements": "https://rocm.docs.amd.com/projects/install-on-windows/en/docs-7.2/reference/system-requirements.html",
+        "rocm_radeon_documentation": "https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    },
+    {
+      "id": "nvidia-rtx-a5000-24gb",
+      "manufacturer": "NVIDIA",
+      "product": "RTX A5000 24GB",
+      "compute_platform": "nvidia-ampere-professional",
+      "category": "workstation_gpu_secondary_market_target",
+      "status": "available_new_but_secondary_market_preferred",
+      "tier": "A-low-power-professional-when-cheap",
+      "gpu_architecture": "Ampere",
+      "cuda_cores": 8192,
+      "tensor_cores": 256,
+      "tensor_core_generation": 3,
+      "rt_cores": 64,
+      "fp32_tflops": 27.8,
+      "tensor_tflops_vendor_sparse": 222.2,
+      "memory_gb": 24,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 768,
+      "board_power_w": 230,
+      "bandwidth_per_watt_gbps": 3.339,
+      "host_interface": "PCIe 4.0 x16",
+      "interconnect": ["2-way NVLink", "112.5 GB/s bidirectional NVLink bandwidth"],
+      "form_factor": "4.4 in high x 10.5 in long, dual-slot, full-height",
+      "cooling": "active",
+      "power_connector": "1x PCIe 8-pin",
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "NVIDIA vGPU"],
+      "software_lifecycle": "Ampere remains supported by current CUDA architecture/toolkit generations.",
+      "model_size_practicality": "Similar 24 GB model-capacity envelope to RTX 3090/RX 7900 XTX, but lower 230 W board power, ECC memory, active dual-slot workstation cooling and professional form factor improve deployment practicality.",
+      "quantization_compatibility": ["GGUF k-quants through llama.cpp CUDA", "GPTQ/AWQ through compatible CUDA runtimes", "FP16/BF16/INT8 paths depend on framework/runtime"],
+      "llm_inference_suitability": "High when acquired at sensible secondary-market pricing. It sacrifices raw bandwidth versus RTX 3090/RX 7900 XTX but delivers substantially better bandwidth-per-watt and denser dual-slot packaging.",
+      "multi_gpu_notes": "NVIDIA documents two RTX A5000 cards connected by NVLink with 48 GB combined memory for applications that explicitly support NVLink; this is not transparent universal VRAM pooling.",
+      "physical_constraints": ["Dual-slot full-height but easier to integrate than many 3-4 slot gaming cards", "230 W TBP still requires meaningful system cooling", "Current new retail channel pricing is extremely poor value"],
+      "off_grid_suitability": "medium",
+      "off_grid_notes": "At 230 W, A5000 is materially easier to sustain from batteries/solar than 350-355 W 24 GB gaming GPUs while retaining 768 GB/s bandwidth. Used acquisition price is the deciding factor.",
+      "cost_efficiency_notes": "Current new Canadian reseller listings around CA$5,299 are not competitive for local LLM use. The card belongs in the catalog primarily as a secondary-market target where its ECC, 230 W TBP and NVLink can become attractive.",
+      "pricing": [
+        {
+          "amount": 5299.00,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "condition": "new",
+          "availability": "orderable_listing",
+          "observed_at": "2026-08-17",
+          "vendor": "Newegg.ca marketplace",
+          "url": "https://www.newegg.ca/p/pl?d=rtx+a5000",
+          "note": "Current new marketplace listings are around CA$5,299 and are explicitly classified as poor value for local LLM acquisition."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-au/products/workstations/rtx-a5000/",
+        "canada_store_search": "https://www.newegg.ca/p/pl?d=rtx+a5000"
+      },
+      "technical_documentation": {
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/products/workstations/nvidia-rtx-a5000-datasheet.pdf",
+        "cuda_architecture_matrix": "https://docs.nvidia.com/datacenter/tesla/drivers/latest/cuda-toolkit-driver-and-architecture-matrix.html"
+      },
+      "evidence": "manufacturer_plus_retailer"
+    }
+  ]
+}
