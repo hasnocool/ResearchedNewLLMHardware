@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-18",
+  "scope": "compact_arm_ai_and_llm_nodes",
+  "notes": [
+    "Manufacturer specifications are preferred; store prices are point-in-time observations and availability can change.",
+    "TOPS values are datatype- and sparsity-dependent and should not be compared directly across vendors.",
+    "Model-size practicality is guidance, not a guarantee; runtime overhead, KV cache, context length and backend support materially affect fit."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-jetson-orin-nx-16gb-super",
+      "manufacturer": "NVIDIA",
+      "product": "Jetson Orin NX 16GB",
+      "model_identifier": "900-13767-0000-001",
+      "compute_platform": "nvidia-orin-ampere",
+      "category": "embedded_ai_module",
+      "status": "available",
+      "tier": "A-low-power-cuda",
+      "cpu": "8-core Arm Cortex-A78AE",
+      "gpu_architecture": "NVIDIA Ampere",
+      "cuda_cores": 1024,
+      "tensor_cores": 32,
+      "memory_gb": 16,
+      "memory_type": "LPDDR5",
+      "memory_bus_bits": 128,
+      "memory_bandwidth_gbps": 102,
+      "int8_sparse_tops_maxn_super": 157,
+      "int8_dense_tops_maxn_super": 78,
+      "fp16_tflops_cuda_maxn_super": 4.8,
+      "power_modes_w": [10, 15, 25, 40],
+      "host_interface": "260-pin SO-DIMM module connector; carrier board required",
+      "software": ["JetPack", "CUDA", "TensorRT", "PyTorch", "llama.cpp CUDA backend"],
+      "model_size_practicality": "Strong fit for 7B-class quantized models and selected 13B-14B-class quantized models when runtime and KV-cache overhead fit inside 16GB unified memory. Larger models generally require aggressive quantization, partial offload or distributed execution.",
+      "quantization_compatibility": "CUDA/TensorRT paths support multiple reduced-precision formats depending on model/runtime; llama.cpp GGUF compatibility depends on build and model architecture.",
+      "llm_inference_suitability": "Excellent low-power CUDA edge node when 16GB memory is sufficient; substantially more flexible for general LLM work than vision-only NPUs.",
+      "off_grid_suitability": "excellent",
+      "physical_constraints": "Module requires a compatible carrier board, power delivery and thermal solution; 40W Super mode raises cooling requirements.",
+      "pricing": [
+        {
+          "amount": 999,
+          "currency": "USD",
+          "region": "1KU+ suggested module pricing",
+          "kind": "msrp_volume",
+          "availability": "available",
+          "observed_at": "2026-08-18",
+          "url": "https://developer.nvidia.com/embedded/faq",
+          "note": "NVIDIA current FAQ lists Jetson Orin NX 16GB at US$999 suggested pricing at 1KU+."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://developer.nvidia.com/embedded/jetson-modules",
+        "pricing_faq": "https://developer.nvidia.com/embedded/faq"
+      },
+      "source_urls": {
+        "datasheet": "https://developer.nvidia.com/embedded/downloads",
+        "power_modes": "https://docs.nvidia.com/jetson/archives/r36.4.3/DeveloperGuide/SD/PlatformPowerAndPerformance/JetsonOrinNanoSeriesJetsonOrinNxSeriesAndJetsonAgxOrinSeries.html"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "radxa-rock-5b-plus-32gb",
+      "manufacturer": "Radxa",
+      "product": "ROCK 5B+ 32GB",
+      "compute_platform": "rockchip-rk3588",
+      "category": "high_memory_arm_sbc",
+      "status": "available_channel_dependent",
+      "tier": "B-experimental-llm",
+      "cpu": "4x Cortex-A76 up to 2.4GHz + 4x Cortex-A55 up to 1.8GHz",
+      "gpu": "Arm Mali-G610 MC4",
+      "npu_tops": 6,
+      "npu_datatypes": ["INT4", "INT8", "INT16", "FP16", "BF16", "TF32"],
+      "memory_gb": 32,
+      "memory_type": "LPDDR5",
+      "memory_data_rate_mt_s": 5500,
+      "networking": ["2.5GbE", "Wi-Fi 6", "Bluetooth 5.2"],
+      "storage_interfaces": ["2x M.2 M-key PCIe 3.0 x2", "onboard eMMC", "microSD"],
+      "power_input": "USB-C PD; Radxa recommends a 65W adapter and at least 40W capability for ROCK 5B+",
+      "software": ["Linux", "Android", "Vulkan", "OpenCL", "Rockchip NPU toolchain"],
+      "model_size_practicality": "32GB system RAM makes CPU/Vulkan experiments with larger quantized models possible than on typical SBCs, but practical generation speed is constrained by LPDDR bandwidth and backend maturity. Treat NPU acceleration for arbitrary LLMs as runtime/model dependent.",
+      "quantization_compatibility": "CPU/Vulkan backends can use GGUF quantization where supported; Rockchip NPU use requires supported conversion/runtime paths and should not be assumed for arbitrary models.",
+      "llm_inference_suitability": "Interesting inexpensive high-memory Arm node for experimentation, clustering and low-duty-cycle local inference; weaker software maturity and decode performance than CUDA/Metal/ROCm platforms.",
+      "off_grid_suitability": "good",
+      "physical_constraints": "SBC requires cooling under sustained workloads; NVMe and peripherals increase power requirements.",
+      "pricing": [
+        {
+          "amount": 426.99,
+          "currency": "USD",
+          "region": "ALLNET China",
+          "kind": "observed_new",
+          "availability": "sold_out_when_observed",
+          "observed_at": "2026-08-18",
+          "url": "https://shop.allnetchina.cn/products/rock5-model-b-1",
+          "note": "32GB variant listed at US$426.99 but sold out when observed; 8GB variant was orderable."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://radxa.com/products/rock5/5bp/",
+        "reseller": "https://shop.allnetchina.cn/products/rock5-model-b-1"
+      },
+      "source_urls": {
+        "documentation": "https://docs.radxa.com/en/rock5/rock5b/getting-started/introduction",
+        "power_supply": "https://docs.radxa.com/en/rock5/rock5b/getting-started/power-supply",
+        "product_brief": "https://dl.radxa.com/rock5/5b%2B/docs/radxa_rock5bp_product_brief.pdf"
+      },
+      "evidence": "manufacturer_plus_reseller"
+    },
+    {
+      "id": "khadas-edge2-pro-16gb",
+      "manufacturer": "Khadas",
+      "product": "Edge2 Pro 16GB",
+      "compute_platform": "rockchip-rk3588s2",
+      "category": "compact_arm_sbc",
+      "status": "available",
+      "tier": "B-ultracompact-edge",
+      "cpu": "4x Cortex-A76 at 2.25GHz + 4x Cortex-A55 at 1.8GHz",
+      "gpu": "Arm Mali-G610 MC4 up to 700MHz",
+      "npu_tops": 6,
+      "memory_gb": 16,
+      "memory_type": "LPDDR4X",
+      "memory_bus_bits": 64,
+      "memory_clock_mhz": 2112,
+      "storage": "64GB eMMC 5.1",
+      "networking": ["Wi-Fi 6", "Bluetooth 5.0"],
+      "dimensions_mm": [89.0, 62.0, 16.0],
+      "cooling": "Active Cooling Kit included with Edge2 ARM PC",
+      "power_input": "USB-C PD; power adapter and cable sold separately",
+      "software": ["Ubuntu", "Android", "Vulkan", "OpenCL", "Rockchip NPU software"],
+      "model_size_practicality": "Best for small quantized models and edge AI. 16GB RAM allows more headroom than typical SBCs, but it is not a high-bandwidth LLM platform and should not be ranked by 6 TOPS alone.",
+      "quantization_compatibility": "CPU/Vulkan GGUF use is backend dependent; NPU acceleration requires supported Rockchip conversion/runtime paths.",
+      "llm_inference_suitability": "Useful ultra-compact experimental node for small local models, embeddings, speech and vision workloads; general LLM flexibility is better on CPU/Vulkan than the NPU path.",
+      "off_grid_suitability": "very_good",
+      "physical_constraints": "No Ethernet or onboard M.2 socket; storage and wired-network expansion are more constrained than ROCK 5B+.",
+      "pricing": [
+        {
+          "amount": 339,
+          "currency": "USD",
+          "region": "Khadas store",
+          "kind": "manufacturer_family_from",
+          "availability": "available",
+          "observed_at": "2026-08-18",
+          "url": "https://www.khadas.com/product-page/edge2",
+          "note": "Khadas currently advertises Edge2 from US$339. The page identifies Pro as 16GB LPDDR4X/64GB eMMC but the search-visible price is family-from pricing, so it is not asserted as the exact Pro price."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.khadas.com/edge2",
+        "manufacturer_store": "https://www.khadas.com/product-page/edge2"
+      },
+      "source_urls": {
+        "specification_pdf": "https://dl.khadas.com/products/edge2/specs/edge2_v13_specs.pdf",
+        "comparison_pdf": "https://dl.khadas.com/products/edge2/specs/edge2-comparisons.pdf"
+      },
+      "evidence": "manufacturer"
+    }
+  ]
+}
