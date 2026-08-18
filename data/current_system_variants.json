@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0.0",
-  "last_updated": "2026-08-17",
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-18",
   "purpose": "Purchasable OEM/system variants that share compute platforms already represented in the main catalog. These records must not be counted as independent silicon architectures.",
   "hardware": [
     {
@@ -106,6 +106,74 @@
       "technical_documentation": ["https://www.gmktec.com/products/amd-ryzen%E2%84%A2-ai-max-395-evo-x2-ai-mini-pc"],
       "evidence": "manufacturer_plus_vendor_benchmark",
       "notes": "Vendor benchmarks are useful evidence but are not independent. Preserve exact model/runtime/quantization metadata when independent reproductions become available."
+    },
+    {
+      "id": "msi-pro-max-edge-ai-plus-11m-006us",
+      "manufacturer": "MSI",
+      "product": "PRO MAX EDGE AI+",
+      "model": "11M-006US",
+      "compute_platform": "amd-strix-halo-ryzen-ai-max-plus-395",
+      "category": "compact_ai_workstation",
+      "status": "available_channel_constrained",
+      "cpu": "AMD Ryzen AI Max+ 395, 16C/32T",
+      "gpu": "Radeon 8060S",
+      "npu_tops_vendor": 50,
+      "vendor_total_ai_tops": 126,
+      "memory_gb": 128,
+      "memory_type": "LPDDR5X-8000 unified",
+      "gpu_allocatable_memory_gb_max": 96,
+      "storage_tb": 2,
+      "storage_expansion": "2x M.2 NVMe PCIe Gen4 x4",
+      "networking": ["2.5GbE", "Wi-Fi 7"],
+      "power_supply_w": 300,
+      "volume_l": 4,
+      "pricing": [
+        {
+          "amount": 6999,
+          "currency": "CAD",
+          "region": "CA",
+          "kind": "reseller_msrp",
+          "configuration": "128GB LPDDR5X + 2TB NVMe",
+          "availability": "backorder_or_limited_stock",
+          "observed_at": "2026-08-18",
+          "url": "https://www.shi.ca/product/52030076/MSI-PRO-MAX-EDGE-AI-Desktop-PC%2C-Ryzen-AI-Max-395%2C-128GB-LPDDR5X%2C-2TB-M.2-NVMe%2C",
+          "note": "SHI Canada exposes CA$6,999 MSRP and CA$7,222 observed selling price."
+        },
+        {
+          "amount": 7222,
+          "currency": "CAD",
+          "region": "CA",
+          "kind": "observed_new",
+          "configuration": "128GB LPDDR5X + 2TB NVMe",
+          "availability": "backorder_or_limited_stock",
+          "observed_at": "2026-08-18",
+          "url": "https://www.shi.ca/product/52030076/MSI-PRO-MAX-EDGE-AI-Desktop-PC%2C-Ryzen-AI-Max-395%2C-128GB-LPDDR5X%2C-2TB-M.2-NVMe%2C"
+        }
+      ],
+      "vendor_benchmarks": [
+        {
+          "model": "109B model",
+          "metric": "decode_tokens_per_second",
+          "value": 15,
+          "configuration": "single node; exact model/runtime/quantization not stated in indexed MSI page",
+          "evidence": "vendor_benchmark"
+        }
+      ],
+      "cluster_examples_vendor": [
+        "2 nodes: GPT-OSS 120B INT8",
+        "2 nodes: Qwen3-235B-A22B-Instruct-2507 Q4KM",
+        "4 nodes: DeepSeek-V3.1 671B Q4_0"
+      ],
+      "vendor_urls": [
+        "https://www.msi.com/Business-Productivity-PC/PRO-MAX-EDGE-AI-Plus-11M",
+        "https://www.shi.ca/product/52030076/MSI-PRO-MAX-EDGE-AI-Desktop-PC%2C-Ryzen-AI-Max-395%2C-128GB-LPDDR5X%2C-2TB-M.2-NVMe%2C"
+      ],
+      "technical_documentation": [
+        "https://www.msi.com/Business-Productivity-PC/PRO-MAX-EDGE-AI-Plus-11M/Specification",
+        "https://www.msi.com/news/detail/MSI-Launches-the-PRO-MAX-EDGE-AI---Ushering-in-a-New-Era-of-On-Device-AI-Computing-149591"
+      ],
+      "evidence": "manufacturer_plus_reseller_plus_vendor_benchmark",
+      "notes": "Shared Strix Halo compute platform. The 15 tok/s figure is retained only as vendor evidence because the indexed MSI material does not specify enough model/runtime/quantization detail for normalized cross-platform comparison."
     }
   ]
 }
