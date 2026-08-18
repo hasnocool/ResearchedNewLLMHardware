@@ -1,6 +1,6 @@
 # Detailed Hardware Catalog
 
-Last updated: **2026-08-15**
+Last updated: **2026-08-18**
 
 This catalog separates hardware by role rather than treating every TOPS number as comparable. The most useful LLM hardware generally needs a combination of **memory capacity, bandwidth, suitable kernels/runtime support, acceptable power and attainable price**.
 
@@ -367,3 +367,43 @@ Altera's 2026.1.1 software introduces a beta spatial compiler that maps neural-n
 Small edge NPUs can show excellent TOPS/W while being poor LLM devices. A 1–8 GB accelerator may be excellent for vision, speech, embeddings or always-on classifiers but cannot compete with a 64–192 GB system for general large-model inference.
 
 Therefore, the catalog should never let `TOPS / watts` alone dominate the score. Memory capacity, bandwidth and software support are gating factors.
+
+---
+
+## 10. Qualcomm Dragonwing embedded / industrial AI
+
+### Qualcomm Dragonwing IQ-9075 EVK — B / high-priority edge candidate
+
+**Category:** embedded/industrial AI evaluation kit  
+**CPU:** 8-core Kryo, up to 2.36 GHz  
+**GPU:** Adreno 663  
+**NPU:** dual Hexagon Tensor Processors  
+**NPU performance:** up to 100 dense INT8 TOPS  
+**Memory:** 36 GB LPDDR5 with link ECC  
+**SoC power:** **3.8–20 W** according to Qualcomm's IQ9 product brief  
+**OS:** Ubuntu and upstream Linux/Yocto  
+**Storage:** 128 GB UFS on the EVK
+
+**Manufacturer LLM evidence:** Qualcomm publishes up to **22 tok/s for Llama 2 7B** and **12 tok/s for Llama 2 13B** across its IQ9/IQ-9075 product briefs.
+
+This is unusually useful edge evidence because it combines a named model family, token throughput, memory capacity, Linux support and SoC power in public manufacturer documentation. It still needs quantization/context details and wall-power measurements before normalized tokens/joule ranking.
+
+**Pricing:** no stable public numeric EVK price captured during the 2026-08-18 maintenance pass.
+
+### Qualcomm Dragonwing IQ-8275 EVK — B / capacity-limited edge candidate
+
+**NPU:** 20–40 dense INT8 TOPS  
+**EVK memory:** 12 GB LPDDR5 ECC  
+**Platform memory support:** up to 32 GB  
+**OS:** Ubuntu / upstream Linux with Yocto  
+**Manufacturer LLM evidence:** Qualcomm states the EVK runs 13B-class models at approximately **9 tok/s**, but the public EVK page does not identify the exact model, quantization or context.
+
+The 12 GB EVK is restrictive for general LLMs; the architecture becomes more interesting in 16–32 GB system implementations.
+
+### Arduino VENTUNO Q — Experimental/B-potential SBC
+
+VENTUNO Q packages the IQ-8275 with **16 GB RAM**, **64 GB eMMC**, **M.2 NVMe Gen4**, **2.5GbE**, Wi-Fi 6 and an STM32H5 real-time MCU. It is worth tracking as an SBC/robotics node because it provides a more practical host around the IQ-8275 platform than the reference EVK.
+
+Do not assign a normal buying rank until stable public pricing, broad availability, board-level power and reproducible LLM benchmarks are available.
+
+See [`QUALCOMM_EDGE_AI.md`](QUALCOMM_EDGE_AI.md) and [`data/qualcomm_edge.json`](data/qualcomm_edge.json) for sources and normalized records.
