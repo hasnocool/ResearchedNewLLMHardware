@@ -1,0 +1,223 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-19",
+  "purpose": "High-bandwidth-memory datacenter and unusual AI platforms that remain relevant to local/workstation experimentation, secondary-market monitoring, or architecture comparison.",
+  "notes": [
+    "Manufacturer specifications are authoritative for hardware fields. Marketplace prices are point-in-time observations and not fair-market valuations.",
+    "Vendor TOPS/TFLOPS figures are precision- and sparsity-dependent and must not be compared without matching datatypes and assumptions.",
+    "Server accelerators often require directed chassis airflow, server-class power delivery, platform firmware support, or proprietary carrier/socket infrastructure; these constraints materially affect local deployment practicality.",
+    "Unsupported or deprecated software status is recorded explicitly and must not be inferred from historical product support pages."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-a30-24gb",
+      "manufacturer": "NVIDIA",
+      "product": "A30 Tensor Core GPU 24GB",
+      "compute_platform": "nvidia-ampere-a30",
+      "category": "datacenter_gpu_secondary_market_hbm",
+      "status": "secondary-market_and_channel",
+      "tier": "A-bandwidth-per-watt",
+      "gpu_architecture": "Ampere",
+      "fp32_tflops": 10.3,
+      "tf32_tensor_tflops_dense": 82,
+      "fp16_bf16_tensor_tflops_dense": 165,
+      "int8_tops_dense": 330,
+      "int4_tops_dense": 661,
+      "memory_gb": 24,
+      "memory_type": "HBM2",
+      "memory_bus_bits": 3072,
+      "memory_bandwidth_gbps": 933,
+      "board_power_w": 165,
+      "host_interface": "PCIe 4.0 x16",
+      "interconnect": "third-generation NVLink up to 200 GB/s between a supported adjacent pair",
+      "mig": ["4x6GB", "2x12GB", "1x24GB"],
+      "form_factor": "dual-slot full-height full-length passive",
+      "cooling": "passive; server-style directed airflow required",
+      "software": ["CUDA", "TensorRT", "PyTorch", "TensorFlow", "NGC", "NVIDIA AI Enterprise", "llama.cpp CUDA", "vLLM CUDA"],
+      "quantization_compatibility": "Strong CUDA support for FP16/BF16/TF32 and Tensor Core INT8/INT4 paths; practical GGUF/AWQ/GPTQ support depends on runtime/kernel selection.",
+      "llm_fit": "24GB VRAM is practical for many 7B-14B models at high precision and a broad set of roughly 20B-32B low-bit models, with room varying substantially by context/KV cache. 933GB/s HBM2 bandwidth is unusually high for a 165W 24GB accelerator and can make decode bandwidth attractive compared with many workstation cards.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_board_w": 5.65,
+        "board_w_per_gb_vram": 6.875
+      },
+      "off_grid_suitability": "moderate_if_server_airflow_and_165w_board_budget_are_acceptable",
+      "pricing": [
+        {
+          "amount": 3468.91,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "pre-owned",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-19",
+          "vendor": "eBay.ca / cloud_storage_corp",
+          "url": "https://www.ebay.ca/sch/i.html?Brand=&_dcat=27386&_nkw=nvidia+a30",
+          "note": "Representative A30 24GB used listing observed at CA$3,468.91 plus shipping. This is an asking-price observation and appears poor value versus many newer 24-32GB cards; market prices vary widely."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/data-center/products/a30-gpu/"
+      },
+      "technical_documentation": {
+        "product_brief": "https://www.nvidia.com/content/dam/en-zz/Solutions/data-center/products/a30-gpu/pdf/a30-product-brief.pdf",
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/data-center/products/a30-gpu/pdf/a30-datasheet.pdf",
+        "inference_technical_blog": "https://developer.nvidia.com/blog/accelerating-ai-inference-workloads-with-nvidia-a30-gpu/"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    },
+    {
+      "id": "amd-instinct-mi60-32gb",
+      "manufacturer": "AMD",
+      "product": "Instinct MI60 32GB",
+      "compute_platform": "amd-vega20-gfx906-mi60",
+      "category": "datacenter_gpu_secondary_market_legacy_hbm",
+      "status": "secondary-market_legacy_software",
+      "tier": "B-experimental-legacy",
+      "gpu_architecture": "Vega20",
+      "llvm_target": "gfx906",
+      "compute_units": 64,
+      "stream_processors": 4096,
+      "fp16_tflops": 29.5,
+      "fp32_tflops": 14.7,
+      "fp64_tflops": 7.4,
+      "int8_tops": 59,
+      "memory_gb": 32,
+      "memory_type": "HBM2 ECC",
+      "memory_bus_bits": 4096,
+      "memory_bandwidth_gbps": 1000,
+      "board_power_w": 300,
+      "host_interface": "PCIe 4.0 x16 / PCIe 3.0 x16",
+      "interconnect": "2x Infinity Fabric links; up to 92 GB/s peak link bandwidth",
+      "form_factor": "10.5-inch full-height dual-slot passive PCIe card",
+      "power_connectors": ["1x6-pin", "1x8-pin"],
+      "cooling": "passive; strong server-style directed airflow required",
+      "software": ["Linux", "historical ROCm/HIP", "OpenCL"],
+      "software_lifecycle": "AMD's current ROCm Compute Profiler compatibility documentation marks MI50/MI60 Vega20 as unsupported. Historical ROCm/HIP software may still be usable with older stacks, but current prebuilt ROCm libraries/tooling must not be assumed to support gfx906 MI60.",
+      "quantization_compatibility": "Potentially usable for GGUF/low-bit inference through compatible legacy ROCm/HIP or community paths, but modern prebuilt ROCm support is not verified; treat software setup as experimental.",
+      "llm_fit": "32GB capacity plus 1TB/s HBM2 bandwidth is attractive on paper for 20B-32B low-bit models and split larger models, but software lifecycle, 300W board power and passive cooling dominate practical value.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_board_w": 3.33,
+        "board_w_per_gb_vram": 9.375
+      },
+      "off_grid_suitability": "poor_due_to_300w_board_power_and_forced_air_requirement",
+      "pricing": [
+        {
+          "amount": 701.04,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "used",
+          "availability": "out_of_stock_historical_listing",
+          "observed_at": "2026-08-19",
+          "vendor": "eBay.ca / computer-hq",
+          "url": "https://www.cafr.ebay.ca/itm/125006475381",
+          "note": "Used MI60 32GB listing last updated February 19, 2026 showed about CA$701 and was out of stock. Retained as a market reference, not a current buy recommendation."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_support": "https://www.amd.com/en/support/downloads/drivers.html/accelerators/instinct/instinct-mi-series/instinct-mi60.html"
+      },
+      "technical_documentation": {
+        "manufacturer_specs": "https://www.amd.com/en/products/specifications/accelerators.html",
+        "current_rocm_profiler_compatibility": "https://rocm.docs.amd.com/projects/rocprofiler-compute/en/develop/reference/compatible-accelerators.html"
+      },
+      "evidence": "manufacturer_plus_marketplace_plus_current_software_matrix"
+    },
+    {
+      "id": "intel-gaudi3-pcie-128gb",
+      "manufacturer": "Intel",
+      "product": "Gaudi 3 PCIe AI Accelerator",
+      "compute_platform": "intel-gaudi3-tpc",
+      "category": "datacenter_ai_accelerator_unusual",
+      "status": "available_via_server_oem_and_channel",
+      "tier": "Experimental-high-capacity",
+      "accelerator_architecture": "5th Generation Tensor Processor Core",
+      "memory_gb": 128,
+      "memory_type": "8x HBM2E",
+      "memory_bandwidth_gbps": 3700,
+      "on_die_sram_mb": 96,
+      "on_die_sram_bandwidth_tbps": 19.2,
+      "board_power_w": 600,
+      "host_interface": "PCIe 5.0 x16",
+      "pcie_peak_bidirectional_bandwidth_gbps": 128,
+      "form_factor": "full-height 10.5-inch double-width PCIe card",
+      "cooling": "air-cooled server accelerator",
+      "supported_datatypes": ["FP32", "BF16", "FP16", "FP8 E4M3", "FP8 E5M2"],
+      "software": ["Intel Gaudi software", "PyTorch", "Hugging Face model references", "containers", "SynapseAI ecosystem"],
+      "quantization_compatibility": "Vendor stack supports FP8 and common framework/model-reference workflows; broad consumer-style GGUF compatibility should not be assumed and depends on dedicated Gaudi runtime support.",
+      "llm_fit": "128GB HBM2E and 3.7TB/s bandwidth are highly attractive for very large models and high-throughput inference, but 600W board power, server cooling and software specialization make this a datacenter/advanced-lab platform rather than a normal local-PC accelerator.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_board_w": 6.17,
+        "board_w_per_gb_hbm": 4.6875
+      },
+      "off_grid_suitability": "poor",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "server_oem_and_channel_dependent",
+          "observed_at": "2026-08-19",
+          "note": "No defensible standalone public retail price captured in this pass; Gaudi 3 PCIe is primarily sold through server/OEM channels."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_developer": "https://www.intel.com/content/www/us/en/developer/platform/gaudi/overview.html"
+      },
+      "technical_documentation": {
+        "pcie_product_brief": "https://cdrdv2-public.intel.com/817488/Gaudi%203%20PCIe%20Product%20Brief_RB_1_V6.pdf"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "amd-instinct-mi300a-128gb",
+      "manufacturer": "AMD",
+      "product": "Instinct MI300A APU",
+      "compute_platform": "amd-cdna3-zen4-mi300a",
+      "category": "datacenter_hpc_ai_apu_unusual",
+      "status": "available_via_hpc_oem_platforms",
+      "tier": "Experimental-high-capacity-unified-hbm",
+      "gpu_architecture": "CDNA 3",
+      "cpu_architecture": "Zen 4",
+      "cpu_cores": 24,
+      "gpu_compute_units": 228,
+      "fp32_vector_tflops": 122.6,
+      "fp32_matrix_tflops": 122.6,
+      "bf16_matrix_tflops_dense": 980.6,
+      "int8_tops_dense": 1960,
+      "memory_gb": 128,
+      "memory_type": "unified HBM3 ECC",
+      "memory_bus_bits": 8192,
+      "memory_bandwidth_gbps": 5300,
+      "tdp_w": 550,
+      "peak_power_w": 760,
+      "form_factor": "SH5 socket APU; not a conventional PCIe add-in card",
+      "host_interface": "PCIe 5.0 x16 plus 8 Infinity Fabric links",
+      "infinity_fabric_link_bandwidth_gbps": 128,
+      "cooling": "platform-dependent passive or active server/HPC cooling",
+      "software": ["ROCm", "PyTorch", "HPC/AI software ecosystem"],
+      "quantization_compatibility": "ROCm supports standard AI datatypes and model runtimes on MI300-class hardware; low-bit LLM support depends on runtime kernels and should be benchmarked by exact model/engine.",
+      "llm_fit": "Architecturally exceptional for large-model experimentation because CPU and GPU share 128GB of very high-bandwidth HBM3. However, SH5 socket/platform requirements and 550-760W power make it an HPC node architecture, not a drop-in local-workstation option.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_tdp_w": 9.64,
+        "tdp_w_per_gb_hbm": 4.297
+      },
+      "off_grid_suitability": "poor",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "hpc_oem_platform_dependent",
+          "observed_at": "2026-08-19",
+          "note": "MI300A is sold as part of HPC/OEM platforms rather than as a normal retail add-in card; no defensible standalone retail price captured."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300a.html"
+      },
+      "technical_documentation": {
+        "manufacturer_product": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300a.html",
+        "mi300_series_overview": "https://www.amd.com/en/products/accelerators/instinct/mi300.html",
+        "rocm_docs": "https://rocm.docs.amd.com/"
+      },
+      "evidence": "manufacturer"
+    }
+  ]
+}
