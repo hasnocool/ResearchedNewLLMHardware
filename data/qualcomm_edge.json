@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0.0",
-  "last_updated": "2026-08-18",
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-19",
   "purpose": "Qualcomm Dragonwing embedded and industrial AI candidates with public LLM evidence.",
   "hardware": [
     {
@@ -23,7 +23,30 @@
       "soc_power_w": {"min": 3.8, "max": 20, "kind": "soc_only"},
       "networking": ["2x 2.5GbE with TSN on IQ-9075 platform", "Wi-Fi 6E via companion module", "Bluetooth 5.3 via companion module"],
       "pcie": ["PCIe Gen4 x4 expansion", "PCIe Gen4 x2 on platform"],
-      "software": ["Ubuntu", "Upstream Linux with Yocto support", "Qualcomm AI Stack", "ONNX Runtime", "TensorFlow Lite", "PyTorch"],
+      "software": [
+        "Ubuntu",
+        "Upstream Linux with Yocto support",
+        "Qualcomm AI Runtime (QAIRT)",
+        "Qualcomm AI Hub",
+        "GenieX developer preview",
+        "Genie LLM library",
+        "llama.cpp / GGUF path",
+        "ONNX Runtime",
+        "LiteRT / TensorFlow Lite",
+        "PyTorch",
+        "Qualcomm Intelligent Multimedia SDK"
+      ],
+      "genai_interfaces": [
+        "GenieX CLI",
+        "GenieX Python SDK",
+        "GenieX Android SDK",
+        "GenieX Docker containers",
+        "GenieX OpenAI-compatible API"
+      ],
+      "runtime_paths": [
+        {"runtime": "QAIRT", "role": "maximum Qualcomm hardware optimization and Hexagon NPU acceleration"},
+        {"runtime": "llama.cpp", "role": "broader GGUF and open-source model compatibility"}
+      ],
       "llm_evidence": [
         {
           "model": "Llama 2",
@@ -38,19 +61,28 @@
           "decode_tps": 12,
           "source_type": "manufacturer_module_brief",
           "note": "Qualcomm IQ-9075 module brief states Llama 2 13B at 12 tokens/s."
+        },
+        {
+          "model": "Llama 3.2 Instruct 3B + BAAI BGE-large + Whisper-small",
+          "source_type": "manufacturer_application_demo",
+          "note": "Qualcomm demonstrated on-device LLM with RAG plus ASR simultaneously on the IQ-9075 EVK, distributing optimized workloads across its two Hexagon HTP cores. No normalized token-throughput or wall-power result was published for this combined workload."
         }
       ],
       "pricing": [],
       "price_status": "no_stable_public_price_captured",
       "evidence": "manufacturer",
       "research_priority": "high_for_edge",
+      "software_maturity_note": "Materially improved public GenAI deployment story as of August 2026: Qualcomm documents QAIRT NPU acceleration, llama.cpp/GGUF compatibility, GenieX developer-preview interfaces including an OpenAI-compatible API, and a real IQ-9075 LLM+RAG+ASR application. GenieX remains developer preview, so production maturity should not be overstated.",
       "vendor_urls": [
         "https://www.qualcomm.com/developer/hardware/qualcomm-iq-9075-evaluation-kit-evk",
         "https://www.qualcomm.com/internet-of-things/products/iq9-series/iq-9075"
       ],
       "technical_documentation": [
         "https://docs.qualcomm.com/doc/87-97354-1/87-97354-1_REV_C_Qualcomm_Dragonwing_IQ-9075_Module_Product_Brief.pdf",
-        "https://docs.qualcomm.com/doc/87-83840-1/87-83840-1_REV_A_Qualcomm_IQ9_Series_Product_Brief.pdf"
+        "https://docs.qualcomm.com/doc/87-83840-1/87-83840-1_REV_A_Qualcomm_IQ9_Series_Product_Brief.pdf",
+        "https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge",
+        "https://www.qualcomm.com/developer/blog/2026/07/genai-rag-iq9075-factorypulse",
+        "https://www.qualcomm.com/developer/artificial-intelligence"
       ],
       "notes": "Interesting because Qualcomm publishes both SoC power and named LLM throughput. Do not compare dense INT8 TOPS directly with GPU FP4/FP8 figures."
     },
@@ -72,7 +104,19 @@
       "storage_gb": 128,
       "networking": ["2.5GbE", "Wi-Fi 6E via companion module", "Bluetooth 5.3 via companion module"],
       "pcie": ["PCIe x4 expansion", "M.2 E-key"],
-      "software": ["Ubuntu", "Upstream Linux with Yocto support", "Qualcomm AI Stack", "ONNX Runtime", "TensorFlow Lite", "PyTorch"],
+      "software": [
+        "Ubuntu",
+        "Upstream Linux with Yocto support",
+        "Qualcomm AI Runtime (QAIRT)",
+        "Qualcomm AI Hub",
+        "GenieX developer preview",
+        "llama.cpp / GGUF path",
+        "ONNX Runtime",
+        "LiteRT / TensorFlow Lite",
+        "PyTorch",
+        "Qualcomm Intelligent Multimedia SDK"
+      ],
+      "genai_interfaces": ["GenieX CLI", "GenieX Python SDK", "GenieX Docker containers", "GenieX OpenAI-compatible API"],
       "llm_evidence": [
         {
           "model": "unspecified 13B-class supported model",
@@ -86,12 +130,15 @@
       "price_status": "no_stable_public_price_captured",
       "evidence": "manufacturer",
       "research_priority": "medium_high_for_edge",
+      "software_maturity_note": "Qualcomm's August 2026 Dragonwing software guidance explicitly spans IQ8 and IQ9 with QAIRT, AI Hub, GenieX and llama.cpp paths. The strongest multi-workload GenAI demonstration located in this pass was on IQ-9075, not this EVK.",
       "vendor_urls": [
         "https://www.qualcomm.com/developer/hardware/qualcomm-iq-8275-evaluation-kit-evk",
         "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275"
       ],
       "technical_documentation": [
-        "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275"
+        "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275",
+        "https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge",
+        "https://www.qualcomm.com/developer/artificial-intelligence"
       ],
       "notes": "The 12GB EVK is capacity-constrained for general LLM use, but the IQ-8275 platform supports up to 32GB and has unusually explicit edge-LLM evidence."
     },
@@ -110,7 +157,7 @@
       "storage_type": "eMMC",
       "storage_expansion": ["M.2 NVMe Gen4"],
       "networking": ["2.5GbE", "Wi-Fi 6", "Bluetooth 5.3"],
-      "software": ["Linux", "ROS 2", "Qualcomm AI software ecosystem", "Arduino ecosystem"],
+      "software": ["Linux", "ROS 2", "Qualcomm AI Runtime (QAIRT)", "Qualcomm AI Hub", "GenieX developer preview", "llama.cpp / GGUF path", "Arduino ecosystem"],
       "pricing": [],
       "price_status": "no_defensible_public_price_captured",
       "evidence": "manufacturer_and_platform_vendor",
@@ -120,9 +167,10 @@
         "https://www.qualcomm.com/developer/hardware"
       ],
       "technical_documentation": [
-        "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275"
+        "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275",
+        "https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge"
       ],
-      "notes": "A practical SBC-style packaging of IQ-8275 with 16GB RAM, 2.5GbE and NVMe expansion. Track price, broad retail availability and reproducible LLM benchmarks before assigning a normal buying rank."
+      "notes": "A practical SBC-style packaging of IQ-8275 with 16GB RAM, 2.5GbE and NVMe expansion. Track price, broad retail availability and reproducible board-specific LLM benchmarks before assigning a normal buying rank."
     }
   ]
 }
