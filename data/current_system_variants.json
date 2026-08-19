@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.1.0",
-  "last_updated": "2026-08-18",
+  "schema_version": "1.2.0",
+  "last_updated": "2026-08-19",
   "purpose": "Purchasable OEM/system variants that share compute platforms already represented in the main catalog. These records must not be counted as independent silicon architectures.",
   "hardware": [
     {
@@ -174,6 +174,53 @@
       ],
       "evidence": "manufacturer_plus_reseller_plus_vendor_benchmark",
       "notes": "Shared Strix Halo compute platform. The 15 tok/s figure is retained only as vendor evidence because the indexed MSI material does not specify enough model/runtime/quantization detail for normalized cross-platform comparison."
+    },
+    {
+      "id": "gmktec-evo-x3-ryzen-ai-max-plus-395-128gb",
+      "manufacturer": "GMKtec",
+      "product": "EVO-X3 AI Mini PC",
+      "compute_platform": "amd-strix-halo-ryzen-ai-max-plus-395",
+      "category": "compact_ai_workstation",
+      "status": "available",
+      "cpu": "AMD Ryzen AI Max+ 395, 16C/32T",
+      "gpu": "Radeon 8060S",
+      "gpu_compute_units": 40,
+      "npu_tops_vendor": 50,
+      "vendor_total_ai_tops": 126,
+      "memory_gb": 128,
+      "memory_type": "LPDDR5X-8000 unified",
+      "gpu_allocatable_memory_gb_max": 96,
+      "storage_options_tb": [2, 4],
+      "storage_expansion": "2x M.2 2280 PCIe 4.0 x4; vendor states up to 16TB total",
+      "networking": ["2.5GbE", "Wi-Fi 7", "Bluetooth 5.4"],
+      "expansion": ["OCuLink PCIe Gen4 x4", "USB4 40Gbps"],
+      "power": {"silent_mode_package_w_vendor": 54, "balanced_mode_package_w_vendor": 85, "peak_package_w_vendor": 140, "adapter_w_approx": 230.1},
+      "os": ["Windows 11 Pro", "Ubuntu", "Linux"],
+      "software": ["ROCm ecosystem", "GMKtec Claw local AI deployment"],
+      "pricing": [
+        {
+          "amount": 3799.99,
+          "currency": "USD",
+          "region": "US",
+          "kind": "manufacturer_store",
+          "configuration": "128GB RAM + 2TB SSD selected on indexed product page",
+          "availability": "in_stock_add_to_cart",
+          "observed_at": "2026-08-19",
+          "url": "https://www.gmktec.com/products/gmktec-evo-x3-ai-mini-pc-amd-ryzen-ai-max-395",
+          "note": "Manufacturer page shows US$3,799.99 versus a struck-through US$4,100 price. Preserve this as a dated storefront observation rather than assuming it is permanent MSRP."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.gmktec.com/products/gmktec-evo-x3-ai-mini-pc-amd-ryzen-ai-max-395",
+        "https://www.gmktec.com/pages/evo-x3"
+      ],
+      "technical_documentation": [
+        "https://www.gmktec.com/products/gmktec-evo-x3-ai-mini-pc-amd-ryzen-ai-max-395",
+        "https://www.gmktec.com/blogs/news/evo-x3-is-coming-a-new-compact-ai-workstation-built-for-local-ai-computing",
+        "https://de.gmktec.com/fr/blogs/news/gmktec-amd-seven-years-of-ai-innovation-from-evo-x2-to-evo-x3"
+      ],
+      "evidence": "manufacturer",
+      "notes": "Shared Strix Halo silicon; do not count as a new compute architecture. EVO-X3 is materially different from EVO-X2 at the system level because it adds native OCuLink, standardizes 128GB memory, and provides updated I/O/cooling while retaining the same Ryzen AI Max+ 395 compute platform. Vendor claims support for models up to 235B, but no normalized independent LLM throughput is recorded here yet."
     }
   ]
 }
