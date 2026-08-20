@@ -1,0 +1,240 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-19",
+  "purpose": "Overlooked Intel data-center GPUs and an older 32GB workstation GPU that remain relevant to local LLM experimentation because they combine substantial memory bandwidth or capacity with still-usable software paths.",
+  "notes": [
+    "Manufacturer specifications are authoritative for hardware fields. Marketplace prices are point-in-time observations, not fair-market valuations.",
+    "Intel Flex and Max GPUs remain present in Intel's 2026 oneAPI support matrix, but software coverage differs by application and should be verified against the exact runtime.",
+    "The Intel Flex 140 is a dual-GPU card with 6GB local memory per GPU; its advertised 12GB is not a single 12GB memory heap and should not be treated like a conventional 12GB GPU for model fit.",
+    "Model-size guidance is approximate and depends on quantization, context length, KV cache, runtime buffers, and whether the backend can split work across devices."
+  ],
+  "hardware": [
+    {
+      "id": "intel-data-center-gpu-max-1100-48gb",
+      "manufacturer": "Intel",
+      "product": "Data Center GPU Max 1100",
+      "compute_platform": "intel-ponte-vecchio-xe-hpc",
+      "category": "datacenter_gpu_secondary_market_hbm",
+      "status": "discontinued_secondary_market_current_software_support",
+      "tier": "A-experimental-value-if-cheap",
+      "launch_date": "Q2 2023",
+      "expected_discontinuance": "2026-01",
+      "gpu_architecture": "Xe-HPC",
+      "xe_cores": 56,
+      "xmx_engines": 448,
+      "memory_gb": 48,
+      "memory_type": "HBM2e",
+      "memory_bus_bits": 1024,
+      "memory_bandwidth_gbps": 1228.8,
+      "tdp_w": 300,
+      "host_interface": "PCIe 5.0 x16",
+      "interconnect": "Intel Xe Link bridge support for supported multi-GPU configurations",
+      "form_factor": "double-wide PCIe add-in card",
+      "cooling": "server/datacenter airflow required",
+      "software": ["oneAPI", "oneDNN", "PyTorch torch.xpu", "OpenVINO", "SYCL", "llama.cpp SYCL"],
+      "software_lifecycle": "Intel's 2026 oneAPI system requirements still list Data Center GPU Max Series on supported Linux distributions. Intel states native Intel GPU/XPU support is available in stock PyTorch, and llama.cpp's SYCL backend lists Max 1100/1550 as verified devices.",
+      "quantization_compatibility": "llama.cpp SYCL enables GGUF low-bit inference; Intel PyTorch/OpenVINO paths support framework-native mixed precision and weight-only quantization where supported by the runtime.",
+      "llm_fit": "48GB HBM2e and 1.23TB/s bandwidth are strong for 30B-class models and some larger low-bit models. 70B-class 4-bit deployments can be tight once KV cache and runtime buffers are included, so exact fit must be measured.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_tdp_w": 4.096,
+        "tdp_w_per_gb_vram": 6.25
+      },
+      "off_grid_suitability": "poor_to_moderate_due_to_300w_accelerator_power_and_server_airflow",
+      "pricing": [
+        {
+          "amount": 2801.0,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "used_tested",
+          "availability": "ended_listing_historical_reference",
+          "observed_at": "2026-08-19",
+          "vendor": "eBay.ca",
+          "url": "https://www.ebay.ca/itm/157974050164",
+          "note": "Ended June 11, 2026 listing for a used/tested Max 1100 at US$1,999, approximately CA$2,801. Retained as a recent secondary-market reference, not a current available offer."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.intel.com/content/www/us/en/products/sku/232876/intel-data-center-gpu-max-1100/specifications.html",
+        "manufacturer_family": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/max-series.html"
+      },
+      "technical_documentation": {
+        "accelerator_datasheet": "https://www.intel.com/content/www/us/en/content-details/817799/intel-data-center-gpu-max-1100-accelerator-datasheet.html",
+        "oneapi_2026_system_requirements": "https://www.intel.com/content/www/us/en/developer/articles/release-notes/oneapi-toolkit/2026.html",
+        "pytorch_optimizations": "https://www.intel.com/content/www/us/en/developer/tools/oneapi/optimization-for-pytorch.html",
+        "llama_cpp_sycl_backend": "https://github.com/ggml-org/llama.cpp/blob/master/docs/backend/SYCL.md"
+      },
+      "evidence": "manufacturer_plus_current_software_docs_plus_marketplace"
+    },
+    {
+      "id": "intel-data-center-gpu-flex-170-16gb",
+      "manufacturer": "Intel",
+      "product": "Data Center GPU Flex 170",
+      "compute_platform": "intel-arctic-sound-xe-hpg",
+      "category": "datacenter_gpu_secondary_market_low_power",
+      "status": "launched_channel_and_secondary_market",
+      "tier": "B-low-power-sycl",
+      "launch_date": "Q3 2022",
+      "gpu_architecture": "Xe-HPG",
+      "xe_cores": 32,
+      "xmx_engines": 512,
+      "fp32_tflops_vendor_product_brief": 16,
+      "int8_tops_vendor_product_brief": 250,
+      "memory_gb": 16,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 576,
+      "board_power_w": 150,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "full-height three-quarter-length single-width passive",
+      "cooling": "passive; directed server airflow required",
+      "software": ["oneAPI", "OpenVINO", "PyTorch/SYCL ecosystem", "Vulkan 1.3", "OpenCL 3.0", "llama.cpp SYCL"],
+      "software_lifecycle": "Intel's 2026 oneAPI requirements continue to list Data Center GPU Flex Series, and llama.cpp's SYCL backend lists Flex 170 as a verified Intel GPU.",
+      "quantization_compatibility": "GGUF low-bit inference is available through llama.cpp SYCL. OpenVINO and Intel GPU runtimes provide additional quantized inference paths, but model/operator coverage must be checked.",
+      "llm_fit": "16GB VRAM is practical for many 7B-14B quantized models and smaller high-precision models. 576GB/s at 150W is attractive for its capacity class, but passive cooling and Intel-specific software paths reduce plug-and-play appeal.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_board_w": 3.84,
+        "board_w_per_gb_vram": 9.375
+      },
+      "off_grid_suitability": "moderate_if_forced_air_and_150w_board_budget_are_acceptable",
+      "pricing": [
+        {
+          "amount": 1828.32,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "pre-owned",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-19",
+          "vendor": "eBay.ca",
+          "url": "https://www.ebay.ca/b/Intel-Computer-Graphics-Cards/27386/bn_7113457456",
+          "note": "Canada-visible eBay results showed a pre-owned 24P01G00BA Flex 170 at about CA$1,828.32 plus shipping. Asking prices vary materially by OEM part number and region."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.intel.com/content/www/us/en/products/sku/230019/intel-data-center-gpu-flex-170/specifications.html",
+        "manufacturer_family": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/flex-series.html"
+      },
+      "technical_documentation": {
+        "product_brief": "https://cdrdv2-public.intel.com/768797/intel-data-center-gpu-flex-series-product-brief-final.pdf",
+        "oneapi_2026_system_requirements": "https://www.intel.com/content/www/us/en/developer/articles/release-notes/oneapi-toolkit/2026.html",
+        "llama_cpp_sycl_backend": "https://github.com/ggml-org/llama.cpp/blob/master/docs/backend/SYCL.md"
+      },
+      "evidence": "manufacturer_plus_current_software_docs_plus_marketplace"
+    },
+    {
+      "id": "intel-data-center-gpu-flex-140-12gb",
+      "manufacturer": "Intel",
+      "product": "Data Center GPU Flex 140",
+      "compute_platform": "intel-arctic-sound-xe-hpg-dual-gpu",
+      "category": "datacenter_gpu_low_power_dual_gpu",
+      "status": "launched_channel_and_secondary_market",
+      "tier": "Experimental-low-power-memory-split",
+      "launch_date": "Q3 2022",
+      "gpu_architecture": "Xe-HPG",
+      "gpu_count": 2,
+      "xe_cores_total": 16,
+      "xmx_engines_total": 256,
+      "fp32_tflops_vendor_product_brief_total": 8,
+      "int8_tops_vendor_product_brief_total": 105,
+      "memory_gb_total": 12,
+      "memory_gb_per_gpu": 6,
+      "memory_type": "GDDR6",
+      "memory_bus_bits_total": 192,
+      "memory_bandwidth_gbps_total": 336,
+      "board_power_w": 75,
+      "host_interface": "PCIe 4.0 x8",
+      "form_factor": "half-height half-length single-width passive",
+      "cooling": "passive; directed server airflow required",
+      "software": ["oneAPI", "OpenVINO", "Vulkan 1.3", "OpenCL 3.0"],
+      "software_lifecycle": "Intel's 2026 oneAPI requirements continue to list Data Center GPU Flex Series. Unlike Flex 170, Flex 140 is not explicitly listed among llama.cpp SYCL's verified devices.",
+      "quantization_compatibility": "Potential low-bit inference through Intel/SYCL/OpenVINO paths, but the card exposes two GPUs with 6GB local memory each; do not assume a single model can use the full 12GB without explicit multi-device partitioning.",
+      "llm_fit": "The 75W board power is excellent, but the 6GB-per-GPU memory split makes it much less useful for ordinary local LLM inference than a single 12GB GPU. Best treated as an experimental multi-device or small-model accelerator.",
+      "performance_per_watt": {
+        "aggregate_memory_bandwidth_gbps_per_board_w": 4.48,
+        "board_w_per_gb_total_memory": 6.25
+      },
+      "off_grid_suitability": "good_power_profile_but_limited_by_split_memory_and_passive_airflow",
+      "pricing": [
+        {
+          "amount": 2878.99,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_open_box",
+          "condition": "open_box",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-19",
+          "vendor": "eBay.ca / CloudStorageCorp",
+          "url": "https://www.ebay.ca/itm/206152974027",
+          "note": "Open-box Flex 140 observed at CA$2,878.99. This asking price is poor value for local LLM use and is recorded for market tracking, not as a recommendation."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.intel.com/content/www/us/en/products/sku/230020/intel-data-center-gpu-flex-140/specifications.html",
+        "manufacturer_family": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/flex-series.html"
+      },
+      "technical_documentation": {
+        "product_brief": "https://cdrdv2-public.intel.com/768797/intel-data-center-gpu-flex-series-product-brief-final.pdf",
+        "oneapi_2026_system_requirements": "https://www.intel.com/content/www/us/en/developer/articles/release-notes/oneapi-toolkit/2026.html"
+      },
+      "evidence": "manufacturer_plus_current_software_docs_plus_marketplace"
+    },
+    {
+      "id": "amd-radeon-pro-w6800-32gb",
+      "manufacturer": "AMD",
+      "product": "Radeon PRO W6800 32GB",
+      "compute_platform": "amd-rdna2-gfx1030",
+      "category": "workstation_gpu_secondary_market",
+      "status": "legacy_workstation_current_pro_driver_secondary_market",
+      "tier": "B-capacity-value-if-cheap",
+      "launch_date": "2021-06-08",
+      "gpu_architecture": "RDNA 2",
+      "llvm_target": "gfx1030",
+      "compute_units": 60,
+      "stream_processors": 3840,
+      "fp16_tflops": 35.7,
+      "fp32_tflops": 17.8,
+      "memory_gb": 32,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 512,
+      "infinity_cache_mb": 128,
+      "board_power_w": 250,
+      "host_interface": "PCIe 4.0 x16",
+      "power_connectors": ["1x6-pin", "1x8-pin"],
+      "form_factor": "10.5-inch full-height double-slot",
+      "cooling": "active",
+      "software": ["AMD Software PRO Edition", "Linux x86-64 graphics stack", "Vulkan", "OpenCL", "community llama.cpp Vulkan paths"],
+      "software_lifecycle": "AMD published a current Radeon PRO W6800 driver/support page in 2026. AMD's latest HIP SDK 7.2 Windows system-requirements page does not list W6800 as officially supported, so current ROCm/HIP support must not be assumed even though older/current documentation snapshots can conflict.",
+      "quantization_compatibility": "GGUF low-bit inference is most realistically approached through Vulkan/community backends unless a specific ROCm/HIP version is independently verified for gfx1030.",
+      "llm_fit": "32GB ECC VRAM is attractive for 20B-32B quantized models and some split larger workloads. Active workstation cooling is easier to integrate than passive datacenter cards, but 512GB/s and 250W make efficiency modest versus newer 32GB options.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_board_w": 2.048,
+        "board_w_per_gb_vram": 7.8125
+      },
+      "off_grid_suitability": "poor_to_moderate_due_to_250w_board_power_despite_active_cooling",
+      "pricing": [
+        {
+          "amount": 1289.42,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "pre-owned",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-19",
+          "vendor": "eBay.ca",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=amd+radeon+pro+w6800",
+          "note": "Representative pre-owned W6800 32GB listing observed at CA$1,289.42 plus shipping; other used listings were roughly CA$1,447-1,545."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_support": "https://www.amd.com/en/support/downloads/drivers.html/graphics/radeon-pro/radeon-pro-w6000-series/amd-radeon-pro-w6800.html"
+      },
+      "technical_documentation": {
+        "manufacturer_datasheet": "https://www.amd.com/content/dam/amd/en/documents/products/graphics/workstation/radeon-pro-w6800-datasheet.pdf",
+        "hip_sdk_7_2_windows_support_matrix": "https://rocm.docs.amd.com/projects/install-on-windows/en/docs-7.2/reference/system-requirements.html"
+      },
+      "evidence": "manufacturer_plus_current_software_matrix_plus_marketplace"
+    }
+  ]
+}
