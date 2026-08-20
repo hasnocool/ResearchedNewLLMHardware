@@ -1,6 +1,6 @@
 # Hardware Watchlist
 
-Last updated: **2026-08-18**
+Last updated: **2026-08-20**
 
 This file tracks hardware that could become important to local or distributed LLM inference after a price, availability, software or benchmark milestone.
 
@@ -8,6 +8,7 @@ This file tracks hardware that could become important to local or distributed LL
 
 | Candidate | Current state | Trigger for promotion / alert |
 |---|---|---|
+| NVIDIA RTX Spark N1X systems | Announced / prelaunch for fall-Q4 2026 | First stable retail prices, exact memory bandwidth, sustained power, independent LLM decode/prefill results, and shipping availability for 128 GB systems. |
 | AMD Ryzen AI Max PRO 400 systems | Announced for Q3 2026 platform rollout | First orderable 192 GB systems; exact memory bandwidth; ROCm support; measured wall power; real decode benchmarks; street price. |
 | Qualcomm Dragonwing IQ-9075 / IQ-8275 | Available through developer/partner channels | Stable public EVK/module pricing, wall-power measurements, exact quantization/context for published LLM results, and independent tokens/watt reproduction. |
 | Acrab Agent Box / GΞLIX 1 | Announced / early product rollout | Public exact memory capacity, orderable price, system power, decode throughput, developer/runtime documentation, supported-model matrix and independent validation. |
@@ -18,6 +19,30 @@ This file tracks hardware that could become important to local or distributed LL
 | Tenstorrent Wormhole | Available specialist ASIC | Broader transformer support, easier model conversion and independent LLM tokens/watt evidence. |
 | AMD Versal AI Edge Gen 2 | Adaptive SoC | Reproducible decoder-transformer/LLM deployment with external-memory and wall-power measurements. |
 | Altera FPGA AI Suite / Agilex | FPGA | Modern transformer benchmark from spatial compiler path and measured energy efficiency. |
+
+## NVIDIA RTX Spark watch
+
+NVIDIA introduced RTX Spark as a Windows-focused Blackwell/Grace AI PC platform with native CUDA, up to **6,144 CUDA cores**, a **20-core Grace CPU**, **1 PFLOP FP4** vendor performance and up to **128 GB unified memory**. NVIDIA says partner systems arrive in fall 2026.
+
+ASUS has already published detailed configurations for:
+
+- **ProArt P16 (H7607):** 64 GB or 128 GB LPDDR5X unified memory;
+- **ProArt P14 (H7407):** 48 GB, 64 GB or 128 GB LPDDR5X unified memory;
+- **ProArt Mini PC:** up to 128 GB unified memory, 10GbE, PCIe Gen5 NVMe expansion and 140 W thermal headroom.
+
+Track RTX Spark as the shared `nvidia-rtx-spark-n1x` platform, not as separate silicon for each OEM system.
+
+Promotion / alert triggers:
+
+- first stable orderable price for a 128 GB configuration;
+- exact memory bandwidth;
+- measured SoC and whole-system wall power;
+- battery-versus-AC performance on laptop implementations;
+- reproducible llama.cpp, TensorRT-LLM, PyTorch or vLLM LLM benchmarks;
+- shipping confirmation by region;
+- materially cheaper OEM implementation or a 10GbE desktop implementation becoming broadly available.
+
+See `NVIDIA_RTX_SPARK.md` and `data/nvidia_rtx_spark.json`.
 
 ## Qualcomm Dragonwing watch
 
