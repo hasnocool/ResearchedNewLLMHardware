@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-20",
+  "platforms": [
+    {
+      "id": "tenstorrent-blackhole",
+      "manufacturer": "Tenstorrent",
+      "product": "Blackhole Tensix Processor",
+      "category": "ai_asic_pcie",
+      "status": "available",
+      "evidence": "manufacturer",
+      "architecture": "Blackhole",
+      "tensix_cores": 120,
+      "big_riscv_cores": 16,
+      "sram_mb": 180,
+      "memory_gb_max": 32,
+      "memory_type": "GDDR6",
+      "software": ["TT-Metalium", "TT-NN", "TT-MLIR", "PyTorch ecosystem", "open-source Tenstorrent software stack"],
+      "technical_documentation": {
+        "blackhole_cards": "https://docs.tenstorrent.com/aibs/blackhole/index.html",
+        "system_firmware": "https://docs.tenstorrent.com/tt-system-firmware/boards/tenstorrent/tt_blackhole/doc/index.html"
+      },
+      "vendor_urls": {
+        "cards": "https://tenstorrent.com/en/hardware/cards"
+      },
+      "notes": "Treat Blackhole as a distinct compute platform from Wormhole. Card variants differ in memory, fabric connectivity and cooling but share the Blackhole ASIC family."
+    }
+  ],
+  "hardware": [
+    {
+      "id": "tenstorrent-blackhole-p100a",
+      "manufacturer": "Tenstorrent",
+      "product": "Blackhole p100a",
+      "compute_platform": "tenstorrent-blackhole",
+      "category": "ai_asic_pcie",
+      "status": "available",
+      "tier": "B-high-interest",
+      "tensix_cores": 120,
+      "big_riscv_cores": 16,
+      "sram_mb": 180,
+      "memory_gb": 28,
+      "memory_type": "GDDR6",
+      "memory_bandwidth_gbps": 448,
+      "blockfp8_tflops": 664,
+      "board_power_w": 300,
+      "host_interface": "PCIe 5.0 x16",
+      "cooling": "active",
+      "pricing": [
+        {
+          "kind": "vendor_store",
+          "amount": 999,
+          "currency": "USD",
+          "region": "US/global storefront",
+          "availability": "in_stock_ready_to_ship",
+          "observed_at": "2026-08-20",
+          "url": "https://tenstorrent.com/en/hardware/cards"
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_store": "https://tenstorrent.com/en/hardware/cards"
+      },
+      "technical_documentation": {
+        "specifications": "https://docs.tenstorrent.com/aibs/blackhole/index.html"
+      },
+      "evidence": "manufacturer",
+      "research_note": "Interesting entry price for a newer open-stack accelerator, but 28 GB limits single-card large-model capacity and 300 W is outside strict low-power territory."
+    },
+    {
+      "id": "tenstorrent-blackhole-p150a",
+      "manufacturer": "Tenstorrent",
+      "product": "Blackhole p150a",
+      "compute_platform": "tenstorrent-blackhole",
+      "category": "ai_asic_pcie",
+      "status": "available",
+      "tier": "A-cluster-specialist",
+      "tensix_cores": 120,
+      "big_riscv_cores": 16,
+      "sram_mb": 180,
+      "memory_gb": 32,
+      "memory_type": "GDDR6",
+      "memory_bandwidth_gbps": 512,
+      "blockfp8_tflops": 664,
+      "board_power_w": 300,
+      "host_interface": "PCIe 5.0 x16",
+      "fabric": ["4x QSFP-DD 800G passive Blackhole fabric ports"],
+      "cooling": "active",
+      "pricing": [
+        {
+          "kind": "vendor_store",
+          "amount": 1399,
+          "currency": "USD",
+          "region": "US/global storefront",
+          "availability": "in_stock_ready_to_ship",
+          "observed_at": "2026-08-20",
+          "url": "https://tenstorrent.com/en/hardware/cards"
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_store": "https://tenstorrent.com/en/hardware/cards"
+      },
+      "technical_documentation": {
+        "specifications": "https://docs.tenstorrent.com/aibs/blackhole/index.html"
+      },
+      "evidence": "manufacturer",
+      "research_note": "The 800G card-to-card fabric makes p150a more interesting than p100a for distributed/pipeline inference despite identical compute and similar board power."
+    },
+    {
+      "id": "tenstorrent-blackhole-p150b",
+      "manufacturer": "Tenstorrent",
+      "product": "Blackhole p150b",
+      "compute_platform": "tenstorrent-blackhole",
+      "category": "ai_asic_pcie",
+      "status": "available",
+      "tier": "A-cluster-specialist",
+      "tensix_cores": 120,
+      "big_riscv_cores": 16,
+      "sram_mb": 180,
+      "memory_gb": 32,
+      "memory_type": "GDDR6",
+      "memory_bandwidth_gbps": 512,
+      "blockfp8_tflops": 664,
+      "board_power_w": 300,
+      "host_interface": "PCIe 5.0 x16",
+      "fabric": ["4x QSFP-DD 800G passive Blackhole fabric ports"],
+      "cooling": "passive_server_airflow",
+      "pricing": [
+        {
+          "kind": "vendor_store",
+          "amount": 1399,
+          "currency": "USD",
+          "region": "US/global storefront",
+          "availability": "in_stock_ready_to_ship",
+          "observed_at": "2026-08-20",
+          "url": "https://tenstorrent.com/en/hardware/cards"
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_store": "https://tenstorrent.com/en/hardware/cards"
+      },
+      "technical_documentation": {
+        "specifications": "https://docs.tenstorrent.com/aibs/blackhole/index.html"
+      },
+      "evidence": "manufacturer",
+      "research_note": "Same compute/memory profile as p150a but intended for rack/server forced-air cooling."
+    },
+    {
+      "id": "tenstorrent-quietbox-2-blackhole",
+      "manufacturer": "Tenstorrent",
+      "product": "TT-QuietBox 2 (Blackhole)",
+      "compute_platform": "tenstorrent-blackhole",
+      "category": "ai_workstation",
+      "status": "available",
+      "tier": "A-capacity-specialist",
+      "cpu": "AMD Ryzen 7 9700X",
+      "host_memory_gb": 256,
+      "accelerators": "2x Blackhole p300c cards / 4x Blackhole ASICs",
+      "accelerator_memory_gb_total": 128,
+      "accelerator_memory_type": "GDDR6",
+      "accelerator_sram_mb_total": 720,
+      "accelerator_tensix_cores_total": 480,
+      "storage_tb": 4,
+      "power_supply_w": 1600,
+      "cooling": "liquid",
+      "operating_system": "Ubuntu 24.04.3 LTS",
+      "pricing": [
+        {
+          "kind": "vendor_store",
+          "amount": 9999,
+          "currency": "USD",
+          "region": "US/global storefront",
+          "availability": "available",
+          "observed_at": "2026-08-20",
+          "url": "https://tenstorrent.com/"
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer": "https://tenstorrent.com/"
+      },
+      "technical_documentation": {
+        "system_specs": "https://docs.tenstorrent.com/systems/quietbox/quietbox-bh-2/specifications.html",
+        "getting_started": "https://docs.tenstorrent.com/tt-quietbox2-guide/",
+        "p300c_specs": "https://docs.tenstorrent.com/aibs/blackhole/p300.html"
+      },
+      "evidence": "manufacturer",
+      "research_note": "128 GB aggregate accelerator memory and open software make this important for large-model experiments, but aggregate memory should not be treated as automatically equivalent to a single coherent 128 GB pool without workload/runtime-specific evidence."
+    }
+  ]
+}
