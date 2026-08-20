@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-20",
+  "purpose": "Newly shipping frontier local-AI systems and obscure RISC-V edge hardware. Vendor model-capacity and performance claims are retained as vendor evidence; unknown power/pricing fields are not inferred.",
+  "hardware": [
+    {
+      "id": "amd-ryzen-ai-halo-developer-platform-395-128gb",
+      "manufacturer": "AMD",
+      "product": "Ryzen AI Halo Developer Platform",
+      "model": "Ryzen AI Halo with Ryzen AI Max+ 395",
+      "compute_platform": "amd-strix-halo-ryzen-ai-max-plus-395",
+      "category": "compact_ai_developer_system",
+      "status": "available_us_exclusive_launch",
+      "release_status_as_of": "2026-08-20",
+      "cpu": "AMD Ryzen AI Max+ 395, 16 Zen 5 cores / 32 threads",
+      "gpu": "Radeon 8060S, 40 RDNA 3.5 compute units",
+      "gpu_fp16_tflops_vendor": 60,
+      "npu": "AMD XDNA 2",
+      "npu_tops_vendor": 50,
+      "memory_gb": 128,
+      "memory_type": "LPDDR5X-8000 unified",
+      "memory_bandwidth_gbps": 256,
+      "storage_tb": 2,
+      "networking": ["10GbE", "Wi-Fi 7", "Bluetooth 5.4"],
+      "interfaces": ["3x USB-C data/display", "1x USB-C power input", "HDMI 2.1b"],
+      "tdp_w_vendor": 120,
+      "dimensions_mm": [150, 150, 45.4],
+      "weight_kg_max": 1.2,
+      "os_support": ["Linux", "Windows 11"],
+      "software": ["ROCm", "PyTorch", "vLLM", "llama.cpp", "Ollama", "ComfyUI", "LM Studio"],
+      "quantization_compatibility": "GGUF and other low-bit formats are usable through compatible CPU/GPU runtimes such as llama.cpp/LM Studio; exact ROCm support and kernels depend on runtime/version. Do not treat the XDNA NPU as a transparent accelerator for arbitrary GGUF models.",
+      "llm_suitability": {
+        "assessment": "very_high_capacity_compact_node",
+        "vendor_model_capacity": "up to 200B parameters",
+        "practical_guidance": "128GB unified memory is well suited to 70B-class quantized models and selected larger MoE/low-bit workloads. Actual usable accelerator memory, context headroom and throughput depend on runtime and OS allocation.",
+        "vendor_benchmark_context": "AMD reports May 2026 comparisons versus DGX Spark on GPT-OSS 120B, Qwen 3.5 122B, Qwen 3.6 and GLM 4.7 Flash workloads; treat as vendor benchmark evidence rather than independent normalization.",
+        "evidence_level": "manufacturer_plus_current_retail"
+      },
+      "off_grid_suitability": "moderate_to_high_for_128gb_capacity",
+      "efficiency_notes": "The 120W figure is AMD's platform TDP, not a measured whole-system wall draw. Independent wall-power tokens/joule testing is still needed.",
+      "pricing": [
+        {
+          "amount": 3999.99,
+          "currency": "USD",
+          "region": "US",
+          "kind": "retailer_current",
+          "availability": "in_stock_selected_stores_in_store_only",
+          "observed_at": "2026-08-20",
+          "vendor": "Micro Center",
+          "url": "https://www.microcenter.com/product/711962/amd-ryzen-ai-halo-developer-platform-windows-11-pro",
+          "note": "Windows 11 Pro configuration with 128GB LPDDR5X-8000 and 2TB SSD. Linux SKU is listed at the same US$3,999.99 price; store inventory varies."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-ai-halo.html",
+        "https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-ai-halo/ryzen-ai-max-plus-395.html",
+        "https://www.microcenter.com/product/711962/amd-ryzen-ai-halo-developer-platform-windows-11-pro"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/ryzen-ai-halo/ryzen-ai-max-plus-395.html",
+        "https://www.amd.com/en/blogs/2026/amd-ryzen-ai-halo-now-available-at-micro-center.html",
+        "https://www.amd.com/en/blogs/2026/amd-powers-next-generation-agent-computers-with-new-ryzen-ai-hal.html"
+      ],
+      "evidence": "manufacturer_plus_current_retail"
+    },
+    {
+      "id": "nvidia-dgx-station-windows-gb300",
+      "manufacturer": "NVIDIA",
+      "product": "DGX Station for Windows",
+      "compute_platform": "nvidia-gb300-grace-blackwell-ultra-desktop",
+      "category": "deskside_ai_supercomputer",
+      "status": "announced_coming_q4_2026",
+      "release_status_as_of": "2026-08-20",
+      "cpu": "72-core NVIDIA Grace CPU",
+      "gpu": "NVIDIA Blackwell Ultra GPU",
+      "interconnect": "NVLink-C2C",
+      "fp4_sparse_pflops_vendor_max": 20,
+      "memory_gb_max": 748,
+      "memory_type": "coherent CPU-GPU memory",
+      "networking": ["ConnectX-8 SuperNIC up to 800Gb/s"],
+      "optional_accelerator": "NVIDIA RTX PRO 6000 Blackwell Workstation GPU",
+      "os_support": ["Windows", "WSL"],
+      "software": ["NVIDIA AI software stack", "CUDA", "TensorRT ecosystem", "PyTorch through supported NVIDIA stack"],
+      "quantization_compatibility": "CUDA/TensorRT and framework-supported FP4/FP8/INT8/low-bit workflows are expected to be first-class. Exact GGUF/llama.cpp performance should be benchmarked on shipping systems.",
+      "llm_suitability": {
+        "assessment": "frontier_local_model_capacity",
+        "vendor_model_capacity": "up to 1 trillion parameters",
+        "practical_guidance": "748GB coherent memory is relevant to very large dense/MoE models, long-context agents, fine-tuning and multi-service deployments.",
+        "evidence_level": "manufacturer_announcement_no_shipping_benchmarks"
+      },
+      "power": {
+        "system_power_w": "not_publicly_verified_in_this_pass",
+        "note": "No whole-system power figure is stored because the public NVIDIA Windows product page did not expose a defensible value in this research pass."
+      },
+      "off_grid_suitability": "low_expected_but_unmeasured",
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "coming_q4_2026_no_public_price_verified",
+          "observed_at": "2026-08-20",
+          "note": "No defensible public numeric price was found; do not infer pricing from prior DGX products."
+        }
+      ],
+      "vendor_urls": ["https://www.nvidia.com/en-us/products/workstations/dgx-station-for-windows/"],
+      "technical_documentation": [
+        "https://nvidianews.nvidia.com/news/nvidia-dgx-station-for-windows-puts-a-trillion-parameter-ai-supercomputer-on-every-enterprise-desk",
+        "https://www.nvidia.com/en-us/products/workstations/dgx-station-for-windows/"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "milkv-megrez-eic7700x-32gb",
+      "manufacturer": "Milk-V",
+      "product": "Megrez",
+      "model": "MV070-D32 / 32GB class",
+      "compute_platform": "eswin-eic7700x-sifive-p550",
+      "category": "riscv_ai_mini_itx_board",
+      "status": "limited_or_secondary_market",
+      "release_status_as_of": "2026-08-20",
+      "cpu": "4-core SiFive P550 RISC-V RV64GBCH up to 1.8GHz",
+      "gpu": "Imagination IMG AXM-8-256",
+      "gpu_tflops_vendor": 0.25,
+      "npu": "ESWIN EIC7700X NPU",
+      "npu_tops_int8_vendor": 19.95,
+      "npu_supported_datatypes": ["INT8", "INT16", "FP16"],
+      "memory_gb": 32,
+      "memory_type": "LPDDR5-6400",
+      "storage": ["M.2 SATA", "SATA3", "eMMC connector", "microSD", "SPI flash"],
+      "interfaces": ["PCIe Gen3 x4 in x8 physical connector", "4x USB 3 host", "HDMI 2.0", "UART", "JTAG"],
+      "networking": ["2x Gigabit Ethernet", "M.2 E-key for wireless module"],
+      "power_input": ["24-pin ATX", "12V DC barrel input"],
+      "dimensions_mm": [170, 170],
+      "software": ["RockOS/Debian ecosystem", "ESWIN NPU Runtime", "ENNP SDK", "Vulkan 1.2", "OpenCL"],
+      "quantization_compatibility": "The ESWIN NPU uses its own compiled-model/runtime workflow. Official public examples are primarily vision-oriented; do not assume arbitrary GGUF/AWQ/GPTQ models can execute on the NPU. CPU/Vulkan paths are separate and RISC-V software availability remains workload-dependent.",
+      "llm_suitability": {
+        "assessment": "experimental_high_memory_riscv_edge_node",
+        "practical_guidance": "32GB RAM is enough to experiment with 7B-14B quantized models and selected larger CPU/Vulkan workloads, but general LLM acceleration on the NPU is not yet demonstrated by sufficiently detailed public benchmarks.",
+        "evidence_level": "manufacturer_specs_plus_community_software_evidence"
+      },
+      "off_grid_suitability": "potentially_high_but_power_unmeasured",
+      "efficiency_notes": "The board accepts 12V DC, which is operationally attractive for DC/off-grid systems, but no defensible whole-board LLM power measurement was found. The 19.95 TOPS NPU figure should not be converted into LLM tokens/joule without model/runtime evidence.",
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "official_buy_page_has_no_current_numeric_price",
+          "observed_at": "2026-08-20",
+          "note": "Historical launch-channel pricing was US$269 for the 32GB version, but current official pricing/stock could not be verified and that historical number is not treated as a current price."
+        }
+      ],
+      "historical_pricing": [
+        {
+          "amount": 269,
+          "currency": "USD",
+          "region": "global_partner_launch",
+          "kind": "historical_launch_partner_price",
+          "observed_period": "2024-11",
+          "note": "Reported launch price for the 32GB board through Milk-V partner Arace; retained only as historical context."
+        }
+      ],
+      "vendor_urls": ["https://milkv.io/megrez"],
+      "technical_documentation": [
+        "https://milkv.io/docs/megrez/overview",
+        "https://milkv.io/zh/docs/megrez/development-guide/runtime-sample/yolov3"
+      ],
+      "evidence": "manufacturer_plus_historical_channel_context"
+    }
+  ]
+}
