@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-20",
+  "purpose": "NVIDIA RTX Spark platform-family and OEM-system records for local LLM inference research.",
+  "platforms": [
+    {
+      "id": "nvidia-rtx-spark-n1x",
+      "manufacturer": "NVIDIA",
+      "product": "RTX Spark N1X Superchip",
+      "category": "unified_memory_windows_ai_soc",
+      "status": "announced_q4_2026",
+      "compute_platform": "nvidia-rtx-spark-n1x",
+      "cpu": "20-core NVIDIA Grace CPU",
+      "gpu": "NVIDIA Blackwell RTX GPU",
+      "gpu_cuda_cores_max": 6144,
+      "ai_performance_fp4_pflops_max": 1.0,
+      "memory_gb_max": 128,
+      "memory_type": "unified memory",
+      "memory_bandwidth_gbps": null,
+      "process_node": "TSMC 3nm",
+      "transistors_billion": 70,
+      "software": [
+        "Windows 11",
+        "CUDA",
+        "TensorRT",
+        "NVIDIA RTX ecosystem"
+      ],
+      "llm_positioning": {
+        "vendor_claim_model_parameters_b_max": 120,
+        "vendor_claim_context_tokens_max": 1000000,
+        "evidence": "manufacturer_claim"
+      },
+      "pricing": [],
+      "price_note": "No stable manufacturer retail price captured as of 2026-08-20.",
+      "availability_note": "NVIDIA says partner systems arrive in fall 2026; current reporting indicates strong channel preorders ahead of Q4 launch.",
+      "evidence": "manufacturer",
+      "vendor_urls": [
+        "https://www.nvidia.com/en-us/products/rtx-spark/",
+        "https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark"
+      ],
+      "technical_documentation": [
+        "https://www.nvidia.com/en-us/products/rtx-spark/"
+      ],
+      "research_priority": "very_high",
+      "open_questions": [
+        "exact memory bandwidth",
+        "sustained SoC and whole-system power",
+        "retail pricing by OEM and region",
+        "real llama.cpp/TensorRT/PyTorch prefill and decode throughput",
+        "battery-power performance behavior on laptop implementations"
+      ]
+    }
+  ],
+  "systems": [
+    {
+      "id": "asus-proart-p16-h7607-rtx-spark",
+      "manufacturer": "ASUS",
+      "product": "ProArt P16 (H7607)",
+      "category": "laptop",
+      "status": "announced_prelaunch",
+      "compute_platform": "nvidia-rtx-spark-n1x",
+      "processor": "NVIDIA RTX Spark N1X",
+      "gpu_cuda_cores": 6144,
+      "cpu_cores": 20,
+      "memory_gb_options": [64, 128],
+      "memory_type": "LPDDR5X unified",
+      "display": "16-inch OLED",
+      "pricing": [],
+      "price_note": "No stable ASUS retail price captured as of 2026-08-20.",
+      "vendor_urls": [
+        "https://www.asus.com/ca-en/laptops/for-creators/proart/proart-p16-h7607/"
+      ],
+      "technical_documentation": [
+        "https://www.asus.com/laptops/for-creators/proart/proart-p16-h7607/techspec/"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "asus-proart-p14-h7407-rtx-spark",
+      "manufacturer": "ASUS",
+      "product": "ProArt P14 (H7407)",
+      "category": "laptop",
+      "status": "announced_prelaunch",
+      "compute_platform": "nvidia-rtx-spark-n1x",
+      "processor": "NVIDIA RTX Spark N1X",
+      "gpu_cuda_cores": 6144,
+      "cpu_cores": 20,
+      "memory_gb_options": [48, 64, 128],
+      "memory_type": "LPDDR5X unified",
+      "display": "14-inch OLED",
+      "pricing": [],
+      "price_note": "No stable ASUS retail price captured as of 2026-08-20.",
+      "vendor_urls": [
+        "https://www.asus.com/ca-en/laptops/for-creators/proart/proart-p14-h7407/"
+      ],
+      "technical_documentation": [
+        "https://www.asus.com/laptops/for-creators/proart/proart-p14-h7407/techspec/"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "asus-proart-mini-pc-rtx-spark",
+      "manufacturer": "ASUS",
+      "product": "ProArt Mini PC with RTX Spark",
+      "category": "mini_pc",
+      "status": "announced_prelaunch",
+      "compute_platform": "nvidia-rtx-spark-n1x",
+      "memory_gb_max": 128,
+      "memory_type": "unified memory",
+      "thermal_headroom_w": 140,
+      "networking": ["10GbE"],
+      "storage_expansion": ["M.2 PCIe Gen5 x4"],
+      "dimensions_mm": [150, 150, 51],
+      "pricing": [],
+      "price_note": "No stable ASUS retail price captured as of 2026-08-20.",
+      "vendor_urls": [
+        "https://www.asus.com/us/business/resources/news/computex-2026-proart-pcs/"
+      ],
+      "technical_documentation": [
+        "https://www.asus.com/us/business/resources/news/computex-2026-proart-pcs/"
+      ],
+      "evidence": "manufacturer"
+    }
+  ],
+  "deduplication_note": "RTX Spark OEM systems are implementations of the shared nvidia-rtx-spark-n1x compute platform and must not be counted as independent accelerator architectures."
+}
