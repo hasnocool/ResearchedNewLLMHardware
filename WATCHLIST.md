@@ -10,15 +10,41 @@ This file tracks hardware that could become important to local or distributed LL
 |---|---|---|
 | NVIDIA RTX Spark N1X systems | Announced / prelaunch for fall-Q4 2026 | First stable retail prices, exact memory bandwidth, sustained power, independent LLM decode/prefill results, and shipping availability for 128 GB systems. |
 | AMD Ryzen AI Max PRO 400 systems | Announced for Q3 2026 platform rollout | First orderable 192 GB systems; exact memory bandwidth; ROCm support; measured wall power; real decode benchmarks; street price. |
+| Tenstorrent Blackhole p100/p150 / QuietBox 2 | Available / shipping | Independent model benchmarks, tokens/watt, usable multi-card memory behavior, 2/4-card scaling efficiency and broader TT-NN model coverage. |
 | Qualcomm Dragonwing IQ-9075 / IQ-8275 | Available through developer/partner channels | Stable public EVK/module pricing, wall-power measurements, exact quantization/context for published LLM results, and independent tokens/watt reproduction. |
 | Acrab Agent Box / GΞLIX 1 | Announced / early product rollout | Public exact memory capacity, orderable price, system power, decode throughput, developer/runtime documentation, supported-model matrix and independent validation. |
 | AMD Kria AI SOM / Ryzen AI Embedded X100 | Announced / ecosystem rollout | Developer kit/SOM pricing, Linux GPU/NPU software details, memory bandwidth and measured LLM throughput. |
 | NVIDIA Jetson T3000 | Announced | Retail/dev-kit pricing, module power envelope and real TensorRT/llama.cpp LLM results. |
 | NYMPH AX1 | Vendor-announced specialty ASIC | Independent benchmark, public runtime documentation, shipping confirmation and supported-model matrix. |
 | Used AMD Instinct MI210 | Mature hardware / secondary market | Meaningful price drops; especially listings where total integration cost makes 64 GB HBM2e attractive versus new unified-memory systems. |
-| Tenstorrent Wormhole | Available specialist ASIC | Broader transformer support, easier model conversion and independent LLM tokens/watt evidence. |
+| Tenstorrent Wormhole | Available previous-generation specialist ASIC | Meaningful price reduction, broader transformer support or unusually strong low-cost cluster results versus Blackhole. |
 | AMD Versal AI Edge Gen 2 | Adaptive SoC | Reproducible decoder-transformer/LLM deployment with external-memory and wall-power measurements. |
 | Altera FPGA AI Suite / Agilex | FPGA | Modern transformer benchmark from spatial compiler path and measured energy efficiency. |
+
+## Tenstorrent Blackhole watch
+
+Blackhole is now a distinct tracked platform rather than an extension of Wormhole.
+
+Current manufacturer data captured on 2026-08-20:
+
+- **p100a:** 28 GB GDDR6, 448 GB/s, 664 BLOCKFP8 TFLOPS, 300 W, PCIe 5.0 x16, active cooling, **US$999**.
+- **p150a:** 32 GB GDDR6, 512 GB/s, 664 BLOCKFP8 TFLOPS, 300 W, PCIe 5.0 x16, 4x QSFP-DD 800G fabric ports, active cooling, **US$1,399**.
+- **p150b:** same compute/memory/fabric profile as p150a with passive server cooling, **US$1,399**.
+- **TT-QuietBox 2:** four Blackhole ASICs across two p300c cards, 128 GB aggregate accelerator GDDR6, 256 GB host DDR5, 4 TB NVMe and a 1600 W PSU, **US$9,999**.
+
+The main research question is no longer availability; it is whether the open Tenstorrent stack can turn the hardware and fabric into competitive real LLM performance.
+
+Promotion / alert triggers:
+
+- reproducible decode and prefill results for Qwen, Llama, Gemma or comparable models;
+- tokens/sec per watt measured at the wall;
+- clear single-card versus 2/4-card scaling curves;
+- evidence showing how much p150 fabric-linked memory is practically usable for model weights/KV cache;
+- broader TT-NN / TT-Metalium model coverage with low conversion friction;
+- price drops of roughly 15% or more;
+- strong comparison results versus MI210, GB10, Strix Halo or current consumer GPUs.
+
+See `TENSTORRENT_BLACKHOLE.md` and `data/tenstorrent_blackhole.json`.
 
 ## NVIDIA RTX Spark watch
 
