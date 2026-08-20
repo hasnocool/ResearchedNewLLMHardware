@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.2.0",
+  "last_updated": "2026-08-20",
+  "purpose": "Purchasable BOSGAME system variants that reuse already-tracked AMD Strix Halo and Intel Panther Lake compute platforms. These records are system-level buying and deployment observations, not independent silicon architectures.",
+  "hardware": [
+    {
+      "id": "bosgame-m5-ryzen-ai-max-plus-395",
+      "manufacturer": "BOSGAME",
+      "product": "M5 AI Mini Desktop",
+      "compute_platform": "amd-strix-halo-ryzen-ai-max-plus-395",
+      "category": "mini_pc",
+      "status": "available",
+      "cpu": "AMD Ryzen AI Max+ 395, 16C/32T Zen 5",
+      "gpu": "AMD Radeon 8060S, 40 RDNA 3.5 compute units",
+      "npu": "AMD XDNA 2",
+      "npu_tops_vendor": 50,
+      "vendor_total_ai_tops": 126,
+      "memory_options_gb": [96, 128],
+      "memory_type": "LPDDR5X-8000 unified",
+      "memory_bus_bits_platform": 256,
+      "memory_bandwidth_gbps_platform": 256,
+      "storage": "2TB NVMe SSD; 2x M.2 2280 PCIe 4.0 x4 slots",
+      "networking": ["2.5GbE", "Wi-Fi", "Bluetooth"],
+      "interfaces": ["2x USB4 Type-C", "3x USB 3.2 Gen 2", "2x USB 2.0", "full-size SD 4.0", "HDMI"],
+      "processor_power_w": {
+        "default_tdp": 55,
+        "configurable_min": 45,
+        "configurable_max": 120,
+        "evidence": "AMD processor specification; not measured BOSGAME wall power"
+      },
+      "software": ["Windows", "AMD Radeon software", "ROCm-capable platform", "Vulkan", "LM Studio", "llama.cpp-compatible platform paths"],
+      "quantization_compatibility": {
+        "gguf": "practical through CPU/Vulkan/ROCm-capable llama.cpp-family paths; exact backend support depends on OS, driver and runtime version",
+        "low_bit": "4-bit and 5-bit quantized LLMs are particularly relevant because weights share the unified memory pool",
+        "evidence": "platform/runtime guidance; not a vendor guarantee for every quantization format"
+      },
+      "model_size_practicality": [
+        {
+          "class": "70B-class quantized",
+          "assessment": "high-capacity candidate, especially in the 128GB configuration",
+          "evidence": "reasoned capacity assessment; runtime/context overhead still applies"
+        },
+        {
+          "class": "up to 200B parameters",
+          "assessment": "AMD advertises the Ryzen AI Max+ 395 platform as capable of running local models up to 200B parameters under suitable software/quantization conditions; this is not a BOSGAME-specific throughput result",
+          "evidence": "AMD manufacturer platform claim"
+        }
+      ],
+      "vendor_claims": [
+        {
+          "claim": "BOSGAME advertises up to 2.2x RTX 4090 AI performance in an LM Studio Llama 3 example",
+          "evidence": "vendor_claim",
+          "caveat": "The indexed product page does not provide enough model, quantization, context, prompt/decode split, power, or runtime metadata for normalized cross-platform comparison."
+        }
+      ],
+      "efficiency": {
+        "unified_memory_gb_per_processor_tdp_w_128gb_at_120w": 1.067,
+        "off_grid_suitability": "moderate_to_good",
+        "note": "Large unified memory at a 45-120W processor envelope is attractive for off-grid use, but BOSGAME whole-system idle/load wall power was not publicly verified in this pass."
+      },
+      "pricing": [
+        {
+          "amount": 2399,
+          "currency": "USD",
+          "region": "US/global BOSGAME storefront",
+          "kind": "manufacturer_store_from",
+          "configuration": "M5 family, 96GB/128GB + 2TB; storefront collection advertises from US$2,399",
+          "availability": "add_to_cart",
+          "observed_at": "2026-08-20",
+          "url": "https://www.bosgamepc.com/collections/ai-pc",
+          "note": "This is the current family-level from-price; do not assume it applies to the 128GB selector."
+        },
+        {
+          "amount": 2999,
+          "currency": "USD",
+          "region": "US/global BOSGAME storefront",
+          "kind": "manufacturer_store",
+          "configuration": "128GB LPDDR5X + 2TB SSD selector shown on product page",
+          "availability": "add_to_cart",
+          "observed_at": "2026-08-20",
+          "url": "https://www.bosgamepc.com/products/bosgame-m5-ai-mini-desktop-ryzen-ai-max-395",
+          "note": "Product page displayed the 128GB selector with US$2,999 sale price when checked."
+        }
+      ],
+      "cost_efficiency": {
+        "usd_per_unified_memory_gb_128gb_at_observed_price": 23.43,
+        "note": "Price-per-memory is a simple acquisition metric and excludes SSD value, taxes, shipping and software performance."
+      },
+      "vendor_urls": [
+        "https://www.bosgamepc.com/products/bosgame-m5-ai-mini-desktop-ryzen-ai-max-395",
+        "https://www.bosgamepc.com/collections/ai-pc"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/en/products/processors/laptop/ryzen/ai-300-series/amd-ryzen-ai-max-plus-395.html",
+        "https://developer.amd.com/playbooks/user-guide/",
+        "https://www.bosgamepc.com/pages/m5-drive"
+      ],
+      "evidence": "manufacturer_plus_platform_manufacturer",
+      "notes": "Shared Strix Halo silicon: compare the M5 against Framework Desktop, GMKtec EVO-X2/X3, Minisforum and other Ryzen AI Max+ 395 systems primarily on delivered price, thermals, networking, storage, warranty and measured wall power."
+    },
+    {
+      "id": "bosgame-vti-490-core-ultra-x7-358h-64gb",
+      "manufacturer": "BOSGAME",
+      "product": "VTI-490",
+      "compute_platform": "intel-panther-lake-core-ultra-x7-358h",
+      "category": "mini_pc",
+      "status": "available",
+      "cpu": "Intel Core Ultra X7 358H, 16C/16T, up to 4.8GHz",
+      "cpu_architecture": "Intel Core Ultra Series 3 / Panther Lake",
+      "gpu": "Intel Arc B390",
+      "gpu_xe_cores": 12,
+      "gpu_int8_tops_vendor": 122,
+      "npu_int8_tops_vendor": 50,
+      "memory_gb": 64,
+      "memory_type": "LPDDR5X-9600 onboard",
+      "storage": "1TB M.2 2280 NVMe PCIe 4.0 x4 SSD",
+      "networking": ["10GbE", "2.5GbE", "Wi-Fi 7"],
+      "interfaces": ["Thunderbolt 4", "OCuLink", "HDMI 2.1", "DisplayPort 1.4", "high-speed USB"],
+      "processor_power_w": {
+        "base": 25,
+        "minimum_assured": 15,
+        "maximum_turbo": 80,
+        "evidence": "Intel ARK processor specification; not measured BOSGAME wall power"
+      },
+      "software": ["OpenVINO", "WindowsML", "DirectML", "ONNX Runtime", "WebGPU", "WebNN", "OpenCL", "Vulkan-capable graphics stack"],
+      "quantization_compatibility": {
+        "openvino": "INT8 and other optimized model paths depend on OpenVINO model/runtime support",
+        "gguf": "CPU and portable GPU backends are possible, but Arc B390 llama.cpp/SYCL/Vulkan maturity should be measured rather than assumed from TOPS",
+        "evidence": "Intel framework support plus conservative runtime assessment"
+      },
+      "model_size_practicality": [
+        {
+          "class": "7B-32B quantized",
+          "assessment": "strong memory-capacity fit for a compact integrated system",
+          "evidence": "reasoned capacity assessment; actual acceleration depends on backend support"
+        },
+        {
+          "class": "70B-class quantized",
+          "assessment": "capacity may be possible only with aggressive quantization and constrained context because the 64GB pool must also serve the OS/runtime; not recorded as a guaranteed fit",
+          "evidence": "estimate"
+        }
+      ],
+      "efficiency": {
+        "off_grid_suitability": "good_potential",
+        "note": "Intel specifies a 25W processor base power and 80W maximum turbo power. Whole-system wall power and sustained Arc B390 LLM throughput were not publicly verified in this pass."
+      },
+      "pricing": [
+        {
+          "amount": 1699,
+          "currency": "USD",
+          "region": "US/global BOSGAME storefront",
+          "kind": "manufacturer_store",
+          "configuration": "Core Ultra X7 358H + 64GB LPDDR5X-9600 + 1TB SSD",
+          "availability": "add_to_cart",
+          "observed_at": "2026-08-20",
+          "url": "https://www.bosgamepc.com/products/bosgame-vti-490-intel-core-ultra-x7-358h-16c-16t-up-to-4.8ghz-64gb-lpddr5x-9600mhz-1tb-pcie4.0-ssd-"
+        }
+      ],
+      "cost_efficiency": {
+        "usd_per_unified_memory_gb_at_observed_price": 26.55,
+        "note": "This metric values capacity only and should not be interpreted as a performance ranking against discrete GPUs or Strix Halo."
+      },
+      "vendor_urls": [
+        "https://www.bosgamepc.com/products/bosgame-vti-490-intel-core-ultra-x7-358h-16c-16t-up-to-4.8ghz-64gb-lpddr5x-9600mhz-1tb-pcie4.0-ssd-",
+        "https://www.bosgamepc.com/collections/ai-pc"
+      ],
+      "technical_documentation": [
+        "https://www.intel.com/content/www/us/en/products/sku/245527/intel-core-ultra-x7-processor-358h-18m-cache-up-to-4-80-ghz/specifications.html",
+        "https://www.bosgamepc.com/pages/system-download"
+      ],
+      "evidence": "manufacturer_plus_platform_manufacturer",
+      "notes": "The 122 GPU TOPS and 50 NPU TOPS are Intel peak INT8 figures, not LLM tokens/sec. Treat the VTI-490 as a compact high-memory Panther Lake system whose real local-LLM value depends on Arc B390 driver and runtime maturity."
+    }
+  ]
+}
