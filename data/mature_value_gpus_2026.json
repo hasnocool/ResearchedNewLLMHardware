@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-19",
+  "scope": "mature_used_market_consumer_gpus",
+  "notes": [
+    "This slice tracks older consumer GPUs that remain attractive for local LLM inference because their used-market price, VRAM capacity, memory bandwidth, software maturity, or power envelope is still competitive.",
+    "Prices are point-in-time Canadian marketplace observations and should not be treated as stable market averages. Shipping, taxes, seller reputation and card condition can materially change effective cost.",
+    "Model-size guidance is approximate and assumes quantized inference with additional VRAM reserved for context, KV cache and runtime overhead.",
+    "Memory-bandwidth-per-watt and price ratios are coarse hardware economics indicators, not measured LLM throughput or energy-efficiency benchmarks."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-geforce-rtx-3060-12gb-used-value",
+      "manufacturer": "NVIDIA",
+      "product": "GeForce RTX 3060 12GB",
+      "compute_platform": "nvidia-ampere-ga106",
+      "category": "consumer_gpu_secondary_market",
+      "status": "secondary-market",
+      "tier": "A-entry-cuda-value",
+      "gpu_architecture": "Ampere",
+      "cuda_cores": 3584,
+      "tensor_cores_generation": 3,
+      "cuda_compute_capability": "8.6",
+      "memory_gb": 12,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 192,
+      "memory_speed_gbps": 15,
+      "memory_bandwidth_gbps": 360,
+      "memory_bandwidth_basis": "derived from vendor-documented 15 Gbps GDDR6 on a 192-bit bus",
+      "board_power_w": 170,
+      "host_interface": "PCIe 4.0",
+      "reference_required_system_power_w": 550,
+      "reference_power_connector": "1x 8-pin on many boards; partner implementations vary",
+      "physical_constraints": "Common dual-slot cards are roughly 200-305 mm long depending on partner design; compact ITX variants also exist.",
+      "software": [
+        "CUDA",
+        "TensorRT",
+        "PyTorch",
+        "llama.cpp CUDA",
+        "Ollama CUDA",
+        "vLLM ecosystem where model/runtime support permits"
+      ],
+      "quantization_compatibility": "Broad CUDA support for GGUF/llama.cpp and common FP16/BF16, INT8 and INT4 inference paths. Exact GPTQ/AWQ/FP8 kernel support depends on runtime and model architecture; Ampere does not provide Blackwell-era FP4 hardware.",
+      "model_size_practicality": "A strong entry card for 7B-8B models at high-quality quantization and many 12B-14B models at Q4-class settings. Larger models normally require partial CPU/system-RAM offload or more aggressive quantization.",
+      "llm_inference_suitability": "Still one of the easiest low-cost ways to obtain 12GB of mature CUDA VRAM. Its main limitation is capacity rather than software support.",
+      "performance_per_watt_notes": "360 GB/s at 170W is approximately 2.12 GB/s of memory bandwidth per watt using reference board power.",
+      "cost_efficiency": {
+        "observed_cad_per_vram_gb": 30.83,
+        "observed_cad_per_gbps_bandwidth": 1.03
+      },
+      "off_grid_suitability": "moderate",
+      "off_grid_notes": "170W board power is manageable for a solar-backed desktop, but a complete host will consume materially more. Power limiting can improve energy use at the cost of throughput and should be benchmarked rather than assumed.",
+      "pricing": [
+        {
+          "amount": 370.0,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_used",
+          "condition": "pre-owned",
+          "availability": "marketplace_listing",
+          "observed_at": "2026-08-19",
+          "vendor": "eBay.ca marketplace",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=nvidia+geforce+rtx+3060+12gb",
+          "note": "Representative pre-owned 12GB RTX 3060 listing observed around CA$370. A separate completed ASUS ROG Strix 12GB listing sold for CA$360 on 2026-08-02, supporting the same approximate used-price band."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3060-3060ti/",
+        "partner_reference_spec": "https://ca.msi.com/Graphics-Card/GeForce-RTX-3060-VENTUS-2X-12G-OC/Specification",
+        "used_market_observation": "https://www.ebay.ca/sch/i.html?_nkw=nvidia+geforce+rtx+3060+12gb"
+      },
+      "technical_documentation": {
+        "cuda_docs": "https://docs.nvidia.com/cuda/",
+        "partner_datasheet": "https://storage-asset.msi.com/datasheet/vga/global/GeForce-RTX-3060-GAMING-12G.pdf"
+      },
+      "evidence": "manufacturer_plus_partner_spec_plus_marketplace"
+    },
+    {
+      "id": "intel-arc-a770-16gb-used-value",
+      "manufacturer": "Intel",
+      "product": "Arc A770 16GB",
+      "model_number": "A770",
+      "compute_platform": "intel-alchemist-xe-hpg",
+      "category": "consumer_gpu_secondary_market",
+      "status": "secondary-market",
+      "tier": "A-used-capacity-bandwidth",
+      "gpu_architecture": "Xe HPG",
+      "xe_cores": 32,
+      "xmx_engines": 512,
+      "int8_peak_tops_vendor": 262,
+      "memory_gb": 16,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 256,
+      "memory_speed_gbps": 17.5,
+      "memory_bandwidth_gbps": 560,
+      "board_power_w": 225,
+      "host_interface": "PCIe 4.0 x16",
+      "software": [
+        "oneAPI",
+        "OpenVINO",
+        "Intel Extension for PyTorch",
+        "SYCL",
+        "Vulkan",
+        "OpenCL",
+        "llama.cpp Vulkan/SYCL paths depending build"
+      ],
+      "quantization_compatibility": "GGUF inference is practical through Vulkan and SYCL-capable llama.cpp builds. XMX-optimized paths can be faster but are more runtime-specific than CUDA. Exact support for model-specific low-bit kernels should be verified against the chosen Intel software stack.",
+      "model_size_practicality": "16GB VRAM is comfortable for many 7B-14B quantized models and gives materially more capacity than 12GB cards. Some 20B-class models can fit only with aggressive quantization and context discipline.",
+      "llm_inference_suitability": "A particularly strong used-market capacity/bandwidth value when Intel GPU software is acceptable. Current llama.cpp community usage continues to exercise A770 through Vulkan and SYCL paths, but CUDA remains more universal across AI tooling.",
+      "performance_per_watt_notes": "560 GB/s at 225W is approximately 2.49 GB/s of memory bandwidth per watt using Intel TBP.",
+      "cost_efficiency": {
+        "observed_cad_per_vram_gb": 24.85,
+        "observed_cad_per_gbps_bandwidth": 0.71
+      },
+      "off_grid_suitability": "moderate",
+      "off_grid_notes": "225W TBP is higher than RTX 3060 and newer low-power cards, but the 16GB/560GB/s memory subsystem can justify the draw for bandwidth-bound inference if the host is otherwise efficient.",
+      "pricing": [
+        {
+          "amount": 397.59,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "pre-owned",
+          "availability": "marketplace_listing",
+          "observed_at": "2026-08-19",
+          "vendor": "eBay.ca marketplace",
+          "url": "https://www.ebay.ca/b/HDMI-16-GB-Memory-Computer-Graphics-Cards/27386/bn_114753326",
+          "note": "Representative pre-owned Intel Limited Edition Arc A770 16GB listing observed at CA$397.59. Marketplace prices vary by seller and shipping origin."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html",
+        "desktop_family": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/arc/desktop/a-series.html",
+        "used_market_observation": "https://www.ebay.ca/b/HDMI-16-GB-Memory-Computer-Graphics-Cards/27386/bn_114753326"
+      },
+      "technical_documentation": {
+        "intel_gpu_specs": "https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/specifications.html",
+        "oneapi_docs": "https://www.intel.com/content/www/us/en/developer/tools/oneapi/documentation.html",
+        "openvino_docs": "https://docs.openvino.ai/"
+      },
+      "evidence": "manufacturer_plus_marketplace_plus_runtime_evidence"
+    },
+    {
+      "id": "amd-radeon-rx-6800-16gb-used-value",
+      "manufacturer": "AMD",
+      "product": "Radeon RX 6800 16GB",
+      "compute_platform": "amd-rdna2-navi21",
+      "category": "consumer_gpu_secondary_market",
+      "status": "secondary-market",
+      "tier": "B-used-bandwidth-value",
+      "gpu_architecture": "RDNA 2",
+      "compute_units": 60,
+      "stream_processors": 3840,
+      "fp32_tflops_peak": 16.17,
+      "fp16_tflops_peak": 32.33,
+      "infinity_cache_mb": 128,
+      "memory_gb": 16,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 256,
+      "memory_speed_gbps": 16,
+      "memory_bandwidth_gbps": 512,
+      "board_power_w": 250,
+      "minimum_psu_w_reference": 650,
+      "power_connector_reference": "2x 8-pin",
+      "host_interface": "PCIe 4.0",
+      "reference_dimensions_mm": {
+        "length": 267
+      },
+      "reference_slots": 2,
+      "software": [
+        "Vulkan",
+        "Linux amdgpu graphics driver",
+        "Windows Adrenalin driver",
+        "llama.cpp Vulkan",
+        "community HIP/ROCm paths where explicitly verified"
+      ],
+      "current_rocm_support_status": "not listed in AMD's current ROCm 7.2 Radeon PyTorch support matrices; do not assume official ROCm support",
+      "quantization_compatibility": "GGUF through llama.cpp Vulkan is the most portable path. Older/community ROCm or HIP configurations may work, but current official Radeon support matrices focus on newer RDNA3/RDNA4 products; treat RX 6800 ROCm compatibility as runtime-specific and unverified unless tested.",
+      "model_size_practicality": "16GB capacity makes many 7B-14B quantized models practical and can accommodate some larger low-bit models with restricted context. The 512GB/s memory subsystem is strong for the observed used price.",
+      "llm_inference_suitability": "Attractive as a used Vulkan inference card when 16GB capacity and raw memory bandwidth matter more than official ROCm/PyTorch support. Less turnkey than NVIDIA CUDA and less officially supported for current ROCm than newer Radeon generations.",
+      "performance_per_watt_notes": "512 GB/s at 250W is approximately 2.05 GB/s of memory bandwidth per watt using AMD typical board power.",
+      "cost_efficiency": {
+        "observed_cad_per_vram_gb": 28.13,
+        "observed_cad_per_gbps_bandwidth": 0.88
+      },
+      "off_grid_suitability": "moderate_to_low",
+      "off_grid_notes": "250W board power plus a 650W-class recommended PSU makes it less attractive for energy-constrained systems than newer 160-190W cards, although undervolting/power limiting may improve practical efficiency and should be measured per board.",
+      "pricing": [
+        {
+          "amount": 450.0,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "pre-owned",
+          "availability": "marketplace_listing",
+          "observed_at": "2026-08-19",
+          "vendor": "eBay.ca marketplace",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=rx6800",
+          "note": "Representative used RX 6800 16GB listing observed at CA$450 plus shipping; other contemporaneous listings were approximately CA$475-499."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html",
+        "current_driver_page": "https://www.amd.com/en/support/downloads/drivers.html/graphics/radeon-rx/radeon-rx-6000-series/amd-radeon-rx-6800.html",
+        "used_market_observation": "https://www.ebay.ca/sch/i.html?_nkw=rx6800"
+      },
+      "technical_documentation": {
+        "manufacturer_specifications": "https://www.amd.com/en/products/graphics/desktops/radeon/6000-series/amd-radeon-rx-6800.html",
+        "current_rocm_radeon_compatibility": "https://rocm.docs.amd.com/projects/radeon-ryzen/en/docs-7.2/docs/compatibility/compatibilityrad/windows/windows_compatibility.html",
+        "rocm_docs": "https://rocm.docs.amd.com/"
+      },
+      "evidence": "manufacturer_plus_marketplace_with_runtime_caveat"
+    }
+  ]
+}
