@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 
 REQUIRED_HARDWARE_FIELDS = ("id", "manufacturer", "product", "category", "status")
+RECORD_COLLECTIONS = ("hardware", "platforms", "systems")
 
 
 def load_json(path: Path) -> Any:
@@ -63,10 +64,15 @@ def validate_url_collection(value: Any, label: str, field: str) -> list[str]:
     return [f"{label}: {field} must be a list of strings or a string-to-string mapping"]
 
 
-def validate_hardware_record(record: Any, source: Path, index: int) -> list[str]:
-    """Validate the minimum normalized shape of one hardware record."""
+def validate_hardware_record(
+    record: Any,
+    source: Path,
+    collection: str,
+    index: int,
+) -> list[str]:
+    """Validate the minimum normalized shape of one catalog record."""
     errors: list[str] = []
-    label = f"{source.relative_to(ROOT)} hardware[{index}]"
+    label = f"{source.relative_to(ROOT)} {collection}[{index}]"
 
     if not isinstance(record, dict):
         return [f"{label}: expected object, got {type(record).__name__}"]
@@ -80,14 +86,14 @@ def validate_hardware_record(record: Any, source: Path, index: int) -> list[str]
     if pricing is not None and not isinstance(pricing, list):
         errors.append(f"{label}: pricing must be a list when present")
 
-    for url_field in ("vendor_urls", "source_urls"):
+    for url_field in ("vendor_urls", "source_urls", "technical_documentation"):
         errors.extend(validate_url_collection(record.get(url_field), label, url_field))
 
     return errors
 
 
 def validate_json_catalogs() -> tuple[list[str], dict[str, list[str]]]:
-    """Validate JSON files and collect hardware IDs across catalogs."""
+    """Validate JSON files and collect record IDs across all catalog collections."""
     errors: list[str] = []
     id_sources: dict[str, list[str]] = defaultdict(list)
 
@@ -102,19 +108,26 @@ def validate_json_catalogs() -> tuple[list[str], dict[str, list[str]]]:
             errors.append(f"{path.relative_to(ROOT)}: top-level JSON value must be an object")
             continue
 
-        hardware = document.get("hardware")
-        if hardware is None:
-            continue
-        if not isinstance(hardware, list):
-            errors.append(f"{path.relative_to(ROOT)}: hardware must be a list")
-            continue
+        for collection in RECORD_COLLECTIONS:
+            records = document.get(collection)
+            if records is None:
+                continue
+            if not isinstance(records, list):
+                errors.append(
+                    f"{path.relative_to(ROOT)}: {collection} must be a list"
+                )
+                continue
 
-        for index, record in enumerate(hardware):
-            errors.extend(validate_hardware_record(record, path, index))
-            if isinstance(record, dict):
-                hardware_id = record.get("id")
-                if isinstance(hardware_id, str) and hardware_id.strip():
-                    id_sources[hardware_id].append(str(path.relative_to(ROOT)))
+            for index, record in enumerate(records):
+                errors.extend(
+                    validate_hardware_record(record, path, collection, index)
+                )
+                if isinstance(record, dict):
+                    record_id = record.get("id")
+                    if isinstance(record_id, str) and record_id.strip():
+                        id_sources[record_id].append(
+                            f"{path.relative_to(ROOT)}:{collection}"
+                        )
 
     return errors, id_sources
 
@@ -154,12 +167,12 @@ def validate_jsonl_files() -> list[str]:
 
 
 def validate_duplicate_ids(id_sources: dict[str, list[str]]) -> list[str]:
-    """Reject duplicate hardware IDs across normalized JSON catalogs."""
+    """Reject duplicate record IDs across normalized JSON catalogs."""
     errors: list[str] = []
-    for hardware_id, sources in sorted(id_sources.items()):
+    for record_id, sources in sorted(id_sources.items()):
         if len(sources) > 1:
             errors.append(
-                f"duplicate hardware id {hardware_id!r} appears in: {', '.join(sources)}"
+                f"duplicate catalog id {record_id!r} appears in: {', '.join(sources)}"
             )
     return errors
 
@@ -181,7 +194,7 @@ def main() -> int:
         return 1
 
     print(
-        f"Catalog validation passed: {len(id_sources)} unique hardware IDs "
+        f"Catalog validation passed: {len(id_sources)} unique catalog IDs "
         f"across {len(list(DATA_DIR.glob('*.json')))} JSON catalogs."
     )
     return 0
