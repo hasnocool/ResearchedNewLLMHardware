@@ -2,7 +2,7 @@
 
 A curated research catalog for newly announced, newly available, unusually efficient, or newly affordable hardware that may be useful for **local and distributed LLM inference**.
 
-The project tracks GPUs, NPUs, TPUs, AI ASICs, unified-memory APUs, mini PCs, compact AI workstations, embedded boards and SOMs, SBCs, Apple Silicon, FPGA/adaptive-SoC platforms, secondary-market datacenter accelerators, heterogeneous systems, and high-speed interconnect hardware.
+The project tracks GPUs, NPUs, TPUs, AI ASICs, unified-memory APUs, mini PCs, compact AI workstations, embedded boards and SOMs, SBCs, Apple Silicon, FPGA/adaptive-SoC platforms, secondary-market datacenter accelerators, heterogeneous systems, rack-scale inference accelerators, and high-speed interconnect hardware.
 
 ## What makes hardware interesting here?
 
@@ -35,7 +35,8 @@ A device is not ranked from TOPS alone. Priority is given to:
 | NVIDIA RTX Spark N1X systems | Windows unified-memory AI PC | up to 128 GB | not yet public | system dependent | announced / prelaunch | Brings native CUDA and Blackwell to Windows laptops and mini PCs with unusually large unified memory. |
 | AMD Ryzen AI Max+ 395 systems | unified-memory APU | up to 128 GB LPDDR5X | ~256 GB/s class | system dependent | available | Strong current high-capacity x86 platform with increasingly practical ROCm/Vulkan paths. |
 | Apple M5 Max MacBook Pro | portable unified-memory workstation | up to 128 GB | up to 614 GB/s | portable system | available | Very high memory bandwidth for a portable system; Metal/MLX/BaseRT software paths are improving. |
-| NVIDIA GB10 / DGX Spark class | compact AI supercomputer | 128 GB LPDDR5X | 273 GB/s | 140 W SoC; OEM PSU varies | available | Mature CUDA stack, coherent memory and ConnectX-7 make it unusually cluster-friendly. |
+| NVIDIA GB10 / DGX Spark class | compact AI supercomputer | 128 GB LPDDR5X | 273 GB/s | 140 W SoC; OEM PSU varies | available | Mature CUDA stack, coherent memory and ConnectX-7 make it unusually cluster-friendly; current DGX Spark software adds improved unified-memory handling and NVIDIA advertises up to 1.9x inference speedups. |
+| Qualcomm Dragonfly AI200 | rack-scale inference accelerator | 768 GB LPDDR5X/card; 43 TB/rack | 0.414 PB/s/rack | 140 kW/rack | deployments begin 2026 | Extreme per-card memory capacity makes it notable for very large-model inference even before independent throughput data is available. |
 | AMD Kria AI SOM / Ryzen AI Embedded X100 | embedded SOM | up to 128 GB LPDDR5X | TBD | TBD | announced/sampling | CPU + RDNA 3.5 GPU + XDNA 2 NPU in an embedded form factor. |
 | Qualcomm Dragonwing IQ-9075 EVK | embedded/industrial AI kit | 36 GB LPDDR5 ECC | platform-specific | 3.8–20 W SoC | available/channel-dependent | Qualcomm publishes named LLM results up to 22 tok/s for Llama 2 7B and 12 tok/s for 13B, making it unusually measurable for edge inference. |
 | NVIDIA Jetson T3000 | embedded AI module | 32 GB LPDDR5X | 273 GB/s | platform dependent | announced | Strong CUDA/TensorRT ecosystem and 25GbE for an embedded node. |
@@ -73,9 +74,15 @@ RTX Spark is a separate Windows-focused Blackwell/Grace platform from GB10/DGX S
 
 GB10 systems combine 128 GB coherent LPDDR5X, 273 GB/s memory bandwidth, Blackwell tensor hardware, CUDA tooling and ConnectX-7-class networking. OEM boxes should be compared by price, storage, cooling, warranty, PSU and exposed networking rather than counted as different compute architectures.
 
+The software side is still changing materially. NVIDIA's current DGX Spark product page advertises **up to 1.9x inference speedups** from its latest software update, while the current DGX Spark release notes list DGX OS 7.5.0, CUDA 13.0.2 and improved unified-memory OOM handling. NemoClaw also now exposes managed single- and experimental dual-Spark vLLM paths plus operator-managed llama.cpp attachment. These are manufacturer software claims/capabilities, not normalized model-specific benchmarks. See [`data/software-updates-2026-08-21.json`](data/software-updates-2026-08-21.json).
+
 ### Qualcomm Dragonwing edge AI
 
 Qualcomm Dragonwing IQ8/IQ9 platforms are tracked as low-power embedded/industrial LLM candidates. The IQ-9075 platform reaches 36 GB ECC memory and Qualcomm publishes both SoC power (3.8–20 W) and named Llama 2 throughput; IQ-8275 reaches up to 32 GB platform memory and is also used by Arduino's VENTUNO Q. See [`QUALCOMM_EDGE_AI.md`](QUALCOMM_EDGE_AI.md) and [`data/qualcomm_edge.json`](data/qualcomm_edge.json).
+
+### Qualcomm Dragonfly data-center inference
+
+Dragonfly is tracked separately from Dragonwing. **AI200** provides 768 GB LPDDR5X per card and 43 TB per 56-card rack. **AI250** introduces HBC Gen 1 near-memory compute and Qualcomm publishes 133 TB/s effective bandwidth per card; **AI300** is the HBC Gen 2 roadmap platform. Qualcomm's 18x/54x effective-bandwidth and 4x–8x efficiency statements are manufacturer claims and are not treated as physical-bandwidth or independent tokens/watt measurements. See [`QUALCOMM_DRAGONFLY.md`](QUALCOMM_DRAGONFLY.md) and [`data/qualcomm_dragonfly.json`](data/qualcomm_dragonfly.json).
 
 ### Embedded and edge
 
@@ -104,6 +111,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 ├── WATCHLIST.md
 ├── APPLE_M5.md
 ├── NVIDIA_RTX_SPARK.md
+├── QUALCOMM_DRAGONFLY.md
 ├── QUALCOMM_EDGE_AI.md
 ├── SBC_AND_APPLE_SILICON.md
 ├── SPECIALTY_EDGE_AI.md
@@ -112,9 +120,11 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 │   ├── current_system_variants.json
 │   ├── nvidia_rtx_spark.json
 │   ├── apple_m5.json
+│   ├── qualcomm_dragonfly.json
 │   ├── qualcomm_edge.json
 │   ├── sbc_apple.json
 │   ├── specialty_edge.json
+│   ├── software-updates-2026-08-21.json
 │   ├── cost_effective_hardware.json
 │   ├── low_power_nvidia.json
 │   ├── workstation_gpus.json
@@ -127,7 +137,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 
 ## Research dates
 
-Initial structured catalog assembled **2026-08-15**. Current maintenance pass: **2026-08-20**. Prices and availability are snapshots and can change rapidly.
+Initial structured catalog assembled **2026-08-15**. Current maintenance pass: **2026-08-21**. Prices and availability are snapshots and can change rapidly.
 
 ## Scope note
 
