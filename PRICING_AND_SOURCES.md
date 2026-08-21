@@ -1,6 +1,6 @@
 # Pricing, Vendor URLs, and Technical Documentation
 
-Last updated: **2026-08-18**
+Last updated: **2026-08-21**
 
 This page is the human-readable buying and documentation index for the hardware catalog. The machine-readable data is split by platform family under `data/`.
 
@@ -43,6 +43,9 @@ This page is the human-readable buying and documentation index for the hardware 
 
 | Hardware | Pricing status | Vendor / product | Technical documentation |
 |---|---|---|---|
+| Qualcomm Dragonfly AI200 | Contact sales; no stable public numeric price captured | [AI200 product](https://www.qualcomm.com/data-center/products/qualcomm-dragonfly-ai200) | [AI200 rack/infrastructure note](https://www.qualcomm.com/news/onq/2026/03/ai-inference-that-scales-qualcomm-ai200-infrastructure-management-suite) · [AI accelerator overview](https://www.qualcomm.com/data-center/expertise/ai-accelerators) |
+| Qualcomm Dragonfly AI250 | Not public; commercial HBC Gen 1 sampling expected mid-2027 | [AI250 product](https://www.qualcomm.com/data-center/products/qualcomm-dragonfly-ai250) | [Dragonfly roadmap announcement](https://www.qualcomm.com/news/releases/2026/06/qualcomm-unveils-comprehensive-data-center-roadmap-for-the-agent) · [Investor Day data-center deck](https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/Investor-Day-2026_TPialis_Data-Center.pdf) |
+| Qualcomm Dragonfly AI300 | Not public; commercial sampling expected 2028 | [AI300 product](https://www.qualcomm.com/data-center/products/qualcomm-dragonfly-ai300) | [Dragonfly roadmap announcement](https://www.qualcomm.com/news/releases/2026/06/qualcomm-unveils-comprehensive-data-center-roadmap-for-the-agent) · [AI accelerator overview](https://www.qualcomm.com/data-center/expertise/ai-accelerators) |
 | AMD Ryzen AI Max PRO 400 Series | Not yet public; OEM-system pricing pending | [AMD announcement](https://www.amd.com/en/blogs/2026/amd-powers-next-generation-agent-computers-with-new-ryzen-ai-hal.html) | [Ryzen AI software](https://ryzenai.docs.amd.com/en/latest/) |
 | AMD Kria AI SOM / Ryzen AI Embedded X100 | Partner / quote based | [Kria AI SOM](https://www.amd.com/en/products/system-on-modules/kria/ai.html) · [Kria portfolio](https://www.amd.com/en/products/system-on-modules/kria.html) | [Ryzen AI Embedded X100](https://www.amd.com/en/products/embedded/ryzen-ai/x100-advantage.html) · [Ryzen AI software](https://ryzenai.docs.amd.com/en/latest/) |
 | NVIDIA Jetson T3000 | No public retail price yet; planned Q1 2027 | [NVIDIA announcement](https://blogs.nvidia.com/blog/jetson-thor-robotics-edge-ai-agent/) | [Jetson documentation](https://docs.nvidia.com/jetson/index.html) |
@@ -56,6 +59,10 @@ This page is the human-readable buying and documentation index for the hardware 
 | Altera FPGA AI Suite / Agilex ecosystem | Board/device/license dependent | [FPGA AI Suite](https://www.altera.com/products/development-tools/fpga-ai-suite) | [FPGA AI Suite](https://www.altera.com/products/development-tools/fpga-ai-suite) |
 
 ## Important pricing notes
+
+### Qualcomm Dragonfly pricing
+
+All three Dragonfly generations are sales-led and no stable public numeric card/rack price was captured in this pass. AI200 is the near-term platform with deployments beginning in 2026; AI250 and AI300 remain forward-looking. Do not infer pricing from Cloud AI 100 or other Qualcomm accelerator families.
 
 ### Qualcomm Dragonwing pricing
 
