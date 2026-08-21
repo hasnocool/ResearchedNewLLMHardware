@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-21",
+  "purpose": "Qualcomm Dragonfly rack-scale AI inference accelerator platforms relevant to distributed LLM and agentic inference.",
+  "hardware": [
+    {
+      "id": "qualcomm-dragonfly-ai200",
+      "manufacturer": "Qualcomm",
+      "product": "Dragonfly AI200",
+      "category": "datacenter_ai_inference_accelerator",
+      "status": "deployment_2026",
+      "compute_platform": "qualcomm-dragonfly-ai200",
+      "memory_gb_per_card": 768,
+      "memory_type": "LPDDR5X",
+      "rack_cards": 56,
+      "rack_memory_tb": 43,
+      "rack_memory_bandwidth_pb_s": 0.414,
+      "rack_power_kw": 140,
+      "rack_form_factor": "OCP ORv3 single-wide",
+      "scale_up": "PCIe Gen6",
+      "scale_out": "Ethernet with RoCE",
+      "cooling": ["direct liquid cooling", "air cooling"],
+      "model_capacity_vendor_claim": "Models up to 10T parameters at rack scale; Qualcomm also demonstrated a 350B model on one AI200 card and describes one-card support up to 1T parameters.",
+      "context_length_vendor_claim": 128000,
+      "software": ["Qualcomm AI Inference Suite", "Efficient Transformers Library", "Hugging Face model onboarding", "bare metal", "cloud VM", "inference-as-a-service"],
+      "pricing": [],
+      "pricing_status": "contact_sales_no_stable_public_numeric_price_captured",
+      "availability_note": "Qualcomm states AI200 deployments begin in 2026; product page is active and sales-led.",
+      "evidence": "manufacturer",
+      "evidence_quality": "manufacturer_specification_and_demo_claims",
+      "vendor_urls": [
+        "https://www.qualcomm.com/data-center/products/qualcomm-dragonfly-ai200"
+      ],
+      "technical_documentation": [
+        "https://www.qualcomm.com/news/releases/2025/10/qualcomm-unveils-ai200-and-ai250-redefining-rack-scale-data-cent",
+        "https://www.qualcomm.com/news/onq/2026/03/ai-inference-that-scales-qualcomm-ai200-infrastructure-management-suite",
+        "https://www.qualcomm.com/data-center/expertise/ai-accelerators"
+      ]
+    },
+    {
+      "id": "qualcomm-dragonfly-ai250",
+      "manufacturer": "Qualcomm",
+      "product": "Dragonfly AI250",
+      "category": "datacenter_ai_inference_accelerator",
+      "status": "sampling_planned_mid_2027",
+      "compute_platform": "qualcomm-dragonfly-ai250-hbc-gen1",
+      "memory_gb_per_card": 768,
+      "memory_architecture": "Qualcomm High Bandwidth Compute HBC Gen 1 near-memory computing",
+      "effective_memory_bandwidth_tb_s_per_card_vendor": 133,
+      "effective_bandwidth_vs_ai200_vendor": "18x",
+      "rack_cards": 56,
+      "rack_memory_tb": 43,
+      "rack_effective_bandwidth_pb_s_vendor": 7.455,
+      "rack_power_kw": 140,
+      "rack_form_factor": "OCP ORv3 single-wide",
+      "scale_up": "PCIe Gen6",
+      "scale_out": "Ethernet with RoCE",
+      "cooling": ["direct liquid cooling", "air cooling"],
+      "context_length_vendor_claim": 1000000,
+      "performance_per_watt_claim": "4x-8x better than contemporary GPU-based architectures on memory-bandwidth-per-watt-per-card basis; Qualcomm estimate, not independent benchmark.",
+      "software": ["Qualcomm AI Inference Suite", "disaggregated inference", "bare metal", "cloud VM", "inference-as-a-service"],
+      "pricing": [],
+      "pricing_status": "not_public_contact_sales",
+      "availability_note": "Commercial sampling of HBC Gen 1 with AI250 expected mid-2027.",
+      "evidence": "manufacturer_forward_looking",
+      "evidence_quality": "manufacturer_specification_with_forward_looking_efficiency_estimates",
+      "vendor_urls": [
+        "https://www.qualcomm.com/data-center/products/qualcomm-dragonfly-ai250"
+      ],
+      "technical_documentation": [
+        "https://www.qualcomm.com/news/releases/2026/06/qualcomm-unveils-comprehensive-data-center-roadmap-for-the-agent",
+        "https://www.qualcomm.com/data-center/expertise/ai-accelerators",
+        "https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/Investor-Day-2026_TPialis_Data-Center.pdf"
+      ]
+    },
+    {
+      "id": "qualcomm-dragonfly-ai300",
+      "manufacturer": "Qualcomm",
+      "product": "Dragonfly AI300",
+      "category": "datacenter_ai_inference_accelerator",
+      "status": "sampling_planned_2028",
+      "compute_platform": "qualcomm-dragonfly-ai300-hbc-gen2",
+      "memory_architecture": "Qualcomm High Bandwidth Compute HBC Gen 2 near-memory computing",
+      "effective_bandwidth_vs_ai200_vendor": "54x",
+      "scale_up": "UALink and ESUN all-to-all rack scale-up",
+      "scale_out": "high-bandwidth copper and optical",
+      "cooling": ["direct liquid cooling", "air cooling"],
+      "cpu_integration": "Qualcomm Dragonfly C1000 CPU in validated pod configurations",
+      "performance_per_watt_claim": "Qualcomm expects 4x-8x better performance-per-watt than existing GPU-based architectures on memory-bandwidth-per-watt-per-card basis.",
+      "software": ["Qualcomm AI Inference Suite", "disaggregated prefill/decode", "validated pod configurations"],
+      "pricing": [],
+      "pricing_status": "not_public_contact_sales",
+      "availability_note": "Commercial sampling expected in 2028.",
+      "evidence": "manufacturer_forward_looking",
+      "evidence_quality": "manufacturer_roadmap_claims_no_independent_hardware_results_yet",
+      "vendor_urls": [
+        "https://www.qualcomm.com/data-center/products/qualcomm-dragonfly-ai300"
+      ],
+      "technical_documentation": [
+        "https://www.qualcomm.com/news/releases/2026/06/qualcomm-unveils-comprehensive-data-center-roadmap-for-the-agent",
+        "https://www.qualcomm.com/data-center/expertise/ai-accelerators",
+        "https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/Investor-Day-2026_TPialis_Data-Center.pdf"
+      ]
+    }
+  ]
+}
