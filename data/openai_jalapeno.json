@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-21",
+  "purpose": "OpenAI/Broadcom Jalapeño inference accelerator watch record.",
+  "hardware": [
+    {
+      "id": "openai-broadcom-jalapeno",
+      "manufacturer": "OpenAI / Broadcom",
+      "product": "Jalapeño Intelligence Processor",
+      "compute_platform": "openai-broadcom-jalapeno-gen1",
+      "category": "llm_inference_asic",
+      "status": "engineering_samples_predeployment",
+      "tier": "Experimental-datacenter-watch",
+      "architecture_note": "Blank-slate accelerator designed specifically for modern LLM inference; OpenAI says the design reduces data movement and balances compute, memory and networking resources for higher realized utilization.",
+      "memory_gb": null,
+      "memory_type": null,
+      "memory_bandwidth_gbps": null,
+      "power_w": null,
+      "pricing": [],
+      "price_status": "not_publicly_sold_or_priced",
+      "availability_note": "Engineering samples are running ML workloads at production target frequency and power. OpenAI and Broadcom say initial deployment is planned by the end of 2026, with gigawatt-scale datacenter deployment over multiple generations.",
+      "software_evidence": ["Engineering samples reported running GPT-5.3-Codex-Spark"],
+      "performance_evidence": [
+        {
+          "kind": "manufacturer_early_testing",
+          "claim": "performance per watt substantially better than current state-of-the-art",
+          "normalization_status": "not_comparable_without_detailed_technical_report"
+        }
+      ],
+      "evidence": "manufacturer",
+      "vendor_urls": [
+        "https://openai.com/index/openai-broadcom-jalapeno-inference-chip/",
+        "https://investors.broadcom.com/news-releases/news-release-details/openai-and-broadcom-unveil-llm-optimized-intelligence-processor"
+      ],
+      "technical_documentation": [],
+      "research_notes": [
+        "Do not infer TOPS/FLOPS, memory capacity, memory bandwidth, process node, board power or price; none were published in the captured primary sources.",
+        "OpenAI says a detailed technical performance report will be presented in the coming months; that report is the primary promotion trigger.",
+        "This is a datacenter infrastructure platform rather than an expected retail/local inference accelerator, but it is directly relevant to LLM-specific ASIC architecture and performance-per-watt research."
+      ]
+    }
+  ]
+}
