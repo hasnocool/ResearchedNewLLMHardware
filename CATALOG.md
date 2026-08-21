@@ -1,6 +1,6 @@
 # Detailed Hardware Catalog
 
-Last updated: **2026-08-18**
+Last updated: **2026-08-21**
 
 This catalog separates hardware by role rather than treating every TOPS number as comparable. The most useful LLM hardware generally needs a combination of **memory capacity, bandwidth, suitable kernels/runtime support, acceptable power and attainable price**.
 
@@ -128,6 +128,8 @@ The critical modeling rule is to treat **GB10 as one compute platform**. DGX Spa
 **Storage:** 4 TB reference configuration  
 **Interconnect:** ConnectX-7 200 Gb/s  
 **Strength:** best-defined reference software stack and official specifications.
+
+**2026-08-21 software note:** NVIDIA now advertises up to **1.9x inference speedups** from its latest DGX Spark software update. Current release notes list DGX OS 7.5.0 / CUDA 13.0.2 and improved unified-memory OOM handling. Treat the 1.9x number as manufacturer software evidence rather than a normalized benchmark until a model/runtime/context-specific comparison is available.
 
 ### ASUS Ascent GX10
 
@@ -407,3 +409,56 @@ VENTUNO Q packages the IQ-8275 with **16 GB RAM**, **64 GB eMMC**, **M.2 NVMe Ge
 Do not assign a normal buying rank until stable public pricing, broad availability, board-level power and reproducible LLM benchmarks are available.
 
 See [`QUALCOMM_EDGE_AI.md`](QUALCOMM_EDGE_AI.md) and [`data/qualcomm_edge.json`](data/qualcomm_edge.json) for sources and normalized records.
+
+---
+
+## 11. Recent platform addenda
+
+Several newer platform families have dedicated files so shared silicon is not duplicated across every OEM implementation.
+
+### Tenstorrent Blackhole — B / available-specialist
+
+Blackhole is a separate Tenstorrent generation from Wormhole. Current tracked cards include p100a and p150 variants, with **28–32 GB GDDR6**, **448–512 GB/s** memory bandwidth and 300 W board power. p150 variants add high-speed QSFP-DD fabric links. TT-QuietBox 2 aggregates four Blackhole ASICs and 128 GB accelerator memory, but aggregate card memory must not be treated as automatically coherent single-pool memory.
+
+See [`TENSTORRENT_BLACKHOLE.md`](TENSTORRENT_BLACKHOLE.md) and [`data/tenstorrent_blackhole.json`](data/tenstorrent_blackhole.json).
+
+### NVIDIA RTX Spark N1X — A/S-potential / prelaunch
+
+RTX Spark is a distinct Windows-focused Grace/Blackwell platform from GB10. NVIDIA documents up to **6,144 CUDA cores**, **1 PFLOP FP4**, a 20-core Grace CPU and **up to 128 GB unified memory**. ASUS has announced ProArt P14/P16 laptops and a compact ProArt Mini PC. Exact memory bandwidth, production power and stable retail pricing remain open.
+
+See [`NVIDIA_RTX_SPARK.md`](NVIDIA_RTX_SPARK.md) and [`data/nvidia_rtx_spark.json`](data/nvidia_rtx_spark.json).
+
+### Apple M5 Pro / M5 Max — A/S depending memory configuration
+
+Apple's current M5 Pro reaches **307 GB/s** and up to 64 GB unified memory; the high-end M5 Max reaches **614 GB/s** and up to 128 GB. Metal, MLX, llama.cpp and emerging research runtimes make Apple Silicon a serious high-efficiency LLM platform despite the closed hardware stack.
+
+See [`APPLE_M5.md`](APPLE_M5.md) and [`data/apple_m5.json`](data/apple_m5.json).
+
+---
+
+## 12. Qualcomm Dragonfly rack-scale inference
+
+### Dragonfly AI200 — high-capacity distributed-inference watch
+
+**Category:** rack-scale inference accelerator  
+**Memory:** **768 GB LPDDR5X per card**  
+**Rack:** 56 cards / **43 TB** total memory  
+**Aggregate rack bandwidth:** **0.414 PB/s**  
+**Rack power:** **140 kW**  
+**Scale-up:** PCIe Gen6  
+**Scale-out:** Ethernet with RoCE  
+**Availability:** Qualcomm says deployments begin in 2026
+
+AI200 is notable primarily because of per-card memory capacity. Qualcomm's active product page says rack-scale deployments support models up to 10T parameters and 128K context; Qualcomm also demonstrated a 350B generative model on one card and describes one-card support up to roughly 1T parameters. These are manufacturer claims and need independent throughput/power validation.
+
+### Dragonfly AI250 — HBC Gen 1 / sampling planned mid-2027
+
+AI250 retains **768 GB per card** while introducing Qualcomm High Bandwidth Compute (HBC) Gen 1 near-memory computing. Qualcomm publishes **133 TB/s effective bandwidth per card**, **18x AI200 effective bandwidth**, 7.455 PB/s effective bandwidth per rack and context lengths up to 1M tokens.
+
+Qualcomm also claims **4x–8x better performance per watt** than contemporary GPU-based architectures on a memory-bandwidth-per-watt-per-card basis. Treat this as a forward-looking vendor estimate, not a normalized tokens/watt result.
+
+### Dragonfly AI300 — HBC Gen 2 / sampling planned 2028
+
+AI300 is Qualcomm's third-generation roadmap platform with HBC Gen 2, all-to-all rack scale-up and expanded scale-out. Qualcomm states a **54x effective-bandwidth increase versus AI200**, but exact per-card memory capacity, physical bandwidth, card power and pricing are not yet public enough for normalized comparison.
+
+See [`QUALCOMM_DRAGONFLY.md`](QUALCOMM_DRAGONFLY.md) and [`data/qualcomm_dragonfly.json`](data/qualcomm_dragonfly.json).
