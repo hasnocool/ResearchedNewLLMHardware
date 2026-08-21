@@ -1,0 +1,223 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-21",
+  "purpose": "Obscure and enterprise inference accelerators with unusually strong memory capacity, bandwidth, or power characteristics. Vendor TOPS/TFLOPS and benchmark claims are retained with provenance and are not normalized across architectures.",
+  "hardware": [
+    {
+      "id": "furiosa-rngd-48gb",
+      "manufacturer": "FuriosaAI",
+      "product": "RNGD",
+      "model": "RNGD PCIe accelerator",
+      "compute_platform": "furiosa-tensor-contraction-processor",
+      "category": "llm_inference_accelerator_pcie",
+      "status": "available_mass_production_quote_only",
+      "release_status_as_of": "2026-08-21",
+      "architecture": "Tensor Contraction Processor (TCP), TSMC 5nm",
+      "frequency_ghz": 1.0,
+      "bf16_tflops_vendor": 256,
+      "fp8_tflops_vendor": 512,
+      "int8_tops_vendor": 512,
+      "int4_tops_vendor": 1024,
+      "memory_gb": 48,
+      "memory_type": "HBM3 ECC",
+      "memory_bandwidth_gbps": 1500,
+      "on_chip_sram_mb": 256,
+      "tdp_w_vendor": 180,
+      "bandwidth_per_watt_gbps_per_w": 8.33,
+      "host_interface": "PCIe Gen5 x16",
+      "power_connector": "12VHPWR",
+      "form_factor": "PCIe dual-slot full-height 3/4 length",
+      "cooling": "passive; requires server-class directed airflow",
+      "virtualization": [
+        "SR-IOV",
+        "up to 8 accelerator instances"
+      ],
+      "software": [
+        "Furiosa SDK",
+        "Furiosa Compiler",
+        "Furiosa Runtime",
+        "Furiosa-LLM",
+        "OpenAI-compatible serving through Furiosa-LLM"
+      ],
+      "supported_llm_examples": [
+        "Llama 3.1",
+        "Llama 3.3",
+        "Qwen 2.5",
+        "Qwen 3",
+        "Qwen 3 MoE",
+        "Qwen 3 VL",
+        "EXAONE 4.0",
+        "GPT-OSS",
+        "Solar Open"
+      ],
+      "quantization_compatibility": "Hardware exposes BF16, FP8, INT8 and INT4. Furiosa publishes precompiled model bundles and per-model quantization recipes; this is not a drop-in GGUF/CUDA accelerator and models generally use the Furiosa compilation/runtime path.",
+      "llm_suitability": {
+        "assessment": "very_high_for_supported_inference_models",
+        "practical_guidance": "48GB HBM3 and 1.5TB/s are exceptionally strong for supported 8B-32B dense models and multi-card larger-model serving. Furiosa documents Llama 3.3 70B FP8 on four cards, so single-card 70B deployment should not be inferred from capacity alone.",
+        "vendor_software_evidence": "Furiosa's 2026 supported-model matrix validates multiple Llama, Qwen, EXAONE and GPT-OSS architectures; performance tuning status varies by model.",
+        "evidence_level": "manufacturer_current"
+      },
+      "off_grid_suitability": "low_to_moderate_card_level_but_server_airflow_required",
+      "efficiency_notes": "At the current 180W product specification, raw memory bandwidth is approximately 8.33GB/s/W, unusually high for a 48GB accelerator. This is a hardware bandwidth metric, not tokens/joule.",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "mass_production_contact_sales_or_access_program",
+          "observed_at": "2026-08-21",
+          "note": "Furiosa states RNGD is in mass production and available as a standalone PCIe card, but no defensible public numeric card price was found."
+        }
+      ],
+      "vendor_urls": [
+        "https://furiosa.ai/rngd",
+        "https://furiosa.ai/renegade-spec",
+        "https://furiosa.ai/signup"
+      ],
+      "technical_documentation": [
+        "https://developer.furiosa.ai/latest/en/overview/rngd.html",
+        "https://developer.furiosa.ai/latest/en/overview/supported_models.html",
+        "https://furiosa.ai/blog/furiosa-sdk-2026-2"
+      ],
+      "source_caveats": [
+        "Older Furiosa developer pages have shown 150W TDP, while current public product/spec pages and the April 2026 mass-production announcement specify 180W. This record uses the current 180W product value and preserves the discrepancy as provenance."
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "qualcomm-cloud-ai-100-ultra-128gb",
+      "manufacturer": "Qualcomm",
+      "product": "Cloud AI 100 Ultra",
+      "model": "AI 100 Ultra",
+      "compute_platform": "qualcomm-cloud-ai-100-ultra",
+      "category": "llm_inference_accelerator_pcie",
+      "status": "available_enterprise_contact_sales",
+      "release_status_as_of": "2026-08-21",
+      "architecture": "Qualcomm Cloud AI accelerator",
+      "ai_cores_vendor": 64,
+      "int8_tops_vendor_max": 870,
+      "fp16_tflops_vendor_max": 288,
+      "on_chip_sram_mb": 576,
+      "memory_gb": 128,
+      "memory_type": "LPDDR4X ECC",
+      "memory_bandwidth_gbps": 548,
+      "tdp_w_vendor": 150,
+      "bandwidth_per_watt_gbps_per_w": 3.65,
+      "host_interface": "PCIe Gen4 x16",
+      "form_factor": "PCIe FH3/4L, 111.2mm x 237.9mm",
+      "software": [
+        "Qualcomm AI Inference Suite",
+        "Cloud AI SDK",
+        "OpenAI-compatible APIs",
+        "Kubernetes",
+        "bare-metal containers"
+      ],
+      "quantization_compatibility": "Qualcomm documents FP16 and integer inference paths and optimized generative-AI model conversion. Do not assume GGUF/AWQ/GPTQ files run directly; deployment uses Qualcomm's compiler/runtime and precompiled/optimized model ecosystem.",
+      "llm_suitability": {
+        "assessment": "very_high_capacity_specialized_inference",
+        "vendor_model_capacity": "up to 120B parameters in current on-prem appliance positioning",
+        "vendor_performance_claim": "up to 300 tokens/s on Llama 3.1 8B in Qualcomm's on-prem appliance material",
+        "practical_guidance": "128GB accelerator memory is unusually large at 150W and can avoid sharding for many large optimized models, but software portability is materially narrower than CUDA/ROCm/MLX.",
+        "evidence_level": "manufacturer_vendor_benchmark"
+      },
+      "off_grid_suitability": "moderate_for_capacity_if_host_system_is_efficient",
+      "efficiency_notes": "128GB at 150W is approximately 1.17W/GB of accelerator memory. The 3.65GB/s/W bandwidth ratio is lower than HBM accelerators but capacity-per-watt is unusually strong.",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "contact_sales_and_oem_appliances",
+          "observed_at": "2026-08-21",
+          "note": "Qualcomm exposes contact-sales and OEM on-prem appliance channels; no defensible public standalone-card retail price was verified."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.qualcomm.com/data-center/products/cloud-ai-100-ultra",
+        "https://www.qualcomm.com/internet-of-things/solutions/ai-on-prem-appliance",
+        "https://www.qualcomm.com/internet-of-things/device-finder/advantech-co-air-410"
+      ],
+      "technical_documentation": [
+        "https://www.qualcomm.com/data-center/products/cloud-ai-100-ultra",
+        "https://www.qualcomm.com/developer/blog/2024/10/hands-on-with-qualcomm-cloud-ai-100-ultra-developer-playground"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "memryx-mx3-2280-m-4-i",
+      "manufacturer": "MemryX",
+      "product": "MX3 M.2 AI Accelerator Module",
+      "model": "MX3-2280-M-4-I",
+      "compute_platform": "memryx-mx3-dataflow",
+      "category": "edge_ai_accelerator_m2",
+      "status": "available_backorder",
+      "release_status_as_of": "2026-08-21",
+      "architecture": "MemryX MX3 compute-at-memory/dataflow, four MX3 ICs",
+      "compute_tflops_vendor_max": 24,
+      "weight_capacity_million_parameters": {
+        "int4": 80,
+        "int8": 40
+      },
+      "external_dram": "none; model weights/operators are stored on-chip within supported capacity",
+      "power_w": {
+        "typical": 8,
+        "average_max": 10,
+        "peak_max": 14
+      },
+      "host_interface": "PCIe Gen3 via M.2 2280 M-key; module exposes two 2-lane PCIe links",
+      "dimensions_mm": [
+        22,
+        80
+      ],
+      "host_architectures": [
+        "x86",
+        "Arm",
+        "RISC-V"
+      ],
+      "os_support": [
+        "Ubuntu 22.04",
+        "Ubuntu 24.04",
+        "Windows 64-bit",
+        "Android"
+      ],
+      "software": [
+        "MemryX SDK 2.2",
+        "NeuralCompiler",
+        "Accelerator Runtime",
+        "ONNX",
+        "PyTorch",
+        "TensorFlow",
+        "Keras",
+        "TensorFlow Lite"
+      ],
+      "quantization_compatibility": "The module stores up to about 80M 4-bit or 40M 8-bit weight parameters. MemryX states models can often be deployed without user-driven quantization/retraining, but transformer support remains limited and compiler-dependent. This is not a general GGUF LLM accelerator.",
+      "llm_suitability": {
+        "assessment": "experimental_for_language_models_strong_for_edge_cv",
+        "practical_guidance": "Parameter storage limits are orders of magnitude below modern 1B+ LLM weight sets. SDK 2.2 supports Attention, MultiHeadAttention and GroupedQueryAttention, but MemryX explicitly says transformer support is still limited. Best treated as a low-power CV/hybrid-transformer accelerator rather than a local-chat LLM device.",
+        "evidence_level": "manufacturer_current_plus_distributor_current"
+      },
+      "off_grid_suitability": "very_high_for_supported_edge_models",
+      "efficiency_notes": "Typical module power is about 8W and average maximum 10W. This makes it highly attractive for always-on vision or small transformer subgraphs, but its limited on-chip weight capacity prevents direct comparison with DRAM/HBM LLM accelerators.",
+      "pricing": [
+        {
+          "amount": 201.56,
+          "currency": "USD",
+          "region": "US/global distributor",
+          "kind": "distributor_current",
+          "availability": "backorder",
+          "observed_at": "2026-08-21",
+          "vendor": "Mouser",
+          "url": "https://www.mouser.com/en/ProductDetail/MemryX/MX3-2280-M-4-I",
+          "note": "Qty-1 price. Mouser showed zero stock, 64 units on order, expected 2026-08-28 when checked."
+        }
+      ],
+      "vendor_urls": [
+        "https://memryx.com/",
+        "https://www.mouser.com/en/ProductDetail/MemryX/MX3-2280-M-4-I"
+      ],
+      "technical_documentation": [
+        "https://developer.memryx.com/specs/M.2_datasheet.html",
+        "https://developer.memryx.com/support/transformer_support.html",
+        "https://developer.memryx.com/get_started/install_software.html",
+        "https://developer.memryx.com/tutorials/advanced/set_powermode.html"
+      ],
+      "evidence": "manufacturer_plus_current_distributor"
+    }
+  ]
+}
