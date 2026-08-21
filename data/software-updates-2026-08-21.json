@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-08-21",
+  "updates": [
+    {
+      "hardware_id": "nvidia-dgx-spark",
+      "compute_platform": "nvidia-gb10-grace-blackwell",
+      "kind": "software_runtime_update",
+      "summary": "NVIDIA now advertises up to 1.9x inference speedups from the latest DGX Spark software update, together with streamlined NemoClaw installation and updated open-model support.",
+      "current_software": {
+        "dgx_os": "7.5.0",
+        "gpu_driver": "580.159.03",
+        "cuda_toolkit": "13.0.2",
+        "kernel": "6.17"
+      },
+      "reliability_changes": [
+        "Improved unified-memory out-of-memory handling and user feedback under memory pressure.",
+        "NemoClaw supports bounded managed vLLM profiles for single DGX Spark systems.",
+        "NemoClaw includes an experimental managed vLLM path for two DGX Spark systems and supports attaching operator-managed llama.cpp servers."
+      ],
+      "evidence": "manufacturer",
+      "benchmark_caution": "The headline up-to-1.9x figure is manufacturer-published and is not stored as a normalized model-specific benchmark because the product page does not provide one universal model/runtime/context configuration for that number.",
+      "source_urls": [
+        "https://www.nvidia.com/en-us/products/workstations/dgx-spark/",
+        "https://docs.nvidia.com/dgx/dgx-spark/release-notes.html",
+        "https://docs.nvidia.com/nemoclaw/user-guide/deepagents/release-notes/2026/8/4",
+        "https://docs.nvidia.com/nemoclaw/user-guide/hermes/release-notes/2026/8/10"
+      ]
+    }
+  ]
+}
