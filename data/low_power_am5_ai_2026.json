@@ -1,0 +1,277 @@
+{
+  "schema_version": "1.2.0",
+  "last_updated": "2026-08-20",
+  "purpose": "Low-power AM5 Ryzen AI 400 desktop processors and a currently shipping OEM implementation relevant to compact, expandable, off-grid, and local-AI nodes.",
+  "hardware": [
+    {
+      "id": "amd-ryzen-ai-7-450ge",
+      "manufacturer": "AMD",
+      "product": "Ryzen AI 7 450GE",
+      "compute_platform": "amd-gorgon-point-am5",
+      "category": "desktop_apu",
+      "status": "available_oem_channel",
+      "release_date": "2026-03-02",
+      "cpu_architecture": "Zen 5",
+      "cpu_cores": 8,
+      "cpu_threads": 16,
+      "cpu_base_ghz": 2.0,
+      "cpu_boost_ghz": 5.1,
+      "total_cache_mb": 24,
+      "socket": "AM5",
+      "process_node": "TSMC 4nm FinFET",
+      "gpu": "Radeon 860M",
+      "gpu_architecture": "RDNA 3.5",
+      "gpu_compute_units": 8,
+      "gpu_frequency_mhz": 3100,
+      "npu": "AMD XDNA 2",
+      "npu_tops_vendor": 50,
+      "npu_frequency_ghz": 1.9,
+      "tdp_w": 35,
+      "memory": {
+        "type": "DDR5 UDIMM",
+        "channels": 2,
+        "max_gb": 256,
+        "official_speed_2dpc_or_less_mt_s": 5600,
+        "official_speed_4dpc_mt_s": 3600,
+        "ecc": "supported with motherboard support"
+      },
+      "interfaces": {
+        "pcie_version": "PCIe 4.0",
+        "native_pcie_lanes_total": 16,
+        "native_pcie_lanes_usable": 12,
+        "native_usb4_40gbps": 2
+      },
+      "os_support": ["Windows 11 64-bit", "RHEL x86-64", "Ubuntu x86-64"],
+      "ai_frameworks_runtimes": ["AMD Ryzen AI Software", "ONNX Runtime paths via Ryzen AI", "CPU llama.cpp", "Vulkan-capable llama.cpp paths"],
+      "quantization_compatibility": {
+        "gguf": "CPU/Vulkan paths are practical; XDNA 2 acceleration requires models/operators supported by Ryzen AI tooling rather than arbitrary GGUF execution.",
+        "int8": "50 TOPS is AMD's peak NPU figure, not LLM tokens/sec."
+      },
+      "model_size_practicality": [
+        {"class": "7B-14B quantized", "assessment": "practical in sufficiently provisioned system RAM; GPU/NPU acceleration depends on backend support", "evidence": "capacity/runtime assessment"},
+        {"class": "30B+ quantized", "assessment": "system RAM capacity can be configured high enough, but DDR5 bandwidth and the small integrated GPU make CPU/RAM decode the likely bottleneck unless a supported accelerator path is used", "evidence": "reasoned estimate"}
+      ],
+      "efficiency": {
+        "off_grid_suitability": "very_good_platform_candidate",
+        "note": "35W processor TDP is unusually low for socketed AM5 with up to 256GB DDR5; whole-system wall power depends on motherboard, memory, storage, PSU and peripherals."
+      },
+      "pricing": [
+        {"kind": "oem_channel_only", "availability": "processor not observed as normal boxed retail SKU", "observed_at": "2026-08-20", "note": "AMD positions Ryzen AI 400 desktop parts for OEM systems; no defensible standalone retail price was found in this pass."}
+      ],
+      "vendor_urls": ["https://www.amd.com/en/products/processors/desktops/ryzen/ai-400-series/amd-ryzen-ai-7-450ge.html"],
+      "technical_documentation": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/ai-400-series/amd-ryzen-ai-7-450ge.html",
+        "https://newsroom.amd.com/news/amd-gives-consumers-and-businesses-more-ai-pc-opti/",
+        "https://ryzenai.docs.amd.com/en/latest/"
+      ],
+      "manufacturer_model_identifier": "100-000001924",
+      "evidence": "manufacturer",
+      "notes": "Useful as an expandable low-power AI host rather than a high-throughput GPU replacement. The 50-TOPS NPU figure should not be compared directly with GPU TOPS or tokens/sec."
+    },
+    {
+      "id": "amd-ryzen-ai-5-440ge",
+      "manufacturer": "AMD",
+      "product": "Ryzen AI 5 440GE",
+      "compute_platform": "amd-gorgon-point-am5",
+      "category": "desktop_apu",
+      "status": "available_oem_channel",
+      "release_date": "2026-03-02",
+      "cpu_architecture": "Zen 5",
+      "cpu_cores": 6,
+      "cpu_threads": 12,
+      "cpu_base_ghz": 2.0,
+      "cpu_boost_ghz": 4.8,
+      "total_cache_mb": 22,
+      "socket": "AM5",
+      "process_node": "TSMC 4nm FinFET",
+      "gpu": "Radeon 840M",
+      "gpu_architecture": "RDNA 3.5",
+      "gpu_compute_units": 4,
+      "gpu_frequency_mhz": 2900,
+      "npu": "AMD XDNA 2",
+      "npu_tops_vendor": 50,
+      "npu_frequency_ghz": 1.9,
+      "tdp_w": 35,
+      "memory": {
+        "type": "DDR5 UDIMM",
+        "channels": 2,
+        "max_gb": 256,
+        "official_speed_2dpc_or_less_mt_s": 5600,
+        "official_speed_4dpc_mt_s": 3600,
+        "ecc": "supported with motherboard support"
+      },
+      "interfaces": {
+        "pcie_version": "PCIe 4.0",
+        "native_pcie_lanes_total": 16,
+        "native_pcie_lanes_usable": 12,
+        "native_usb4_40gbps": 2
+      },
+      "os_support": ["Windows 11 64-bit", "RHEL x86-64", "Ubuntu x86-64"],
+      "ai_frameworks_runtimes": ["AMD Ryzen AI Software", "ONNX Runtime paths via Ryzen AI", "CPU llama.cpp", "Vulkan-capable llama.cpp paths"],
+      "quantization_compatibility": {
+        "gguf": "CPU/Vulkan paths are practical; XDNA 2 acceleration requires models/operators supported by Ryzen AI tooling rather than arbitrary GGUF execution.",
+        "int8": "50 TOPS is AMD's peak NPU figure, not LLM tokens/sec."
+      },
+      "model_size_practicality": [
+        {"class": "7B-14B quantized", "assessment": "practical in sufficiently provisioned system RAM; GPU/NPU acceleration depends on backend support", "evidence": "capacity/runtime assessment"},
+        {"class": "30B+ quantized", "assessment": "system RAM capacity can be configured high enough, but DDR5 bandwidth and the small integrated GPU make CPU/RAM decode the likely bottleneck unless a supported accelerator path is used", "evidence": "reasoned estimate"}
+      ],
+      "efficiency": {
+        "off_grid_suitability": "very_good_platform_candidate",
+        "note": "35W processor TDP is unusually low for socketed AM5 with up to 256GB DDR5; whole-system wall power depends on motherboard, memory, storage, PSU and peripherals."
+      },
+      "pricing": [
+        {"kind": "oem_channel_only", "availability": "processor not observed as normal boxed retail SKU", "observed_at": "2026-08-20", "note": "AMD positions Ryzen AI 400 desktop parts for OEM systems; no defensible standalone retail price was found in this pass."}
+      ],
+      "vendor_urls": ["https://www.amd.com/en/products/processors/desktops/ryzen/ai-400-series/amd-ryzen-ai-5-440ge.html"],
+      "technical_documentation": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/ai-400-series/amd-ryzen-ai-5-440ge.html",
+        "https://newsroom.amd.com/news/amd-gives-consumers-and-businesses-more-ai-pc-opti/",
+        "https://ryzenai.docs.amd.com/en/latest/"
+      ],
+      "manufacturer_model_identifier": "100-000001925",
+      "evidence": "manufacturer",
+      "notes": "Useful as an expandable low-power AI host rather than a high-throughput GPU replacement. The 50-TOPS NPU figure should not be compared directly with GPU TOPS or tokens/sec."
+    },
+    {
+      "id": "amd-ryzen-ai-5-435ge",
+      "manufacturer": "AMD",
+      "product": "Ryzen AI 5 435GE",
+      "compute_platform": "amd-gorgon-point-am5",
+      "category": "desktop_apu",
+      "status": "available_oem_channel",
+      "release_date": "2026-03-02",
+      "cpu_architecture": "Zen 5",
+      "cpu_cores": 6,
+      "cpu_threads": 12,
+      "cpu_base_ghz": 2.0,
+      "cpu_boost_ghz": 4.5,
+      "total_cache_mb": 14,
+      "socket": "AM5",
+      "process_node": "TSMC 4nm FinFET",
+      "gpu": "Radeon 840M",
+      "gpu_architecture": "RDNA 3.5",
+      "gpu_compute_units": 4,
+      "gpu_frequency_mhz": 2800,
+      "npu": "AMD XDNA 2",
+      "npu_tops_vendor": 50,
+      "npu_frequency_ghz": 1.8,
+      "tdp_w": 35,
+      "memory": {
+        "type": "DDR5 UDIMM",
+        "channels": 2,
+        "max_gb": 256,
+        "official_speed_2dpc_or_less_mt_s": 5600,
+        "official_speed_4dpc_mt_s": 3600,
+        "ecc": "supported with motherboard support"
+      },
+      "interfaces": {
+        "pcie_version": "PCIe 4.0",
+        "native_pcie_lanes_total": 14,
+        "native_pcie_lanes_usable": 10,
+        "native_usb4_40gbps": 2
+      },
+      "os_support": ["Windows 11 64-bit", "RHEL x86-64", "Ubuntu x86-64"],
+      "ai_frameworks_runtimes": ["AMD Ryzen AI Software", "ONNX Runtime paths via Ryzen AI", "CPU llama.cpp", "Vulkan-capable llama.cpp paths"],
+      "quantization_compatibility": {
+        "gguf": "CPU/Vulkan paths are practical; XDNA 2 acceleration requires models/operators supported by Ryzen AI tooling rather than arbitrary GGUF execution.",
+        "int8": "50 TOPS is AMD's peak NPU figure, not LLM tokens/sec."
+      },
+      "model_size_practicality": [
+        {"class": "7B-14B quantized", "assessment": "practical in sufficiently provisioned system RAM; GPU/NPU acceleration depends on backend support", "evidence": "capacity/runtime assessment"},
+        {"class": "30B+ quantized", "assessment": "system RAM capacity can be configured high enough, but DDR5 bandwidth and the small integrated GPU make CPU/RAM decode the likely bottleneck unless a supported accelerator path is used", "evidence": "reasoned estimate"}
+      ],
+      "efficiency": {
+        "off_grid_suitability": "very_good_platform_candidate",
+        "note": "35W processor TDP is unusually low for socketed AM5 with up to 256GB DDR5; whole-system wall power depends on motherboard, memory, storage, PSU and peripherals."
+      },
+      "pricing": [
+        {"kind": "oem_channel_only", "availability": "processor not observed as normal boxed retail SKU", "observed_at": "2026-08-20", "note": "AMD positions Ryzen AI 400 desktop parts for OEM systems; no defensible standalone retail price was found in this pass."}
+      ],
+      "vendor_urls": ["https://www.amd.com/en/products/processors/desktops/ryzen/ai-400-series/amd-ryzen-ai-5-435ge.html"],
+      "technical_documentation": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/ai-400-series/amd-ryzen-ai-5-435ge.html",
+        "https://newsroom.amd.com/news/amd-gives-consumers-and-businesses-more-ai-pc-opti/",
+        "https://ryzenai.docs.amd.com/en/latest/"
+      ],
+      "manufacturer_model_identifier": "100-000001785",
+      "evidence": "manufacturer",
+      "notes": "Useful as an expandable low-power AI host rather than a high-throughput GPU replacement. The 50-TOPS NPU figure should not be compared directly with GPU TOPS or tokens/sec."
+    },
+    {
+      "id": "hp-elitedesk-8-sff-g2a-e13lkat",
+      "manufacturer": "HP",
+      "product": "EliteDesk 8 SFF G2a Desktop Next Gen AI PC",
+      "sku": "E13LKAT#ABA",
+      "compute_platform": "amd-gorgon-point-am5",
+      "category": "small_form_factor_desktop",
+      "status": "available_channel",
+      "processor": "AMD Ryzen AI 5 435G",
+      "processor_mapping_evidence": "HP lists Ryzen AI 5 435G as supported; a reseller SKU mapping for E13LKAT#ABA identifies the 435G configuration.",
+      "cpu_architecture": "Zen 5",
+      "npu": "AMD XDNA 2",
+      "npu_tops_vendor": 50,
+      "gpu": "Radeon 840M",
+      "memory": {
+        "installed_gb": 16,
+        "installed_type": "DDR5",
+        "slots": 2,
+        "system_max_gb": 64,
+        "max_speed_mt_s": 5600,
+        "upgradeable": true
+      },
+      "storage": {
+        "installed": "512GB NVMe SSD",
+        "m2_2280_slots": 2,
+        "supported": "up to 2TB M.2 2280 PCIe Gen5 NVMe listed by HP"
+      },
+      "expansion": ["PCIe 4.0 x16", "PCIe 3.0 x1", "2x M.2 2280 storage", "M.2 2230 WLAN", "SATA 6Gb/s"],
+      "networking": ["1GbE", "optional Wi-Fi/Bluetooth by configuration"],
+      "ports": ["front USB-C 20Gbps", "4x front USB-A 10Gbps", "rear USB-A", "DisplayPort 2.1", "HDMI 2.1", "optional flex I/O including Thunderbolt 4"],
+      "physical": {"height_in": 3.94, "width_in": 11.95, "depth_in": 12.13, "weight_lb_reference": 9.37},
+      "power_supply_w_options": [180, 280],
+      "software": ["Windows 11 Pro", "AMD Ryzen AI / XDNA 2 supported application paths", "CPU llama.cpp", "Vulkan-capable llama.cpp paths"],
+      "quantization_compatibility": {
+        "gguf": "CPU/Vulkan inference is feasible; do not assume arbitrary GGUF execution on the NPU.",
+        "npu": "Requires supported Ryzen AI/ONNX execution paths."
+      },
+      "model_size_practicality": [
+        {"class": "7B-14B quantized", "assessment": "reasonable after memory upgrade; stock 16GB configuration leaves limited headroom", "evidence": "capacity assessment"},
+        {"class": "30B-class quantized", "assessment": "possible only after substantial RAM upgrade, with DDR5/CPU bandwidth likely limiting decode speed", "evidence": "estimate"}
+      ],
+      "efficiency": {
+        "off_grid_suitability": "good",
+        "note": "SFF platform can use a low-power Ryzen AI desktop APU, but HP lists 180W/280W PSU options rather than measured wall draw."
+      },
+      "pricing": [
+        {
+          "amount": 1296,
+          "currency": "USD",
+          "region": "US",
+          "kind": "retailer",
+          "availability": "add_to_cart",
+          "observed_at": "2026-08-20",
+          "vendor": "CDW",
+          "configuration": "E13LKAT#ABA, Ryzen AI 5, 16GB RAM, 512GB SSD",
+          "url": "https://www.cdw.com/product/hp-elitedesk-8-sff-g2a-desktop-next-gen-ai-pc-wolf-pro-security-edition/9193257",
+          "note": "CDW price observed August 20, 2026. Exact 435G mapping is corroborated by a separate reseller listing for the same HP manufacturer part number."
+        }
+      ],
+      "cost_efficiency": {
+        "usd_per_installed_ram_gb": 81.0,
+        "note": "Not a pure compute metric because the price includes the complete system and software; system memory is upgradeable."
+      },
+      "vendor_urls": [
+        "https://www.cdw.com/product/hp-elitedesk-8-sff-g2a-desktop-next-gen-ai-pc-wolf-pro-security-edition/9193257",
+        "https://support.hp.com/us-en/product/setup-user-guides/hp-elitedesk-8-sff-g2a-desktop-next-gen-ai-pc/2103559103"
+      ],
+      "technical_documentation": [
+        "https://support.hp.com/se-sv/document/ish_15153543-15153663-16?fallbackLocale=us-en&validated=true",
+        "https://support.hp.com/us-en/product/setup-user-guides/hp-elitedesk-8-sff-g2a-desktop-next-gen-ai-pc/2103559103",
+        "https://newsroom.amd.com/news/amd-gives-consumers-and-businesses-more-ai-pc-opti/"
+      ],
+      "evidence": "manufacturer_plus_retailer_sku_mapping",
+      "notes": "Practical OEM reference for Ryzen AI 400 desktop deployment. HP caps this chassis at 64GB even though the processor family supports up to 256GB, so platform and system memory ceilings must not be conflated."
+    }
+  ]
+}
