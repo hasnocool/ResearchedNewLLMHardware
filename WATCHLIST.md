@@ -1,6 +1,6 @@
 # Hardware Watchlist
 
-Last updated: **2026-08-20**
+Last updated: **2026-08-21**
 
 This file tracks hardware that could become important to local or distributed LLM inference after a price, availability, software or benchmark milestone.
 
@@ -10,6 +10,7 @@ This file tracks hardware that could become important to local or distributed LL
 |---|---|---|
 | NVIDIA RTX Spark N1X systems | Announced / prelaunch for fall-Q4 2026 | First stable retail prices, exact memory bandwidth, sustained power, independent LLM decode/prefill results, and shipping availability for 128 GB systems. |
 | AMD Ryzen AI Max PRO 400 systems | Announced for Q3 2026 platform rollout | First orderable 192 GB systems; exact memory bandwidth; ROCm support; measured wall power; real decode benchmarks; street price. |
+| Qualcomm Dragonfly AI200 / AI250 / AI300 | AI200 deployment in 2026; AI250 sampling planned mid-2027; AI300 sampling planned 2028 | Public pricing, per-card power, independent tokens/watt, production AI200 results, HBC physical/effective bandwidth characterization and AI250/AI300 sampling data. |
 | Tenstorrent Blackhole p100/p150 / QuietBox 2 | Available / shipping | Independent model benchmarks, tokens/watt, usable multi-card memory behavior, 2/4-card scaling efficiency and broader TT-NN model coverage. |
 | Qualcomm Dragonwing IQ-9075 / IQ-8275 | Available through developer/partner channels | Stable public EVK/module pricing, wall-power measurements, exact quantization/context for published LLM results, and independent tokens/watt reproduction. |
 | Acrab Agent Box / GΞLIX 1 | Announced / early product rollout | Public exact memory capacity, orderable price, system power, decode throughput, developer/runtime documentation, supported-model matrix and independent validation. |
@@ -20,6 +21,32 @@ This file tracks hardware that could become important to local or distributed LL
 | Tenstorrent Wormhole | Available previous-generation specialist ASIC | Meaningful price reduction, broader transformer support or unusually strong low-cost cluster results versus Blackhole. |
 | AMD Versal AI Edge Gen 2 | Adaptive SoC | Reproducible decoder-transformer/LLM deployment with external-memory and wall-power measurements. |
 | Altera FPGA AI Suite / Agilex | FPGA | Modern transformer benchmark from spatial compiler path and measured energy efficiency. |
+
+## Qualcomm Dragonfly datacenter watch
+
+Dragonfly is a separate rack-scale inference family from Qualcomm's Dragonwing edge hardware.
+
+Current manufacturer data captured on 2026-08-21:
+
+- **AI200:** 768 GB LPDDR5X per card; 56 cards and 43 TB memory per rack; 0.414 PB/s aggregate rack bandwidth; PCIe Gen6 scale-up; Ethernet/RoCE scale-out; 140 kW rack power; deployments begin in 2026.
+- **AI250:** 768 GB per card with HBC Gen 1 near-memory compute; Qualcomm publishes 133 TB/s effective bandwidth per card, 7.455 PB/s effective per rack and 1M-token context support; commercial sampling expected mid-2027.
+- **AI300:** HBC Gen 2 roadmap platform with all-to-all scale-up and expanded scale-out; Qualcomm states a 54x effective-bandwidth increase versus AI200; commercial sampling expected 2028.
+
+Important evidence rule: Qualcomm's **18x/54x effective-bandwidth** and **4x-8x performance-per-watt** statements are manufacturer estimates based on its HBC architecture. Do not compare those figures directly with physical HBM/LPDDR bandwidth or independent tokens/watt results.
+
+Promotion / alert triggers:
+
+- public delivered card or rack pricing;
+- AI200 per-card power and wall-power measurements;
+- reproducible prefill/decode results for named models;
+- independent tokens/sec/watt and tokens/dollar comparisons;
+- production AI200 deployment results during 2026;
+- physical-versus-effective HBC bandwidth analysis when AI250 samples;
+- AI300 per-card capacity, bandwidth and power;
+- vLLM/SGLang/PyTorch/Hugging Face compatibility matrices;
+- disaggregated prefill/decode scaling measurements.
+
+See `QUALCOMM_DRAGONFLY.md` and `data/qualcomm_dragonfly.json`.
 
 ## Tenstorrent Blackhole watch
 
@@ -145,13 +172,16 @@ Track the following under a shared `nvidia-gb10-grace-blackwell` compute platfor
 - Lenovo ThinkStation PGX
 - other OEM GB10 systems as they become orderable
 
+Current software watch note (2026-08-21): NVIDIA now advertises **up to 1.9x inference speedups** from the latest DGX Spark software update. DGX Spark release notes also document improved unified-memory OOM handling, while NemoClaw has added managed single-Spark and experimental dual-Spark vLLM paths. Treat the 1.9x figure as manufacturer evidence until a model/runtime-specific reproducible comparison is available.
+
 Alert for:
 
 - >=15% delivered-price reduction,
 - materially cheaper OEM SKU with the same 128 GB GB10 platform,
 - meaningful storage/networking difference,
 - exact-system wall-power measurements,
-- major CUDA/DGX OS improvements affecting large-model reliability.
+- major CUDA/DGX OS improvements affecting large-model reliability,
+- model-specific evidence explaining the new up-to-1.9x software performance claim.
 
 ### Decommissioned datacenter accelerators
 
@@ -179,6 +209,7 @@ Future research should actively look for:
 - PCIe accelerators under ~200 W with strong transformer software
 - mini PCs with >=96 GB high-bandwidth unified memory
 - embedded boards/SOMs with >=64 GB memory and >=10GbE
+- rack-scale inference accelerators with unusually high memory capacity per card
 - affordable HBM-equipped used accelerators
 - new FPGA/adaptive SoC transformer compilers
 - open-source inference accelerators
