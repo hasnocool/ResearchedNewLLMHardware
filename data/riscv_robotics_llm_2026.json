@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.2.0",
+  "last_updated": "2026-08-21",
+  "purpose": "Obscure and newly available RISC-V / embedded AI systems with direct local-LLM relevance. Vendor throughput claims are retained with provenance and are not treated as normalized cross-platform benchmarks.",
+  "hardware": [
+    {
+      "id": "sipeed-k3-pico-itx-32gb",
+      "manufacturer": "Sipeed",
+      "product": "K3 Pico-ITX 32GB",
+      "compute_platform": "spacemit-keystone-k3",
+      "category": "riscv_ai_sbc",
+      "status": "available_channel_dependent",
+      "tier": "A-experimental",
+      "soc": "SpacemiT Key Stone K3",
+      "cpu": "8x X100 high-performance RISC-V cores + 8x A100 AI cores",
+      "isa": "RVA23-class RISC-V",
+      "ai_compute": {
+        "int4_tops_vendor": 60,
+        "supported_datatypes": ["BF16", "FP16", "INT4"]
+      },
+      "memory_gb": 32,
+      "memory_type": "LPDDR5-6400 unified",
+      "memory_bandwidth_gbps": 51,
+      "storage": ["eMMC 5.1", "microSD", "M.2 NVMe PCIe Gen3 x4"],
+      "networking": ["10GbE", "1GbE"],
+      "interfaces": ["PCIe Gen3 x4", "USB 3.0", "dual USB-C with USB-PD and DisplayPort Alt Mode"],
+      "dimensions_mm": {"width": 103, "depth": 90.5, "height_with_heatsink": 35},
+      "software": ["Bianbu OS (Debian-based)", "Docker", "RISC-V KVM virtualization", "Ubuntu 26.04 support claimed by vendor", "ROS support claimed by vendor"],
+      "vendor_benchmarks": [
+        {
+          "model_class": "30B parameter LLM",
+          "metric": "decode_tokens_per_second",
+          "value": ">10",
+          "evidence": "vendor_claim",
+          "caveat": "Sipeed does not provide enough public model, quantization, context, runtime, or power metadata on the indexed product page for normalized comparison."
+        }
+      ],
+      "model_size_practicality": "32GB unified memory makes many 20B-30B-class 4-bit models capacity-plausible, but usable speed depends on the K3 runtime and operator coverage; do not infer performance from TOPS alone.",
+      "quantization_compatibility": "Vendor explicitly lists INT4 and promotes 30B LLM inference. Arbitrary GGUF/llama.cpp compatibility should be treated as runtime-dependent until independently verified.",
+      "llm_inference_suitability": "High-interest experimental RISC-V local-AI node because it combines 32GB memory, 10GbE and dedicated AI compute in Pico-ITX form factor.",
+      "off_grid_suitability": "Potentially good compact-node candidate, but no defensible manufacturer whole-board idle/load power measurement was found in this pass; do not score power efficiency from TOPS alone.",
+      "pricing": [
+        {
+          "amount": 639,
+          "currency": "USD",
+          "region": "global/online",
+          "kind": "observed_new",
+          "configuration": "32GB K3 Pico-ITX",
+          "availability": "channel_dependent",
+          "observed_at": "2026-06-21",
+          "url": "https://www.cnx-software.com/2026/06/21/spacemit-k3-pico-itx-risc-v-chassis-kit-review-part-2-what-works-what-doesnt-in-bianbu-os-4-0/",
+          "note": "Recent third-party channel observation; retained as dated market evidence because the public Sipeed product page does not expose a stable current storefront price."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://sipeed.com/k3"
+      },
+      "technical_documentation": {
+        "manufacturer_product": "https://sipeed.com/k3"
+      },
+      "source_urls": {
+        "recent_independent_review": "https://www.cnx-software.com/2026/06/21/spacemit-k3-pico-itx-risc-v-chassis-kit-review-part-2-what-works-what-doesnt-in-bianbu-os-4-0/"
+      },
+      "evidence": "manufacturer_plus_independent_market_observation"
+    },
+    {
+      "id": "pine64-alpha-one-32gb",
+      "manufacturer": "PINE64",
+      "product": "ALPHA-One 7B LLM Agentic/Generative AI Agent Appliance",
+      "compute_platform": "eswin-eic7700x-starpro64",
+      "category": "riscv_ai_appliance",
+      "status": "available",
+      "tier": "A-obscure-low-power",
+      "soc": "ESWIN EIC7700X",
+      "cpu": "4-core SiFive P550 RISC-V up to 1.8GHz",
+      "gpu": "Imagination AXM-8-256",
+      "npu": {"int8_tops": 19.95, "fp16_or_int16_tops": 9.975},
+      "memory_gb": 32,
+      "memory_type": "LPDDR5-6400",
+      "storage": "64GB eMMC preinstalled with LLM image",
+      "networking": ["dual 1GbE", "Wi-Fi 6", "Bluetooth 5.3"],
+      "interfaces": ["2x USB 3.0 host", "2x USB 2.0 host", "digital video output"],
+      "cooling": "passive aluminum enclosure with heat pipe contacting SoC",
+      "power": {"vendor_system_claim_w_max": "below 30", "included_adapter": "12V 3A"},
+      "weight_kg": 1.2,
+      "software": ["RockOS", "ESWIN NPU runtime", "preinstalled Qwen2 7B", "DeepSeek-R1-Distill-Qwen 7B support", "Qwen2 0.5B support"],
+      "vendor_benchmarks": [
+        {
+          "model_class": "7B LLM",
+          "metric": "generation_tokens_per_second",
+          "value": "4.x",
+          "evidence": "manufacturer_store",
+          "caveat": "PINE64 store gives a current 4.x tok/s figure without full prompt/context/quantization metadata; documentation also records approximately 3.5 tok/s for the Docker path and labels higher native-mode rates as potential improvement."
+        }
+      ],
+      "model_size_practicality": "Designed and shipped specifically around 7B-class local models. PINE64 describes 15B support as a potential future optimization, not verified current capability.",
+      "quantization_compatibility": "Uses ESWIN-specific model/runtime tooling; do not assume arbitrary GGUF compatibility or llama.cpp NPU acceleration.",
+      "llm_inference_suitability": "Unusually concrete RISC-V edge-AI appliance because it ships with working 7B models and a vendor-reported real token rate rather than TOPS alone.",
+      "off_grid_suitability": "Strong experimental off-grid candidate: vendor claims below-30W system consumption and passive cooling, though independent wall-power measurements are still desirable.",
+      "pricing": [
+        {
+          "amount": 329.99,
+          "currency": "USD",
+          "region": "US",
+          "kind": "manufacturer_store",
+          "configuration": "US version, 32GB LPDDR5 + 64GB eMMC",
+          "availability": "in_stock",
+          "observed_at": "2026-08-21",
+          "url": "https://pine64.com/product/alpha-one-7b-llm-agentic-generative-ai-agent-us-version/",
+          "note": "PINE Store community price; includes US-plug 12V 3A supply."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_store": "https://pine64.com/product/alpha-one-7b-llm-agentic-generative-ai-agent-us-version/",
+        "manufacturer_device": "https://pine64.org/devices/alpha-one/"
+      },
+      "technical_documentation": {
+        "documentation": "https://pine64.org/documentation/ALPHA-One/",
+        "specifications": "https://pine64.org/documentation/ALPHA-One/Specifications/",
+        "software": "https://pine64.org/documentation/ALPHA-One/Software/",
+        "starpro64_platform": "https://pine64.org/documentation/StarPro64/"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "arduino-ventuno-q-16gb",
+      "manufacturer": "Arduino",
+      "product": "VENTUNO Q",
+      "compute_platform": "qualcomm-dragonwing-iq-8275",
+      "category": "robotics_ai_sbc",
+      "status": "announced_coming_soon",
+      "tier": "A-potential",
+      "mpu": "Qualcomm Dragonwing IQ-8275",
+      "cpu": "8-core Qualcomm Kryo",
+      "gpu": "Qualcomm Adreno 623",
+      "npu": {"dense_tops": 40, "architecture": "Qualcomm Hexagon"},
+      "mcu": "STM32H5F5 Arm Cortex-M33 at 250MHz, 4MB flash, 1.5MB RAM",
+      "memory_gb": 16,
+      "memory_type": "LPDDR5",
+      "storage": ["64GB eMMC", "M.2 NVMe Gen4 expansion"],
+      "networking": ["2.5GbE", "Wi-Fi 6 tri-band", "Bluetooth 5.3"],
+      "interfaces": ["3x MIPI-CSI camera interfaces", "HDMI", "USB-C DisplayPort Alt Mode", "2x USB 3.0 Type-A", "CAN-FD", "UNO shield headers", "Raspberry Pi HAT-compatible 40-pin GPIO", "Qwiic"],
+      "dimensions_mm": {"width": 160, "depth": 100, "height": 25.8},
+      "power_input": ["USB-C 5V up to 3A", "12-24V barrel jack", "7-24V screw terminal"],
+      "operating_systems": ["Ubuntu", "Debian", "Arduino Core on Zephyr for MCU"],
+      "software": ["Arduino App Lab", "Qualcomm AI Hub", "Edge Impulse", "ROS 2", "Docker/standard Linux toolchains"],
+      "llm_support_evidence": "Arduino explicitly advertises local LLMs, VLMs, ASR and TTS through pre-optimized Qualcomm AI Hub / Edge Impulse / App Lab paths.",
+      "model_size_practicality": "16GB LPDDR5 is useful for small and medium edge models, but no defensible public model-size ceiling or normalized token-rate benchmark is stored yet.",
+      "quantization_compatibility": "Qualcomm AI Hub and Edge Impulse provide optimized/quantized deployment paths. Arbitrary GGUF acceleration on the Hexagon NPU is not claimed here.",
+      "llm_inference_suitability": "High-potential robotics/physical-AI node where deterministic real-time control and local multimodal inference matter more than maximum language-model size.",
+      "off_grid_suitability": "Promising due to direct DC input options and integrated edge compute, but no whole-board workload power measurements are yet stored.",
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "coming_soon_waitlist",
+          "observed_at": "2026-08-21",
+          "url": "https://www.arduino.cc/product-ventuno-q",
+          "note": "Arduino has not published a stable retail price yet."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.arduino.cc/product-ventuno-q",
+        "announcement": "https://blog.arduino.cc/2026/03/09/introducing-arduino-ventuno-q-your-new-ai-robotics-and-actuation-platform/"
+      },
+      "technical_documentation": {
+        "product_specs": "https://www.arduino.cc/product-ventuno-q",
+        "getting_started": "https://www.arduino.cc/en/ventuno-q/"
+      },
+      "evidence": "manufacturer"
+    }
+  ]
+}
