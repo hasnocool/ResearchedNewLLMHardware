@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-21",
+  "purpose": "AMD Instinct MI400-series accelerator records for large-model inference, HPC, and rack-scale AI research.",
+  "hardware": [
+    {
+      "id": "amd-instinct-mi455x",
+      "manufacturer": "AMD",
+      "product": "Instinct MI455X",
+      "compute_platform": "amd-cdna5-mi400",
+      "category": "datacenter_ai_accelerator",
+      "status": "production_ramp_2026",
+      "tier": "S-datacenter",
+      "architecture": "AMD CDNA 5",
+      "work_group_processors": 256,
+      "memory_gb": 432,
+      "memory_type": "HBM4",
+      "memory_stacks": 12,
+      "memory_bandwidth_tb_s": 23.3,
+      "peak_fp4_pflops": 40.3,
+      "peak_fp8_pflops": 20.1,
+      "scale_up_bandwidth_tb_s": 3.6,
+      "scale_out_bandwidth_gb_s": 600,
+      "interconnect": ["UALink", "UALoE", "AMD Infinity Fabric"],
+      "form_factor": "Enhanced Accelerator Module (EAM)",
+      "cooling": "direct liquid cooling in Helios reference implementation",
+      "software": ["ROCm", "PyTorch", "TensorFlow", "JAX", "ONNX Runtime", "vLLM", "SGLang", "Triton"],
+      "power_w": null,
+      "pricing": [],
+      "price_status": "no_public_standalone_price_captured",
+      "availability_note": "AMD says MI400/Helios production shipments and volume partner deployments begin in the second half of 2026. MI455X is primarily described as the GPU used in Helios rack-scale systems rather than a retail standalone card.",
+      "evidence": "manufacturer",
+      "vendor_urls": [
+        "https://www.amd.com/en/products/accelerators/instinct/mi400.html",
+        "https://www.amd.com/en/products/specifications/accelerators.html"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/content/dam/amd/en/documents/products/accelerators/instinct/amd-instinct-mi455x_brochure.pdf",
+        "https://www.amd.com/content/dam/amd/en/documents/products/technologies/cdna/amd-cdna5-whitepaper.pdf",
+        "https://rocm.docs.amd.com/"
+      ],
+      "research_notes": [
+        "432 GB HBM4 and 23.3 TB/s physical memory bandwidth create a materially higher single-accelerator capacity/bandwidth tier than older MI300/MI350 products.",
+        "AMD claims 34x higher token throughput than MI355X in its published Advancing AI 2026 methodology; treat this as manufacturer evidence until workload details are independently reproduced.",
+        "Do not infer board/module power from rack power or from older Instinct products; no defensible per-GPU power value was captured in this pass."
+      ]
+    },
+    {
+      "id": "amd-instinct-mi430x",
+      "manufacturer": "AMD",
+      "product": "Instinct MI430X",
+      "compute_platform": "amd-cdna5-mi400",
+      "category": "datacenter_ai_hpc_accelerator",
+      "status": "announced_2027",
+      "tier": "A-potential-datacenter",
+      "architecture": "AMD CDNA 5",
+      "work_group_processors": 256,
+      "memory_gb": 432,
+      "memory_type": "HBM4",
+      "memory_bandwidth_tb_s": 23.3,
+      "peak_fp64_tflops": 288,
+      "peak_fp4_pflops": 9.2,
+      "software": ["ROCm", "PyTorch", "TensorFlow", "JAX", "ONNX Runtime", "vLLM", "Triton"],
+      "power_w": null,
+      "pricing": [],
+      "price_status": "no_public_price_captured",
+      "availability_note": "AMD says MI430X is expected to be available in 2027 and targets sovereign AI and HPC workloads.",
+      "evidence": "manufacturer",
+      "vendor_urls": [
+        "https://www.amd.com/en/products/accelerators/instinct/mi400/mi430x.html",
+        "https://www.amd.com/en/products/accelerators/instinct/mi400.html"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/content/dam/amd/en/documents/products/technologies/cdna/amd-cdna5-whitepaper.pdf",
+        "https://rocm.docs.amd.com/"
+      ],
+      "research_notes": [
+        "MI430X emphasizes FP64/HPC while retaining very large HBM4 capacity useful for AI-for-science and large inference workloads.",
+        "Power and commercial pricing remain unpublished in the captured manufacturer material."
+      ]
+    }
+  ]
+}
