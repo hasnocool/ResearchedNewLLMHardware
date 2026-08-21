@@ -2,7 +2,7 @@
 
 A curated research catalog for newly announced, newly available, unusually efficient, or newly affordable hardware that may be useful for **local and distributed LLM inference**.
 
-The project tracks GPUs, NPUs, TPUs, AI ASICs, unified-memory APUs, mini PCs, compact AI workstations, embedded boards and SOMs, SBCs, Apple Silicon, FPGA/adaptive-SoC platforms, secondary-market datacenter accelerators, heterogeneous systems, rack-scale inference accelerators, and high-speed interconnect hardware.
+The project tracks GPUs, NPUs, TPUs, AI ASICs, unified-memory APUs, mini PCs, compact AI workstations, embedded boards and SOMs, SBCs, Apple Silicon, FPGA/adaptive-SoC platforms, secondary-market datacenter accelerators, heterogeneous systems, rack-scale inference accelerators, purpose-built LLM inference ASICs, and high-speed interconnect hardware.
 
 ## What makes hardware interesting here?
 
@@ -36,6 +36,7 @@ A device is not ranked from TOPS alone. Priority is given to:
 | AMD Ryzen AI Max+ 395 systems | unified-memory APU | up to 128 GB LPDDR5X | ~256 GB/s class | system dependent | available | Strong current high-capacity x86 platform with increasingly practical ROCm/Vulkan paths. |
 | Apple M5 Max MacBook Pro | portable unified-memory workstation | up to 128 GB | up to 614 GB/s | portable system | available | Very high memory bandwidth for a portable system; Metal/MLX/BaseRT software paths are improving. |
 | NVIDIA GB10 / DGX Spark class | compact AI supercomputer | 128 GB LPDDR5X | 273 GB/s | 140 W SoC; OEM PSU varies | available | Mature CUDA stack, coherent memory and ConnectX-7 make it unusually cluster-friendly; current DGX Spark software adds improved unified-memory handling and NVIDIA advertises up to 1.9x inference speedups. |
+| AMD Instinct MI455X | datacenter AI accelerator | 432 GB HBM4 | 23.3 TB/s | not yet captured | production ramp 2H 2026 | A new single-accelerator memory-capacity/bandwidth tier with ROCm and rack-scale UALink/UALoE deployment. |
 | Qualcomm Dragonfly AI200 | rack-scale inference accelerator | 768 GB LPDDR5X/card; 43 TB/rack | 0.414 PB/s/rack | 140 kW/rack | deployments begin 2026 | Extreme per-card memory capacity makes it notable for very large-model inference even before independent throughput data is available. |
 | AMD Kria AI SOM / Ryzen AI Embedded X100 | embedded SOM | up to 128 GB LPDDR5X | TBD | TBD | announced/sampling | CPU + RDNA 3.5 GPU + XDNA 2 NPU in an embedded form factor. |
 | Qualcomm Dragonwing IQ-9075 EVK | embedded/industrial AI kit | 36 GB LPDDR5 ECC | platform-specific | 3.8–20 W SoC | available/channel-dependent | Qualcomm publishes named LLM results up to 22 tok/s for Llama 2 7B and 12 tok/s for 13B, making it unusually measurable for edge inference. |
@@ -62,6 +63,10 @@ See [`data/current_system_variants.json`](data/current_system_variants.json) and
 
 Ryzen AI Max systems let model weights live in a large unified LPDDR5X pool rather than being limited to conventional discrete-GPU VRAM. This trades HBM/GDDR bandwidth for much larger capacity at relatively modest power. The next-generation Ryzen AI Max PRO 400 platform raises the ceiling to 192 GB system memory and up to 160 GB graphics allocation.
 
+### AMD Instinct MI400 / CDNA 5
+
+MI400 is a distinct datacenter accelerator family. **MI455X** exposes 432 GB HBM4 at 23.3 TB/s with up to 40.3 PFLOPS FP4, while **MI430X** keeps the same 432 GB / 23.3 TB/s memory tier and emphasizes high-precision HPC/AI-for-science workloads. MI455X/Helios production ramps in the second half of 2026; AMD expects MI430X availability in 2027. Public standalone pricing and defensible per-GPU power figures were not captured, so they remain unknown rather than inferred. See [`AMD_MI400.md`](AMD_MI400.md) and [`data/amd_mi400.json`](data/amd_mi400.json).
+
 ### Apple Silicon
 
 Apple Silicon should be scored on unified-memory capacity, bandwidth, GPU/runtime support, measured tokens per second, whole-system power and delivered price. The M5 Pro reaches 307 GB/s and 64 GB, while the high-end M5 Max reaches 614 GB/s and 128 GB. See [`APPLE_M5.md`](APPLE_M5.md), [`SBC_AND_APPLE_SILICON.md`](SBC_AND_APPLE_SILICON.md), and the corresponding data files.
@@ -83,6 +88,10 @@ Qualcomm Dragonwing IQ8/IQ9 platforms are tracked as low-power embedded/industri
 ### Qualcomm Dragonfly data-center inference
 
 Dragonfly is tracked separately from Dragonwing. **AI200** provides 768 GB LPDDR5X per card and 43 TB per 56-card rack. **AI250** introduces HBC Gen 1 near-memory compute and Qualcomm publishes 133 TB/s effective bandwidth per card; **AI300** is the HBC Gen 2 roadmap platform. Qualcomm's 18x/54x effective-bandwidth and 4x–8x efficiency statements are manufacturer claims and are not treated as physical-bandwidth or independent tokens/watt measurements. See [`QUALCOMM_DRAGONFLY.md`](QUALCOMM_DRAGONFLY.md) and [`data/qualcomm_dragonfly.json`](data/qualcomm_dragonfly.json).
+
+### OpenAI / Broadcom Jalapeño
+
+Jalapeño is tracked as a purpose-built LLM inference ASIC and architectural watch item rather than a retail accelerator. OpenAI says engineering samples are running at production target frequency and power and that initial deployment is planned by the end of 2026. Memory capacity, memory bandwidth, power, peak compute and pricing are not public, so the catalog intentionally leaves them unset. The promised detailed technical report is the main promotion trigger. See [`OPENAI_JALAPENO.md`](OPENAI_JALAPENO.md) and [`data/openai_jalapeno.json`](data/openai_jalapeno.json).
 
 ### Embedded and edge
 
@@ -109,16 +118,20 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 ├── METHODOLOGY.md
 ├── PRICING_AND_SOURCES.md
 ├── WATCHLIST.md
+├── AMD_MI400.md
 ├── APPLE_M5.md
 ├── NVIDIA_RTX_SPARK.md
+├── OPENAI_JALAPENO.md
 ├── QUALCOMM_DRAGONFLY.md
 ├── QUALCOMM_EDGE_AI.md
 ├── SBC_AND_APPLE_SILICON.md
 ├── SPECIALTY_EDGE_AI.md
 ├── data/
 │   ├── hardware.json
+│   ├── amd_mi400.json
 │   ├── current_system_variants.json
 │   ├── nvidia_rtx_spark.json
+│   ├── openai_jalapeno.json
 │   ├── apple_m5.json
 │   ├── qualcomm_dragonfly.json
 │   ├── qualcomm_edge.json
