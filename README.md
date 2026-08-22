@@ -57,10 +57,11 @@ As of **2026-08-22**, notable captured variants include:
 - **Dell Pro Max with GB10 (FCM1253)** — 128 GB LPDDR5X, DGX OS 7; a 4 TB Canadian configuration was listed at CA$8,703.69.
 - **Acer Veriton GN100 (GN100-UD11)** — GB10, 128 GB LPDDR5X, 4 TB, 10GbE and ConnectX-7; Acer publishes a 170 W maximum PSU figure and a North American launch price from US$3,999.
 - **GMKtec EVO-X2 / EVO-X3** — Ryzen AI Max+ 395 systems with high-capacity LPDDR5X; vendor LLM results remain tagged as vendor evidence until independently reproduced.
+- **ACEMAGIC F9A** — announced Ryzen AI Max+ 395 system with up to 128 GB LPDDR5X-8000, native OCuLink, dual USB4 and dual 2.5GbE in an approximately 2 L chassis. ACEMAGIC still lists pricing and availability as coming soon, so no purchase price or shipping date is inferred.
 - **ASUS ProArt P14 / P16 RTX Spark** — prelaunch Windows laptops with RTX Spark N1X and configurations up to 128 GB unified memory.
 - **ASUS ProArt Mini PC RTX Spark** — announced compact 128 GB-class implementation with 10GbE and 140 W thermal headroom.
 
-See [`data/current_system_variants.json`](data/current_system_variants.json), [`data/nvidia_gb300_deskside.json`](data/nvidia_gb300_deskside.json), and [`data/nvidia_rtx_spark.json`](data/nvidia_rtx_spark.json) for normalized records.
+See [`data/current_system_variants.json`](data/current_system_variants.json), [`data/acemagic_f9a.json`](data/acemagic_f9a.json), [`data/nvidia_gb300_deskside.json`](data/nvidia_gb300_deskside.json), and [`data/nvidia_rtx_spark.json`](data/nvidia_rtx_spark.json) for normalized records.
 
 ## Major platform families
 
@@ -127,6 +128,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 ├── METHODOLOGY.md
 ├── PRICING_AND_SOURCES.md
 ├── WATCHLIST.md
+├── ACEMAGIC_F9A.md
 ├── AMD_MI400.md
 ├── APPLE_M5.md
 ├── NVIDIA_GB300_DESKSIDE.md
@@ -138,6 +140,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 ├── SPECIALTY_EDGE_AI.md
 ├── data/
 │   ├── hardware.json
+│   ├── acemagic_f9a.json
 │   ├── amd_mi400.json
 │   ├── current_system_variants.json
 │   ├── nvidia_gb300_deskside.json
