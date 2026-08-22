@@ -1,6 +1,6 @@
 # Hardware Watchlist
 
-Last updated: **2026-08-21**
+Last updated: **2026-08-22**
 
 This file tracks hardware that could become important to local or distributed LLM inference after a price, availability, software or benchmark milestone.
 
@@ -8,6 +8,7 @@ This file tracks hardware that could become important to local or distributed LL
 
 | Candidate | Current state | Trigger for promotion / alert |
 |---|---|---|
+| NVIDIA GB300 DGX Station class | Ubuntu DGX Station orderable; ASUS ET900N orderable; Dell shipping/call-to-order; HP ZGX Fury pre-order | Stable delivered pricing, named-model decode/prefill results, measured wall power under inference, HBM3e-vs-LPDDR5X placement behavior and two-node ConnectX-8 scaling. |
 | NVIDIA RTX Spark N1X systems | Announced / prelaunch for fall-Q4 2026 | First stable retail prices, exact memory bandwidth, sustained power, independent LLM decode/prefill results, and shipping availability for 128 GB systems. |
 | AMD Ryzen AI Max PRO 400 systems | Announced for Q3 2026 platform rollout | First orderable 192 GB systems; exact memory bandwidth; ROCm support; measured wall power; real decode benchmarks; street price. |
 | Qualcomm Dragonfly AI200 / AI250 / AI300 | AI200 deployment in 2026; AI250 sampling planned mid-2027; AI300 sampling planned 2028 | Public pricing, per-card power, independent tokens/watt, production AI200 results, HBC physical/effective bandwidth characterization and AI250/AI300 sampling data. |
@@ -21,6 +22,33 @@ This file tracks hardware that could become important to local or distributed LL
 | Tenstorrent Wormhole | Available previous-generation specialist ASIC | Meaningful price reduction, broader transformer support or unusually strong low-cost cluster results versus Blackhole. |
 | AMD Versal AI Edge Gen 2 | Adaptive SoC | Reproducible decoder-transformer/LLM deployment with external-memory and wall-power measurements. |
 | Altera FPGA AI Suite / Agilex | FPGA | Modern transformer benchmark from spatial compiler path and measured energy efficiency. |
+
+## NVIDIA GB300 deskside watch
+
+NVIDIA's current DGX Station documentation moves GB300 from announcement-only status into an orderable deskside platform class.
+
+Current manufacturer data captured on 2026-08-22:
+
+- **GB300 Grace Blackwell Ultra Desktop:** 72-core Grace CPU + Blackwell Ultra GPU, 252 GB HBM3e at 7.1 TB/s, 496 GB LPDDR5X at 396 GB/s and **748 GB coherent memory**.
+- **NVLink-C2C:** 900 GB/s.
+- **Reference DGX Station:** up to 20 PFLOPS sparse FP4, ConnectX-8 up to 800 Gb/s, four M.2 Gen5 slots and **1,600 W total system power**.
+- **NVIDIA DGX Station (Ubuntu):** NVIDIA now exposes **Order Now** through partner channels; no stable public numeric reference price captured.
+- **DGX Station for Windows:** remains a distinct Q4 2026 software/OS variant and should not be used to mark the Ubuntu system unavailable.
+- **ASUS ExpertCenter Pro ET900N G3:** ASUS says it is available to order worldwide; 1,600 W Titanium PSU; quote-based pricing in captured manufacturer material.
+- **Dell Pro Max with GB300:** shipping/call-to-order by region. Dell Canada's storefront displayed CA$372,895.28 for an indexed configuration on 2026-08-22; preserve this unusual dynamic storefront value as an observation, not platform MSRP.
+- **HP ZGX Fury:** pre-order / notify-me rollout with 748 GB coherent memory.
+
+Promotion / alert triggers:
+
+- stable delivered prices from NVIDIA/OEM channels;
+- named-model prefill/decode benchmarks with runtime, datatype/quantization, context and batch metadata;
+- wall-power measurements at idle, prefill and decode rather than only the 1,600 W system rating;
+- evidence explaining practical placement of model weights and KV cache between 252 GB HBM3e and 496 GB LPDDR5X;
+- one-versus-two-node scaling over ConnectX-8;
+- production Windows availability and any Windows-vs-Ubuntu performance differences;
+- OEM cooling/noise/reliability comparisons.
+
+See `NVIDIA_GB300_DESKSIDE.md` and `data/nvidia_gb300_deskside.json`.
 
 ## Qualcomm Dragonfly datacenter watch
 
