@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-22",
+  "purpose": "ACEMAGIC F9A OEM system record. This is a system implementation of the existing AMD Ryzen AI Max+ 395 / Strix Halo platform and must not be counted as a new silicon architecture.",
+  "hardware": [
+    {
+      "id": "acemagic-f9a-ryzen-ai-max-plus-395",
+      "manufacturer": "ACEMAGIC",
+      "product": "F9A Mini AI Workstation",
+      "compute_platform": "amd-strix-halo-ryzen-ai-max-plus-395",
+      "category": "compact_ai_workstation",
+      "status": "announced_prelaunch",
+      "cpu": "AMD Ryzen AI Max+ 395, 16C/32T Zen 5",
+      "gpu": "AMD Radeon 8060S, RDNA 3.5",
+      "npu": "AMD XDNA 2",
+      "npu_tops_vendor": 50,
+      "vendor_total_ai_tops": 126,
+      "memory_gb_max": 128,
+      "memory_type": "LPDDR5X-8000 unified",
+      "storage_expansion": "2x M.2 PCIe 4.0 x4 NVMe",
+      "networking": ["2.5GbE", "2.5GbE", "Wi-Fi 7", "Bluetooth 5.4"],
+      "expansion": ["OCuLink PCIe 4.0 x4", "2x USB4 40Gbps", "SD 4.0 UHS-II"],
+      "dimensions_mm": [158, 158, 85],
+      "volume_l_approx": 2.0,
+      "power": {
+        "peak_package_w_vendor": 140,
+        "wall_power_w": null,
+        "note": "140 W is a vendor package/performance figure, not a measured whole-system wall-power result."
+      },
+      "pricing": [],
+      "availability_note": "ACEMAGIC's current product page states pricing and availability are coming soon. No retail price or shipping date is inferred.",
+      "vendor_capability_claims": [
+        {
+          "claim": "Supports local models up to the 120B-parameter class in high-memory configurations",
+          "evidence": "manufacturer_claim",
+          "note": "Capability claim only; no normalized F9A-specific throughput benchmark is recorded."
+        }
+      ],
+      "software": ["Windows", "AMD Ryzen AI software", "ROCm ecosystem expected for compatible Linux configurations", "Vulkan/llama.cpp ecosystem"],
+      "vendor_urls": [
+        "https://acemagic.co/pages/f9a-ai-workstation",
+        "https://acemagic.uk/products/acemagic-minipc-f9a"
+      ],
+      "technical_documentation": [
+        "https://acemagic.net/blogs/news/official-announcement-introducing-the-acemagic-f9a-2l-flagship-mini-ai-workstation-with-amd-ryzen-ai-max-395-oculink-amp-50-tops-npu",
+        "https://ryzenai.docs.amd.com/en/latest/"
+      ],
+      "evidence": "manufacturer",
+      "notes": "Shared Strix Halo silicon. The F9A is interesting at the system level because it combines up to 128GB unified memory with OCuLink, dual USB4 and dual 2.5GbE in an approximately 2L chassis. Do not count it as a new compute architecture or invent a price before ACEMAGIC publishes one."
+    }
+  ]
+}
