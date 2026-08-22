@@ -1,0 +1,204 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-21",
+  "scope": "compact_low_power_cuda_and_cix_arm_ai_nodes",
+  "notes": [
+    "This slice adds a mature 70W CUDA workstation GPU and two CIX P1 Arm boards that provide unusually large system-memory capacities for compact local-AI experimentation.",
+    "Vendor NPU TOPS and tokens-per-second claims are retained as vendor-scoped evidence and are not treated as portable llama.cpp, Vulkan, CUDA, or cross-platform benchmark results.",
+    "Model-size guidance is approximate and reserves memory for runtime, context and KV cache. System RAM capacity does not imply equivalent accelerator-accessible capacity or performance.",
+    "Marketplace prices are point-in-time observations and should not be interpreted as stable market averages."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-rtx-a2000-12gb-used-low-power",
+      "manufacturer": "NVIDIA",
+      "product": "RTX A2000 12GB",
+      "compute_platform": "nvidia-ampere-ga106-professional",
+      "category": "workstation_gpu_secondary_market",
+      "status": "secondary-market",
+      "tier": "A-low-power-cuda-value",
+      "gpu_architecture": "Ampere",
+      "cuda_cores": 3328,
+      "tensor_cores": 104,
+      "rt_cores": 26,
+      "fp32_tflops_peak": 8.0,
+      "tensor_tflops_vendor_sparse": 63.9,
+      "memory_gb": 12,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 192,
+      "memory_bandwidth_gbps": 288,
+      "board_power_w": 70,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "low-profile dual-slot",
+      "dimensions": "2.7 in high x 6.6 in long",
+      "cooling": "active",
+      "external_power_connector": "none on NVIDIA reference design; powered from PCIe slot",
+      "software": [
+        "CUDA",
+        "TensorRT",
+        "PyTorch",
+        "llama.cpp CUDA",
+        "Ollama CUDA",
+        "ONNX Runtime CUDA"
+      ],
+      "quantization_compatibility": "Broad CUDA support makes GGUF Q4/Q5/Q8 and many CUDA-backed INT8/INT4 inference paths practical. Exact GPTQ/AWQ kernel support depends on runtime and model architecture; Ampere does not provide newer Blackwell FP4 hardware.",
+      "model_size_practicality": "Very good for 7B-8B models and many 12B-14B models at 4-bit-class quantization. 12GB VRAM is normally insufficient for larger models without partial CPU/system-RAM offload or aggressive quantization and restricted context.",
+      "llm_inference_suitability": "A mature compact CUDA option whose main attraction is 12GB ECC VRAM at only 70W with active low-profile cooling. It trades raw throughput and capacity against dramatically easier power and chassis requirements than most 12GB-plus GPUs.",
+      "performance_per_watt_notes": "288 GB/s at 70W is approximately 4.11 GB/s of memory bandwidth per board watt; this is a coarse hardware ratio, not measured tokens-per-joule.",
+      "cost_efficiency": {
+        "observed_cad_per_vram_gb": 52.67,
+        "observed_cad_per_gbps_bandwidth": 2.19
+      },
+      "off_grid_suitability": "high_for_cuda",
+      "off_grid_notes": "The 70W slot-powered design is unusually practical for efficient desktops and solar-backed inference nodes. Whole-system consumption remains host-dependent.",
+      "pricing": [
+        {
+          "amount": 632.0,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "pre-owned",
+          "availability": "marketplace_listing",
+          "observed_at": "2026-08-21",
+          "vendor": "eBay.ca marketplace",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=rtx+a2000+12gb",
+          "note": "Representative HP-branded RTX A2000 12GB Grade A listing observed at CA$632 plus shipping from the United States. Other contemporaneous used listings were commonly higher; marketplace pricing is volatile."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/products/workstations/rtx-a2000/",
+        "used_market_observation": "https://www.ebay.ca/sch/i.html?_nkw=rtx+a2000+12gb"
+      },
+      "technical_documentation": {
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/rtx-a2000/nvidia-rtx-a2000-datasheet-1987439-r5.pdf",
+        "cuda_docs": "https://docs.nvidia.com/cuda/"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    },
+    {
+      "id": "radxa-orion-o6-64gb-cix-p1",
+      "manufacturer": "Radxa",
+      "product": "Orion O6 64GB",
+      "compute_platform": "cix-p1-armv9",
+      "category": "arm_ai_motherboard",
+      "status": "available_channel_dependent",
+      "tier": "A-experimental-large-memory-edge",
+      "soc": "CIX P1",
+      "cpu_architecture": "Armv9.2",
+      "cpu_cores": 12,
+      "cpu_configuration": "4x Cortex-A720 up to 2.6GHz + 4x Cortex-A720 up to 2.4GHz + 4x Cortex-A520 up to 1.8GHz",
+      "gpu": "Arm Immortalis-G720 MC10",
+      "npu_tops": 30,
+      "combined_ai_tops_vendor": 45,
+      "npu_precisions": ["INT4", "INT8", "INT16", "FP16", "BF16", "TF32"],
+      "memory_gb": 64,
+      "memory_type": "LPDDR5",
+      "memory_bus_bits": 128,
+      "memory_data_rate_mt_s": 5500,
+      "memory_bandwidth_gbps_vendor": 100,
+      "storage": ["1x M.2 M-key PCIe Gen4 x4 NVMe"],
+      "networking": ["2x 5GbE", "M.2 E-key for Wi-Fi/Bluetooth"],
+      "expansion": ["PCIe x16 physical slot wired PCIe Gen4 x8", "40-pin GPIO"],
+      "power_input": ["20V USB-C PD", "24-pin ATX"],
+      "recommended_psu_w": 65,
+      "form_factor": "Mini-ITX 170mm x 170mm",
+      "software": [
+        "Debian 12 / Radxa OS",
+        "Vulkan 1.3",
+        "OpenCL 2.2",
+        "CIX NeuralONE AI SDK",
+        "CIX AI Model Hub",
+        "CPU inference runtimes where Arm64 builds are available"
+      ],
+      "vendor_llm_claim": {
+        "model": "Qwen2 1.5B",
+        "throughput_tokens_per_second": 30,
+        "scope": "Radxa/CIX heterogeneous AI stack vendor claim",
+        "caveat": "Radxa does not expose enough quantization, context, prefill/decode and software-version detail on the product page to compare this directly with llama.cpp, CUDA, ROCm or MLX benchmarks."
+      },
+      "quantization_compatibility": "The CIX NPU supports multiple low-precision datatypes, but arbitrary GGUF execution on the NPU should not be assumed. CPU/GPU Vulkan paths and NeuralONE-compiled NPU models have different compatibility constraints.",
+      "model_size_practicality": "64GB system memory gives substantial CPU/Vulkan experimentation headroom and can hold many 30B-class quantized models and selected larger low-bit models. Accelerator performance and NPU model compatibility are the limiting factors, not just capacity.",
+      "llm_inference_suitability": "Interesting as an inexpensive high-memory Arm development workstation and CIX NPU research node. It is substantially less turnkey for broad LLM tooling than CUDA, ROCm or Apple MLX systems.",
+      "off_grid_suitability": "high_potential",
+      "off_grid_notes": "Radxa recommends a >=65W supply and supports USB-C PD. Actual wall power under sustained NPU/GPU/CPU inference should be measured; PSU rating is not a workload-power claim.",
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "approved_partner_channel_current_price_not_captured",
+          "observed_at": "2026-08-21",
+          "note": "Radxa currently routes purchases through approved partners. The original official launch presentation listed the 64GB model at US$539, but that historical launch price is not stored as a current price."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://radxa.com/products/orion/o6/",
+        "manufacturer_docs": "https://docs.radxa.com/en/orion/o6"
+      },
+      "technical_documentation": {
+        "product_docs": "https://docs.radxa.com/en/orion/o6",
+        "downloads": "https://docs.radxa.com/en/orion/download",
+        "historical_launch_presentation": "https://dl.radxa.com/orion/o6/radxa_orion_o6_announcement_presentation_2024_12_18.pdf"
+      },
+      "evidence": "manufacturer_with_vendor_benchmark_claim"
+    },
+    {
+      "id": "radxa-orion-o6n-64gb-cix-p1",
+      "manufacturer": "Radxa",
+      "product": "Orion O6N 64GB",
+      "compute_platform": "cix-p1-armv9",
+      "category": "nano_itx_arm_ai_motherboard",
+      "status": "available_channel_dependent",
+      "tier": "A-experimental-compact-edge",
+      "soc": "CIX P1",
+      "cpu_architecture": "Armv9.2",
+      "cpu_cores": 12,
+      "cpu_configuration": "4x Cortex-A720 up to 2.6GHz + 4x Cortex-A720 up to 2.4GHz + 4x Cortex-A520 up to 1.8GHz",
+      "gpu": "Arm Immortalis-G720 MC10",
+      "npu_tops": 30,
+      "combined_ai_tops_vendor": 45,
+      "npu_precisions": ["INT4", "INT8", "INT16", "FP16", "BF16", "TF32"],
+      "memory_gb": 64,
+      "memory_type": "LPDDR5",
+      "memory_bus_bits": 128,
+      "memory_data_rate_mt_s_options": [5000, 6000],
+      "memory_bandwidth_gbps_theoretical_options": [80, 96],
+      "memory_bandwidth_basis": "Derived from 128-bit LPDDR5 at Radxa-documented 5000/6000 MT/s; actual application bandwidth will be lower and platform configuration dependent.",
+      "storage": ["2x M.2 M-key 2280 PCIe Gen4 x4 NVMe", "UFS module on V1.11"],
+      "networking": ["2x 2.5GbE", "M.2 E-key Wi-Fi/Bluetooth", "M.2 B-key 4G plus Nano SIM"],
+      "power_input": ["12V DC barrel", "12V pin input"],
+      "recommended_psu_w": 65,
+      "bundled_power_adapter_w_documented": 60,
+      "form_factor": "Nano-ITX 120mm x 120mm",
+      "version_notes": "V1.20 adds front M.2 AI accelerator support; V1.11 supports UFS. Radxa documents optional M.2 AI expansion up to 48GB LPDDR5 and 160 INT8 TOPS on supported V1.20 configurations, but the accelerator module is separate hardware and is not included in the base-board compute totals.",
+      "software": [
+        "Debian 12 / Radxa OS",
+        "Vulkan 1.3",
+        "OpenCL 2.2",
+        "CIX NeuralONE AI SDK",
+        "CIX AI Model Hub",
+        "CPU inference runtimes where Arm64 builds are available"
+      ],
+      "quantization_compatibility": "NPU datatype support includes INT4/INT8/INT16/FP16/BF16/TF32, but arbitrary GGUF models cannot be assumed to execute on the NPU. Treat NeuralONE model support separately from CPU/Vulkan llama.cpp-style paths.",
+      "model_size_practicality": "64GB system memory makes the board unusually capable for a 120mm Arm node and provides room for many 30B-class quantized models in CPU/system memory. Real token throughput depends heavily on backend maturity and memory access behavior.",
+      "llm_inference_suitability": "A compact 12V high-memory Arm node with dual NVMe and dual 2.5GbE, potentially attractive for low-power clusters, edge agents and CIX NPU development. General LLM acceleration remains less portable than mainstream CUDA/ROCm/MLX ecosystems.",
+      "off_grid_suitability": "high_potential",
+      "off_grid_notes": "Direct 12V input and a >=65W recommended supply make it physically attractive for DC-powered installations. Do not equate the adapter or PSU rating with measured sustained inference consumption.",
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "approved_partner_channel_current_price_not_captured",
+          "observed_at": "2026-08-21",
+          "note": "Radxa currently directs buyers to approved partners; no defensible public 64GB O6N price was captured in this research pass."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://radxa.com/products/orion/o6n/",
+        "manufacturer_docs": "https://docs.radxa.com/en/orion/o6n"
+      },
+      "technical_documentation": {
+        "product_docs": "https://docs.radxa.com/en/orion/o6n",
+        "downloads": "https://docs.radxa.com/en/orion/download"
+      },
+      "evidence": "manufacturer"
+    }
+  ]
+}
