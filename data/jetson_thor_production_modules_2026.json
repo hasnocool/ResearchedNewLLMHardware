@@ -1,0 +1,255 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-22",
+  "purpose": "Production NVIDIA Jetson Thor modules and a deployment carrier platform relevant to high-capacity local LLM, VLM, robotics, and DC-powered edge inference.",
+  "notes": [
+    "The Jetson T4000 and T5000 are production system-on-modules, not developer kits. They require a compatible carrier board, storage, cooling, and power subsystem.",
+    "FP4 TFLOPS figures are NVIDIA sparse vendor metrics and are not directly comparable with dense FP16/FP32 throughput or tokens per second.",
+    "Model-fit guidance is capacity-oriented. Actual usable model size and generation speed depend on runtime, quantization, KV cache, context length, and workload.",
+    "Retail prices are point-in-time observations and should not be treated as MSRP unless explicitly stated."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-jetson-t4000-module-64gb",
+      "manufacturer": "NVIDIA",
+      "product": "Jetson T4000 Module",
+      "manufacturer_part_number": "900-13834-0000-001",
+      "compute_platform": "nvidia-thor-t4000-blackwell",
+      "category": "embedded_ai_module",
+      "status": "available_channel_dependent",
+      "tier": "A-high-capacity-low-power-edge",
+      "release_status": "production",
+      "gpu_architecture": "Blackwell",
+      "cuda_cores": 1536,
+      "tensor_cores": 64,
+      "ai_performance_fp4_sparse_tflops": 1200,
+      "cpu": "12-core Arm Neoverse-V3AE 64-bit",
+      "cpu_max_frequency_ghz": 2.6,
+      "memory_gb": 64,
+      "memory_type": "LPDDR5X unified",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 273,
+      "power_w": {
+        "min": 40,
+        "max": 70,
+        "kind": "configurable_module_power"
+      },
+      "networking": [
+        "3x 25GbE module interfaces"
+      ],
+      "host_and_io": [
+        "up to 8 lanes PCIe Gen5",
+        "USB 3.2 / USB 2.0 controller interfaces",
+        "UART",
+        "SPI",
+        "I2C",
+        "PWM",
+        "I2S"
+      ],
+      "dimensions_mm": [100, 87],
+      "connector": "699-pin board-to-board",
+      "cooling": "Integrated thermal-transfer plate; carrier/system must provide an appropriate heatsink or forced-air solution.",
+      "software": [
+        "JetPack 7.x",
+        "CUDA",
+        "TensorRT",
+        "PyTorch",
+        "NVIDIA Isaac",
+        "NVIDIA Holoscan",
+        "Jetson AI Lab"
+      ],
+      "quantization_support_notes": "Blackwell Tensor Cores support low-precision inference paths including FP4 through NVIDIA software; GGUF/llama.cpp compatibility depends on current Jetson CUDA builds rather than the FP4 headline metric alone.",
+      "llm_fit": "64GB unified memory can host many 30B-class quantized models and selected larger low-bit models. It is especially attractive when 64GB capacity is enough and the 70W module ceiling matters more than T5000's extra memory.",
+      "performance_per_watt_notes": "At the maximum 70W module setting, the 273GB/s memory subsystem corresponds to about 3.90 GB/s of memory bandwidth per module watt. This is a simple ratio, not an application benchmark.",
+      "off_grid_suitability": "very_good_for_high_end_edge_if_carrier_and_cooling_overhead_are_budgeted",
+      "availability_lifecycle": {
+        "manufacturer_available_through": "2036-01",
+        "note": "NVIDIA Jetson product lifecycle page lists T4000 availability through January 2036."
+      },
+      "pricing": [
+        {
+          "amount": 3599,
+          "currency": "USD",
+          "region": "global_web_store",
+          "kind": "observed_new",
+          "availability": "out_of_stock_at_observation",
+          "observed_at": "2026-08-22",
+          "vendor": "Waveshare",
+          "url": "https://www.waveshare.com/jetson-thor-t5000.htm?sku=32815",
+          "note": "Waveshare's shared T4000/T5000 selector displayed US$3,599 with an out-of-stock state at observation time. Treat this as a retailer observation, not NVIDIA MSRP."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_family": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/",
+        "manufacturer_module_lineup": "https://developer.nvidia.com/embedded/jetson-modules",
+        "distributor": "https://www.arrow.com/it/products/900-13834-0000-001/nvidia.html",
+        "seeed_bundle": "https://jp.seeedstudio.com/NVIDIA-Jetson-AGX-Thor-T4000-Module-p-6939.html"
+      },
+      "technical_documentation": {
+        "jetson_thor_specs": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/",
+        "jetson_linux_docs": "https://docs.nvidia.com/jetson/",
+        "jetpack_t4000_blog": "https://developer.nvidia.com/blog/accelerate-ai-inference-for-edge-and-robotics-with-nvidia-jetson-t4000-and-nvidia-jetpack-7-1/",
+        "lifecycle": "https://developer.nvidia.com/embedded/lifecycle",
+        "part_number_faq": "https://developer.nvidia.com/embedded/faq"
+      },
+      "evidence": "manufacturer_plus_distributor_plus_retailer"
+    },
+    {
+      "id": "nvidia-jetson-t5000-module-128gb",
+      "manufacturer": "NVIDIA",
+      "product": "Jetson T5000 Module",
+      "manufacturer_part_number": "900-13834-0080-001",
+      "compute_platform": "nvidia-thor-t5000-blackwell",
+      "category": "embedded_ai_module",
+      "status": "available_channel_dependent",
+      "tier": "S-high-capacity-edge",
+      "release_status": "production",
+      "gpu_architecture": "Blackwell",
+      "cuda_cores": 2560,
+      "tensor_cores": 96,
+      "ai_performance_fp4_sparse_tflops": 2070,
+      "cpu": "14-core Arm Neoverse-V3AE 64-bit",
+      "cpu_max_frequency_ghz": 2.6,
+      "memory_gb": 128,
+      "memory_type": "LPDDR5X unified",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 273,
+      "power_w": {
+        "min": 40,
+        "max": 130,
+        "kind": "configurable_module_power"
+      },
+      "networking": [
+        "4x 25GbE module interfaces"
+      ],
+      "host_and_io": [
+        "up to 8 lanes PCIe Gen5",
+        "USB 3.2 / USB 2.0 controller interfaces",
+        "UART",
+        "SPI",
+        "I2C",
+        "PWM",
+        "I2S",
+        "CAN"
+      ],
+      "dimensions_mm": [100, 87],
+      "connector": "699-pin board-to-board",
+      "cooling": "Integrated thermal-transfer plate; carrier/system must provide an appropriate heatsink or forced-air solution.",
+      "software": [
+        "JetPack 7.x",
+        "CUDA",
+        "TensorRT",
+        "PyTorch",
+        "NVIDIA Isaac",
+        "NVIDIA Holoscan",
+        "Jetson AI Lab"
+      ],
+      "quantization_support_notes": "Blackwell Tensor Cores support low-precision inference including FP4 through NVIDIA's software stack. GGUF, AWQ, GPTQ, FP8, and FP4 practicality varies by engine and model and should be benchmarked per runtime.",
+      "llm_fit": "128GB unified memory is sufficient for many 70B-class quantized models with substantial KV-cache headroom and enables selected larger low-bit or MoE experiments. Decode remains constrained by the 273GB/s memory subsystem compared with HBM/GDDR workstation accelerators.",
+      "performance_per_watt_notes": "At the maximum 130W module setting, 273GB/s corresponds to about 2.10 GB/s of memory bandwidth per module watt. Lower power modes may improve energy efficiency at reduced throughput.",
+      "off_grid_suitability": "good_for_extreme_capacity_edge_when_130w_module_budget_is_acceptable",
+      "availability_lifecycle": {
+        "manufacturer_available_through": "2035-08",
+        "note": "NVIDIA Jetson product lifecycle page lists T5000 availability through August 2035."
+      },
+      "pricing": [
+        {
+          "amount": 6419,
+          "currency": "USD",
+          "region": "global_web_store",
+          "kind": "observed_new",
+          "availability": "listing_orderable_at_observation",
+          "observed_at": "2026-08-22",
+          "vendor": "Waveshare",
+          "url": "https://www.waveshare.com/jetson-thor-t5000.htm?sku=32815",
+          "note": "Waveshare listed the T5000 option at US$6,419 in the current product result. Retailer pricing is dynamic and is not NVIDIA MSRP."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_family": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/",
+        "manufacturer_module_lineup": "https://developer.nvidia.com/embedded/jetson-modules",
+        "connect_tech": "https://connecttech.com/product/nvidia-jetson-t5000-module-900-13834-0080-000/",
+        "waveshare": "https://www.waveshare.com/jetson-thor-t5000.htm?sku=32815"
+      },
+      "technical_documentation": {
+        "jetson_thor_specs": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/",
+        "jetson_linux_docs": "https://docs.nvidia.com/jetson/",
+        "lifecycle": "https://developer.nvidia.com/embedded/lifecycle",
+        "part_number_faq": "https://developer.nvidia.com/embedded/faq"
+      },
+      "evidence": "manufacturer_plus_authorized_integrator_plus_retailer"
+    },
+    {
+      "id": "seeed-recomputer-j601-thor-carrier-platform",
+      "manufacturer": "Seeed Studio",
+      "product": "reComputer J601 Carrier Board / Robotics J6014-J6015 Platform",
+      "compute_platform": "carrier-for-nvidia-jetson-thor-t4000-t5000",
+      "category": "embedded_ai_carrier_platform",
+      "status": "available_bundle_configuration",
+      "tier": "A-deployment-platform",
+      "supported_modules": [
+        "NVIDIA Jetson T4000",
+        "NVIDIA Jetson T5000"
+      ],
+      "pcb_dimensions_mm": [168, 155],
+      "networking": [
+        "up to 4x 10GbE RJ45 with T5000",
+        "up to 3x 10GbE RJ45 with T4000"
+      ],
+      "storage": [
+        "1x M.2 Key M PCIe Gen4 NVMe 2280"
+      ],
+      "expansion": [
+        "M.2 Key E 2230 Wi-Fi/Bluetooth",
+        "M.2 Key B 4G/5G",
+        "4x USB 3.2 Type-A",
+        "HDMI 2.1"
+      ],
+      "robotics_io": [
+        "up to 8x GMSL2 cameras",
+        "isolated CAN",
+        "RS-232/422/485",
+        "I2C",
+        "I2S",
+        "GPI",
+        "GPO"
+      ],
+      "power_input": "19V-48V DC via XT30",
+      "cooling": "4-pin 12V PWM fan connector; Seeed sells a matching heatsink/fan bundle.",
+      "operating_temperature_c": {
+        "min": -10,
+        "max_with_thermal_grease": 60,
+        "max_with_thermal_pad": 55
+      },
+      "software": [
+        "JetPack 7.1",
+        "CUDA",
+        "TensorRT",
+        "PyTorch",
+        "NVIDIA Isaac",
+        "Hugging Face workflows",
+        "ROS 2"
+      ],
+      "llm_fit": "Carrier/platform rather than a compute architecture. With T4000 it provides a DC-native 64GB Blackwell node; with T5000 it provides a DC-native 128GB node. The 19-48V input, multi-10GbE connectivity, NVMe slot, and robotics I/O make it more deployment-oriented than NVIDIA's desktop-style developer kit.",
+      "off_grid_suitability": "very_good_for_battery_or_dc_bus_deployments_if_complete_system_power_is_budgeted",
+      "pricing": [
+        {
+          "kind": "configuration_dependent",
+          "availability": "bundle_ordering",
+          "observed_at": "2026-08-22",
+          "vendor": "Seeed Studio",
+          "url": "https://jp.seeedstudio.com/reComputer-J601-Carrier-Board-for-Jetson-AGX-Thortm-T5000-T4000.html",
+          "note": "Seeed sells the J601 as a configurable bundle with carrier, heatsink/fan, T4000 or T5000 module, storage, power supply, and optional wireless hardware. The displayed total changes with selections, so no single numeric price is stored as a durable platform price."
+        }
+      ],
+      "vendor_urls": {
+        "product_bundle": "https://jp.seeedstudio.com/reComputer-J601-Carrier-Board-for-Jetson-AGX-Thortm-T5000-T4000.html"
+      },
+      "technical_documentation": {
+        "getting_started": "https://wiki.seeedstudio.com/ai_robotics_recomputer_robotics_j601_carrier_board_getting_started/",
+        "interfaces": "https://wiki.seeedstudio.com/recomputer_jetson_robotics_j601_interfaces_usage/"
+      },
+      "evidence": "manufacturer"
+    }
+  ]
+}
