@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-22",
+  "purpose": "Large-memory datacenter accelerators increasingly relevant to local-lab and secondary-market LLM inference, with explicit platform, cooling, software, and pricing constraints.",
+  "notes": [
+    "Manufacturer specifications are authoritative for hardware fields; marketplace pricing is a dated asking-price observation, not fair-market value.",
+    "Sparse TOPS/TFLOPS are not directly comparable with dense throughput or token-generation speed.",
+    "Server accelerators can require directed chassis airflow, high-current power delivery, platform firmware support, NVLink/OAM carrier hardware, or enterprise software stacks.",
+    "Model-fit guidance is approximate and depends on quantization, context length, KV cache, runtime overhead, tensor parallelism, and kernel support."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-a100-80gb-pcie",
+      "manufacturer": "NVIDIA",
+      "product": "A100 80GB PCIe Tensor Core GPU",
+      "compute_platform": "nvidia-ampere-a100-sm80",
+      "category": "datacenter_gpu_secondary_market_hbm",
+      "status": "available_secondary_market_and_enterprise_channel",
+      "tier": "A-high-capacity-mature-cuda",
+      "gpu_architecture": "Ampere",
+      "cuda_compute_capability": "8.0",
+      "fp32_tflops": 19.5,
+      "tf32_tensor_tflops_dense": 156,
+      "fp16_bf16_tensor_tflops_dense": 312,
+      "int8_tensor_tops_dense": 624,
+      "memory_gb": 80,
+      "memory_type": "HBM2e ECC",
+      "memory_bandwidth_gbps": 1935,
+      "board_power_w": 300,
+      "host_interface": "PCIe 4.0 x16",
+      "interconnect": "NVLink bridge for two PCIe GPUs, up to 600 GB/s aggregate according to NVIDIA",
+      "mig": "up to 7 MIG instances at 10GB each",
+      "form_factor": "PCIe dual-slot air-cooled or single-slot liquid-cooled depending on SKU",
+      "cooling": "server/workstation implementation dependent; many OEM PCIe cards require directed chassis airflow",
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "NVIDIA AI Enterprise", "llama.cpp CUDA", "Hugging Face CUDA ecosystem"],
+      "quantization_compatibility": "Excellent mature CUDA path for FP16/BF16/TF32 and INT8; AWQ/GPTQ/GGUF low-bit support depends on runtime/kernel. No native FP8 Tensor Core path on A100.",
+      "llm_fit": "80GB HBM2e is a strong single-device capacity tier for many 70B-class 4-bit models and smaller models at higher precision, subject to context/KV-cache overhead. 1.935TB/s memory bandwidth makes it particularly strong for bandwidth-bound decode relative to most workstation GPUs.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_board_w": 6.45,
+        "board_w_per_gb_vram": 3.75
+      },
+      "off_grid_suitability": "poor_to_moderate; 300W board power and server cooling are substantial, but capacity and bandwidth per watt are strong for this class",
+      "pricing": [
+        {
+          "amount": 15999.99,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_new",
+          "condition": "new",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-22",
+          "vendor": "eBay.ca marketplace",
+          "url": "https://www.ebay.ca/sch/i.html?_dcat=27386&_nkw=nvidia+a100+80gb",
+          "note": "Representative Canada-visible A100 80GB PCIe OEM listing at CA$15,999.99. Asking prices vary widely; used SXM4 and converted-card listings are not directly comparable to native PCIe cards."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/data-center/a100/"
+      },
+      "technical_documentation": {
+        "a100_80gb_datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/a100/pdf/a100-80gb-datasheet-update-nvidia-us-1521051-r2-web.pdf",
+        "tensorrt_support_matrix": "https://docs.nvidia.com/deeplearning/tensorrt/latest/getting-started/support-matrix.html"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    },
+    {
+      "id": "nvidia-l40s-48gb",
+      "manufacturer": "NVIDIA",
+      "product": "L40S 48GB",
+      "compute_platform": "nvidia-ada-l40s-sm89",
+      "category": "datacenter_gpu_current_and_secondary_market",
+      "status": "available_enterprise_channel_and_secondary_market",
+      "tier": "A-current-cuda-48gb",
+      "gpu_architecture": "Ada Lovelace",
+      "cuda_compute_capability": "8.9",
+      "cuda_cores": 18176,
+      "tensor_cores": 568,
+      "fp32_tflops": 91.6,
+      "tf32_tensor_tflops_dense": 183,
+      "fp16_bf16_tensor_tflops_dense": 362.05,
+      "fp8_tensor_tflops_dense": 733,
+      "int8_tensor_tops_dense": 733,
+      "memory_gb": 48,
+      "memory_type": "GDDR6 ECC",
+      "memory_bandwidth_gbps": 864,
+      "board_power_w": 350,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "4.4-inch high x 10.5-inch long, dual-slot",
+      "power_connector": "16-pin",
+      "cooling": "passive; directed server airflow required",
+      "nvlink": false,
+      "mig": false,
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "NVIDIA AI Enterprise", "llama.cpp CUDA", "Hugging Face CUDA ecosystem"],
+      "quantization_compatibility": "Excellent modern CUDA support including FP8 Tensor Core paths as well as FP16/BF16/INT8; AWQ/GPTQ/GGUF compatibility depends on runtime.",
+      "llm_fit": "48GB is a useful single-GPU tier for many 30B-class models and selected 70B-class low-bit deployments, while Ada FP8 support is valuable for supported inference engines. It lacks NVLink and MIG, so scaling relies on PCIe/network topology and software parallelism.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_board_w": 2.47,
+        "board_w_per_gb_vram": 7.292
+      },
+      "off_grid_suitability": "poor; 350W board power plus required forced airflow outweigh the otherwise efficient Ada inference stack",
+      "pricing": [
+        {
+          "amount": 10581.98,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "used",
+          "availability": "more_than_10_listed",
+          "observed_at": "2026-08-22",
+          "vendor": "eBay.ca / CloudStorageCorp",
+          "url": "https://www.ebay.ca/itm/178235616126",
+          "note": "Used L40S listing observed at CA$10,581.98; seller showed more than 10 available. Marketplace asking price, not fair-market valuation."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/data-center/l40s/"
+      },
+      "technical_documentation": {
+        "manufacturer_specs": "https://www.nvidia.com/en-us/data-center/l40s/",
+        "tensorrt_support_matrix": "https://docs.nvidia.com/deeplearning/tensorrt/latest/getting-started/support-matrix.html"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    },
+    {
+      "id": "amd-instinct-mi250x-128gb-oam",
+      "manufacturer": "AMD",
+      "product": "Instinct MI250X 128GB OAM",
+      "compute_platform": "amd-cdna2-gfx90a-mi250x",
+      "category": "datacenter_gpu_oam_secondary_market_watch",
+      "status": "supported_current_rocm_but_platform_specialized",
+      "tier": "A-architecture-high-bandwidth-platform-limited",
+      "gpu_architecture": "CDNA 2",
+      "llvm_target": "gfx90a",
+      "compute_units": 220,
+      "stream_processors": 14080,
+      "fp16_bf16_tflops": 383,
+      "fp32_vector_tflops": 47.9,
+      "fp32_matrix_tflops": 95.7,
+      "fp64_vector_tflops": 47.9,
+      "fp64_matrix_tflops": 95.7,
+      "int8_tops": 383,
+      "int4_tops": 383,
+      "memory_gb": 128,
+      "memory_type": "HBM2e ECC",
+      "memory_bandwidth_gbps": 3200,
+      "tdp_w": 500,
+      "peak_power_w": 560,
+      "form_factor": "OCP Accelerator Module (OAM), not a conventional standalone PCIe add-in card",
+      "host_interface": "OAM platform with PCIe 4.0 x16 host connectivity",
+      "interconnect": "8 Infinity Fabric links; AMD lists 100 GB/s peak link bandwidth",
+      "cooling": "passive OAM; qualified server carrier, power delivery, firmware and high-airflow cooling required",
+      "software": ["ROCm 7.2.x current support", "PyTorch ROCm", "vLLM ROCm where supported", "Hugging Face ROCm ecosystem", "HIP"],
+      "software_lifecycle": "AMD ROCm 7.2.x Linux system requirements continue to list MI250X/MI250/MI210 gfx90a as supported. AMD's 2026 ROCm-DS matrix also retains MI250/MI210-class gfx90a support.",
+      "quantization_compatibility": "Strong FP16/BF16/INT8/INT4 hardware capability, but practical low-bit LLM support depends on ROCm runtime kernels. OAM topology enumerates two GCDs, each with 64GB HBM, so software must correctly handle the device topology rather than assuming one monolithic 128GB GPU.",
+      "llm_fit": "128GB total HBM2e and 3.2TB/s aggregate bandwidth are exceptional for large-model research, but the two-GCD OAM design and specialized server carrier make this unsuitable as a simple desktop upgrade. Best treated as a whole-server or qualified-platform acquisition target.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_peak_w": 5.71,
+        "peak_w_per_gb_hbm": 4.375
+      },
+      "off_grid_suitability": "very_poor; 500-560W accelerator power plus OAM server infrastructure",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "specialized_oam_server_and_secondary_market_dependent",
+          "observed_at": "2026-08-22",
+          "note": "No defensible current standalone MI250X OAM price captured. OAM modules are commonly tied to qualified server platforms, so bare-module prices can be misleading without carrier, cooling, firmware and power context."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/products/accelerators/instinct/mi200/mi250x.html"
+      },
+      "technical_documentation": {
+        "manufacturer_product": "https://www.amd.com/en/products/accelerators/instinct/mi200/mi250x.html",
+        "instinct_acceptance_guide": "https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi250.html",
+        "rocm_7_2_system_requirements": "https://rocm.docs.amd.com/projects/install-on-linux/en/docs-7.2.0/reference/system-requirements.html"
+      },
+      "evidence": "manufacturer_plus_current_software_matrix"
+    }
+  ]
+}
