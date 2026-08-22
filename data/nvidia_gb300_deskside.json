@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-22",
+  "purpose": "Normalize the NVIDIA GB300 Grace Blackwell Ultra Desktop compute platform and deskside OEM systems. OEM implementations share the same GB300 compute architecture and must not be counted as independent silicon platforms.",
+  "platforms": [
+    {
+      "id": "nvidia-gb300-grace-blackwell-ultra-desktop",
+      "manufacturer": "NVIDIA",
+      "product": "GB300 Grace Blackwell Ultra Desktop Superchip",
+      "category": "coherent_cpu_gpu_ai_superchip",
+      "status": "shipping_in_dgx_station_class_systems",
+      "release_status_as_of": "2026-08-22",
+      "cpu": "NVIDIA Grace 72-core Arm Neoverse V2",
+      "gpu": "NVIDIA Blackwell Ultra",
+      "gpu_memory_gb": 252,
+      "gpu_memory_type": "HBM3e",
+      "gpu_memory_bandwidth_tbps": 7.1,
+      "cpu_memory_gb": 496,
+      "cpu_memory_type": "LPDDR5X",
+      "cpu_memory_bandwidth_gbps": 396,
+      "coherent_memory_gb": 748,
+      "nvlink_c2c_bandwidth_gbps": 900,
+      "fp4_tensor_pflops_sparse": 20,
+      "fp4_tensor_pflops_dense": 15,
+      "fp8_fp6_tensor_pflops": 10,
+      "fp16_bf16_tensor_pflops": 5,
+      "tf32_tensor_pflops": 2.5,
+      "fp32_tflops": 80,
+      "networking_reference": "NVIDIA ConnectX-8 SuperNIC up to 800 Gb/s Ethernet",
+      "vendor_model_capacity_claim": "up to 1 trillion parameters",
+      "software": ["Ubuntu with NVIDIA AI Developer Tools", "CUDA", "CUDA-X", "PyTorch ecosystem", "NVIDIA AI Enterprise optional", "MIG up to 7 instances"],
+      "evidence": "manufacturer",
+      "source_urls": [
+        "https://www.nvidia.com/en-us/products/workstations/dgx-station/",
+        "https://docs.nvidia.com/dgx/dgx-station-development-guide/Intro.html"
+      ]
+    }
+  ],
+  "systems": [
+    {
+      "id": "nvidia-dgx-station-gb300-ubuntu",
+      "manufacturer": "NVIDIA",
+      "product": "DGX Station",
+      "compute_platform": "nvidia-gb300-grace-blackwell-ultra-desktop",
+      "category": "deskside_ai_supercomputer",
+      "status": "orderable_partner_channel",
+      "release_status_as_of": "2026-08-22",
+      "coherent_memory_gb": 748,
+      "gpu_memory_gb": 252,
+      "gpu_memory_bandwidth_tbps": 7.1,
+      "cpu_memory_gb": 496,
+      "cpu_memory_bandwidth_gbps": 396,
+      "total_system_power_w": 1600,
+      "networking": ["2x QSFP112 400 Gb/s", "10GbE RJ45", "1GbE BMC"],
+      "storage": "4x M.2 Gen5 slots",
+      "pcie": ["1x PCIe Gen5 x16", "2x PCIe Gen5 x16 physical / x8 electrical"],
+      "supported_optional_gpus": ["RTX PRO 6000 Blackwell Workstation Edition", "RTX PRO 6000 Blackwell Max-Q Workstation Edition", "RTX PRO 4000 Blackwell SFF Edition", "RTX PRO 2000 Blackwell"],
+      "os": "Ubuntu with NVIDIA AI Developer Tools",
+      "pricing": [
+        {
+          "kind": "quote_or_partner_channel",
+          "availability": "order_now_contact_partner",
+          "observed_at": "2026-08-22",
+          "note": "NVIDIA currently exposes Order Now / partner contact but no defensible public numeric reference-system price on the product page."
+        }
+      ],
+      "vendor_urls": ["https://www.nvidia.com/en-us/products/workstations/dgx-station/"],
+      "technical_documentation": [
+        "https://docs.nvidia.com/dgx/dgx-station-development-guide/Intro.html",
+        "https://docs.nvidia.com/dgx/dgx-station-development-guide/index.html"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "nvidia-dgx-station-gb300-windows",
+      "manufacturer": "NVIDIA",
+      "product": "DGX Station for Windows",
+      "compute_platform": "nvidia-gb300-grace-blackwell-ultra-desktop",
+      "category": "deskside_ai_supercomputer",
+      "status": "announced_q4_2026",
+      "release_status_as_of": "2026-08-22",
+      "coherent_memory_gb_max": 748,
+      "fp4_tensor_pflops_sparse_max": 20,
+      "networking": ["ConnectX-8 up to 800 Gb/s"],
+      "os": ["Windows", "WSL"],
+      "software_note": "Windows edition remains a distinct Q4 2026 software/OS variant; do not use its launch status to mark the Ubuntu DGX Station as unavailable.",
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "coming_q4_2026",
+          "observed_at": "2026-08-22",
+          "note": "No defensible public numeric Windows-edition price captured."
+        }
+      ],
+      "vendor_urls": ["https://www.nvidia.com/en-us/products/workstations/dgx-station-for-windows/"],
+      "technical_documentation": ["https://nvidianews.nvidia.com/news/nvidia-dgx-station-for-windows-puts-a-trillion-parameter-ai-supercomputer-on-every-enterprise-desk"],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "asus-expertcenter-pro-et900n-g3-gb300",
+      "manufacturer": "ASUS",
+      "product": "ExpertCenter Pro ET900N G3",
+      "compute_platform": "nvidia-gb300-grace-blackwell-ultra-desktop",
+      "category": "deskside_ai_supercomputer",
+      "status": "available_to_order_worldwide",
+      "release_status_as_of": "2026-08-22",
+      "coherent_memory_gb": 748,
+      "cpu_memory_gb": 496,
+      "cpu_memory_bandwidth_gbps": 396,
+      "gpu_memory_gb": 252,
+      "gpu_memory_bandwidth_tbps": 7.1,
+      "power_supply_w": 1600,
+      "storage": "up to 4x M.2 2280 NVMe; ASUS datasheet lists up to 8 TB total",
+      "networking": ["10GbE", "1GbE BMC", "2x ConnectX-8 NIC ports"],
+      "dimensions_mm": [232, 584, 565],
+      "weight_kg": 27,
+      "os": "Ubuntu with NVIDIA AI Developer Tools",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "available_to_order_worldwide_contact_asus",
+          "observed_at": "2026-08-22",
+          "note": "ASUS states worldwide order availability but does not publish a stable numeric price in the captured manufacturer sources."
+        }
+      ],
+      "vendor_urls": ["https://www.asus.com/rs-en/displays-desktops/workstations/performance/expertcenter-pro-et900n-g3/"],
+      "technical_documentation": [
+        "https://www.asus.com/rs-en/displays-desktops/workstations/performance/expertcenter-pro-et900n-g3/techspec/",
+        "https://press.asus.com/news/press-releases/asus-expertcenter-pro-et900n-g3-nvidia-gb300-blackwell/",
+        "https://dlcdnwebimgs.asus.com/files/media/235482bc-bbbe-4347-b7e9-0969da7f8268/asus-expertcenter-pro-et900n-g3-datasheet.pdf"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "dell-pro-max-gb300-fct6263",
+      "manufacturer": "Dell",
+      "product": "Dell Pro Max with GB300",
+      "model": "FCT6263",
+      "compute_platform": "nvidia-gb300-grace-blackwell-ultra-desktop",
+      "category": "deskside_ai_supercomputer",
+      "status": "shipping_or_call_to_order_region_dependent",
+      "release_status_as_of": "2026-08-22",
+      "coherent_memory_gb": 748,
+      "cpu_memory_gb": 496,
+      "cpu_memory_type": "LPDDR5X",
+      "gpu_memory_gb": 252,
+      "gpu_memory_type": "HBM3e",
+      "storage_us_reference": "16 TB listed as 4x 4 TB Gen4 SSD on US product page",
+      "optional_gpu": "RTX PRO 2000 Blackwell 16 GB GDDR7 in captured configuration",
+      "os": "Ubuntu 24.04 LTS with NVIDIA AI Developer Tools",
+      "pricing": [
+        {
+          "amount": 372895.28,
+          "currency": "CAD",
+          "region": "CA",
+          "kind": "manufacturer_store_observed",
+          "availability": "configurable_storefront_when_indexed",
+          "observed_at": "2026-08-22",
+          "url": "https://www.dell.com/en-ca/shop/dell-desktops-workstations/dell-pro-max-with-gb300/spd/dell-pro-max-fct6263-desktop/xcto_fct6263_cax",
+          "note": "Dell Canada's storefront displayed CA$372,895.28 for the indexed GB300 configuration. This unusually high dynamic storefront figure is preserved as an observation, not interpreted as platform MSRP or typical delivered price."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.dell.com/en-us/shop/cty/pdp/spd/dell-pro-max-fct6263-desktop",
+        "https://www.dell.com/en-ca/shop/dell-desktops-workstations/dell-pro-max-with-gb300/spd/dell-pro-max-fct6263-desktop/xcto_fct6263_cax"
+      ],
+      "technical_documentation": [
+        "https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~03~dell-technologies-first-to-ship-nvidia-gb300-desktop-for-autonomous-ai-agents-with-nvidia-openshell.htm"
+      ],
+      "evidence": "manufacturer_plus_current_manufacturer_storefront"
+    },
+    {
+      "id": "hp-zgx-fury-gb300",
+      "manufacturer": "HP",
+      "product": "ZGX Fury AI Station",
+      "compute_platform": "nvidia-gb300-grace-blackwell-ultra-desktop",
+      "category": "deskside_ai_supercomputer",
+      "status": "preorder",
+      "release_status_as_of": "2026-08-22",
+      "coherent_memory_gb": 748,
+      "cpu_memory_gb": 496,
+      "cpu_memory_type": "LPDDR5X",
+      "cpu_memory_bandwidth_gbps": 396,
+      "gpu_memory_gb": 252,
+      "gpu_memory_type": "HBM3e",
+      "gpu_memory_bandwidth_tbps": 7.1,
+      "os": "Ubuntu with NVIDIA AI Developer Tools",
+      "software": ["HP ZGX Toolkit", "NVIDIA AI Software Stack"],
+      "pricing": [
+        {
+          "kind": "preorder_no_numeric_price_captured",
+          "availability": "preorder",
+          "observed_at": "2026-08-22",
+          "note": "HP exposes pre-order/notify-me status; no defensible stable numeric price captured in this pass."
+        }
+      ],
+      "vendor_urls": ["https://www.hp.com/us-en/workstations/ai-stations.html"],
+      "technical_documentation": ["https://www.hp.com/us-en/newsroom/blogs/2026/unlock-ai-with-zgx-fury.html"],
+      "evidence": "manufacturer"
+    }
+  ]
+}
