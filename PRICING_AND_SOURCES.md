@@ -1,6 +1,6 @@
 # Pricing, Vendor URLs, and Technical Documentation
 
-Last updated: **2026-08-21**
+Last updated: **2026-08-22**
 
 This page is the human-readable buying and documentation index for the hardware catalog. The machine-readable data is split by platform family under `data/`.
 
@@ -20,6 +20,10 @@ This page is the human-readable buying and documentation index for the hardware 
 
 | Hardware | Price observed | Availability | Vendor / buy | Technical documentation |
 |---|---:|---|---|---|
+| NVIDIA DGX Station / GB300 | Quote / partner channel; no stable public numeric NVIDIA price captured | **Order Now** through partners | [NVIDIA product](https://www.nvidia.com/en-us/products/workstations/dgx-station/) | [Development guide](https://docs.nvidia.com/dgx/dgx-station-development-guide/Intro.html) · [Guide index](https://docs.nvidia.com/dgx/dgx-station-development-guide/index.html) |
+| ASUS ExpertCenter Pro ET900N G3 | Quote-only in captured manufacturer material | Available to order worldwide | [ASUS product](https://www.asus.com/rs-en/displays-desktops/workstations/performance/expertcenter-pro-et900n-g3/) | [Tech specs](https://www.asus.com/rs-en/displays-desktops/workstations/performance/expertcenter-pro-et900n-g3/techspec/) · [Press release](https://press.asus.com/news/press-releases/asus-expertcenter-pro-et900n-g3-nvidia-gb300-blackwell/) · [Datasheet PDF](https://dlcdnwebimgs.asus.com/files/media/235482bc-bbbe-4347-b7e9-0969da7f8268/asus-expertcenter-pro-et900n-g3-datasheet.pdf) |
+| Dell Pro Max with GB300 FCT6263 | **CA$372,895.28 observed** on Dell Canada on 2026-08-22; treat as dynamic storefront observation, not platform MSRP | Shipping / call-to-order depending region | [US product](https://www.dell.com/en-us/shop/cty/pdp/spd/dell-pro-max-fct6263-desktop) · [Canada storefront](https://www.dell.com/en-ca/shop/dell-desktops-workstations/dell-pro-max-with-gb300/spd/dell-pro-max-fct6263-desktop/xcto_fct6263_cax) | [Dell GB300 announcement](https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~03~dell-technologies-first-to-ship-nvidia-gb300-desktop-for-autonomous-ai-agents-with-nvidia-openshell.htm) |
+| HP ZGX Fury | No stable public numeric price captured | Pre-order / notify-me | [HP AI Stations](https://www.hp.com/us-en/workstations/ai-stations.html) | [HP ZGX Fury overview](https://www.hp.com/us-en/newsroom/blogs/2026/unlock-ai-with-zgx-fury.html) |
 | NVIDIA DGX Spark | **US$4,699 MSRP** | Available | [NVIDIA product](https://www.nvidia.com/en-us/products/workstations/dgx-spark/) | [User guide](https://docs.nvidia.com/dgx/dgx-spark/) · [Hardware guide](https://docs.nvidia.com/dgx/dgx-spark/hardware.html) · [UEFI guide](https://docs.nvidia.com/dgx/dgx-spark-uefi/) |
 | ASUS Ascent GX10 | **US$3,999** / **CA$5,499** | Available; stock varies by region/channel | [US buy](https://www.asus.com/us/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/where-to-buy/) · [Canada buy](https://www.asus.com/ca-en/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/where-to-buy/) | [Technical specs](https://www.asus.com/us/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/techspec/) · [Manuals](https://www.asus.com/ca-en/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/helpdesk_manual?model2Name=ASUS-Ascent-GX10) · [Drivers / DGX OS](https://www.asus.com/us/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/helpdesk_download?model2Name=ASUS-Ascent-GX10) |
 | HP ZGX Nano G1n | Store/configuration dependent | Available regionally | [HP store](https://www.hp.com/us-en/shop/slp/hp-workstations/zgx-nano) | [HP QuickSpecs](https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c09212373) |
@@ -43,6 +47,7 @@ This page is the human-readable buying and documentation index for the hardware 
 
 | Hardware | Pricing status | Vendor / product | Technical documentation |
 |---|---|---|---|
+| NVIDIA DGX Station for Windows | No public numeric price captured; planned Q4 2026 | [Windows product](https://www.nvidia.com/en-us/products/workstations/dgx-station-for-windows/) | [NVIDIA announcement](https://nvidianews.nvidia.com/news/nvidia-dgx-station-for-windows-puts-a-trillion-parameter-ai-supercomputer-on-every-enterprise-desk) |
 | Qualcomm Dragonfly AI200 | Contact sales; no stable public numeric price captured | [AI200 product](https://www.qualcomm.com/data-center/products/qualcomm-dragonfly-ai200) | [AI200 rack/infrastructure note](https://www.qualcomm.com/news/onq/2026/03/ai-inference-that-scales-qualcomm-ai200-infrastructure-management-suite) · [AI accelerator overview](https://www.qualcomm.com/data-center/expertise/ai-accelerators) |
 | Qualcomm Dragonfly AI250 | Not public; commercial HBC Gen 1 sampling expected mid-2027 | [AI250 product](https://www.qualcomm.com/data-center/products/qualcomm-dragonfly-ai250) | [Dragonfly roadmap announcement](https://www.qualcomm.com/news/releases/2026/06/qualcomm-unveils-comprehensive-data-center-roadmap-for-the-agent) · [Investor Day data-center deck](https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/Investor-Day-2026_TPialis_Data-Center.pdf) |
 | Qualcomm Dragonfly AI300 | Not public; commercial sampling expected 2028 | [AI300 product](https://www.qualcomm.com/data-center/products/qualcomm-dragonfly-ai300) | [Dragonfly roadmap announcement](https://www.qualcomm.com/news/releases/2026/06/qualcomm-unveils-comprehensive-data-center-roadmap-for-the-agent) · [AI accelerator overview](https://www.qualcomm.com/data-center/expertise/ai-accelerators) |
@@ -59,6 +64,10 @@ This page is the human-readable buying and documentation index for the hardware 
 | Altera FPGA AI Suite / Agilex ecosystem | Board/device/license dependent | [FPGA AI Suite](https://www.altera.com/products/development-tools/fpga-ai-suite) | [FPGA AI Suite](https://www.altera.com/products/development-tools/fpga-ai-suite) |
 
 ## Important pricing notes
+
+### GB300 deskside pricing
+
+The GB300 deskside category is currently sales-led rather than transparently MSRP-driven. NVIDIA exposes DGX Station through partner ordering, ASUS uses contact-sales ordering for ET900N G3, and HP exposes ZGX Fury pre-order/notify-me. Dell Canada did expose a numeric storefront figure of **CA$372,895.28** on 2026-08-22; because that number is exceptionally high and configuration/dynamic-pricing dependent, it is stored as a dated storefront observation rather than normalized as GB300 MSRP or a representative market value.
 
 ### Qualcomm Dragonfly pricing
 
