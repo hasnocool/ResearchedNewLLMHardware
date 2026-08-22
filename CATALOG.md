@@ -1,6 +1,6 @@
 # Detailed Hardware Catalog
 
-Last updated: **2026-08-21**
+Last updated: **2026-08-22**
 
 This catalog separates hardware by role rather than treating every TOPS number as comparable. The most useful LLM hardware generally needs a combination of **memory capacity, bandwidth, suitable kernels/runtime support, acceptable power and attainable price**.
 
@@ -427,6 +427,16 @@ See [`TENSTORRENT_BLACKHOLE.md`](TENSTORRENT_BLACKHOLE.md) and [`data/tenstorren
 RTX Spark is a distinct Windows-focused Grace/Blackwell platform from GB10. NVIDIA documents up to **6,144 CUDA cores**, **1 PFLOP FP4**, a 20-core Grace CPU and **up to 128 GB unified memory**. ASUS has announced ProArt P14/P16 laptops and a compact ProArt Mini PC. Exact memory bandwidth, production power and stable retail pricing remain open.
 
 See [`NVIDIA_RTX_SPARK.md`](NVIDIA_RTX_SPARK.md) and [`data/nvidia_rtx_spark.json`](data/nvidia_rtx_spark.json).
+
+### NVIDIA GB300 DGX Station class — S-capacity / orderable
+
+GB300 is a separate high-power deskside class from GB10 and RTX Spark. NVIDIA's current DGX Station specification publishes **252 GB HBM3e at 7.1 TB/s**, **496 GB LPDDR5X at 396 GB/s**, **748 GB coherent CPU/GPU memory**, **900 GB/s NVLink-C2C**, up to **20 PFLOPS sparse FP4**, ConnectX-8 networking up to 800 Gb/s and a **1,600 W total-system-power** reference specification.
+
+NVIDIA now exposes the Ubuntu-based DGX Station as **Order Now** through partner channels. The Windows edition remains a separate Q4 2026 software/OS variant. ASUS says ExpertCenter Pro ET900N G3 is available to order worldwide; Dell Pro Max with GB300 is shipping/call-to-order by region; HP ZGX Fury is in pre-order rollout. OEM variants share the same `nvidia-gb300-grace-blackwell-ultra-desktop` compute platform and should be compared by delivered price, storage, optional GPUs, cooling/noise, warranty and regional availability rather than treated as different silicon.
+
+GB300 is a frontier local-capacity reference rather than a low-power recommendation. The main missing evidence is model-specific prefill/decode performance, wall power under inference, memory placement behavior across HBM3e and LPDDR5X, and two-node ConnectX-8 scaling.
+
+See [`NVIDIA_GB300_DESKSIDE.md`](NVIDIA_GB300_DESKSIDE.md) and [`data/nvidia_gb300_deskside.json`](data/nvidia_gb300_deskside.json).
 
 ### Apple M5 Pro / M5 Max — A/S depending memory configuration
 
