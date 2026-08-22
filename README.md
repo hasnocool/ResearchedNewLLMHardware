@@ -33,6 +33,7 @@ A device is not ranked from TOPS alone. Priority is given to:
 |---|---|---:|---:|---:|---|---|
 | AMD Ryzen AI Max PRO 400 family | unified-memory APU | up to 192 GB | TBD by SKU/system | 45–120 W class | announced | Up to 160 GB graphics-addressable memory creates a new compact capacity tier. |
 | NVIDIA RTX Spark N1X systems | Windows unified-memory AI PC | up to 128 GB | not yet public | system dependent | announced / prelaunch | Brings native CUDA and Blackwell to Windows laptops and mini PCs with unusually large unified memory. |
+| NVIDIA GB300 DGX Station class | deskside coherent-memory AI supercomputer | 748 GB total: 252 GB HBM3e + 496 GB LPDDR5X | 7.1 TB/s GPU; 396 GB/s CPU; 900 GB/s NVLink-C2C | 1,600 W reference system | orderable / OEM rollout | A single deskside node can host frontier-scale models and services with mature CUDA tooling; it is a capacity reference, not a low-power platform. |
 | AMD Ryzen AI Max+ 395 systems | unified-memory APU | up to 128 GB LPDDR5X | ~256 GB/s class | system dependent | available | Strong current high-capacity x86 platform with increasingly practical ROCm/Vulkan paths. |
 | Apple M5 Max MacBook Pro | portable unified-memory workstation | up to 128 GB | up to 614 GB/s | portable system | available | Very high memory bandwidth for a portable system; Metal/MLX/BaseRT software paths are improving. |
 | NVIDIA GB10 / DGX Spark class | compact AI supercomputer | 128 GB LPDDR5X | 273 GB/s | 140 W SoC; OEM PSU varies | available | Mature CUDA stack, coherent memory and ConnectX-7 make it unusually cluster-friendly; current DGX Spark software adds improved unified-memory handling and NVIDIA advertises up to 1.9x inference speedups. |
@@ -45,17 +46,21 @@ A device is not ranked from TOPS alone. Priority is given to:
 
 ## Current purchasable-system observations
 
-The project separates **compute platform** from **OEM system variant**. Systems sharing GB10, RTX Spark N1X or Ryzen AI Max+ 395 are not counted as independent silicon architectures.
+The project separates **compute platform** from **OEM system variant**. Systems sharing GB10, GB300, RTX Spark N1X or Ryzen AI Max+ 395 are not counted as independent silicon architectures.
 
-As of **2026-08-20**, notable captured variants include:
+As of **2026-08-22**, notable captured variants include:
 
+- **NVIDIA DGX Station / GB300** — now exposed as Order Now through partner channels; 748 GB coherent memory and a 1,600 W reference total-system-power specification. The Windows edition remains a separate Q4 2026 variant.
+- **ASUS ExpertCenter Pro ET900N G3** — GB300, 748 GB coherent memory, 1,600 W Titanium PSU; ASUS says it is available to order worldwide with quote-based pricing.
+- **Dell Pro Max with GB300 (FCT6263)** — GB300 / 748 GB coherent memory; Dell Canada exposed a CA$372,895.28 dynamic storefront observation on 2026-08-22, retained as an observation rather than assumed MSRP.
+- **HP ZGX Fury** — GB300 / 748 GB coherent memory; HP currently exposes pre-order / notify-me status.
 - **Dell Pro Max with GB10 (FCM1253)** — 128 GB LPDDR5X, DGX OS 7; a 4 TB Canadian configuration was listed at CA$8,703.69.
 - **Acer Veriton GN100 (GN100-UD11)** — GB10, 128 GB LPDDR5X, 4 TB, 10GbE and ConnectX-7; Acer publishes a 170 W maximum PSU figure and a North American launch price from US$3,999.
 - **GMKtec EVO-X2 / EVO-X3** — Ryzen AI Max+ 395 systems with high-capacity LPDDR5X; vendor LLM results remain tagged as vendor evidence until independently reproduced.
 - **ASUS ProArt P14 / P16 RTX Spark** — prelaunch Windows laptops with RTX Spark N1X and configurations up to 128 GB unified memory.
 - **ASUS ProArt Mini PC RTX Spark** — announced compact 128 GB-class implementation with 10GbE and 140 W thermal headroom.
 
-See [`data/current_system_variants.json`](data/current_system_variants.json) and [`data/nvidia_rtx_spark.json`](data/nvidia_rtx_spark.json) for normalized records.
+See [`data/current_system_variants.json`](data/current_system_variants.json), [`data/nvidia_gb300_deskside.json`](data/nvidia_gb300_deskside.json), and [`data/nvidia_rtx_spark.json`](data/nvidia_rtx_spark.json) for normalized records.
 
 ## Major platform families
 
@@ -74,6 +79,10 @@ Apple Silicon should be scored on unified-memory capacity, bandwidth, GPU/runtim
 ### NVIDIA RTX Spark
 
 RTX Spark is a separate Windows-focused Blackwell/Grace platform from GB10/DGX Spark. NVIDIA documents up to 6,144 CUDA cores, a 20-core Grace CPU, 1 PFLOP FP4 and up to 128 GB unified memory with native CUDA. ASUS has published RTX Spark ProArt P14/P16 laptop configurations and a compact ProArt Mini PC. Exact memory bandwidth, retail pricing and independent LLM throughput remain open research items. See [`NVIDIA_RTX_SPARK.md`](NVIDIA_RTX_SPARK.md) and [`data/nvidia_rtx_spark.json`](data/nvidia_rtx_spark.json).
+
+### NVIDIA GB300 Grace Blackwell Ultra Desktop
+
+GB300 deskside systems are a separate capacity/performance class from GB10. The current NVIDIA DGX Station reference exposes **252 GB HBM3e at 7.1 TB/s**, **496 GB LPDDR5X at 396 GB/s**, **748 GB coherent CPU/GPU memory**, **900 GB/s NVLink-C2C**, up to **20 PFLOPS sparse FP4**, ConnectX-8 networking up to 800 Gb/s, and **1,600 W total system power**. NVIDIA now exposes the Ubuntu-based DGX Station as Order Now through partners; the Windows edition remains a Q4 2026 variant. ASUS ET900N G3 is orderable worldwide, Dell Pro Max with GB300 is shipping/call-to-order by region, and HP ZGX Fury is in pre-order rollout. See [`NVIDIA_GB300_DESKSIDE.md`](NVIDIA_GB300_DESKSIDE.md) and [`data/nvidia_gb300_deskside.json`](data/nvidia_gb300_deskside.json).
 
 ### NVIDIA GB10 Grace Blackwell
 
@@ -120,6 +129,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 ├── WATCHLIST.md
 ├── AMD_MI400.md
 ├── APPLE_M5.md
+├── NVIDIA_GB300_DESKSIDE.md
 ├── NVIDIA_RTX_SPARK.md
 ├── OPENAI_JALAPENO.md
 ├── QUALCOMM_DRAGONFLY.md
@@ -130,6 +140,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 │   ├── hardware.json
 │   ├── amd_mi400.json
 │   ├── current_system_variants.json
+│   ├── nvidia_gb300_deskside.json
 │   ├── nvidia_rtx_spark.json
 │   ├── openai_jalapeno.json
 │   ├── apple_m5.json
@@ -150,7 +161,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 
 ## Research dates
 
-Initial structured catalog assembled **2026-08-15**. Current maintenance pass: **2026-08-21**. Prices and availability are snapshots and can change rapidly.
+Initial structured catalog assembled **2026-08-15**. Current maintenance pass: **2026-08-22**. Prices and availability are snapshots and can change rapidly.
 
 ## Scope note
 
