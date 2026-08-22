@@ -1,0 +1,306 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-21",
+  "scope": "amd_ryzen_ai_embedded_p100_edge_platforms",
+  "notes": [
+    "Tracks deployable AMD Ryzen AI Embedded P100 platforms rather than treating processor TOPS as equivalent to LLM token throughput.",
+    "Memory-bandwidth figures marked theoretical are derived from advertised memory data rates and channel width, not measured application bandwidth.",
+    "No stable public unit pricing was found for these industrial platforms during this pass; quote/channel-dependent availability is preserved instead of inventing prices."
+  ],
+  "hardware": [
+    {
+      "id": "amd-ryzen-ai-embedded-p185",
+      "manufacturer": "AMD",
+      "product": "Ryzen AI Embedded P185",
+      "category": "embedded_ai_soc",
+      "status": "production",
+      "release_status": "production shipments targeted from July 2026; current AMD product page recommends the part for new designs",
+      "architecture": {
+        "cpu": "Zen 5",
+        "gpu": "RDNA 3.5",
+        "npu": "XDNA 2"
+      },
+      "cpu_cores": 12,
+      "cpu_threads": 24,
+      "cpu_max_frequency_ghz": 5.1,
+      "gpu_compute_units": 16,
+      "gpu_max_frequency_ghz": 2.9,
+      "npu_tops": 50,
+      "tdp_w": 28,
+      "configurable_tdp_w": {
+        "min": 15,
+        "max": 54
+      },
+      "memory_support": [
+        "DDR5-5600 ECC",
+        "LPDDR5X up to 8533 MT/s ECC"
+      ],
+      "memory_controller": "dual-channel",
+      "interfaces": [
+        "PCIe Gen4",
+        "2x USB4",
+        "USB 3.2",
+        "USB 2.0"
+      ],
+      "software": [
+        "AMD ROCm edge software path",
+        "Vulkan",
+        "OpenCL",
+        "DirectX 12"
+      ],
+      "llm_suitability": "Good low-power host/edge SoC candidate when paired with sufficient memory. CPU/GPU inference and supported ROCm/Vulkan paths are more general than the NPU; XDNA2 TOPS must not be converted directly to GGUF tokens/s.",
+      "model_size_practicality": "Platform-dependent. Boards with 96-128GB RAM can hold many 30B-70B class quantized models in system memory, but practical decode speed will be constrained by memory bandwidth and backend maturity.",
+      "quantization_compatibility": "GGUF quantization is practical through CPU and compatible GPU backends; NPU execution requires supported/compiled XDNA2 software paths and is not arbitrary GGUF acceleration.",
+      "off_grid_suitability": "high_for_processor_class",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "embedded_oem_and_board_partner_channels",
+          "observed_at": "2026-08-21",
+          "note": "AMD does not publish a retail unit price for the embedded SoC."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/products/embedded/ryzen-ai/p100-series/ryzen-ai-embedded-p185.html",
+        "family": "https://www.amd.com/en/products/embedded/ryzen-ai/p100-series.html"
+      },
+      "technical_documentation": {
+        "product_brief": "https://www.amd.com/content/dam/amd/en/documents/products/embedded/ryzen/ryzen-embedded-p100-series-product-brief.pdf",
+        "launch_news": "https://newsroom.amd.com/news/amd-introduces-ryzen-ai-embedded-processor-portfol/"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "advantech-mio-5380-p185",
+      "manufacturer": "Advantech",
+      "product": "MIO-5380 with AMD Ryzen AI Embedded P185",
+      "category": "industrial_3_5in_sbc",
+      "status": "available_channel_dependent",
+      "compute_platform": "amd-ryzen-ai-embedded-p185",
+      "cpu_cores": 12,
+      "cpu_threads": 24,
+      "gpu_architecture": "RDNA 3.5",
+      "gpu_compute_units": 16,
+      "npu_architecture": "XDNA 2",
+      "npu_tops": 50,
+      "system_ai_tops_vendor_max": 80,
+      "processor_tdp_w": 28,
+      "processor_configurable_tdp_w": {
+        "min": 15,
+        "max": 54
+      },
+      "memory_gb_max": 128,
+      "memory_type": "dual-channel DDR5-5600 SO-DIMM with sideband ECC",
+      "memory_bandwidth_gbps_theoretical": 89.6,
+      "memory_bandwidth_note": "Derived theoretical peak: DDR5-5600 x 128-bit aggregate dual-channel width / 8. Not a measured LLM bandwidth result.",
+      "storage": [
+        "2x M.2 M-key 2280 PCIe Gen4 x4 NVMe"
+      ],
+      "networking": [
+        "1GbE Intel i210",
+        "2.5GbE Intel i226"
+      ],
+      "interfaces": [
+        "USB4 Type-C up to 40Gbps",
+        "MCIO PCIe Gen4 x4 on selected SKU",
+        "M.2 E-key",
+        "M.2 B-key",
+        "2x CAN-FD",
+        "4x COM",
+        "I2C/SMBus"
+      ],
+      "input_power": "12-24V DC ±10%",
+      "dimensions_mm": {
+        "width": 146,
+        "depth": 102
+      },
+      "operating_temperature_c": {
+        "standard_min": 0,
+        "standard_max": 60,
+        "extended_min": -40,
+        "extended_max": 85
+      },
+      "software": [
+        "Ubuntu/Linux",
+        "Windows ecosystem",
+        "AMD ROCm-compatible edge path",
+        "Vulkan",
+        "Advantech DeviceOn"
+      ],
+      "llm_suitability": "Strong compact DC-powered edge host when configured with 96-128GB RAM. Best suited to CPU/iGPU quantized inference, orchestration, embeddings, and supported NPU workloads; dual-channel DDR5 bandwidth will limit very large-model decode.",
+      "model_size_practicality": "128GB capacity can store many 70B-class 4-bit weights with room for runtime overhead, but fit does not imply fast generation. 7B-30B-class quantized models are the more practical general-purpose range.",
+      "quantization_compatibility": "GGUF via CPU and compatible Vulkan/ROCm backends; XDNA2 NPU requires supported compiled models and should not be treated as a transparent GGUF accelerator.",
+      "off_grid_suitability": "high_due_to_12_24v_dc_and_15_54w_processor_range",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "buy_online_or_distributor_channel",
+          "observed_at": "2026-08-21",
+          "url": "https://gst.advantech.com/products/MIO-5380/mod/6878B6A5-3AFC-4FCB-8BDA-CB635ECE3F0A",
+          "note": "Advantech exposes Buy Online/distributor routing, but no stable public unit price was captured."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://gst.advantech.com/products/MIO-5380/mod/6878B6A5-3AFC-4FCB-8BDA-CB635ECE3F0A"
+      },
+      "technical_documentation": {
+        "datasheet": "https://advdownload.advantech.com/productfile/PIS/MIO-5380/file/MIO-5380_DS%28031126%2920260311145652.pdf",
+        "amd_p185": "https://www.amd.com/en/products/embedded/ryzen-ai/p100-series/ryzen-ai-embedded-p185.html"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "advantech-som-6874-p185",
+      "manufacturer": "Advantech",
+      "product": "SOM-6874 with AMD Ryzen AI Embedded P185",
+      "category": "com_express_compact_module",
+      "status": "available_or_sampling_channel_dependent",
+      "compute_platform": "amd-ryzen-ai-embedded-p185",
+      "form_factor": "COM Express R3.1 Compact Type 6",
+      "cpu_cores": 12,
+      "cpu_threads": 24,
+      "gpu_architecture": "RDNA 3.5",
+      "gpu_compute_units": 16,
+      "gpu_fp16_tflops_vendor": 23.8,
+      "npu_architecture": "XDNA 2",
+      "npu_tops": 50,
+      "system_ai_tops_vendor_max": 80,
+      "processor_tdp_w": 28,
+      "processor_configurable_tdp_w": {
+        "min": 15,
+        "max": 54
+      },
+      "memory_gb_max": 96,
+      "memory_type": "dual-channel DDR5-5600 SO-DIMM ECC",
+      "memory_bandwidth_gbps_theoretical": 89.6,
+      "memory_bandwidth_note": "Derived theoretical peak from dual-channel DDR5-5600; not an application benchmark.",
+      "networking": [
+        "2.5GbE Intel i226"
+      ],
+      "interfaces": [
+        "PCIe Gen4 PEG up to x8",
+        "additional PCIe Gen4 lanes",
+        "4x USB 3.2 Gen2",
+        "8x USB 2.0",
+        "CAN option",
+        "SMBus",
+        "I2C",
+        "SPI"
+      ],
+      "input_power": "4.75-20V module input; carrier design determines system input",
+      "dimensions_mm": {
+        "width": 95,
+        "depth": 95
+      },
+      "operating_temperature_c": {
+        "standard_min": 0,
+        "standard_max": 60,
+        "extended_min": -40,
+        "extended_max": 85
+      },
+      "software": [
+        "Ubuntu/Linux",
+        "Windows ecosystem",
+        "AMD ROCm-compatible edge path",
+        "Vulkan",
+        "WISE-PaaS/DeviceOn"
+      ],
+      "llm_suitability": "Useful rugged modular host for embedded local inference. 96GB RAM is enough for many large quantized models, while power and modularity are attractive for robotics and industrial nodes; bandwidth remains much lower than discrete HBM/GDDR accelerators.",
+      "model_size_practicality": "Many 30B-class quantized models fit comfortably; selected 70B 4-bit-class models can fit subject to runtime/KV-cache overhead. Throughput depends heavily on backend and memory traffic.",
+      "quantization_compatibility": "GGUF through CPU/compatible GPU backends; NPU use depends on XDNA2-supported model compilation/runtime.",
+      "off_grid_suitability": "high_at_low_ctdp_with_dc_carrier",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "industrial_distribution_and_oem",
+          "observed_at": "2026-08-21",
+          "note": "No stable public retail price found; industrial COM Express modules are typically configuration/channel priced."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_family_announcement": "https://www.advantech.com/emt/resources/news/advantech-powers-the-future-of-edge-ai-with-the-amd-ryzen%E2%84%A2-ai-embedded-p100-series-portfolio"
+      },
+      "technical_documentation": {
+        "datasheet": "https://advdownload.advantech.com/productfile/PIS/SOM-6874/file/SOM-6874_DS%28052726%2920260527090756.pdf",
+        "amd_p185": "https://www.amd.com/en/products/embedded/ryzen-ai/p100-series/ryzen-ai-embedded-p185.html"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "solidrun-honeycomb-ryzen-ai-p100",
+      "manufacturer": "SolidRun",
+      "product": "HoneyComb Ryzen AI Embedded P100",
+      "category": "industrial_mini_itx_platform",
+      "status": "available",
+      "compute_platform": "amd-ryzen-ai-embedded-p100-family",
+      "cpu_architecture": "Zen 5",
+      "gpu_architecture": "RDNA 3.5",
+      "npu_architecture": "XDNA 2",
+      "npu_tops_max": 50,
+      "system_ai_tops_vendor_max": 59,
+      "processor_configurable_tdp_w": {
+        "min": 15,
+        "max": 54
+      },
+      "memory_type": "serviceable LPCAMM2, LPDDR5X-class",
+      "memory_data_rate_mt_s_vendor_range": {
+        "min": 8533,
+        "max": 9600
+      },
+      "memory_capacity_note": "Public page reviewed in this pass did not expose a defensible maximum installed-memory figure; capacity is intentionally left unspecified.",
+      "networking": [
+        "2x 2.5GbE"
+      ],
+      "storage": [
+        "1x M.2 NVMe Gen4 x4 on carrier",
+        "additional M.2 NVMe Gen4 on COM",
+        "2x SATA 3.0"
+      ],
+      "interfaces": [
+        "PCIe Gen4 x8 in physical x16 slot",
+        "USB 3.2",
+        "USB 3.0",
+        "HDMI",
+        "2x mini DisplayPort",
+        "eDP"
+      ],
+      "power_input": "standard ATX connector",
+      "dimensions_mm": {
+        "width": 170,
+        "depth": 170
+      },
+      "operating_temperature_c": {
+        "commercial_min": 0,
+        "commercial_max": 70,
+        "industrial_module_min": -40,
+        "industrial_module_max": 85
+      },
+      "software": [
+        "Linux/x86 ecosystem",
+        "AMD ROCm edge software path",
+        "Vulkan"
+      ],
+      "llm_suitability": "Interesting serviceable/rugged x86 edge platform. Faster LPCAMM2/LPDDR5X-class memory can improve CPU/iGPU inference relative to ordinary DDR5 boards, but exact LLM throughput and installed-memory capacity require configuration-specific validation.",
+      "model_size_practicality": "Configuration-dependent because SolidRun's public page did not provide a verified maximum RAM capacity in this pass.",
+      "quantization_compatibility": "CPU and compatible GPU backends can use common quantized formats such as GGUF; XDNA2 acceleration remains model/runtime specific.",
+      "off_grid_suitability": "medium_to_high_processor_power_but_atx_carrier_requires_system_level_dc_design",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "available_now_direct_or_oem_channel",
+          "observed_at": "2026-08-21",
+          "url": "https://www.solid-run.com/embedded-networking/honeycomb-ryzen-ai-p100/",
+          "note": "SolidRun states the platform is available now, but no stable public configuration price was exposed."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.solid-run.com/embedded-networking/honeycomb-ryzen-ai-p100/"
+      },
+      "technical_documentation": {
+        "platform_article": "https://www.solid-run.com/blog/introducing-the-p100-comx6-for-rugged-edge-ai/",
+        "amd_family": "https://www.amd.com/en/products/embedded/ryzen-ai/p100-series.html"
+      },
+      "evidence": "manufacturer"
+    }
+  ]
+}
