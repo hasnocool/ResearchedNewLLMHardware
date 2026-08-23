@@ -1,0 +1,182 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-23",
+  "purpose": "Verified 2026 additions covering AMD RDNA 4 32GB professional GPUs and a current Ryzen AI 400 mini-PC. Vendor compute figures are retained as architecture metrics, not translated into tokens/second without reproducible LLM benchmarks.",
+  "hardware": [
+    {
+      "id": "amd-radeon-ai-pro-r9600-32gb",
+      "manufacturer": "AMD",
+      "product": "Radeon AI PRO R9600",
+      "compute_platform": "amd-rdna4-gfx1201",
+      "category": "workstation_gpu",
+      "status": "product_page_live_driver_supported_public_retail_not_verified",
+      "gpu_architecture": "RDNA 4",
+      "llvm_target": "gfx1201",
+      "compute_units": 48,
+      "stream_processors": 3072,
+      "ai_accelerators": 96,
+      "fp32_vector_tflops": 24.8,
+      "fp16_matrix_tflops_dense": 99,
+      "fp8_matrix_tflops_dense": 199,
+      "int8_matrix_tops_dense": 199,
+      "int4_matrix_tops_dense": 397,
+      "memory_gb": 32,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 640,
+      "memory_ecc": "Linux only",
+      "board_power_w": 150,
+      "bandwidth_per_watt_gbps": 4.27,
+      "watts_per_gb_vram": 4.69,
+      "host_interface": "PCIe 5.0 x16",
+      "cooling": "active",
+      "board_width": "single-slot",
+      "power_connector": "12V-2x6",
+      "minimum_psu_w_vendor": 450,
+      "software": ["ROCm", "PyTorch through supported ROCm builds", "Vulkan", "OpenCL", "llama.cpp via supported AMD GPU backends/runtime combinations"],
+      "quantization_compatibility": "Low-bit LLM formats are runtime-dependent. GGUF can be practical through llama.cpp-compatible AMD GPU paths; FP8/INT8/INT4 matrix peak figures are hardware capabilities and do not guarantee equivalent support in every LLM engine.",
+      "llm_suitability": {
+        "assessment": "very_strong_32gb_efficiency_candidate",
+        "practical_guidance": "32GB VRAM is well suited to many 20B-32B-class quantized models and can support selected larger heavily-quantized workloads depending on context/KV cache. The 640GB/s memory bandwidth at 150W is especially notable for autoregressive inference efficiency.",
+        "evidence_level": "manufacturer_specs_current_driver_support_no_independent_normalized_llm_benchmark"
+      },
+      "off_grid_suitability": "moderate_to_high_for_32gb_discrete_gpu",
+      "efficiency_notes": "Using AMD reference specifications, 640GB/s at 150W yields about 4.27GB/s/W and 32GB at 150W yields about 4.69W per GB of VRAM. These are specification-derived ratios, not measured wall-power inference efficiency.",
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "no_defensible_public_retail_price_verified",
+          "observed_at": "2026-08-23",
+          "note": "AMD has a live product page and current driver support, but a stable public retail price was not verified in this pass."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.amd.com/en/products/graphics/workstations/radeon-ai-pro/ai-9000-series/amd-radeon-ai-pro-r9600.html"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/en/support/downloads/drivers.html/graphics/radeon-ai-pro/radeon-ai-pro-r9000-series/amd-radeon-ai-pro-r9600.html",
+        "https://rocmdocs.amd.com/en/develop/reference/gpu-specs.html"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "amd-radeon-ai-pro-r9700s-32gb",
+      "manufacturer": "AMD",
+      "product": "Radeon AI PRO R9700S",
+      "compute_platform": "amd-rdna4-gfx1201",
+      "category": "passive_workstation_server_gpu",
+      "status": "product_page_live_driver_supported_channel_availability_not_verified",
+      "gpu_architecture": "RDNA 4",
+      "llvm_target": "gfx1201",
+      "compute_units": 64,
+      "stream_processors": 4096,
+      "ai_accelerators": 128,
+      "fp32_vector_tflops": 47.8,
+      "fp16_matrix_tflops_dense": 191,
+      "fp8_matrix_tflops_dense": 383,
+      "int8_matrix_tops_dense": 383,
+      "int4_matrix_tops_dense": 766,
+      "memory_gb": 32,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 640,
+      "memory_ecc": "Linux only",
+      "board_power_w": 300,
+      "bandwidth_per_watt_gbps": 2.13,
+      "watts_per_gb_vram": 9.38,
+      "host_interface": "PCIe 5.0 x16",
+      "cooling": "passive; directed chassis airflow required",
+      "board_width": "double-slot",
+      "power_connector": "12V-2x6",
+      "minimum_psu_w_vendor": 750,
+      "software": ["ROCm", "PyTorch through supported ROCm builds", "Vulkan", "OpenCL", "AMD Software PRO Edition 26.Q3"],
+      "quantization_compatibility": "Low-bit LLM support depends on ROCm/Vulkan engine implementation. Hardware FP8/INT8/INT4 matrix figures should not be treated as guaranteed performance for arbitrary GGUF/AWQ/GPTQ models.",
+      "llm_suitability": {
+        "assessment": "strong_multi_gpu_or_server_node_with_airflow_requirement",
+        "practical_guidance": "The full 32GB VRAM pool is suitable for many 20B-32B-class quantized models. Compared with R9600, R9700S offers substantially more compute at the same 640GB/s memory bandwidth but doubles board power and requires server/workstation airflow.",
+        "evidence_level": "manufacturer_specs_current_driver_support_no_independent_normalized_llm_benchmark"
+      },
+      "off_grid_suitability": "low_to_moderate",
+      "efficiency_notes": "The passive R9700S is primarily interesting for dense multi-GPU/server deployments. Its 640GB/s at 300W is about 2.13GB/s/W, roughly half the reference memory-bandwidth-per-watt ratio of R9600.",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "channel_or_system_integrator_dependent",
+          "observed_at": "2026-08-23",
+          "note": "AMD exposes the product and current driver support, but no stable standalone public price was verified."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.amd.com/en/products/graphics/workstations/radeon-ai-pro/ai-9000-series/amd-radeon-ai-pro-r9700s.html"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/en/support/downloads/drivers.html/graphics/radeon-ai-pro/radeon-ai-pro-r9000-series/amd-radeon-ai-pro-r9700s.html",
+        "https://rocmdocs.amd.com/en/develop/reference/gpu-specs.html",
+        "https://www.amd.com/en/resources/support-articles/release-notes/RN-PRO-WIN-26-Q3.html"
+      ],
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "minisforum-ai-x1-pro-470-hx470",
+      "manufacturer": "MINISFORUM",
+      "product": "AI X1 Pro-470",
+      "model": "AI X1 Pro-470",
+      "compute_platform": "amd-gorgon-point-ryzen-ai-9-hx-470",
+      "category": "mini_pc",
+      "status": "available_configuration_dependent",
+      "release_year": 2026,
+      "cpu": "AMD Ryzen AI 9 HX 470, 12 cores / 24 threads",
+      "cpu_architecture": "4x Zen 5 + 8x Zen 5c",
+      "cpu_max_boost_ghz": 5.2,
+      "processor_default_tdp_w": 28,
+      "processor_ctdp_w": {"min": 15, "max": 54},
+      "gpu": "AMD Radeon 890M",
+      "gpu_compute_units": 16,
+      "gpu_frequency_mhz": 3100,
+      "npu_tops_vendor": 55,
+      "overall_ai_tops_vendor": 86,
+      "memory_type": "DDR5-5600 SO-DIMM, dual channel",
+      "memory_gb_max_system_vendor": 128,
+      "processor_memory_gb_max": 256,
+      "memory_note": "AMD's processor specification supports up to 256GB, while the current MINISFORUM system specification advertises up to 128GB. The system limit is used for this product record.",
+      "storage": "3x M.2 2280 PCIe 4.0 NVMe; up to 12TB advertised total",
+      "networking": ["2x 2.5GbE", "Wi-Fi 7", "Bluetooth 5.4"],
+      "interfaces": ["2x USB4 40Gbps", "OCuLink PCIe 4.0 x4", "HDMI 2.1", "DisplayPort 2.0", "USB-A", "SD card"],
+      "power_supply_w": 134.9,
+      "dimensions_mm": [195, 195, 47.5],
+      "weight_kg": 1.5,
+      "software": ["Windows 11", "Ubuntu/RHEL processor support", "Ryzen AI Software for NPU-compatible models", "Vulkan/CPU local-LLM runtimes", "ROCm support is runtime/platform dependent and should be verified for Radeon 890M before deployment"],
+      "quantization_compatibility": "CPU/Vulkan local-LLM paths can use common low-bit GGUF formats when supported by the runtime. The 55-TOPS XDNA 2 NPU requires Ryzen AI-compatible model/operator workflows and should not be assumed to accelerate arbitrary GGUF models.",
+      "llm_suitability": {
+        "assessment": "high_capacity_expandable_low_power_host",
+        "practical_guidance": "Up to 128GB replaceable DDR5 makes this useful for CPU/Vulkan experiments with models far larger than typical mini-PC soldered-memory systems. Large models may fit but decode speed is constrained by dual-channel DDR5 bandwidth; the NPU headline does not remove that limitation for arbitrary LLMs.",
+        "evidence_level": "manufacturer_specs_no_independent_normalized_llm_benchmark"
+      },
+      "clusterability": "moderate; dual 2.5GbE plus OCuLink/USB4 expansion",
+      "off_grid_suitability": "high_potential",
+      "efficiency_notes": "AMD specifies the HX 470 at 28W default TDP and 15-54W cTDP; MINISFORUM uses an internal 134.9W power supply. Supply rating is not measured wall consumption. Replaceable DDR5 and a low processor power range are useful for efficient always-on nodes, but independent LLM wall-power measurements are still needed.",
+      "pricing": [
+        {
+          "amount": 1040,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "manufacturer_store_sale",
+          "configuration": "barebone",
+          "availability": "store_page_live_configuration_dependent",
+          "observed_at": "2026-08-23",
+          "url": "https://ca.minisforum.com/products/minisforum-ai-x1-pro-470",
+          "note": "MINISFORUM Canada displayed CA$1,040 sale pricing for the barebone configuration; stock state can vary by selector/session."
+        }
+      ],
+      "vendor_urls": [
+        "https://ca.minisforum.com/products/minisforum-ai-x1-pro-470",
+        "https://www.minisforum.com/products/ai-x1-pro-470"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/en/products/processors/laptop/ryzen/ai-400-series/amd-ryzen-ai-9-hx-470.html",
+        "https://ryzenai.docs.amd.com/en/latest/"
+      ],
+      "evidence": "manufacturer"
+    }
+  ]
+}
