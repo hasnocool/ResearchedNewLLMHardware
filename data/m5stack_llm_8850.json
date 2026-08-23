@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-23",
+  "purpose": "M5Stack/Axera low-power edge accelerator records relevant to Raspberry Pi, RK3588, x86, local LLM, multimodal, and distributed helper-node workloads.",
+  "hardware": [
+    {
+      "id": "m5stack-llm-8850-kit-4gb",
+      "manufacturer": "M5Stack",
+      "product": "LLM-8850 Kit 4GB",
+      "sku": "AI-002-4G",
+      "compute_platform": "axera-ax8850",
+      "category": "m2_edge_ai_accelerator_kit",
+      "status": "available",
+      "soc": "Axera AX8850",
+      "cpu": "8-core Arm Cortex-A55 at 1.7GHz",
+      "npu_tops_int8_vendor": 24,
+      "memory_gb": 4,
+      "memory_type": "64-bit LPDDR4X-4266",
+      "host_interface": "M.2 M-Key 2242, PCIe 2.0 x2",
+      "card_power_w": 7,
+      "kit_power_requirement": ">9V@3A (27W) via USB-C PD on PiHat adapter",
+      "cooling": "active micro-blower/turbine fan with CNC aluminum heatsink and EC-controlled fan curve",
+      "software": ["AXCL Runtime", "C API", "Python API", "ffmpeg hardware codec integration"],
+      "supported_model_examples_vendor": ["Llama3.2", "Qwen3", "InternVL3", "CLIP", "Whisper", "YOLO-v8/11"],
+      "host_os_support": ["Ubuntu 20.04", "Ubuntu 22.04", "Ubuntu 24.04", "Debian 12", "Debian 13", "Windows 10", "Windows 11"],
+      "host_examples": ["Raspberry Pi 5", "RK3588 SBCs", "x86 PCs"],
+      "llm_suitability": {
+        "assessment": "small-model dedicated-memory edge accelerator",
+        "strengths": ["7W accelerator power", "dedicated model memory", "native transformer/LLM runtime", "Pi 5 and RK3588 integration", "multimodal and hardware video pipeline"],
+        "limits": ["4GB dedicated memory", "PCIe 2.0 x2 host link", "AXCL/model-conversion ecosystem is less universal than CUDA/ROCm/Metal", "not suitable for large general-purpose LLMs"]
+      },
+      "pricing": [
+        {
+          "amount": 185,
+          "currency": "USD",
+          "region": "M5Stack official store",
+          "kind": "vendor_store",
+          "availability": "in_stock_10_plus",
+          "observed_at": "2026-08-23",
+          "url": "https://shop.m5stack.com/products/ai-8850-llm-acceleration-m-2-kit-4gb-version-ax8850"
+        }
+      ],
+      "vendor_urls": {
+        "official_store": "https://shop.m5stack.com/products/ai-8850-llm-acceleration-m-2-kit-4gb-version-ax8850"
+      },
+      "technical_documentation": {
+        "kit_docs": "https://docs.m5stack.com/en/ai_hardware/LLM-8850_Kit",
+        "card_docs": "https://docs.m5stack.com/en/ai_hardware/LLM-8850_Card"
+      },
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "m5stack-llm-8850-kit-8gb",
+      "manufacturer": "M5Stack",
+      "product": "LLM-8850 Kit 8GB",
+      "sku": "AI-002-8G",
+      "compute_platform": "axera-ax8850",
+      "category": "m2_edge_ai_accelerator_kit",
+      "status": "out_of_stock",
+      "soc": "Axera AX8850",
+      "cpu": "8-core Arm Cortex-A55 at 1.7GHz",
+      "npu_tops_int8_vendor": 24,
+      "memory_gb": 8,
+      "memory_type": "64-bit LPDDR4X-4266",
+      "host_interface": "M.2 M-Key 2242, PCIe 2.0 x2",
+      "card_power_w": 7,
+      "kit_power_requirement": ">9V@3A (27W) via USB-C PD on PiHat adapter",
+      "cooling": "active micro-blower/turbine fan with CNC aluminum heatsink and EC-controlled fan curve",
+      "software": ["AXCL Runtime", "C API", "Python API", "ffmpeg hardware codec integration"],
+      "supported_model_examples_vendor": ["Llama3.2", "Qwen3", "InternVL3", "CLIP", "Whisper", "YOLO-v8/11"],
+      "host_os_support": ["Ubuntu 20.04", "Ubuntu 22.04", "Ubuntu 24.04", "Debian 12", "Debian 13", "Windows 10", "Windows 11"],
+      "host_examples": ["Raspberry Pi 5", "RK3588 SBCs", "x86 PCs"],
+      "llm_suitability": {
+        "assessment": "small-to-mid edge-model accelerator",
+        "strengths": ["8GB dedicated memory", "7W accelerator power", "native transformer/LLM runtime", "Pi 5 and RK3588 integration", "multimodal and hardware video pipeline"],
+        "limits": ["8GB memory remains a hard capacity ceiling", "PCIe 2.0 x2 host link", "runtime/model coverage requires AXCL support or conversion"]
+      },
+      "pricing": [
+        {
+          "amount": 215,
+          "currency": "USD",
+          "region": "M5Stack official store",
+          "kind": "vendor_store",
+          "availability": "out_of_stock",
+          "observed_at": "2026-08-23",
+          "url": "https://shop.m5stack.com/products/ai-8850-llm-accelerator-m-2-kit-8gb-version-ax8850"
+        }
+      ],
+      "vendor_urls": {
+        "official_store": "https://shop.m5stack.com/products/ai-8850-llm-accelerator-m-2-kit-8gb-version-ax8850"
+      },
+      "technical_documentation": {
+        "kit_docs": "https://docs.m5stack.com/en/ai_hardware/LLM-8850_Kit",
+        "card_docs": "https://docs.m5stack.com/en/ai_hardware/LLM-8850_Card"
+      },
+      "evidence": "manufacturer"
+    }
+  ]
+}
