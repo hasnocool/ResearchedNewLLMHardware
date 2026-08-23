@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-08-23",
+  "product": "MINISFORUM N5 MAX AI NAS",
+  "platform": "AMD Ryzen AI Max+ 395",
+  "evidence_quality": "vendor_benchmark",
+  "runtime": "llama.cpp llama-bench",
+  "settings": {
+    "gpu_layers": 99,
+    "flash_attention": true,
+    "prompt_processing_fixture": "PP512",
+    "text_generation_fixture": "TG128"
+  },
+  "results": [
+    {"model":"gpt-oss-120b","quantization":"MXFP4","model_memory_gb":59.03,"text_generation_tps":59.30,"prompt_processing_tps":668.79},
+    {"model":"Qwen3.5-122B-A10B","quantization":"Q4_K_M","model_memory_gb":69.11,"text_generation_tps":31.76,"prompt_processing_tps":317.58},
+    {"model":"gpt-oss-20b","quantization":"MXFP4","model_memory_gb":11.28,"text_generation_tps":83.09,"prompt_processing_tps":1575.75},
+    {"model":"Gemma 4 26B-A4B","quantization":"Q4_K_M","model_memory_gb":15.64,"text_generation_tps":70.33,"prompt_processing_tps":1200.58}
+  ],
+  "source_url": "https://store.minisforum.com/products/minisforum-n5-max-ai-nas",
+  "notes": "Manufacturer internal results. Preserve as vendor evidence rather than independent cross-platform benchmarking."
+}
