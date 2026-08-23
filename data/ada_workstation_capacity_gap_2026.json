@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-22",
+  "purpose": "Fill the Ada-generation professional-workstation gap between existing RTX 4000 Ada coverage and higher-capacity datacenter/professional cards, with emphasis on local LLM capacity, active cooling and mature CUDA support.",
+  "notes": [
+    "Manufacturer specifications are authoritative for durable hardware fields; retailer and marketplace prices are point-in-time observations.",
+    "Tensor performance figures are vendor peak figures and are not directly equivalent to LLM tokens/sec.",
+    "Model-size guidance is approximate because quantization format, context length, KV cache and runtime overhead materially change usable capacity.",
+    "RTX 5880 Ada is a region/channel-constrained professional variant and must not be conflated with RTX 6000 Ada."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-rtx-4500-ada-24gb",
+      "manufacturer": "NVIDIA",
+      "product": "RTX 4500 Ada Generation 24GB",
+      "manufacturer_model": "PNY VCNRTX4500ADA-PB representative retail SKU",
+      "compute_platform": "nvidia-ada-lovelace-rtx4500",
+      "category": "workstation_gpu_mid_capacity",
+      "status": "available_channel_and_secondary_market",
+      "tier": "A-balanced-24gb-cuda",
+      "gpu_architecture": "Ada Lovelace",
+      "cuda_cores": 7680,
+      "tensor_cores": 240,
+      "rt_cores": 60,
+      "fp32_tflops": 39.6,
+      "tensor_performance_fp8_sparse_tflops": 634.0,
+      "memory_gb": 24,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 192,
+      "memory_bandwidth_gbps": 432,
+      "board_power_w": 210,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "4.4 in H x 10.5 in L, dual-slot full-height",
+      "cooling": "active",
+      "display_outputs": ["4x DisplayPort 1.4a"],
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "NVIDIA RTX Enterprise drivers"],
+      "quantization_compatibility": ["GGUF Q4/Q5/Q8 via llama.cpp CUDA", "AWQ/GPTQ runtime-dependent", "FP8 via Ada Tensor Cores in supported frameworks", "FP16/BF16/INT8 runtime-dependent"],
+      "llm_fit": "24GB is comfortable for 7B-14B models and many 20B-30B-class 4-bit models when context and runtime overhead are controlled. Active workstation cooling makes it easier to deploy than passive datacenter cards in the same capacity class.",
+      "llm_inference_suitability": "very_good_24gb_cuda_workstation_option",
+      "off_grid_suitability": "moderate_due_to_210w_board_power",
+      "efficiency_metrics": {
+        "memory_bandwidth_gbps_per_board_w": 2.06,
+        "board_w_per_gb_vram": 8.75
+      },
+      "pricing": [
+        {
+          "amount": 2000,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_used",
+          "condition": "used_like_new",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-22",
+          "vendor": "Kijiji Calgary",
+          "url": "https://www.kijiji.ca/v-computer-components/calgary/nvidia-rtx-4500-ada-generation-24gb-gddr6-workstation-gpu/1742031790",
+          "note": "Local used asking price; marketplace listing, not a sold-price benchmark."
+        },
+        {
+          "amount": 3737.47,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "sourced_on_demand",
+          "observed_at": "2026-08-22",
+          "vendor": "IT Devices Canada",
+          "url": "https://www.itdevices.ca/product-details/218934",
+          "note": "PNY VCNRTX4500ADA-PB sourced-on-demand channel listing."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/products/workstations/rtx-4500/",
+        "pny_channel": "https://www.itdevices.ca/product-details/218934",
+        "used_market_observation": "https://www.kijiji.ca/v-computer-components/calgary/nvidia-rtx-4500-ada-generation-24gb-gddr6-workstation-gpu/1742031790"
+      },
+      "technical_documentation": {
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/products/workstations/nvidia-rtx-4500-datasheet.pdf",
+        "manufacturer_specs": "https://www.nvidia.com/en-us/products/workstations/rtx-4500/"
+      },
+      "evidence": "manufacturer_plus_retailer_plus_marketplace"
+    },
+    {
+      "id": "nvidia-rtx-5000-ada-32gb",
+      "manufacturer": "NVIDIA",
+      "product": "RTX 5000 Ada Generation 32GB",
+      "manufacturer_model": "PNY VCNRTX5000ADA-PB representative retail SKU",
+      "compute_platform": "nvidia-ada-lovelace-rtx5000",
+      "category": "workstation_gpu_high_capacity",
+      "status": "available_channel",
+      "tier": "A-32gb-cuda",
+      "gpu_architecture": "Ada Lovelace",
+      "cuda_cores": 12800,
+      "tensor_cores": 400,
+      "rt_cores": 100,
+      "fp32_tflops": 65.3,
+      "tensor_performance_fp8_sparse_tflops": 1044.4,
+      "memory_gb": 32,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 576,
+      "board_power_w": 250,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "4.4 in H x 10.5 in L, dual-slot full-height",
+      "cooling": "active",
+      "display_outputs": ["4x DisplayPort 1.4a"],
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "NVIDIA AI Enterprise", "NVIDIA RTX Enterprise drivers"],
+      "quantization_compatibility": ["GGUF Q4/Q5/Q8 via llama.cpp CUDA", "AWQ/GPTQ runtime-dependent", "FP8 via Ada Tensor Cores in supported frameworks", "FP16/BF16/INT8 runtime-dependent"],
+      "llm_fit": "32GB materially improves headroom over 24GB cards for 20B-30B-class models, larger contexts and multi-model serving. It can fit selected larger models at aggressive low-bit quantization, but 70B-class single-GPU use remains highly constrained by weights plus KV-cache/runtime overhead.",
+      "llm_inference_suitability": "excellent_when_32gb_cuda_capacity_is_needed",
+      "off_grid_suitability": "moderate_to_low_due_to_250w_board_power",
+      "efficiency_metrics": {
+        "memory_bandwidth_gbps_per_board_w": 2.30,
+        "board_w_per_gb_vram": 7.81
+      },
+      "pricing": [
+        {
+          "amount": 4999.98,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-22",
+          "vendor": "Best Buy Canada marketplace / QNovum Canada",
+          "url": "https://www.bestbuy.ca/en-ca/brand/NVIDIA",
+          "note": "Brand-new marketplace listing observed at CA$4,999.98; seller/channel pricing can vary substantially."
+        },
+        {
+          "amount": 5000,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_open_box",
+          "condition": "open_box",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-22",
+          "vendor": "eBay Canada",
+          "url": "https://www.ebay.ca/itm/800268120738",
+          "note": "Open-box asking price; not a completed-sale benchmark."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/products/workstations/rtx-5000/",
+        "best_buy_canada": "https://www.bestbuy.ca/en-ca/brand/NVIDIA",
+        "marketplace_observation": "https://www.ebay.ca/itm/800268120738"
+      },
+      "technical_documentation": {
+        "datasheet": "https://resources.nvidia.com/en-us-briefcase-for-datasheets/rtx-5000-ada-datashe",
+        "manufacturer_specs": "https://www.nvidia.com/en-us/products/workstations/rtx-5000/"
+      },
+      "evidence": "manufacturer_plus_retailer_plus_marketplace"
+    },
+    {
+      "id": "nvidia-rtx-5880-ada-48gb",
+      "manufacturer": "NVIDIA",
+      "product": "RTX 5880 Ada Generation 48GB",
+      "compute_platform": "nvidia-ada-lovelace-rtx5880",
+      "category": "workstation_gpu_region_constrained_high_capacity",
+      "status": "available_channel_region_dependent",
+      "tier": "A-48gb-cuda-capacity",
+      "gpu_architecture": "Ada Lovelace",
+      "fp32_tflops": 69.3,
+      "tensor_performance_fp8_sparse_tflops": 1108.4,
+      "memory_gb": 48,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 960,
+      "board_power_w": 285,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "4.4 in H x 10.5 in L, dual-slot full-height",
+      "cooling": "active",
+      "display_outputs": ["4x DisplayPort 1.4a"],
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "NVIDIA RTX Virtual Workstation"],
+      "quantization_compatibility": ["GGUF Q4/Q5/Q8 via llama.cpp CUDA", "AWQ/GPTQ runtime-dependent", "FP8 via Ada Tensor Cores in supported frameworks", "FP16/BF16/INT8 runtime-dependent"],
+      "llm_fit": "48GB is a meaningful single-GPU capacity tier for many 30B-class models at comfortable quantization and selected 70B-class models at aggressive 4-bit-class quantization, subject to context and KV-cache overhead. Its 960GB/s memory bandwidth is materially higher than RTX 4500/5000 Ada.",
+      "llm_inference_suitability": "excellent_capacity_and_bandwidth_but_channel_price_sensitive",
+      "off_grid_suitability": "low_to_moderate_due_to_285w_board_power",
+      "efficiency_metrics": {
+        "memory_bandwidth_gbps_per_board_w": 3.37,
+        "board_w_per_gb_vram": 5.94
+      },
+      "pricing": [
+        {
+          "amount": 5980,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "listing_observed",
+          "observed_at": "2026-08-22",
+          "vendor": "eBay Canada seller in Ontario",
+          "url": "https://www.ebay.ca/itm/287281788800",
+          "note": "Canada-located new asking price; marketplace listing, not manufacturer MSRP."
+        },
+        {
+          "amount": 13408.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "orderable",
+          "observed_at": "2026-08-22",
+          "vendor": "PC-Canada",
+          "url": "https://www.pc-canada.com/item/hp-nvidia-rtx-5880-ada-graphic-card/9z7p5aa",
+          "note": "HP 9Z7P5AA channel price; illustrates substantial OEM/channel premium."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/products/workstations/rtx-5880/",
+        "canada_marketplace_observation": "https://www.ebay.ca/itm/287281788800",
+        "pc_canada_hp": "https://www.pc-canada.com/item/hp-nvidia-rtx-5880-ada-graphic-card/9z7p5aa"
+      },
+      "technical_documentation": {
+        "manufacturer_specs": "https://www.nvidia.com/en-us/products/workstations/rtx-5880/"
+      },
+      "provenance_notes": [
+        "The current NVIDIA product page confirms 48GB ECC GDDR6, 285W, PCIe 4.0 x16, form factor and performance figures. Current channel data lists a 384-bit interface and 960GB/s bandwidth.",
+        "Do not conflate RTX 5880 Ada with RTX 6000 Ada; both have 48GB but different compute and power specifications."
+      ],
+      "evidence": "manufacturer_plus_retailer_plus_marketplace"
+    }
+  ]
+}
