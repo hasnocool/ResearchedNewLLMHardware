@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-08-24",
+  "model": "Qwen3.8-27B",
+  "observations": [
+    {
+      "evidence": "manufacturer_vendor_benchmark",
+      "hardware": "AMD Ryzen AI Max+ 395 / Radeon 8060S",
+      "example_system": "GMKtec EVO-X2 AI Mini PC",
+      "memory_gb": 128,
+      "vgm_gb": 64,
+      "os": "Windows 11 Pro 25H2",
+      "runtime": "llama.cpp",
+      "backend": "Vulkan",
+      "mtp_draft_tokens": 4,
+      "decode_tps_up_to": 24.5,
+      "measurement_note": "AMD reports average token-generation throughput across three or more runs; quantization was not stated in the public article text captured for this observation.",
+      "source_url": "https://www.amd.com/en/blogs/2026/run-qwen-3-8-27b-on-amd-ryzen-ai-max-and-radeon-graphics-cards-day-0.html"
+    },
+    {
+      "evidence": "manufacturer_vendor_benchmark",
+      "hardware": "AMD Radeon AI PRO R9700 32GB",
+      "host_cpu": "AMD Ryzen 9 9950X",
+      "host_memory_gb": 64,
+      "os": "Windows 11 Pro 25H2",
+      "runtime": "llama.cpp",
+      "backend": "Vulkan",
+      "mtp_draft_tokens": 2,
+      "decode_tps_up_to": 51.8,
+      "measurement_note": "AMD reports average token-generation throughput across three or more runs; all values are characterized as preliminary/up to.",
+      "source_url": "https://www.amd.com/en/blogs/2026/run-qwen-3-8-27b-on-amd-ryzen-ai-max-and-radeon-graphics-cards-day-0.html"
+    },
+    {
+      "evidence": "community_reproducible",
+      "hardware": "AMD Ryzen AI Max+ 395 / Radeon 8060S",
+      "memory_gb": 128,
+      "runtime": "llama.cpp b10503",
+      "backend": "ROCm and Vulkan comparisons",
+      "quantization": "Q8_0",
+      "context_note": "Greedy generation, 256 max output tokens; community author reports llama.cpp timing-block measurements with three repetitions per configuration.",
+      "package_power_w_observed": 85,
+      "decode_tps_no_mtp": 7.3,
+      "decode_tps_mtp": 22.4,
+      "decode_tps_rocmfp4_fork": 29.9,
+      "caution": "Community result; custom ROCmFP4 path is not directly comparable with stock llama.cpp or AMD's Vulkan vendor result.",
+      "source_url": "https://www.reddit.com/r/StrixHalo/comments/1vsstxm/qwen3827b_benchmarks_on_strix_halo_q8_0_mtp_21_ts/"
+    },
+    {
+      "evidence": "community_reproducible",
+      "hardware": "AMD Ryzen AI Max+ 395 / Radeon 8060S",
+      "example_system": "GMKtec EVO-X2",
+      "memory_gb": 128,
+      "runtime": "llama.cpp b10436",
+      "backend": "Vulkan",
+      "quantization": "Unsloth UD-Q5_K_XL",
+      "context_tokens": 131072,
+      "mtp_draft_tokens": 4,
+      "kv_cache": "q8_0 K/V",
+      "workload_note": "Repository includes reproducible local inference and OpenCode agent testing methodology rather than one universal normalized throughput figure.",
+      "source_url": "https://github.com/erstmalreden/qwen3.8-27b-ryzen-ai-max-395-benchmarks"
+    }
+  ],
+  "interpretation": "The new evidence materially improves confidence that Qwen3.8-27B is practical on Strix Halo. MTP can substantially raise decode throughput when configured well, but community results also show sensitivity to backend, quantization and speculative-decoding settings. R9700 remains substantially faster in AMD's vendor test, while Strix Halo trades speed for unified-memory capacity and lower platform power."
+}
