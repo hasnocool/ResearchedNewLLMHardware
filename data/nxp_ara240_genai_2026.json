@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-24",
+  "purpose": "Current structured research for NXP Ara240 discrete NPU hardware relevant to low-power local generative-AI and LLM inference. Vendor benchmark and precision claims retain provenance and are not normalized against GPU TOPS or token-rate results from other runtimes.",
+  "hardware": [
+    {
+      "id": "nxp-ara240-m2-16gb",
+      "manufacturer": "NXP Semiconductors",
+      "product": "Ara240 16GB M.2 Module",
+      "model": "ARA2-M2-16G-GT",
+      "manufacturer_part_number": "ARA2-M2-16G-GT",
+      "compute_platform": "nxp-ara240-dnpu",
+      "category": "edge_genai_accelerator_m2",
+      "status": "available_distributor_stock",
+      "release_status_as_of": "2026-08-24",
+      "release_context": "NXP announced distributor availability for June 2026; current US distributor pages show active/in-stock inventory.",
+      "architecture": "NXP Ara240 discrete neural processing unit (DNPU), proprietary neural-network processor",
+      "processor_frequency_mhz_max": 900,
+      "etops_vendor_max": 40,
+      "etops_note": "NXP reports equivalent TOPS (eTOPS); this metric is vendor-defined and must not be compared directly with INT8/INT4 TOPS from other architectures.",
+      "memory_gb": 16,
+      "memory_type": "LPDDR4",
+      "memory_bandwidth_gbps": null,
+      "memory_bandwidth_note": "NXP describes the architecture as high-bandwidth for large models but does not expose a defensible public numeric LPDDR4 bandwidth for the ARA2-M2-16G-GT module in the sources used here.",
+      "host_interface": "M.2 M-Key, PCIe 4.0 x1/x2/x4 configurable; maximum x4",
+      "form_factor": "M.2 2280 / NGFF 2280",
+      "module_dimensions_mm": [22, 80],
+      "chip_package": "17 mm x 17 mm FCBGA",
+      "chip_power_w_typical_vendor": 6.5,
+      "module_power_w": {
+        "nxp_module": null,
+        "partner_modules_typical": 12
+      },
+      "power_notes": "NXP's Ara240 fact sheet specifies 6.5W typical chip power. NXP's partner-module table lists approximately 12W typical for multiple Ara240 M.2 implementations. A whole-system or exact NXP ARA2-M2-16G-GT module power figure was not inferred from those partner values.",
+      "operating_system_support": ["Linux"],
+      "software": [
+        "NXP Ara SDK 2.1.1",
+        "Ara2 Runtime Package",
+        "Optimum-Ara",
+        "Hugging Face Transformers/Optimum integration",
+        "TensorFlow",
+        "PyTorch",
+        "ONNX"
+      ],
+      "software_release_state": "Ara SDK 2.1.1 released July 2026; NXP states it can quantize and compile CNN, LLM and VLM models for Ara240.",
+      "documented_integer_precisions": ["INT8", "INT16", "INT32"],
+      "quantization_compatibility": "NXP documents flexible quantization in Ara SDK. NXP technical support states the Ara240 data sheet documents INT8, INT16 and INT32, while no official INT4 support was found in that documentation. Do not assume arbitrary GGUF/GPTQ/AWQ artifacts execute directly; models use NXP's compiler/runtime path.",
+      "llm_benchmarks": [
+        {
+          "model": "Llama 2 7B",
+          "metric": "output_tokens_per_second",
+          "value": 14,
+          "source_type": "manufacturer_fact_sheet",
+          "source_date": "2026-04-01",
+          "caveats": "NXP publishes 14 output tok/s but the public fact sheet does not provide enough quantization, context-length, prompt/prefill, batching or host-system detail for normalized cross-platform comparison."
+        }
+      ],
+      "llm_suitability": {
+        "assessment": "high_for_supported_small_to_mid_edge_genai_models",
+        "practical_guidance": "The dedicated 16GB LPDDR4 pool is materially larger than most edge NPUs and NXP explicitly validates a 7B LLM workload. The module is best treated as a fixed-model edge inference accelerator where Ara SDK/Optimum-Ara supports the chosen architecture, not as a drop-in replacement for CUDA/ROCm/MLX or generic GGUF experimentation.",
+        "capacity_guidance": "7B-class models are directly supported by manufacturer evidence. Larger-model practicality should not be inferred solely from 16GB capacity until NXP publishes model-specific compilation, quantization and runtime evidence.",
+        "evidence_level": "manufacturer_current"
+      },
+      "performance_per_watt_notes": "Using NXP's 14 output tok/s Llama2-7B claim and 6.5W typical chip power would imply about 2.15 output tok/s per chip watt, but that ratio is not stored as a normalized efficiency score because host/module power and benchmark methodology are incomplete.",
+      "off_grid_suitability": "very_high_accelerator_level_host_power_dependent",
+      "physical_constraints": [
+        "Requires an M.2 M-Key host with PCIe connectivity and software/platform support.",
+        "NXP currently documents runtime enablement on i.MX 8M Plus and i.MX 95 hosts; broader PCIe host compatibility should not be assumed without NXP support documentation.",
+        "Thermal solution and whole-module power must be included in system design; partner Ara240 M.2 modules are listed around 12W typical."
+      ],
+      "pricing": [
+        {
+          "amount": 698.6,
+          "currency": "USD",
+          "region": "US",
+          "kind": "distributor_current",
+          "availability": "in_stock",
+          "observed_at": "2026-08-24",
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/nxp-usa-inc/ARA2-M2-16G-GT/29292316",
+          "note": "Qty-1 price; DigiKey showed 20 units in stock when checked."
+        },
+        {
+          "amount": 698.57,
+          "currency": "USD",
+          "region": "US",
+          "kind": "distributor_current",
+          "availability": "in_stock",
+          "observed_at": "2026-08-24",
+          "vendor": "Mouser",
+          "url": "https://www.mouser.com/en/ProductDetail/NXP-Semiconductors/ARA2-M2-16G-GT",
+          "note": "Qty-1 price; Mouser showed 22 units in stock and 7 on order when checked."
+        }
+      ],
+      "cost_efficiency_notes": "At roughly US$699, the module is expensive per GB versus commodity GPUs/SBCs, but its value proposition is low accelerator power, dedicated 16GB memory, M.2 integration and a vendor-supported LLM compiler/runtime rather than raw memory-per-dollar.",
+      "vendor_urls": [
+        "https://www.nxp.com/products/ARA240",
+        "https://www.nxp.com/design/design-center/development-boards-and-designs/ARA2-M2-16G-GT",
+        "https://www.nxp.com/design/design-center/software/embedded-software/ara-software-development-kit%3AARA-SDK"
+      ],
+      "technical_documentation": [
+        "https://www.nxp.com/docs/en/fact-sheet/ARA240DNPUFS.pdf",
+        "https://www.nxp.com/design/design-center/development-boards-and-designs/ARA2-M2-16G-GT",
+        "https://www.nxp.com/design/design-center/software/embedded-software/ara-software-development-kit%3AARA-SDK",
+        "https://community.nxp.com/t5/i-MX-Solutions/Ara240-16GB-M-2-Module/m-p/2398037"
+      ],
+      "source_caveats": [
+        "NXP's 40 eTOPS is an equivalent-TOPS metric and is not directly comparable to vendor INT4/INT8 TOPS elsewhere in the catalog.",
+        "The 14 tok/s Llama2-7B result is manufacturer evidence with incomplete benchmark metadata, so it is retained as a vendor benchmark rather than an independent normalized result.",
+        "No numeric module memory-bandwidth figure was stored because a defensible current primary-source value was not found.",
+        "NXP technical support says official Ara240 documentation does not currently document INT4 support; INT8/INT16/INT32 are documented."
+      ],
+      "evidence": "manufacturer_plus_current_distributors"
+    }
+  ]
+}
