@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-24",
+  "purpose": "MINIX Ryzen AI Max+ 395 system variants. These share the existing AMD Strix Halo compute platform and must not be counted as new silicon architectures.",
+  "hardware": [
+    {
+      "id": "minix-er939-ai-128gb-2tb",
+      "manufacturer": "MINIX",
+      "product": "ER939-AI",
+      "compute_platform": "amd-strix-halo-ryzen-ai-max-plus-395",
+      "category": "mini_pc",
+      "status": "listed_sold_out",
+      "cpu": "AMD Ryzen AI Max+ 395, 16C/32T, up to 5.1 GHz",
+      "gpu": "AMD Radeon 8060S",
+      "npu_tops_vendor": 50,
+      "vendor_total_ai_tops": 126,
+      "memory_gb": 128,
+      "memory_type": "LPDDR5X-8000 unified",
+      "storage_tb": 2,
+      "storage_expansion": "additional M.2 2280 PCIe 4.0 x4 slot; vendor states up to 8TB expansion",
+      "networking": ["2.5GbE", "Wi-Fi 7", "Bluetooth 5.4"],
+      "io": ["2x USB4 40Gbps", "HDMI 2.1", "DisplayPort 1.4", "SD card reader"],
+      "power_supply_w": 240,
+      "pricing": [
+        {
+          "amount": 3150,
+          "currency": "USD",
+          "region": "US storefront",
+          "kind": "manufacturer_store",
+          "configuration": "128GB LPDDR5X + 2TB NVMe",
+          "availability": "sold_out_when_checked",
+          "observed_at": "2026-08-24",
+          "url": "https://www.minix.com.hk/products/minix-er939-ai-amd-ryzen-ai-max-395-mini-pc"
+        }
+      ],
+      "vendor_urls": [
+        "https://www.minix.com.hk/products/minix-er939-ai-amd-ryzen-ai-max-395-mini-pc"
+      ],
+      "technical_documentation": [
+        "https://www.minix.com.hk/products/minix-er939-ai-amd-ryzen-ai-max-395-mini-pc",
+        "https://www.minix.com.hk/pages/download-center"
+      ],
+      "evidence": "manufacturer",
+      "notes": "Shared Ryzen AI Max+ 395 / Radeon 8060S silicon. The official storefront currently shows the selected 128GB + 2TB configuration as sold out, so the observed price is not treated as evidence of immediate availability."
+    },
+    {
+      "id": "minix-er939-ai-pro-128gb-2tb",
+      "manufacturer": "MINIX",
+      "product": "ER939-AI Pro",
+      "compute_platform": "amd-strix-halo-ryzen-ai-max-plus-395",
+      "category": "compact_ai_workstation",
+      "status": "listed_sold_out",
+      "cpu": "AMD Ryzen AI Max+ 395, 16C/32T, up to 5.1 GHz",
+      "gpu": "AMD Radeon 8060S",
+      "npu_tops_vendor": 50,
+      "vendor_total_ai_tops": 126,
+      "memory_gb": 128,
+      "memory_type": "LPDDR5X-8000 unified",
+      "storage_tb": 2,
+      "storage_expansion": "second M.2 2280 PCIe 4.0 x4 slot; vendor states up to 12TB total storage",
+      "networking": ["10GbE", "10GbE", "Wi-Fi 7", "Bluetooth 5.4"],
+      "io": ["2x USB4 40Gbps", "HDMI 2.1", "DisplayPort 1.4", "SD 4.0 card reader"],
+      "power": {
+        "max_tdp_w_vendor": 132,
+        "power_supply_w": 240
+      },
+      "cooling": "triple-fan vendor design",
+      "pricing": [
+        {
+          "amount": 3500,
+          "currency": "USD",
+          "region": "US storefront",
+          "kind": "manufacturer_store",
+          "configuration": "128GB LPDDR5X + 2TB NVMe",
+          "availability": "sold_out_when_checked",
+          "observed_at": "2026-08-24",
+          "url": "https://www.minix.com.hk/products/minix-er939-ai-pro-mini-pc"
+        },
+        {
+          "amount": 698000,
+          "currency": "JPY",
+          "region": "JP",
+          "kind": "authorized_distributor_market_price",
+          "configuration": "128GB LPDDR5X + 2TB NVMe",
+          "availability": "released_channel_dependent",
+          "observed_at": "2026-08-24",
+          "url": "https://www.links.co.jp/item/minix-er939-ai-pro/",
+          "note": "Japanese authorized distributor page documents June 2026 release; market price has been reported at ¥698,000."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.minix.com.hk/products/minix-er939-ai-pro-mini-pc",
+        "https://www.links.co.jp/item/minix-er939-ai-pro/"
+      ],
+      "technical_documentation": [
+        "https://www.minix.com.hk/products/minix-er939-ai-pro-mini-pc",
+        "https://www.links.co.jp/item/minix-er939-ai-pro/",
+        "https://www.minix.com.hk/pages/download-center"
+      ],
+      "evidence": "manufacturer_plus_authorized_distributor",
+      "notes": "The Pro variant's dual 10GbE is materially more useful for distributed inference than the base ER939-AI's 2.5GbE. It still shares the same Strix Halo compute platform and should be compared on system price, networking, cooling and availability rather than counted as distinct silicon."
+    }
+  ]
+}
