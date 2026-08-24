@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-23",
+  "scope": "turing_24gb_value_secondary_market",
+  "notes": [
+    "This catalog slice tracks active-cooled NVIDIA Turing GPUs with 24 GB of addressable GDDR6 that remain useful for local LLM inference on the secondary market.",
+    "Manufacturer specifications are authoritative for architecture, memory, bandwidth, power and interfaces. Marketplace prices are point-in-time asking-price observations, not fair-market-value guarantees.",
+    "NVIDIA currently lists TITAN RTX and Quadro RTX 6000 as compute capability 7.5 devices in its CUDA GPU table. Turing therefore has a materially better current CUDA position than Maxwell, Pascal and Volta, but application-level support still depends on framework builds and kernel requirements.",
+    "Model-fit guidance is approximate because quantization format, context length, KV cache, runtime overhead and CPU/RAM offload affect usable capacity."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-titan-rtx-24gb-secondary-market",
+      "manufacturer": "NVIDIA",
+      "product": "TITAN RTX 24GB",
+      "compute_platform": "nvidia-turing-tu102",
+      "category": "prosumer_gpu_secondary_market",
+      "status": "secondary-market",
+      "tier": "A-used-cuda-value",
+      "release_status": "discontinued_primary_market_secondary_market_active",
+      "gpu_architecture": "Turing",
+      "compute_capability": "7.5",
+      "cuda_cores": 4608,
+      "tensor_cores": 576,
+      "rt_cores": 72,
+      "tensor_tflops_vendor": 130,
+      "memory_gb": 24,
+      "memory_type": "GDDR6",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 672,
+      "tdp_w": 280,
+      "host_interface": "PCIe 3.0 x16",
+      "power_connectors": ["2x 8-pin"],
+      "recommended_system_psu_w": 650,
+      "form_factor": "dual-slot full-height",
+      "cooling": "active dual-fan vapor-chamber reference design",
+      "nvlink": "2-way; NVIDIA states paired TITAN RTX cards can expose 48 GB effective GPU memory to supported applications with up to 100 GB/s NVLink transfer bandwidth",
+      "software": ["CUDA", "CUDA-X", "cuDNN", "TensorRT", "PyTorch", "llama.cpp CUDA", "vLLM where Turing-compatible kernels/builds are used"],
+      "quantization_compatibility": "Strong compatibility with common CUDA-backed GGUF, GPTQ, AWQ and other weight-only quantized inference paths, subject to the selected runtime still compiling and shipping kernels for compute capability 7.5.",
+      "model_size_practicality": "24 GB is comfortable for many 7B-20B class quantized models and some larger models with aggressive quantization. Many 30B-class 4-bit weights are near the practical capacity boundary once KV cache and runtime overhead are included, so exact fit must be tested.",
+      "llm_inference_suitability": "High. The combination of 24 GB VRAM, 672 GB/s bandwidth, active desktop cooling and a still-current CUDA compute-capability listing makes TITAN RTX easier to operate than passive datacenter bargains of similar capacity.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_tdp_w": 2.4,
+        "basis": "672 GB/s divided by NVIDIA 280 W TDP; this is a specification ratio, not measured LLM tokens per watt."
+      },
+      "cost_efficiency": {
+        "representative_price_cad": 1091.28,
+        "cad_per_vram_gb": 45.47,
+        "cad_per_memory_bandwidth_gbps": 1.62,
+        "basis": "Representative eBay Canada localized used listing observed 2026-08-23; shipping, taxes, seller location and condition vary."
+      },
+      "off_grid_suitability": "low-medium; 280 W GPU power is substantial, but active cooling and 24 GB capacity can make it more practical than server cards when total integration effort matters.",
+      "pricing": [
+        {
+          "amount": 1091.28,
+          "currency": "CAD",
+          "region": "eBay Canada localized / international seller",
+          "kind": "observed_used",
+          "condition": "used",
+          "availability": "listing_available_when_observed",
+          "observed_at": "2026-08-23",
+          "vendor": "eBay marketplace",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=nvidia+titan+rtx",
+          "note": "Representative pre-owned TITAN RTX 24GB listing. Other listings observed around CA$1,145-1,250; asking prices are not completed-sale valuations."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/titan/titan-rtx/",
+        "developer_product": "https://developer.nvidia.com/titan-rtx",
+        "market_search": "https://www.ebay.ca/sch/i.html?_nkw=nvidia+titan+rtx"
+      },
+      "technical_documentation": {
+        "cuda_compute_capability": "https://developer.nvidia.com/cuda/gpus",
+        "turing_compatibility_guide": "https://docs.nvidia.com/cuda/archive/13.0.1/turing-compatibility-guide/index.html"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    },
+    {
+      "id": "nvidia-quadro-rtx-6000-24gb-secondary-market",
+      "manufacturer": "NVIDIA",
+      "product": "Quadro RTX 6000 24GB",
+      "compute_platform": "nvidia-turing-tu102",
+      "category": "workstation_gpu_secondary_market",
+      "status": "secondary-market",
+      "tier": "A-used-cuda-workstation",
+      "release_status": "discontinued_primary_market_secondary_market_active",
+      "gpu_architecture": "Turing",
+      "compute_capability": "7.5",
+      "cuda_cores": 4608,
+      "tensor_cores": 576,
+      "rt_cores": 72,
+      "fp32_tflops": 16.3,
+      "tensor_tflops_vendor": 130.5,
+      "memory_gb": 24,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 384,
+      "memory_bandwidth_gbps": 672,
+      "total_board_power_w": 295,
+      "total_graphics_power_w": 260,
+      "host_interface": "PCIe 3.0 x16",
+      "form_factor": "4.4 in high x 10.5 in long, dual-slot workstation reference card",
+      "cooling": "active on workstation reference/OEM variants; passive server variants also exist and require directed airflow",
+      "nvlink": "2-way; NVIDIA documents up to 48 GB combined GDDR6 and 100 GB/s bidirectional transfer bandwidth for supported applications",
+      "software": ["CUDA", "CUDA-X", "cuDNN", "TensorRT", "PyTorch", "llama.cpp CUDA", "professional NVIDIA driver stack"],
+      "quantization_compatibility": "Strong compatibility with common CUDA-backed GGUF and weight-only quantization runtimes when the selected build retains compute capability 7.5 kernels. ECC memory can be useful for long-running workstation/server deployments.",
+      "model_size_practicality": "24 GB is comfortable for many 7B-20B quantized models and selected larger models. 30B-class 4-bit operation is configuration dependent because model weights, KV cache and runtime buffers compete for the same VRAM.",
+      "llm_inference_suitability": "High for a used Turing workstation card. It combines the same 672 GB/s class memory subsystem as TITAN RTX with ECC and professional-driver positioning, but seller listings must be checked carefully for passive server variants.",
+      "performance_per_watt": {
+        "memory_bandwidth_gbps_per_board_w": 2.28,
+        "basis": "672 GB/s divided by NVIDIA 295 W total board power; specification ratio only."
+      },
+      "cost_efficiency": {
+        "representative_price_cad": 1336.25,
+        "cad_per_vram_gb": 55.68,
+        "cad_per_memory_bandwidth_gbps": 1.99,
+        "basis": "Representative eBay Canada localized pre-owned listing observed 2026-08-23; shipping/import costs vary materially."
+      },
+      "off_grid_suitability": "low; nearly 300 W board power plus host load, though active workstation variants avoid the additional blower/duct engineering required by passive datacenter cards.",
+      "pricing": [
+        {
+          "amount": 1336.25,
+          "currency": "CAD",
+          "region": "eBay Canada localized / US seller",
+          "kind": "observed_used",
+          "condition": "used",
+          "availability": "listing_available_when_observed",
+          "observed_at": "2026-08-23",
+          "vendor": "eBay marketplace - egoods.supply",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=rtx+6000",
+          "note": "Representative pre-owned Quadro RTX 6000 24GB listing at CA$1,336.25 before CA$312.81 shipping. Other active/passive variants were observed at different prices; cooling implementation must be verified before purchase."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-eu/products/workstations/quadro/rtx-6000/",
+        "market_search": "https://www.ebay.ca/sch/i.html?_nkw=rtx+6000"
+      },
+      "technical_documentation": {
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/quadro-rtx-6000-us-nvidia-704093-r4-web.pdf",
+        "cuda_compute_capability": "https://developer.nvidia.com/cuda/gpus",
+        "turing_compatibility_guide": "https://docs.nvidia.com/cuda/archive/13.0.1/turing-compatibility-guide/index.html"
+      },
+      "evidence": "manufacturer_plus_marketplace"
+    }
+  ]
+}
