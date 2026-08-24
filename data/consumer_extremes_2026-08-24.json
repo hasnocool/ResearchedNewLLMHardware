@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.2.0",
+  "last_updated": "2026-08-24",
+  "scope": "current_consumer_extremes",
+  "notes": [
+    "This slice captures two opposite ends of current local-AI hardware: the highest-capacity/current-generation GeForce card and a low-power 16GB Raspberry Pi desktop.",
+    "Prices are point-in-time observations and should not be treated as stable MSRP or fair-market value.",
+    "TOPS figures are vendor peak figures and are not equivalent to LLM token generation throughput.",
+    "Model-size guidance is approximate and reserves headroom for runtime, context and KV cache."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-geforce-rtx-5090-32gb",
+      "manufacturer": "NVIDIA",
+      "product": "GeForce RTX 5090 32GB",
+      "model_number": "GeForce RTX 5090",
+      "compute_platform": "nvidia-blackwell-gb202",
+      "category": "consumer_gpu",
+      "status": "available_high_price",
+      "release_date": "2025-01-30",
+      "gpu_architecture": "Blackwell",
+      "cuda_compute_capability": "12.0",
+      "cuda_cores": 21760,
+      "tensor_cores": 680,
+      "tensor_cores_generation": 5,
+      "ai_tops_vendor": 3352,
+      "memory_gb": 32,
+      "memory_type": "GDDR7",
+      "memory_bus_bits": 512,
+      "memory_data_rate_gbps": 28,
+      "memory_bandwidth_gbps": 1792,
+      "board_power_w": 575,
+      "required_system_power_w_reference": 1000,
+      "host_interface": "PCIe 5.0",
+      "reference_dimensions_mm": {"length": 304, "width": 137},
+      "reference_slots": 2,
+      "reference_power_connector": "1x 600W PCIe Gen5 cable or adapter from PCIe 8-pin cables",
+      "nvlink": false,
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "Ollama", "LM Studio"],
+      "quantization_compatibility": "Broad current CUDA support for FP16/BF16, FP8/FP4 where supported by the runtime, INT8/INT4 kernels, GPTQ/AWQ and GGUF CUDA inference. Exact datatype acceleration depends on runtime and kernel versions.",
+      "model_size_practicality": "32GB VRAM is well suited to 7B-32B quantized models and can run selected larger models with aggressive quantization or CPU/system-memory offload. A typical 70B-class model does not fit entirely in 32GB once runtime and KV-cache overhead are included.",
+      "llm_inference_suitability": "Current consumer CUDA performance ceiling with extremely high memory bandwidth, but acquisition cost, 575W board power and 32GB capacity make it poor value for users whose primary need is simply maximum model size.",
+      "performance_per_watt_notes": "1792 GB/s divided by 575W is approximately 3.12 GB/s of peak memory bandwidth per board watt. This is a specification-derived ratio, not measured tokens-per-joule.",
+      "cost_efficiency": {
+        "observed_cad_per_vram_gb": 196.87,
+        "observed_cad_per_gbps_bandwidth": 3.52
+      },
+      "off_grid_suitability": "poor",
+      "off_grid_notes": "The 575W GPU alone can exceed the total power budget of many off-grid systems; whole-system peak demand can approach or exceed 1kW. Power limiting may improve efficiency but requires workload-specific benchmarking.",
+      "pricing": [
+        {
+          "amount": 6299.99,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "orderable_listing",
+          "observed_at": "2026-08-24",
+          "vendor": "Canada Computers",
+          "url": "https://www.canadacomputers.com/en/914/graphics-cards?q=GPU-GeForce+RTX+5090",
+          "note": "Representative GIGABYTE WINDFORCE OC listing. Other RTX 5090 partner cards were substantially more expensive, so this is a point-in-time example rather than a universal market price."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+        "retailer_observation": "https://www.canadacomputers.com/en/914/graphics-cards?q=GPU-GeForce+RTX+5090"
+      },
+      "technical_documentation": {
+        "manufacturer_specifications": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+        "blackwell_architecture_whitepaper": "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+        "cuda_docs": "https://docs.nvidia.com/cuda/"
+      },
+      "evidence": "manufacturer_plus_current_retailer"
+    },
+    {
+      "id": "raspberry-pi-500-plus-16gb",
+      "manufacturer": "Raspberry Pi",
+      "product": "Raspberry Pi 500+",
+      "manufacturer_model_id": "SC1237 (US unit-only variant)",
+      "compute_platform": "bcm2712",
+      "category": "arm_desktop_sbc",
+      "status": "available",
+      "cpu": "2.4GHz quad-core 64-bit Arm Cortex-A76",
+      "cpu_cores": 4,
+      "gpu": "VideoCore VII",
+      "memory_gb": 16,
+      "memory_type": "LPDDR4X-4267",
+      "storage": ["256GB Raspberry Pi NVMe SSD included", "M.2 NVMe support up to 2280", "microSD"],
+      "networking": ["Gigabit Ethernet", "Wi-Fi 5", "Bluetooth 5.0 BLE"],
+      "io": ["2x USB 3.0", "1x USB 2.0", "2x micro HDMI", "40-pin GPIO"],
+      "graphics_api": ["OpenGL ES 3.1", "Vulkan 1.3"],
+      "power_input": "5V DC USB-C",
+      "recommended_power_supply_w": 27,
+      "typical_active_current_a": 0.8,
+      "typical_active_power_w_derived": 4.0,
+      "typical_active_power_note": "Derived from Raspberry Pi documentation's 800mA typical active current at 5V with LEDs off and SSD inactive; actual whole-system power rises with SSD, peripherals, CPU/GPU load and USB devices.",
+      "dimensions_mm": {"width": 312, "depth": 123.06, "height": 35.76},
+      "production_lifetime_until": "2035-01",
+      "software": ["Raspberry Pi OS", "Debian", "Ubuntu", "llama.cpp CPU", "Vulkan-capable experimental GPU backends"],
+      "quantization_compatibility": "CPU llama.cpp supports common GGUF integer quantizations such as Q4/Q5/Q8 depending on build; there is no discrete CUDA/ROCm-class accelerator and VideoCore VII Vulkan acceleration remains runtime-specific.",
+      "model_size_practicality": "16GB system memory is practical for small 1B-8B quantized CPU models and experimentation with larger models at very low-memory quantization, but CPU compute and shared-memory bandwidth become the limiting factors well before capacity alone.",
+      "llm_inference_suitability": "Useful as a silent/low-power local assistant, router, embedding node, preprocessing host or small-model endpoint. It is not cost-effective for raw LLM tokens/sec at its current memory-shortage-inflated price.",
+      "off_grid_suitability": "excellent",
+      "off_grid_notes": "5V USB-C power and low single-digit-watt bare-system activity make it straightforward to power from DC battery/solar systems, although sustained CPU workloads and attached NVMe/USB devices increase consumption.",
+      "pricing": [
+        {
+          "amount": 410,
+          "currency": "USD",
+          "region": "US/global list-price basis",
+          "kind": "manufacturer_current_from",
+          "availability": "available",
+          "observed_at": "2026-08-24",
+          "vendor": "Raspberry Pi",
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-500-plus/",
+          "note": "Current official unit family price shown by Raspberry Pi."
+        },
+        {
+          "amount": 615.13,
+          "currency": "CAD",
+          "region": "Canada",
+          "kind": "observed_new",
+          "availability": "in_stock",
+          "observed_at": "2026-08-24",
+          "vendor": "DigiKey Canada",
+          "url": "https://www.digikey.ca/en/products/detail/raspberry-pi/SC1237/27336556",
+          "note": "US-layout unit-only SC1237 listing; retailer showed 198 units in stock when checked."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.raspberrypi.com/products/raspberry-pi-500-plus/",
+        "canada_retailer": "https://www.digikey.ca/en/products/detail/raspberry-pi/SC1237/27336556"
+      },
+      "technical_documentation": {
+        "product_brief": "https://pip-assets.raspberrypi.com/categories/1271-raspberry-pi-500/documents/RP-009158-MM-8-Raspberry%20Pi%20500_%20product%20brief.pdf?disposition=inline",
+        "power_supply_guidance": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html",
+        "general_documentation": "https://www.raspberrypi.com/documentation/"
+      },
+      "evidence": "manufacturer_plus_current_distributor"
+    }
+  ]
+}
