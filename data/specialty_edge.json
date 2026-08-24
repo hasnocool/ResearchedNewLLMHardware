@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "last_updated": "2026-08-15",
+  "last_updated": "2026-08-24",
   "hardware": [
     {
       "id": "acrab-agent-box-gelix-1",
@@ -8,8 +8,10 @@
       "product": "Agent Box",
       "compute_platform": "acrab-gelix-1",
       "category": "specialty_edge_ai_system",
-      "status": "announced_early_rollout",
+      "status": "commercialization_early_rollout",
       "tier": "watch_high_priority",
+      "announcement_date": "2026-07-23",
+      "commercialization_update_date": "2026-08-06",
       "soc_process_nm": 5,
       "cpu": "20-core Arm",
       "accelerators": ["integrated GPU", "multicore NPU"],
@@ -18,7 +20,16 @@
       "memory_bandwidth_gbps": 273,
       "model_capacity_claim": "up to 100B-parameter-class open-source models",
       "power_w": null,
-      "pricing": [],
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "commercialization_in_progress_no_public_retail_price",
+          "observed_at": "2026-08-24",
+          "amount": null,
+          "currency": null,
+          "note": "Acrab says commercialization is advancing and expects revenue within 2026, but no defensible public retail price or generally orderable storefront was found."
+        }
+      ],
       "software": ["vendor optimized runtime", "developer toolchain", "agent orchestration stack"],
       "benchmark_evidence": [
         {
@@ -34,6 +45,12 @@
       "evidence": "manufacturer_and_vendor_benchmark",
       "software_maturity": "early_proprietary_public_details_limited",
       "research_priority": "very_high",
+      "commercialization_evidence": {
+        "status": "advancing_commercialization",
+        "company_statement_date": "2026-08-06",
+        "expected_revenue_window": "within_2026",
+        "note": "Acrab's August Series B announcement states the GΞLIX 1-powered Agent Box is entering its next commercialization phase with visible paths to industrial deployments. This is company-reported progress, not proof of broad retail availability."
+      },
       "missing_fields": [
         "exact unified-memory capacity",
         "retail price",
@@ -57,11 +74,16 @@
         },
         {
           "title": "Acrab GΞLIX 1 and Agent Box press release",
-          "url": "https://www.prnewswire.com/news-releases/acrab-unveils-glix-1-soc-and-agent-box-bringing-state-of-the-art-ai-to-the-edge-302833081.html",
+          "url": "https://en.prnasia.com/releases/apac/acrab-unveils-glix-1-soc-and-agent-box-bringing-state-of-the-art-ai-to-the-edge-541669.shtml",
           "kind": "vendor_press_release"
+        },
+        {
+          "title": "Acrab Series B / commercialization update",
+          "url": "https://www.vertexgrowth.com/news/acrab-raises-us-130-million-series-b-advancing-agentic-ai-compute-platform-commercialization/",
+          "kind": "investor_and_company_announcement"
         }
       ],
-      "notes": "Do not use unverified third-party claims of exact price, TOPS, memory capacity, or power as catalog facts until Acrab publishes them or independent evidence is available."
+      "notes": "Do not use unverified third-party claims of exact price, TOPS, memory capacity, or power as catalog facts until Acrab publishes them or independent evidence is available. A third-party report has cited roughly one-fifth DGX Spark pricing and half the power; those figures remain excluded because Acrab has not publicly substantiated them."
     }
   ]
 }
