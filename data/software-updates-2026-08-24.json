@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-08-24",
+  "updates": [
+    {
+      "hardware_ids": [
+        "minisforum-ms-s1-max-128gb",
+        "minisforum-n5-max-64gb",
+        "lucebox-r9700-strix-halo"
+      ],
+      "compute_platforms": [
+        "amd-strix-halo-ryzen-ai-max-plus-395",
+        "amd-radeon-ai-pro-r9700"
+      ],
+      "kind": "day_zero_model_runtime_support",
+      "summary": "AMD published day-zero local support for Qwen3.8-27B on Ryzen AI Max+ systems and Radeon AI PRO R9700 using llama.cpp, with LM Studio and Lemonade integration paths.",
+      "model": "Qwen3.8-27B",
+      "runtime_paths": [
+        "llama.cpp Vulkan",
+        "LM Studio",
+        "Lemonade"
+      ],
+      "memory_guidance": "AMD states the model needs roughly 24 GB of VGM/VRAM to run comfortably, making high-memory Ryzen AI Max+ systems and 32 GB R9700 cards practical targets.",
+      "vendor_results_summary": {
+        "ryzen_ai_max_plus_395_decode_tps_up_to": 24.5,
+        "radeon_ai_pro_r9700_decode_tps_up_to": 51.8,
+        "measurement": "average token-generation throughput across three or more runs",
+        "os": "Windows 11 Pro 25H2",
+        "backend": "llama.cpp Vulkan",
+        "mtp": {
+          "ryzen_ai_max_plus_395": 4,
+          "radeon_ai_pro_r9700": 2
+        }
+      },
+      "evidence": "manufacturer_vendor_benchmark",
+      "benchmark_caution": "AMD labels these results preliminary and reports all values as up to. They should not be mixed with community ROCm/Vulkan results without normalizing model quantization, context, MTP settings, package power, llama.cpp revision, and driver version.",
+      "source_urls": [
+        "https://www.amd.com/en/blogs/2026/run-qwen-3-8-27b-on-amd-ryzen-ai-max-and-radeon-graphics-cards-day-0.html"
+      ]
+    }
+  ]
+}
