@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-24",
+  "scope": "newly_announced_local_ai_systems",
+  "hardware": [
+    {
+      "id": "gmktec-ifa-2026-ryzen-ai-max-plus-pro-495-system",
+      "manufacturer": "GMKtec",
+      "product": "Unnamed Ryzen AI Max+ PRO 495 system for IFA Berlin 2026",
+      "compute_platform": "amd-gorgon-halo-ryzen-ai-max-plus-pro-495",
+      "category": "compact_ai_workstation_announced",
+      "status": "announced_reveal_scheduled",
+      "announcement_date": "2026-08-21",
+      "planned_reveal_date": "2026-09-05",
+      "planned_reveal_event": "IFA Berlin 2026",
+      "product_name_public": false,
+      "silicon": {
+        "processor": "AMD Ryzen AI Max+ PRO 495",
+        "former_codename": "Gorgon Halo",
+        "cpu_architecture": "Zen 5",
+        "cpu_cores": 16,
+        "cpu_threads": 32,
+        "cpu_base_clock_ghz": 3.1,
+        "cpu_boost_clock_ghz_max": 5.2,
+        "default_tdp_w": 55,
+        "configurable_tdp_w": {
+          "min": 45,
+          "max": 120
+        },
+        "package": "FP11",
+        "process_nm": 4
+      },
+      "gpu": {
+        "model": "AMD Radeon 8065S",
+        "architecture": "RDNA 3.5",
+        "llvm_target": "gfx1151",
+        "compute_units": 40,
+        "frequency_mhz_max": 3000
+      },
+      "npu": {
+        "architecture": "XDNA 2",
+        "tops_vendor_max": 55
+      },
+      "vendor_total_ai_tops_max": 131,
+      "memory": {
+        "type": "LPDDR5X",
+        "bus_bits": 256,
+        "data_rate_mt_s_max": 8533,
+        "capacity_gb_max_processor": 192,
+        "theoretical_peak_bandwidth_gbps": 273.056,
+        "bandwidth_note": "Derived from AMD's 256-bit LPDDR5X-8533 processor specification: 8533 MT/s × 256 bits ÷ 8. This is a theoretical processor-memory ceiling, not a measured GMKtec system bandwidth result. Exact GMKtec memory capacity and implementation have not yet been announced."
+      },
+      "connectivity_processor": {
+        "pcie_version": "4.0",
+        "native_pcie_lanes_total": 16,
+        "native_pcie_lanes_usable": 16,
+        "native_usb4_40gbps": 2
+      },
+      "software": [
+        "ROCm 7.14+",
+        "PyTorch through supported ROCm configurations",
+        "Linux",
+        "Windows 11"
+      ],
+      "runtime_notes": "AMD ROCm 7.14 explicitly adds Ryzen AI Max+ PRO 495 / Radeon 8065S (gfx1151) support. Exact GMKtec operating-system image, firmware, validated LLM runtimes, and shipping driver versions remain unannounced.",
+      "llm_suitability": {
+        "classification": "very_high_potential_pending_system_details",
+        "capacity_guidance": "If GMKtec ships the processor near AMD's 192 GB memory ceiling, the system could accommodate substantially larger quantized models than current 128 GB Strix Halo systems. This is capacity guidance only; exact GMKtec RAM capacity is not yet public and model fit also depends on runtime overhead, KV cache and graphics-memory allocation.",
+        "quantization": [
+          "GGUF/llama.cpp compatibility expected through CPU/Vulkan/ROCm-class paths but must be validated on the shipping system",
+          "ROCm support for gfx1151 is officially present in ROCm 7.14",
+          "NPU TOPS must not be interpreted as arbitrary GGUF token-generation throughput"
+        ]
+      },
+      "power_efficiency": {
+        "processor_envelope_only": true,
+        "processor_ctdp_w": {
+          "min": 45,
+          "max": 120
+        },
+        "whole_system_power_known": false,
+        "off_grid_suitability": "potentially_good_but_unverified",
+        "note": "The 45-120 W figure is AMD processor cTDP, not wall power. GMKtec has not yet published PSU size, idle draw, sustained inference power, thermals or DC input requirements."
+      },
+      "physical_constraints": {
+        "chassis_dimensions_known": false,
+        "weight_known": false,
+        "cooling_design_known": false,
+        "storage_configuration_known": false,
+        "networking_configuration_known": false
+      },
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "not_announced_before_ifa_reveal",
+          "observed_at": "2026-08-24",
+          "currency": null,
+          "amount": null,
+          "note": "GMKtec has announced the platform and September 5 reveal event but has not published a defensible retail price or final configuration."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.gmktec.com/blogs/news/gmktec-global-launch-event-at-ifa-berlin-2026-introducing-the-next-era-of-ai-computing-with-amd-ryzen%E2%84%A2-ai-max-pro-495",
+        "https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-plus-pro-495.html"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-plus-pro-495.html",
+        "https://rocm.docs.amd.com/en/latest/about/release-notes.html"
+      ],
+      "evidence": "manufacturer",
+      "provenance": [
+        {
+          "source": "GMKtec",
+          "checked_at": "2026-08-24",
+          "supports": [
+            "system announcement",
+            "Ryzen AI Max+ PRO 495 platform identity",
+            "IFA Berlin September 5 reveal date",
+            "local AI deployment positioning"
+          ]
+        },
+        {
+          "source": "AMD",
+          "checked_at": "2026-08-24",
+          "supports": [
+            "processor architecture and identifiers",
+            "192 GB processor memory ceiling",
+            "LPDDR5X-8533 256-bit memory interface",
+            "Radeon 8065S 40-CU graphics",
+            "55 NPU TOPS and 131 total AI TOPS",
+            "45-120 W configurable processor TDP",
+            "ROCm 7.14 gfx1151 support"
+          ]
+        }
+      ],
+      "missing_fields": [
+        "final GMKtec product name/model identifier",
+        "shipping memory configurations",
+        "retail price and currencies",
+        "regional availability",
+        "storage",
+        "networking",
+        "chassis dimensions and weight",
+        "cooling design",
+        "PSU and whole-system power",
+        "graphics-addressable memory limit",
+        "independent LLM benchmarks",
+        "validated runtime and quantization matrix"
+      ],
+      "notes": "Do not backfill system-level details from older EVO-X2/EVO-X3 Ryzen AI Max+ 395 products. GMKtec has only announced the processor platform and IFA reveal so far."
+    }
+  ]
+}
