@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-25",
+  "scope": "intel_hot_chips_agentic_ai_2026",
+  "notes": [
+    "Records use Intel's August 24, 2026 Hot Chips disclosure and current Intel ARK/product documentation.",
+    "Crescent Island's up-to-480GB disclosure supersedes Intel's earlier 160GB design target; it remains pre-production and pricing is not public.",
+    "TOPS figures are datatype/vendor peak metrics and are not directly comparable to LLM tokens/sec."
+  ],
+  "hardware": [
+    {
+      "id": "intel-crescent-island-480gb-hot-chips-2026",
+      "manufacturer": "Intel",
+      "product": "Crescent Island datacenter inference GPU (Hot Chips 2026 configuration)",
+      "compute_platform": "intel-xe3p-crescent-island",
+      "category": "datacenter_inference_gpu",
+      "status": "announced_sampling_2026",
+      "tier": "S-potential",
+      "gpu_architecture": "Xe3P",
+      "xe_cores": 32,
+      "xmx_engines": 256,
+      "memory_gb_max": 480,
+      "memory_type": "LPDDR5X",
+      "board_power_w": 350,
+      "form_factor": "air-cooled PCIe card",
+      "pricing": [{"kind":"unavailable","availability":"preproduction_sampling","observed_at":"2026-08-25","note":"Intel has not announced public pricing. Customer sampling was previously targeted for H2 2026."}],
+      "software": ["Intel oneAPI ecosystem", "PyTorch/XPU path expected", "OpenVINO/SYCL ecosystem"],
+      "llm_suitability": "very_high_capacity_inference_watch",
+      "model_size_practicality": "Up to 480GB local accelerator memory would make very large dense and MoE models plausible on a single PCIe accelerator, but actual usable memory, bandwidth, datatype throughput, software maturity and token rates remain unverified until production systems and benchmarks appear.",
+      "quantization_compatibility": "Intel states broad datatype support but has not yet published a complete public precision/quantization matrix for Crescent Island; do not infer GGUF/AWQ/GPTQ performance from capacity alone.",
+      "off_grid_suitability": "poor",
+      "research_priority": "very_high",
+      "vendor_urls": {
+        "hot_chips_announcement": "https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026",
+        "earlier_product_announcement": "https://newsroom.intel.com/artificial-intelligence/intel-to-expand-ai-accelerator-portfolio-with-new-gpu"
+      },
+      "technical_documentation": {
+        "hot_chips_2026_disclosure": "https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026"
+      },
+      "evidence": "manufacturer",
+      "provenance_notes": "Intel's October 2025 announcement described 160GB LPDDR5X; the August 24, 2026 Hot Chips disclosure states up to 480GB LPDDR5X, 32 Xe cores, 256 XMX engines and 350W. This record uses the newer disclosure and preserves the change explicitly."
+    },
+    {
+      "id": "intel-xeon-diamond-rapids-hot-chips-2026",
+      "manufacturer": "Intel",
+      "product": "Xeon next-generation Diamond Rapids (Hot Chips 2026)",
+      "compute_platform": "intel-diamond-rapids-18a-p",
+      "category": "server_cpu",
+      "status": "announced",
+      "tier": "HPC-server-watch",
+      "cpu_architecture": "next-generation Xeon on Intel 18A-P",
+      "cpu_cores_max": 256,
+      "llc_mb_max": 1280,
+      "memory_channels": 16,
+      "memory_data_rate_mt_s": 12800,
+      "pcie_lanes": 128,
+      "pcie_generation": "PCIe 6.0",
+      "cxl_version": "3.0",
+      "ai_acceleration": ["enhanced Intel AMX", "Intel APX"],
+      "pricing": [{"kind":"quote_only","availability":"not_yet_publicly_priced","observed_at":"2026-08-25","note":"No defensible public SKU pricing is available for the announced generation."}],
+      "llm_suitability": "server_cpu_orchestration_and_cpu_inference",
+      "model_size_practicality": "Large host-memory capacity and 16-channel memory subsystem make Diamond Rapids relevant for CPU inference, model staging, agent orchestration and accelerator feeding; model throughput cannot be estimated until SKU memory bandwidth, clocks and AMX benchmarks are published.",
+      "off_grid_suitability": "poor",
+      "vendor_urls": {"hot_chips_announcement":"https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026"},
+      "technical_documentation": {"hot_chips_2026_disclosure":"https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026"},
+      "evidence": "manufacturer"
+    },
+    {
+      "id": "intel-core-7-360-wildcat-lake",
+      "manufacturer": "Intel",
+      "product": "Core 7 processor 360",
+      "compute_platform": "intel-wildcat-lake-series-3",
+      "category": "low_power_client_edge_cpu",
+      "status": "available_oem",
+      "tier": "B-low-power-edge",
+      "cpu_cores": 6,
+      "cpu_threads": 6,
+      "cpu_configuration": "2 P-cores + 4 low-power E-cores",
+      "max_turbo_ghz": 4.8,
+      "processor_base_power_w": 15,
+      "minimum_assured_power_w": 10,
+      "maximum_turbo_power_w": 35,
+      "memory_gb_max": 64,
+      "memory_types": ["LPDDR5X-7467", "DDR5-6400"],
+      "gpu": "Intel Graphics Xe3",
+      "gpu_xe_cores": 2,
+      "gpu_int8_tops": 21,
+      "npu_int8_tops": 17,
+      "software": ["OpenVINO", "WindowsML", "DirectML", "ONNX Runtime", "WebGPU", "WebNN"],
+      "pricing": [{"kind":"unavailable","availability":"oem_platform_dependent","observed_at":"2026-08-25","note":"Mobile/embedded processor pricing is OEM/platform dependent; no standalone retail price is stored."}],
+      "llm_suitability": "small_model_cpu_gpu_npu_edge",
+      "model_size_practicality": "64GB system-memory support permits CPU-hosted quantized models larger than the NPU/GPU would efficiently accelerate. Best suited to small local models, embeddings, routing, preprocessing and always-on agent tasks rather than large-model high-throughput decode.",
+      "quantization_compatibility": "OpenVINO/ONNX paths support optimized low-precision inference; arbitrary GGUF use is primarily CPU/SYCL/Vulkan-runtime dependent and NPU TOPS should not be treated as llama.cpp throughput.",
+      "off_grid_suitability": "very_good",
+      "vendor_urls": {"intel_ark":"https://www.intel.com/content/www/us/en/products/sku/246015/intel-core-7-processor-360-6m-cache-up-to-4-80-ghz/specifications.html"},
+      "technical_documentation": {
+        "ark":"https://www.intel.com/content/www/us/en/products/sku/246015/intel-core-7-processor-360-6m-cache-up-to-4-80-ghz/specifications.html",
+        "hot_chips_context":"https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026"
+      },
+      "evidence": "manufacturer"
+    }
+  ]
+}
