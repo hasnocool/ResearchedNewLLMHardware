@@ -1,0 +1,225 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-25",
+  "scope": "overlooked_virtualization_gpus_for_local_ai",
+  "notes": [
+    "This catalog slice focuses on server/virtualization GPUs whose memory topology, current software support, and used-market pricing materially affect local LLM suitability.",
+    "TOPS/TFLOPS figures are vendor peak specifications and are not interchangeable with LLM tokens/sec.",
+    "Model-size guidance is approximate capacity guidance, not a benchmark guarantee; context length, KV cache, runtime overhead, quantization format, and tensor-parallel implementation materially affect fit and speed.",
+    "Passive datacenter cards require deliberate chassis airflow and should not be treated as drop-in desktop GPUs."
+  ],
+  "hardware": [
+    {
+      "id": "amd-radeon-pro-v710-28gb",
+      "manufacturer": "AMD",
+      "product": "Radeon PRO V710",
+      "manufacturer_model": "Radeon PRO V710",
+      "category": "datacenter_virtualization_gpu",
+      "status": "available_secondary_market_and_cloud",
+      "release_date": "2024-10-03",
+      "architecture": "RDNA 3",
+      "llvm_target": "gfx1101",
+      "compute_units": 54,
+      "stream_processors": 3456,
+      "fp32_vector_tflops_peak": 27.65,
+      "fp16_vector_tflops_peak": 27.65,
+      "int8_matrix_tops_peak": 55.3,
+      "int4_matrix_tops_peak": 110.59,
+      "memory_gb": 28,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 224,
+      "memory_bandwidth_gbps": 448,
+      "infinity_cache_mb": 54,
+      "board_power_w": 158,
+      "power_connector": "1x 8-pin",
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "full-height, 10.5-inch, single-slot",
+      "cooling": "passive; server-class directed airflow required",
+      "software": ["ROCm", "HIP", "PyTorch via ROCm", "Vulkan", "OpenCL", "AMD MxGPU/SR-IOV"],
+      "current_rocm_support": {
+        "status": "officially_supported",
+        "evidence": "ROCm 7.2.x system requirements list Radeon PRO V710 / gfx1101 as supported; ROCm 7.14 release notes add KVM SR-IOV support."
+      },
+      "quantization_compatibility": {
+        "hardware_datatypes": ["FP16", "BF16", "INT8", "INT4"],
+        "llm_runtime_note": "Hardware INT8/INT4 matrix support does not guarantee every GGUF/GPTQ/AWQ kernel path. Verify the exact ROCm/Vulkan runtime and model format."
+      },
+      "model_size_practicality": {
+        "best_fit": "7B-20B quantized models and many 20B-32B 4-bit-class models",
+        "capacity_note": "28 GB is a single VRAM pool. 30B-class 4-bit weights can fit with useful headroom in many runtimes, but long context/KV cache can materially reduce available capacity."
+      },
+      "llm_inference_suitability": "high_for_rocm_experimentation",
+      "off_grid_suitability": "medium",
+      "efficiency_metrics": {
+        "memory_bandwidth_per_board_w_gbps": 2.835,
+        "metric_note": "Specification-derived memory bandwidth divided by TBP; not measured LLM performance-per-watt."
+      },
+      "pricing": [
+        {
+          "amount": 1787.42,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "pre-owned",
+          "availability": "orderable",
+          "observed_at": "2026-08-25",
+          "url": "https://www.ebay.ca/sch/i.html?_blrs=recall_filtering&_dkr=1&_oac=1&_ssn=maravi_canada&iconV2Request=true&store_cat=19332865010&store_name=maravicanada",
+          "note": "Representative used listing; marketplace pricing is dynamic."
+        },
+        {
+          "amount": 1999.99,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_new",
+          "condition": "new",
+          "availability": "orderable",
+          "observed_at": "2026-08-25",
+          "url": "https://www.ebay.ca/itm/137033557206",
+          "note": "New listing with 10 units shown available when checked; marketplace pricing is dynamic."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/products/accelerators/radeon-pro/amd-radeon-pro-v710.html",
+        "manufacturer_announcement": "https://www.amd.com/en/blogs/2024/amd-introduces-the-radeon-pro-v710-to-microsoft-az.html"
+      },
+      "technical_documentation": {
+        "rocm_gpu_specs": "https://rocm.docs.amd.com/en/latest/reference/gpu-specs.html",
+        "rocm_release_notes": "https://rocm.docs.amd.com/en/latest/about/release-notes.html"
+      },
+      "evidence": "manufacturer_plus_current_rocm_docs_plus_marketplace"
+    },
+    {
+      "id": "amd-radeon-pro-v620-32gb",
+      "manufacturer": "AMD",
+      "product": "Radeon PRO V620",
+      "manufacturer_model": "Radeon PRO V620 / board listing 102-D60306-00",
+      "category": "datacenter_virtualization_gpu",
+      "status": "available_secondary_market",
+      "release_date": "2021-11-04",
+      "architecture": "RDNA 2",
+      "llvm_target": "gfx1030",
+      "compute_units": 72,
+      "stream_processors": 4608,
+      "fp32_vector_tflops_peak": 20.28,
+      "fp16_vector_tflops_peak": 40.55,
+      "memory_gb": 32,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 512,
+      "infinity_cache_mb": 128,
+      "board_power_w": 300,
+      "power_connector": "2x 8-pin",
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "full-height, 10.5-inch, double-slot",
+      "cooling": "passive; server-class directed airflow required",
+      "software": ["ROCm", "HIP", "PyTorch via ROCm", "Vulkan", "OpenCL", "AMD MxGPU/SR-IOV"],
+      "current_rocm_support": {
+        "status": "officially_supported",
+        "evidence": "ROCm 7.2.2 system requirements list Radeon PRO V620 / gfx1030 as supported."
+      },
+      "quantization_compatibility": {
+        "hardware_note": "RDNA 2 predates RDNA 3 WMMA INT8/INT4 marketing; practical quantized LLM support depends primarily on ROCm/Vulkan runtime kernels rather than a dedicated low-bit matrix-TOPS figure.",
+        "runtime_formats": ["GGUF via compatible ROCm/Vulkan backends", "runtime-dependent PyTorch quantization"]
+      },
+      "model_size_practicality": {
+        "best_fit": "7B-20B and many 20B-32B 4-bit-class models",
+        "capacity_note": "32 GB is one VRAM pool. It offers more model/KV-cache headroom than 24 GB cards, but 512 GB/s and 300 W make it less energy-efficient than newer 28-32 GB options."
+      },
+      "llm_inference_suitability": "medium_high_when_rocm_or_vulkan_is_acceptable",
+      "off_grid_suitability": "low",
+      "efficiency_metrics": {
+        "memory_bandwidth_per_board_w_gbps": 1.707,
+        "metric_note": "Specification-derived memory bandwidth divided by TBP; not measured LLM performance-per-watt."
+      },
+      "pricing": [
+        {
+          "amount": 1238.39,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "used excellent",
+          "availability": "orderable",
+          "observed_at": "2026-08-25",
+          "url": "https://www.ebay.ca/itm/358658575086",
+          "note": "Current observed asking price was US$899.99 / approximately CA$1,238.39. The same listing changed materially during the prior week, so treat this as a volatile point-in-time observation."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.amd.com/en/products/accelerators/radeon-pro/amd-radeon-pro-v620.html",
+        "manufacturer_announcement": "https://www.amd.com/en/newsroom/press-releases/2021-11-4-amd-radeon-pro-v620-gpu-delivers-powerful-multi-.html"
+      },
+      "technical_documentation": {
+        "rocm_system_requirements": "https://rocm.docs.amd.com/projects/install-on-linux/en/docs-7.2.2/reference/system-requirements.html",
+        "rocm_gpu_specs": "https://rocm.docs.amd.com/en/docs-7.0.2/reference/gpu-arch-specs.html"
+      },
+      "evidence": "manufacturer_plus_current_rocm_docs_plus_marketplace"
+    },
+    {
+      "id": "nvidia-a16-4x16gb",
+      "manufacturer": "NVIDIA",
+      "product": "A16",
+      "manufacturer_model": "A16 / 900-2G171 family",
+      "category": "multi_gpu_datacenter_virtualization_card",
+      "status": "available_secondary_market",
+      "architecture": "Ampere",
+      "cuda_compute_capability": "8.6",
+      "physical_gpu_count": 4,
+      "cuda_cores": "4 x 1280",
+      "tensor_cores": "4 x 40 third-generation Tensor Cores",
+      "rt_cores": "4 x 10 second-generation RT Cores",
+      "fp32_tflops_peak": "4 x 4.5",
+      "tf32_tensor_tflops_peak_dense": "4 x 9",
+      "tf32_tensor_tflops_peak_sparse": "4 x 18",
+      "fp16_tensor_tflops_peak_dense": "4 x 17.9",
+      "fp16_tensor_tflops_peak_sparse": "4 x 35.9",
+      "int8_tops_peak_dense": "4 x 35.9",
+      "int8_tops_peak_sparse": "4 x 71.8",
+      "memory_total_board_gb": 64,
+      "memory_topology": "4 independent GPUs x 16 GB GDDR6 ECC; not a unified 64 GB VRAM pool",
+      "memory_per_gpu_gb": 16,
+      "memory_bandwidth_gbps": "4 x 200",
+      "board_power_w": 250,
+      "power_connector": "1x 8-pin CPU",
+      "host_interface": "PCIe Gen4 x16 board interface",
+      "form_factor": "full-height, full-length, dual-slot",
+      "cooling": "passive; server-class directed airflow required",
+      "software": ["CUDA", "PyTorch", "TensorRT", "NVIDIA AI Enterprise", "vGPU/vCS", "OpenCL", "OpenACC"],
+      "quantization_compatibility": {
+        "runtime_formats": ["GGUF via CUDA-capable llama.cpp builds", "GPTQ/AWQ/runtime-dependent CUDA kernels", "FP16/BF16/INT8 depending on framework"],
+        "topology_warning": "The four GPUs do not automatically combine into one 64 GB address space. Larger models require explicit multi-GPU/tensor-parallel or layer-sharding support."
+      },
+      "model_size_practicality": {
+        "single_gpu": "Best suited to 7B-class and selected 13B/14B quantized models within 16 GB per GPU.",
+        "board_level": "Useful for four-way concurrent small-model serving or explicit multi-GPU sharding. A 30B/70B model cannot be assumed to fit as if the board were one 64 GB GPU."
+      },
+      "llm_inference_suitability": "specialized_multi_gpu_or_concurrent_serving",
+      "off_grid_suitability": "low",
+      "efficiency_metrics": {
+        "aggregate_non_pooling_bandwidth_per_board_w_gbps": 3.2,
+        "metric_note": "800 GB/s is the sum of four independent 200 GB/s memory systems. This is not equivalent to an 800 GB/s unified memory pool and should not be compared directly with single-GPU bandwidth."
+      },
+      "pricing": [
+        {
+          "amount": 4036.57,
+          "currency": "CAD",
+          "region": "Canada-visible marketplace",
+          "kind": "observed_used",
+          "condition": "pre-owned",
+          "availability": "orderable",
+          "observed_at": "2026-08-25",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=nvidia+a16+64gb",
+          "note": "Representative pre-owned listing before shipping. The headline 64 GB is 4 x 16 GB, not a single 64 GB VRAM pool."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/data-center/products/a16-gpu/"
+      },
+      "technical_documentation": {
+        "datasheet": "https://images.nvidia.com/content/Solutions/data-center/vgpu-a16-datasheet.pdf",
+        "product_brief": "https://images.nvidia.com/content/Solutions/data-center/vgpu-a16-product-brief.pdf",
+        "cuda_compute_capability": "https://developer.nvidia.com/cuda/gpus"
+      },
+      "evidence": "manufacturer_plus_current_cuda_docs_plus_marketplace"
+    }
+  ]
+}
