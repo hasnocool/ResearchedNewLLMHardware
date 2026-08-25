@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.2.0",
-  "last_updated": "2026-08-19",
-  "purpose": "Purchasable OEM/system variants that share compute platforms already represented in the main catalog. These records must not be counted as independent silicon architectures.",
+  "schema_version": "1.3.0",
+  "last_updated": "2026-08-25",
+  "purpose": "Purchasable or near-launch OEM/system variants that share compute platforms already represented in the main catalog. These records must not be counted as independent silicon architectures.",
   "hardware": [
     {
       "id": "dell-pro-max-gb10-fcm1253-4tb",
@@ -221,6 +221,76 @@
       ],
       "evidence": "manufacturer",
       "notes": "Shared Strix Halo silicon; do not count as a new compute architecture. EVO-X3 is materially different from EVO-X2 at the system level because it adds native OCuLink, standardizes 128GB memory, and provides updated I/O/cooling while retaining the same Ryzen AI Max+ 395 compute platform. Vendor claims support for models up to 235B, but no normalized independent LLM throughput is recorded here yet."
+    },
+    {
+      "id": "framework-desktop-ryzen-ai-max-plus-pro-495-192gb",
+      "manufacturer": "Framework",
+      "product": "Framework Desktop 192GB",
+      "compute_platform": "amd-gorgon-halo-ryzen-ai-max-plus-pro-495",
+      "category": "compact_unified_memory_desktop",
+      "status": "coming_soon",
+      "cpu": "AMD Ryzen AI Max+ PRO 495, 16C/32T",
+      "gpu": "Radeon 8065S",
+      "gpu_compute_units": 40,
+      "npu_tops_vendor": 55,
+      "memory_gb": 192,
+      "memory_type": "LPDDR5X unified",
+      "memory_data_rate_mt_s": 8533,
+      "gpu_allocatable_memory_gb_max": 160,
+      "processor_ctdp_w": {"min": 45, "max": 120},
+      "platform_notes": [
+        "Framework's official Desktop page currently displays '192GB coming soon'.",
+        "Framework has not published a stable retail price or exact ship date for the 192GB configuration in the captured manufacturer page.",
+        "AMD specifies the Ryzen AI Max+ PRO 495 with 192GB maximum LPDDR5X-8533 memory and up to 160GB graphics-addressable memory."
+      ],
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "coming_soon",
+          "observed_at": "2026-08-25",
+          "url": "https://frame.work/desktop",
+          "note": "No defensible official 192GB retail price captured; do not infer one from the existing 128GB configuration."
+        }
+      ],
+      "vendor_urls": ["https://frame.work/desktop"],
+      "technical_documentation": [
+        "https://frame.work/desktop?tab=specs",
+        "https://frame.work/desktop?tab=machine-learning",
+        "https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-plus-pro-495.html"
+      ],
+      "evidence": "manufacturer",
+      "notes": "This is a Gorgon Halo system variant and must not be counted as a separate silicon architecture. Promotion trigger: orderable configuration, official delivered price, exact system power behavior, and reproducible LLM benchmarks."
+    },
+    {
+      "id": "asus-nuc-16-pro-core-ultra-5-7-cso-dimm-128gb",
+      "manufacturer": "ASUS",
+      "product": "NUC 16 Pro",
+      "model": "NUC16GDK / NUC16GDK-B / NUC16GDB",
+      "compute_platform": "intel-core-ultra-series-3",
+      "category": "mini_pc_memory_variant",
+      "status": "available",
+      "cpu_variants": ["Intel Core Ultra 7 356", "Intel Core Ultra 5 325"],
+      "gpu": "Intel Graphics",
+      "memory_gb_max": 128,
+      "memory_type": "DDR5 CSO-DIMM",
+      "memory_topology": "dual-channel removable CSO-DIMM",
+      "storage": "2x M.2 2280 NVMe: 1x PCIe Gen5 x4 + 1x PCIe Gen4 x4",
+      "networking": ["2.5GbE", "2.5GbE", "Wi-Fi 7", "Bluetooth 6.0"],
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "configuration_and_channel_dependent",
+          "observed_at": "2026-08-25",
+          "note": "No stable single system price captured because processor, RAM, storage, kit/mini-PC/board format and region vary."
+        }
+      ],
+      "vendor_urls": ["https://www.asus.com/ca-en/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-16-pro/"],
+      "technical_documentation": [
+        "https://dlcdnwebimgs.asus.com/files/media/202512/61637bcb-4aaa-4a1f-a35d-ba97011a86c9/asus-nuc-16-pro-datasheet.pdf",
+        "https://www.asus.com/ca-en/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-16-pro/helpdesk/"
+      ],
+      "evidence": "manufacturer",
+      "notes": "Important catalog correction: the existing 96GB NUC 16 Pro record describes the onboard LPDDR5/LPDDR5X Core Ultra X7/X9 variants. ASUS's datasheet separately documents Core Ultra 5/7 variants with up to 128GB DDR5 CSO-DIMM. Do not treat 96GB as the maximum for the entire NUC 16 Pro family."
     }
   ]
 }
