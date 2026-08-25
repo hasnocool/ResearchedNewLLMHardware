@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-25",
+  "purpose": "Track AMD Instinct MI350P as a standard PCIe CDNA 4 accelerator for enterprise and large-model inference.",
+  "hardware": [
+    {
+      "id": "amd-instinct-mi350p",
+      "manufacturer": "AMD",
+      "product": "Instinct MI350P",
+      "category": "datacenter_ai_accelerator_pcie",
+      "status": "available_through_oem_channel",
+      "compute_platform": "amd-cdna4-mi350p",
+      "gpu_architecture": "CDNA 4",
+      "lithography": "TSMC 3nm / 6nm FinFET",
+      "compute_units": 128,
+      "stream_processors": 8192,
+      "matrix_cores": 512,
+      "peak_engine_clock_mhz": 2200,
+      "memory_gb": 144,
+      "memory_type": "HBM3E ECC",
+      "memory_interface_bits": 4096,
+      "memory_bandwidth_gbps": 4000,
+      "last_level_cache_mb": 128,
+      "peak_mxfp4_pflops": 4.6,
+      "peak_mxfp6_pflops": 4.6,
+      "peak_mxfp8_pflops": 2.3,
+      "peak_fp16_bf16_matrix_pflops": 1.15,
+      "board_power_w": {
+        "configurable": 450,
+        "maximum": 600,
+        "kind": "TBP"
+      },
+      "form_factor": "FHFL double-slot PCIe add-in card",
+      "host_interface": "PCIe 5.0 x16",
+      "host_bandwidth_gbps_bidirectional": 128,
+      "cooling": "passive server airflow required",
+      "gpu_partitioning": "up to 4 isolated 36GB partitions",
+      "software": [
+        "ROCm",
+        "HIP",
+        "PyTorch",
+        "TensorFlow",
+        "JAX",
+        "SGLang",
+        "OpenMP",
+        "OpenCL"
+      ],
+      "llm_relevance": [
+        "144GB single-card HBM capacity can hold substantially larger models than most PCIe accelerators",
+        "4TB/s HBM3E bandwidth is attractive for bandwidth-bound autoregressive decode",
+        "450W configurable mode can reduce infrastructure demands relative to 600W maximum TBP",
+        "standard PCIe form factor enables deployment in existing air-cooled enterprise servers"
+      ],
+      "clusterability_note": "Unlike MI355X OAM deployments, MI350P is primarily a PCIe card. Multi-GPU model parallelism should be evaluated with host/server PCIe and network topology rather than assuming OAM-class Infinity Fabric scale-up behavior.",
+      "pricing": [],
+      "pricing_status": "no_public_standalone_msrp_captured",
+      "availability_note": "AMD positions MI350P for deployment in existing enterprise PCIe infrastructure. Dell PowerEdge XE7745 is one documented 8-GPU server platform; Dell lists the server as Contact Sales rather than exposing a stable MI350P configuration price.",
+      "benchmark_evidence": [
+        {
+          "source_type": "manufacturer_benchmark_methodology",
+          "workload": "Llama 3.3 70B Instruct FP8 online serving",
+          "configuration": "8x MI350P in Dell PowerEdge XE7745",
+          "runtime": "AMD AIMS / ROCm 7.14.0",
+          "note": "AMD publishes methodology and token-per-dollar comparisons versus H200 NVL/RTX PRO 6000, but the captured source does not provide a simple normalized absolute tok/s result suitable for the repository's cross-platform benchmark table."
+        }
+      ],
+      "evidence": "manufacturer_with_independent_platform_observation",
+      "vendor_urls": [
+        "https://www.amd.com/en/products/accelerators/instinct/mi350/mi350p.html"
+      ],
+      "technical_documentation": [
+        "https://www.amd.com/content/dam/amd/en/documents/epyc-business-docs/other/amd-instinct-mi350p-product-brochure.pdf",
+        "https://www.amd.com/en/products/accelerators/instinct/mi350.html",
+        "https://rocm.docs.amd.com/",
+        "https://www.dell.com/en-ca/shop/ipovw/poweredge-xe7745",
+        "https://www.dell.com/support/product-details/en-ca/product/poweredge-xe7745/resources/manuals"
+      ],
+      "source_urls": [
+        "https://www.amd.com/en/products/accelerators/instinct/mi350/mi350p.html",
+        "https://www.amd.com/content/dam/amd/en/documents/epyc-business-docs/other/amd-instinct-mi350p-product-brochure.pdf",
+        "https://www.amd.com/en/solutions/data-center/insights/7-takeaways-from-amd-advancing-ai-2026.html",
+        "https://www.servethehome.com/the-amd-instinct-mi350p-is-a-hbm-pcie-accelerator-that-has-been-all-over/"
+      ],
+      "research_priority": "high",
+      "open_questions": [
+        "standalone card street price and availability",
+        "independent LLM decode/prefill benchmarks",
+        "tokens per watt at 450W versus 600W TBP",
+        "multi-card scaling over PCIe and server fabric",
+        "used-market pricing once decommissioned systems appear"
+      ]
+    }
+  ]
+}
