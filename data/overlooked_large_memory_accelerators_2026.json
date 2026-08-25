@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-24",
+  "purpose": "Structured research for overlooked large-memory AI accelerators relevant to local or on-premises LLM inference. Platform-only, region-restricted, and vendor-runtime-specific constraints are preserved explicitly; theoretical compute and memory figures are not presented as normalized token-generation benchmarks.",
+  "hardware": [
+    {
+      "id": "amd-instinct-mi300x-192gb",
+      "manufacturer": "AMD",
+      "product": "Instinct MI300X 192GB",
+      "model": "Instinct MI300X OAM",
+      "compute_platform": "amd-cdna3-mi300x",
+      "category": "datacenter_gpu_oam",
+      "status": "available_via_solution_partners",
+      "release_status_as_of": "2026-08-24",
+      "architecture": "AMD CDNA 3",
+      "compute_units": 304,
+      "memory_gb": 192,
+      "memory_type": "HBM3 ECC",
+      "memory_bandwidth_gbps": 5300,
+      "last_level_cache_mb": 256,
+      "fp32_vector_tflops": 163.4,
+      "fp32_matrix_tflops": 1307.4,
+      "bf16_fp16_matrix_tflops_dense": 1307.4,
+      "bf16_fp16_matrix_tflops_sparse": 2614.9,
+      "fp8_matrix_tflops_dense": 2614.9,
+      "fp8_matrix_tflops_sparse": 5229.8,
+      "int8_tops_dense": 2614.9,
+      "int8_tops_sparse": 5229.8,
+      "board_power_w_peak": 750,
+      "host_interface": "PCIe 5.0 x16 through OAM/UBB platform",
+      "interconnect": ["8x AMD Infinity Fabric links", "128 GB/s peak per-link bandwidth as specified by AMD"],
+      "form_factor": "OCP Accelerator Module (OAM), normally deployed on an 8-GPU UBB 2.0 platform",
+      "cooling": "passive OAM; requires qualified server/platform airflow and thermal design",
+      "software": ["ROCm", "PyTorch", "vLLM", "Hugging Face", "TensorFlow ecosystem via ROCm where supported"],
+      "quantization_compatibility": "ROCm/vLLM supports modern low-precision inference paths including FP8 on MI300X. GGUF/llama.cpp support depends on the exact ROCm/HIP backend and version; do not assume CUDA-specific GPTQ/AWQ kernels are portable without verification.",
+      "llm_suitability": {
+        "assessment": "very_high_capacity_and_bandwidth_platform",
+        "practical_guidance": "192GB HBM3 allows many 70B-class models at high precision or with large KV caches on one accelerator and materially reduces model sharding pressure. AMD documents a 66B OPT transformer running on one MI300X. Larger or MoE workloads remain runtime- and context-dependent.",
+        "evidence_level": "manufacturer_current"
+      },
+      "bandwidth_per_watt_gbps_per_w_derived": 7.07,
+      "performance_per_watt_notes": "5.3 TB/s divided by AMD's 750W peak board power is approximately 7.07 GB/s/W. This is a specification-derived memory-bandwidth ratio, not measured LLM efficiency.",
+      "off_grid_suitability": "very_low",
+      "physical_constraints": [
+        "Not a conventional desktop PCIe add-in card; requires an OAM/UBB-compatible server platform.",
+        "Passive cooling and 54V platform power require qualified datacenter infrastructure.",
+        "AMD's MI300X platform typically integrates eight OAM accelerators; acquiring a bare OAM without a compatible carrier is not equivalent to acquiring a usable local GPU."
+      ],
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "solution_partner_platform",
+          "observed_at": "2026-08-24",
+          "note": "AMD directs buyers to solution partners; no defensible public single-accelerator retail price was found for a deployable MI300X OAM/platform configuration."
+        }
+      ],
+      "cost_efficiency_notes": "Purchase economics cannot be normalized credibly from public retail data because MI300X is sold primarily as integrated OEM/solution-partner infrastructure. Used bare-OAM listings should be treated cautiously because carrier, firmware, power and cooling requirements dominate deployability.",
+      "vendor_urls": [
+        "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
+        "https://www.amd.com/en/products/accelerators/instinct/mi300/platform.html"
+      ],
+      "technical_documentation": [
+        "https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi300x.html",
+        "https://instinct.docs.amd.com/develop/gpu-arch/mi300.html",
+        "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-platform-data-sheet.pdf"
+      ],
+      "source_caveats": [
+        "Peak matrix/TOPS figures are theoretical vendor specifications and are not equivalent to application throughput.",
+        "The 7.07 GB/s/W figure is derived from peak bandwidth and peak board power, not wall-power measurement.",
+        "No numeric price is stored because a complete deployable MI300X solution is partner/platform dependent."
+      ],
+      "evidence": "manufacturer_current"
+    },
+    {
+      "id": "intel-gaudi2-hl225h-96gb",
+      "manufacturer": "Intel / Habana Labs",
+      "product": "Gaudi2 AI Accelerator 96GB",
+      "model": "HL-225H",
+      "manufacturer_part_number": "HL-225H",
+      "compute_platform": "intel-habana-gaudi2",
+      "category": "ai_accelerator_oam",
+      "status": "supported_on_prem_platform",
+      "release_status_as_of": "2026-08-24",
+      "architecture": "Habana Gaudi2, 24 Tensor Processor Cores plus Matrix Multiplication Engine",
+      "memory_gb": 96,
+      "memory_type": "HBM2e",
+      "memory_bandwidth_gbps": 2450,
+      "on_die_sram_mb": 48,
+      "board_power_w": 600,
+      "host_interface": "PCIe 4.0 x16 through OCP Accelerator Module 1.1 platform",
+      "scale_out_networking": "24x integrated 100GbE RoCE v2 ports per accelerator",
+      "form_factor": "OCP Accelerator Module 1.1 mezzanine; HL-225H",
+      "cooling": "server/OAM platform cooling required",
+      "supported_precisions": ["FP32", "TF32", "FP16", "BF16", "FP8"],
+      "software": [
+        "Intel Gaudi Software / SynapseAI",
+        "PyTorch 2.7 in current 1.22 support matrix",
+        "vLLM Gaudi fork",
+        "Text Generation Inference 3.3.2",
+        "Optimum for Intel Gaudi",
+        "Transformers",
+        "DeepSpeed",
+        "Intel Neural Compressor"
+      ],
+      "software_release_state": "Current Gaudi documentation lists Gaudi2 on-prem support with Intel Gaudi Software build 1.24.1-482 and a maintained software stack. The 1.22 support matrix includes PyTorch 2.7, TGI 3.3.2 and a vLLM fork based on v0.9.0.1.",
+      "quantization_compatibility": "Current Gaudi vLLM documentation supports FP8 models plus FP8 KV-cache quantization/calibration with Intel Neural Compressor. This is a Gaudi-specific runtime path; arbitrary CUDA kernels or GGUF artifacts should not be assumed to execute directly.",
+      "llm_suitability": {
+        "assessment": "high_for_supported_large_models_on_gaudi_runtime",
+        "practical_guidance": "96GB HBM2e materially reduces sharding for large models, and Intel's current vLLM guidance validates Llama 2/3/3.1 families including 70B, Mistral and Mixtral across supported single- and multi-HPU configurations. Exact single-accelerator fit and throughput depend on precision, context and runtime overhead.",
+        "evidence_level": "manufacturer_current"
+      },
+      "bandwidth_per_watt_gbps_per_w_derived": 4.08,
+      "performance_per_watt_notes": "2.45 TB/s divided by 600W TDP is approximately 4.08 GB/s/W. This is a specification-derived memory-bandwidth ratio, not measured application efficiency.",
+      "off_grid_suitability": "very_low",
+      "physical_constraints": [
+        "Not a normal desktop PCIe card; HL-225H is an OAM/mezzanine accelerator intended for qualified Gaudi2 systems/baseboards.",
+        "600W accelerator power and integrated high-speed networking require datacenter-class power and cooling.",
+        "Software portability is lower than CUDA/ROCm because supported models run through the Gaudi software stack and HPU-specific integrations."
+      ],
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "on_prem_system_or_oem_platform",
+          "observed_at": "2026-08-24",
+          "note": "No stable public single-card retail price was found for a deployable HL-225H configuration; practical acquisition is generally through Gaudi2 server/platform channels."
+        }
+      ],
+      "cost_efficiency_notes": "Gaudi2 can be compelling when complete systems appear at discounted enterprise/secondary-market pricing because 96GB HBM2e and current vLLM/PyTorch support remain useful. Bare mezzanine price alone is not a valid deployable-system cost.",
+      "vendor_urls": [
+        "https://www.intel.com/content/www/us/en/developer/articles/technical/habana-gaudi2-processor-for-deep-learning.html",
+        "https://habana.ai/products/gaudi/"
+      ],
+      "technical_documentation": [
+        "https://habana.ai/wp-content/uploads/pdf/2021/gaudi2_datasheet.pdf",
+        "https://docs.habana.ai/en/latest/Support_Matrix/Support_Matrix_v1.22.0.html",
+        "https://docs.habana.ai/en/latest/PyTorch/Inference_on_PyTorch/vLLM_Inference/vLLM_FAQs.html"
+      ],
+      "source_caveats": [
+        "Gaudi2's public data sheet is an accelerator/OAM specification, not a complete server wall-power figure.",
+        "Model validation in Intel's vLLM documentation spans multiple tensor-parallel configurations; the record does not claim every 70B configuration runs on one HPU.",
+        "No numeric retail price is stored because acquisition is platform/OEM dependent."
+      ],
+      "evidence": "manufacturer_current"
+    },
+    {
+      "id": "nvidia-l20-48gb",
+      "manufacturer": "NVIDIA",
+      "product": "L20 48GB",
+      "model": "NVIDIA L20",
+      "compute_platform": "nvidia-ada-lovelace-l20",
+      "category": "datacenter_gpu_region_restricted",
+      "status": "available_region_restricted",
+      "release_status_as_of": "2026-08-24",
+      "architecture": "NVIDIA Ada Lovelace",
+      "memory_gb": 48,
+      "memory_type": "GDDR6",
+      "memory_bandwidth_gbps": 864,
+      "fp32_tflops": 59.8,
+      "fp16_tflops_vendor": 119.5,
+      "fp8_tflops_vendor": 239,
+      "int8_tops_vendor": 239,
+      "board_power_w": 275,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "full-height full-length dual-slot, approximately 4.4 in H x 10.5 in L",
+      "cooling": "server/datacenter deployment; verify exact OEM thermal implementation",
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "NVIDIA AI Enterprise/vGPU"],
+      "quantization_compatibility": "Ada-class CUDA software supports common FP8/FP16/INT8 inference paths; GGUF via CUDA llama.cpp and other quantized runtimes is generally feasible, but exact kernel/driver support must be verified for region-specific OEM systems.",
+      "llm_suitability": {
+        "assessment": "high_48gb_cuda_capacity_region_limited",
+        "practical_guidance": "48GB dedicated VRAM is suitable for many 30B-class models at moderate precision and selected 70B-class models with aggressive 4-bit-class quantization, subject to context/KV-cache overhead. Its value is constrained by regional availability rather than memory capacity.",
+        "evidence_level": "nvidia_current_vgpu_plus_hpe_oem_quickspecs"
+      },
+      "bandwidth_per_watt_gbps_per_w_derived": 3.14,
+      "performance_per_watt_notes": "864 GB/s divided by 275W is approximately 3.14 GB/s/W. This is a specification-derived memory-bandwidth ratio, not measured LLM performance-per-watt.",
+      "off_grid_suitability": "low",
+      "physical_constraints": [
+        "HPE's current QuickSpecs states its L20 accelerator is sold only in China, Hong Kong and Macau.",
+        "Availability outside supported regional/OEM channels may involve import, warranty or support limitations.",
+        "Server-class power, chassis clearance and airflow should be verified before treating an L20 as a workstation drop-in."
+      ],
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "china_hong_kong_macau_oem_channel",
+          "observed_at": "2026-08-24",
+          "note": "No defensible current public retail price was stored. HPE documents the L20 accelerator as a China/Hong Kong/Macau-only option in its current accelerator QuickSpecs."
+        }
+      ],
+      "cost_efficiency_notes": "Technically attractive as a 48GB Ada card at 275W, but regional/OEM restrictions make purchase economics highly channel-dependent. It should not be compared with globally retailed workstation GPUs using an unverified import listing.",
+      "vendor_urls": [
+        "https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/virtual-gpu-types-grid-reference.html"
+      ],
+      "technical_documentation": [
+        "https://docs.nvidia.com/ai-enterprise/release-8/latest/infra-software/vgpu/reference/ada-lovelace.html",
+        "https://www.hpe.com/psnow/doc/a00067720enw"
+      ],
+      "source_caveats": [
+        "NVIDIA's current public vGPU documentation confirms L20 as a 48GB physical GPU, while detailed board specifications are exposed through OEM QuickSpecs rather than a normal NVIDIA retail product page.",
+        "HPE states its L20 option is restricted to China, Hong Kong and Macau.",
+        "The 3.14 GB/s/W figure is a derived specification ratio, not an inference benchmark."
+      ],
+      "evidence": "nvidia_current_documentation_plus_oem_quickspecs"
+    }
+  ]
+}
