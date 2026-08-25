@@ -38,6 +38,7 @@ A device is not ranked from TOPS alone. Priority is given to:
 | Apple M5 Max MacBook Pro | portable unified-memory workstation | up to 128 GB | up to 614 GB/s | portable system | available | Very high memory bandwidth for a portable system; Metal/MLX/BaseRT software paths are improving. |
 | NVIDIA GB10 / DGX Spark class | compact AI supercomputer | 128 GB LPDDR5X | 273 GB/s | 140 W SoC; OEM PSU varies | available | Mature CUDA stack, coherent memory and ConnectX-7 make it unusually cluster-friendly; current DGX Spark software adds improved unified-memory handling and NVIDIA advertises up to 1.9x inference speedups. |
 | AMD Instinct MI455X | datacenter AI accelerator | 432 GB HBM4 | 23.3 TB/s | not yet captured | production ramp 2H 2026 | A new single-accelerator memory-capacity/bandwidth tier with ROCm and rack-scale UALink/UALoE deployment. |
+| AMD Instinct MI350P | PCIe datacenter AI accelerator | 144 GB HBM3E | 4 TB/s | 450–600 W TBP | OEM / enterprise channel | CDNA 4 in a standard dual-slot PCIe form factor combines large single-card HBM capacity with high decode-oriented bandwidth. |
 | Qualcomm Dragonfly AI200 | rack-scale inference accelerator | 768 GB LPDDR5X/card; 43 TB/rack | 0.414 PB/s/rack | 140 kW/rack | deployments begin 2026 | Extreme per-card memory capacity makes it notable for very large-model inference even before independent throughput data is available. |
 | AMD Kria AI SOM / Ryzen AI Embedded X100 | embedded SOM | up to 128 GB LPDDR5X | TBD | TBD | announced/sampling | CPU + RDNA 3.5 GPU + XDNA 2 NPU in an embedded form factor. |
 | Qualcomm Dragonwing IQ-9075 EVK | embedded/industrial AI kit | 36 GB LPDDR5 ECC | platform-specific | 3.8–20 W SoC | available/channel-dependent | Qualcomm publishes named LLM results up to 22 tok/s for Llama 2 7B and 12 tok/s for 13B, making it unusually measurable for edge inference. |
@@ -68,6 +69,10 @@ See [`data/current_system_variants.json`](data/current_system_variants.json), [`
 ### AMD unified-memory / Strix Halo and successors
 
 Ryzen AI Max systems let model weights live in a large unified LPDDR5X pool rather than being limited to conventional discrete-GPU VRAM. This trades HBM/GDDR bandwidth for much larger capacity at relatively modest power. The next-generation Ryzen AI Max PRO 400 platform raises the ceiling to 192 GB system memory and up to 160 GB graphics allocation.
+
+### AMD Instinct MI350P / CDNA 4 PCIe
+
+MI350P is a standard PCIe datacenter accelerator rather than an OAM module. It exposes **144 GB HBM3E at 4 TB/s**, 128 CDNA 4 compute units, up to **4.6 PFLOPS MXFP4/MXFP6**, and a **450–600 W configurable TBP** in a passive double-slot PCIe 5.0 x16 card. That combination makes it especially interesting for large-model inference in existing air-cooled servers. Standalone MSRP and independent normalized LLM throughput are not yet captured, so both remain open research items. See [`AMD_MI350P.md`](AMD_MI350P.md) and [`data/amd_mi350p.json`](data/amd_mi350p.json).
 
 ### AMD Instinct MI400 / CDNA 5
 
@@ -129,6 +134,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 ├── PRICING_AND_SOURCES.md
 ├── WATCHLIST.md
 ├── ACEMAGIC_F9A.md
+├── AMD_MI350P.md
 ├── AMD_MI400.md
 ├── APPLE_M5.md
 ├── NVIDIA_GB300_DESKSIDE.md
@@ -141,6 +147,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 ├── data/
 │   ├── hardware.json
 │   ├── acemagic_f9a.json
+│   ├── amd_mi350p.json
 │   ├── amd_mi400.json
 │   ├── current_system_variants.json
 │   ├── nvidia_gb300_deskside.json
@@ -164,7 +171,7 @@ Whenever possible, record the exact hardware SKU and memory configuration, runti
 
 ## Research dates
 
-Initial structured catalog assembled **2026-08-15**. Current maintenance pass: **2026-08-22**. Prices and availability are snapshots and can change rapidly.
+Initial structured catalog assembled **2026-08-15**. Current maintenance pass: **2026-08-25**. Prices and availability are snapshots and can change rapidly.
 
 ## Scope note
 
