@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-26",
+  "purpose": "NVIDIA Groq 3 LPX rack-scale interactive inference accelerator platform.",
+  "hardware": [
+    {
+      "id": "nvidia-groq-3-lpx",
+      "manufacturer": "NVIDIA / Groq",
+      "product": "NVIDIA Groq 3 LPX",
+      "compute_platform": "nvidia-groq-3-lpx",
+      "category": "interactive_inference_lpu_rack",
+      "status": "full_production",
+      "tier": "Datacenter-specialist",
+      "architecture": "Groq 3 Language Processing Unit integrated as an LPX rack extension for NVIDIA Vera Rubin",
+      "lpu_accelerators_per_rack": 256,
+      "sram_mb_per_lpu": 500,
+      "sram_bandwidth_tbps_per_lpu": 150,
+      "scale_up_bandwidth_tbps_per_lpu": 2.5,
+      "rack_sram_gb": 128,
+      "rack_ddr5_tb": 12,
+      "rack_sram_bandwidth_pbps": 40,
+      "rack_scale_up_bandwidth_tbps": 640,
+      "pricing": [],
+      "price_status": "not_public_retail_hardware",
+      "availability_note": "NVIDIA announced full production on 2026-08-24. Nebius is the first announced adopter; Groq and Dell are also working to deploy LPX with Vera Rubin NVL72.",
+      "software": [
+        "NVIDIA Vera Rubin platform integration",
+        "Groq inference software ecosystem"
+      ],
+      "performance_evidence": [
+        {
+          "kind": "independent_benchmark_cited_by_manufacturer",
+          "benchmark_source": "Artificial Analysis",
+          "model": "Gemma 4 31B",
+          "context_tokens": 100000,
+          "output_tokens_per_second": 3400,
+          "manufacturer_comparison_claim": "4x faster than the nearest alternative platform",
+          "normalization_note": "Treat the 4x statement as NVIDIA's summary of the independent benchmark; use the underlying Artificial Analysis methodology for cross-platform normalization."
+        }
+      ],
+      "evidence": "manufacturer_plus_independent_benchmark",
+      "vendor_urls": [
+        "https://www.nvidia.com/en-us/data-center/lpx/",
+        "https://nvidianews.nvidia.com/news/nvidia-groq-3-lpx-now-in-full-production-with-world-class-speed-for-agentic-ai"
+      ],
+      "technical_documentation": [
+        "https://www.nvidia.com/en-us/data-center/lpx/",
+        "https://blogs.nvidia.com/blog/vera-rubin-lpx-spectrum-x-nvlink-fusion/"
+      ],
+      "research_notes": [
+        "LPX is optimized for low-latency token generation and is intended to complement, not replace, Vera Rubin GPU compute.",
+        "The per-LPU memory hierarchy is unusual: only 500 MB of very-high-bandwidth SRAM per LPU, while the rack provides 12 TB of DDR5 for model/workload capacity.",
+        "Do not compare the 150 TB/s per-LPU SRAM bandwidth directly with HBM capacity/bandwidth metrics without accounting for the different memory hierarchy and workload placement.",
+        "No stable standalone hardware price or power figure was captured in the current manufacturer sources."
+      ]
+    }
+  ]
+}
