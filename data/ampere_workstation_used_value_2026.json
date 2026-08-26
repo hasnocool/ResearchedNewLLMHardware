@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-26",
+  "scope": "used_ampere_workstation_value",
+  "notes": [
+    "Focused on Ampere workstation GPUs that remain current CUDA targets and are practical used-market local-LLM candidates.",
+    "Used prices are point-in-time observations and are also stored separately in the corresponding JSONL price-observation file.",
+    "Model-size guidance is approximate capacity guidance, not a benchmark guarantee; KV cache, context length, runtime overhead and quantization materially affect fit.",
+    "Bandwidth-per-watt and price-efficiency fields are specification/price-derived ratios, not measured LLM tokens-per-watt."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-rtx-a4000-16gb",
+      "manufacturer": "NVIDIA",
+      "product": "RTX A4000",
+      "compute_platform": "nvidia-ampere-ga104",
+      "category": "workstation_gpu_secondary_market",
+      "status": "available_secondary_market",
+      "tier": "A-low-power-cuda",
+      "gpu_architecture": "Ampere",
+      "cuda_compute_capability": "8.6",
+      "cuda_cores": 6144,
+      "tensor_cores": 192,
+      "rt_cores": 48,
+      "fp32_tflops_peak": 19.2,
+      "vendor_tensor_tflops_sparse": 153.4,
+      "memory_gb": 16,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps": 448,
+      "board_power_w": 140,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "4.4 in H x 9.5 in L, single-slot, full-height",
+      "cooling": "active",
+      "display_outputs": ["4x DisplayPort 1.4"],
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "Ollama"],
+      "quantization": {
+        "practical": [
+          "GGUF Q4/Q5/Q6/Q8 via CUDA runtimes",
+          "GPTQ/AWQ where runtime supports Ampere",
+          "INT8/INT4 Tensor Core paths via supported CUDA libraries"
+        ],
+        "caveat": "Exact kernel and datatype support depends on runtime/version; Tensor Core precision support does not imply every quantization format is accelerated."
+      },
+      "model_fit_guidance": "Comfortable for many 7B-14B quantized models and selected larger models with aggressive quantization/offload; 16GB VRAM is generally insufficient for a typical 30B-class model entirely in VRAM once runtime and KV-cache overhead are included.",
+      "llm_inference_suitability": "Strong for compact CUDA inference where 16GB is enough; active cooling, ECC and a single-slot 140W design are unusually practical.",
+      "off_grid_suitability": "good_for_discrete_gpu_class",
+      "derived_efficiency": {
+        "memory_bandwidth_gbps_per_board_w": 3.2,
+        "watts_per_vram_gb": 8.75,
+        "cad_per_vram_gb_at_observed_used_price": 73.06,
+        "cad_per_memory_bandwidth_gbps_at_observed_used_price": 2.61
+      },
+      "pricing": [
+        {
+          "kind": "observed_used",
+          "amount": 1169.0,
+          "currency": "CAD",
+          "region": "Canada",
+          "condition": "pre-owned",
+          "availability": "listed",
+          "observed_at": "2026-08-26",
+          "vendor": "eBay.ca marketplace",
+          "url": "https://www.ebay.ca/sch/i.html?_dcat=27386&_nkw=a4000+rtx",
+          "note": "Representative active used listing from current eBay Canada search results; marketplace pricing varies by seller, OEM, condition and shipping."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-gb/products/workstations/rtx-a4000/",
+        "current_cuda_compute_capability": "https://developer.nvidia.com/cuda/gpus"
+      },
+      "technical_documentation": {
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs21/rtx-a4000/nvidia-rtx-a4000-datasheet.pdf",
+        "cuda_architecture_matrix": "https://docs.nvidia.com/datacenter/tesla/drivers/latest/cuda-toolkit-driver-and-architecture-matrix.html"
+      },
+      "evidence": "manufacturer_plus_current_marketplace"
+    },
+    {
+      "id": "nvidia-rtx-a4500-20gb",
+      "manufacturer": "NVIDIA",
+      "product": "RTX A4500",
+      "compute_platform": "nvidia-ampere-ga102",
+      "category": "workstation_gpu_secondary_market",
+      "status": "available_secondary_market",
+      "tier": "A-balanced-cuda",
+      "gpu_architecture": "Ampere",
+      "cuda_compute_capability": "8.6_family",
+      "cuda_cores": 7168,
+      "tensor_cores": 224,
+      "rt_cores": 56,
+      "fp32_tflops_peak": 23.7,
+      "vendor_tensor_tflops_sparse": 189.2,
+      "memory_gb": 20,
+      "memory_type": "GDDR6 ECC",
+      "memory_bus_bits": 320,
+      "memory_bandwidth_gbps": 640,
+      "board_power_w": 200,
+      "host_interface": "PCIe 4.0 x16",
+      "form_factor": "4.4 in H x 10.5 in L, dual-slot, full-height",
+      "cooling": "active",
+      "power_connector": "1x 8-pin PCIe",
+      "nvlink": {
+        "supported": true,
+        "bandwidth_gbps_bidirectional": 112.5,
+        "note": "Two-card memory scaling to 40GB is application-dependent; ordinary LLM runtimes do not automatically expose NVLink-connected VRAM as one transparent pool."
+      },
+      "display_outputs": ["4x DisplayPort 1.4a"],
+      "software": ["CUDA", "TensorRT", "PyTorch", "vLLM", "llama.cpp CUDA", "Ollama"],
+      "quantization": {
+        "practical": [
+          "GGUF Q4/Q5/Q6/Q8 via CUDA runtimes",
+          "GPTQ/AWQ where runtime supports Ampere",
+          "INT8/INT4 Tensor Core paths via supported CUDA libraries"
+        ],
+        "caveat": "Exact kernel and datatype support depends on runtime/version; NVLink does not make multi-GPU model sharding automatic."
+      },
+      "model_fit_guidance": "Well suited to 7B-14B models and many approximately 20B-class quantized workloads; selected larger models may require aggressive quantization or CPU/multi-GPU offload. The 20GB pool provides materially more KV-cache/context headroom than 16GB cards.",
+      "llm_inference_suitability": "Strong used-market CUDA candidate when 20GB capacity and 640GB/s bandwidth justify higher power than RTX A4000.",
+      "off_grid_suitability": "moderate",
+      "derived_efficiency": {
+        "memory_bandwidth_gbps_per_board_w": 3.2,
+        "watts_per_vram_gb": 10.0,
+        "cad_per_vram_gb_at_observed_used_price": 73.75,
+        "cad_per_memory_bandwidth_gbps_at_observed_used_price": 2.30
+      },
+      "pricing": [
+        {
+          "kind": "observed_used",
+          "amount": 1475.0,
+          "currency": "CAD",
+          "region": "Canada_visible",
+          "condition": "pre-owned",
+          "availability": "listed",
+          "observed_at": "2026-08-26",
+          "vendor": "eBay.ca marketplace",
+          "url": "https://www.ebay.ca/sch/i.html?_nkw=rtx+a4500",
+          "note": "Representative active pre-owned listing in current eBay Canada search results; marketplace pricing and seller location vary."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-au/products/workstations/rtx-a4500/",
+        "current_cuda_compute_capability": "https://developer.nvidia.com/cuda/gpus"
+      },
+      "technical_documentation": {
+        "datasheet": "https://www.nvidia.com/content/dam/en-zz/Solutions/products/workstations/nvidia-rtx-a4500-datasheet.pdf",
+        "cuda_architecture_matrix": "https://docs.nvidia.com/datacenter/tesla/drivers/latest/cuda-toolkit-driver-and-architecture-matrix.html"
+      },
+      "evidence": "manufacturer_plus_current_marketplace"
+    }
+  ]
+}
