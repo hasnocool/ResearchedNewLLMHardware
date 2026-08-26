@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-25",
+  "purpose": "Manufacturer-verified record for NVIDIA Jetson Orin Nano 2, announced 2026-08-25 for low-power edge AI, local generative AI and robotics workloads.",
+  "notes": [
+    "Only specifications explicitly disclosed by NVIDIA as of 2026-08-25 are recorded as verified facts.",
+    "NVIDIA has not yet published a public retail price, detailed memory-bandwidth figure, exact GPU/Tensor Core counts, module dimensions, storage configuration or full power-mode table for Jetson Orin Nano 2.",
+    "The 2x inference-performance and 40% lower-power claims are manufacturer comparisons against Jetson Orin Nano Super and are not normalized LLM token-generation benchmarks."
+  ],
+  "hardware": [
+    {
+      "id": "nvidia-jetson-orin-nano-2-8gb",
+      "manufacturer": "NVIDIA",
+      "product": "Jetson Orin Nano 2",
+      "category": "embedded_edge_ai_module_and_developer_kit",
+      "status": "announced_expected_h1_2027",
+      "compute_platform": "nvidia-jetson-orin-nano-2",
+      "announcement_date": "2026-08-25",
+      "availability_expected": "H1 2027",
+      "cpu": "8-core Arm CPU",
+      "ai_compute_tops_vendor": 78,
+      "ai_compute_metric_note": "NVIDIA states 78 trillion operations per second of AI compute; datatype/sparsity details were not specified in the launch release, so no datatype is inferred here.",
+      "memory_gb": 8,
+      "memory_type": "not yet publicly specified by NVIDIA",
+      "memory_bandwidth_gbps": null,
+      "gpu_architecture": "not yet publicly specified by NVIDIA in launch materials",
+      "gpu_core_count": null,
+      "tensor_core_count": null,
+      "power": {
+        "reference_operating_mode_w": 15,
+        "platform_envelope_w": 40,
+        "notes": "NVIDIA says the platform fits the same compact form factor and 40 W power envelope as the prior class, and that in 15 W mode it uses 40% less power to deliver the same performance as Jetson Orin Nano Super. Full supported power-mode table is not yet public."
+      },
+      "performance_claims": [
+        "NVIDIA claims approximately 2x the inference performance of Jetson Orin Nano Super.",
+        "NVIDIA claims 40% lower power at the same performance in 15 W mode versus Jetson Orin Nano Super."
+      ],
+      "software": [
+        "NVIDIA Jetson software stack",
+        "CUDA ecosystem",
+        "TensorRT ecosystem",
+        "NVIDIA Jetson agent skills"
+      ],
+      "supported_model_examples_vendor": [
+        "NVIDIA Cosmos",
+        "NVIDIA Nemotron",
+        "Gemma 4",
+        "Qwen 3"
+      ],
+      "quantization_compatibility": "Expected to use NVIDIA Jetson/TensorRT memory-efficient inference paths and CUDA-compatible runtimes. Exact supported low-bit formats and runtime-version requirements for Jetson Orin Nano 2 should be recorded only after JetPack/TensorRT documentation for the device is published.",
+      "model_size_practicality": "8 GB memory makes this primarily a small-model edge platform. It should be treated as suitable for memory-efficient compact LLM/VLM workloads rather than large 20B-70B-class models. Actual fit depends on runtime, quantization, context length, KV cache and non-model memory overhead.",
+      "llm_inference_suitability": "high_for_small_edge_models",
+      "performance_per_watt": "promising_vendor_claim_only; NVIDIA reports 2x predecessor inference performance and 40% lower power at equal performance in a 15 W mode, but model-specific tokens-per-watt data is not yet public",
+      "cost_efficiency": "unknown_until_price_is_published",
+      "off_grid_suitability": "very_high_potential; 15 W operating-mode evidence and a 40 W platform envelope make it a strong battery/solar candidate, but complete developer-kit wall-power measurements are still needed",
+      "physical_constraints": "NVIDIA states the same compact form factor as Jetson Orin Nano Super; exact module/developer-kit dimensions for Nano 2 were not separately published in the announcement and are therefore not copied from the predecessor.",
+      "interfaces": "not yet fully disclosed for Jetson Orin Nano 2; do not assume predecessor I/O without final module/developer-kit documentation",
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "announced_expected_h1_2027",
+          "observed_at": "2026-08-25",
+          "note": "NVIDIA announced the module and developer kit for first-half 2027 availability but did not publish retail pricing in the launch release."
+        }
+      ],
+      "vendor_urls": [
+        "https://nvidianews.nvidia.com/news/nvidia-announces-jetson-orin-nano-2-robotics-computer-to-redefine-entry-level-edge-ai",
+        "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/"
+      ],
+      "technical_documentation": [
+        "https://nvidianews.nvidia.com/news/nvidia-announces-jetson-orin-nano-2-robotics-computer-to-redefine-entry-level-edge-ai",
+        "https://developer.nvidia.com/embedded-computing"
+      ],
+      "evidence": "manufacturer_announcement",
+      "research_priority": "very_high",
+      "open_questions": [
+        "retail price and regional pricing",
+        "exact memory type and bandwidth",
+        "GPU architecture/core counts and Tensor Core generation/count",
+        "complete power-mode table and developer-kit wall power",
+        "module and developer-kit dimensions/connectors",
+        "JetPack version and detailed runtime support at launch",
+        "model-specific prefill/decode tokens per second and tokens per watt"
+      ]
+    }
+  ]
+}
