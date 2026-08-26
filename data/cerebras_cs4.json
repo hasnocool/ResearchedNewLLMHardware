@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-26",
+  "purpose": "Track Cerebras CS-4 and WSE-3 Turbo as a rack-scale wafer-scale inference platform for frontier and disaggregated LLM inference.",
+  "hardware": [
+    {
+      "id": "cerebras-cs4",
+      "manufacturer": "Cerebras Systems",
+      "product": "CS-4",
+      "category": "rack_scale_wafer_ai_system",
+      "status": "shipping_q3_2026",
+      "compute_platform": "cerebras-wse3-turbo-nexus",
+      "accelerators_per_system": 3,
+      "accelerator": "WSE-3 Turbo",
+      "transistors_per_wafer_trillion": 4,
+      "ai_cores_per_wafer": 900000,
+      "on_chip_sram_gb_per_wafer": 44,
+      "ai_compute_pflops_per_wafer": 250,
+      "system_ai_compute_pflops": 750,
+      "memory_bandwidth_pb_s_per_wafer": 43.2,
+      "system_memory_bandwidth_pb_s": 129.6,
+      "system_fabric_bandwidth_pb_s": 160.5,
+      "system_io_bandwidth_tb_s": 0.9,
+      "system_io_bandwidth_tbit_s": 7.2,
+      "wafer_to_wafer_latency_us_min": 2,
+      "model_scale_claim_parameters_trillion": 50,
+      "software": [
+        "Cerebras Software Platform",
+        "Cerebras Inference",
+        "Cerebras model/runtime ecosystem"
+      ],
+      "llm_relevance": [
+        "Extremely high on-wafer SRAM bandwidth targets low-latency autoregressive inference.",
+        "Direct Wafer Links reduce wafer-to-wafer latency and support very large model partitions across racks.",
+        "Cerebras explicitly supports heterogeneous disaggregated inference, including external prefill engines handing off to CS-4 decode."
+      ],
+      "pricing": [],
+      "pricing_status": "enterprise_quote_only_no_public_price_captured",
+      "availability_note": "Cerebras states first CS-4 shipments begin in Q3 2026.",
+      "benchmark_evidence": [
+        {
+          "source_type": "manufacturer_benchmark",
+          "model": "GPT-OSS-120B",
+          "metric": "tokens_per_second_per_user",
+          "value_min": 4400,
+          "note": "Cerebras reports more than 4,400 TPS/user with identical prompts in its comparison and claims up to 30x faster inference than compared GPU systems. Treat as manufacturer evidence until independently reproduced."
+        },
+        {
+          "source_type": "manufacturer_efficiency_claim",
+          "metric": "throughput_per_watt_improvement_vs_cs3",
+          "value_max_multiple": 10,
+          "note": "Manufacturer claim comparing CS-4 with previous-generation CS-3, not an independent cross-vendor tokens-per-watt result."
+        }
+      ],
+      "evidence": "manufacturer",
+      "vendor_urls": [
+        "https://www.cerebras.ai/cs4"
+      ],
+      "technical_documentation": [
+        "https://www.cerebras.ai/cs4",
+        "https://www.cerebras.ai/cs4-datasheet",
+        "https://www.cerebras.ai/blog/introducing-cerebras-cs-4",
+        "https://www.cerebras.ai/blog/ultrafast-frontier-inference-cerebras-deep-dive-at-hot-chips-2026"
+      ],
+      "source_urls": [
+        "https://investors.cerebras.ai/news-releases/news-release-details/cerebras-unveils-cs-4-30-times-faster-gpu-based-solutions",
+        "https://www.cerebras.ai/cs4",
+        "https://www.cerebras.ai/blog/ultrafast-frontier-inference-cerebras-deep-dive-at-hot-chips-2026"
+      ],
+      "research_priority": "high_datacenter",
+      "open_questions": [
+        "system and rack power at idle, prefill and decode",
+        "delivered enterprise pricing",
+        "independent GPT-OSS-120B and frontier-model reproduction",
+        "throughput at realistic concurrency and context lengths",
+        "external memory hierarchy and model-weight residency behavior",
+        "heterogeneous prefill-to-decode handoff performance with AMD/AWS partner systems"
+      ]
+    }
+  ]
+}
