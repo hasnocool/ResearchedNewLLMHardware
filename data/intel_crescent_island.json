@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-26",
+  "purpose": "Track Intel Crescent Island as a high-memory, air-cooled PCIe inference accelerator for large-model and agentic AI workloads.",
+  "hardware": [
+    {
+      "id": "intel-crescent-island-xe3p",
+      "manufacturer": "Intel",
+      "product": "Crescent Island",
+      "category": "datacenter_ai_accelerator_pcie",
+      "status": "sampling_2026",
+      "compute_platform": "intel-xe3p-crescent-island",
+      "gpu_architecture": "Xe3P",
+      "xe_cores": 32,
+      "xmx_engines": 256,
+      "memory_gb_max": 480,
+      "memory_type": "LPDDR5X",
+      "board_power_w": {
+        "maximum": 350,
+        "kind": "air_cooled_pcie_card"
+      },
+      "form_factor": "PCIe add-in card",
+      "cooling": "air cooled",
+      "software": [
+        "Intel oneAPI 2026.1",
+        "PyTorch torch.xpu",
+        "oneDNN",
+        "oneCCL",
+        "SYCL"
+      ],
+      "software_note": "Intel oneAPI 2026.1 lists Crescent Island GPU support on Ubuntu Server 24.04 and 26.04 with the current Intel GPU user-mode driver stack.",
+      "llm_relevance": [
+        "Up to 480GB LPDDR5X creates an unusually large single-card memory-capacity tier for inference.",
+        "350W air-cooled PCIe deployment targets existing enterprise servers rather than liquid-cooled rack-only infrastructure.",
+        "Intel explicitly positions Crescent Island for token-intensive agentic inference, larger models, longer contexts and higher concurrency."
+      ],
+      "pricing": [],
+      "pricing_status": "no_public_price_captured",
+      "availability_note": "Intel previously targeted customer sampling in the second half of 2026; its Hot Chips 2026 disclosure provides the expanded 480GB/350W specification but does not establish general retail availability.",
+      "evidence": "manufacturer",
+      "vendor_urls": [
+        "https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026"
+      ],
+      "technical_documentation": [
+        "https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026",
+        "https://newsroom.intel.com/data-center/intel-puts-agentic-ai-xeon-6-networking-ai-systems",
+        "https://www.intel.com/content/www/us/en/developer/articles/release-notes/oneapi-toolkit/2026.html",
+        "https://www.intel.com/content/www/us/en/developer/tools/oneapi/optimization-for-pytorch.html"
+      ],
+      "source_urls": [
+        "https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026",
+        "https://newsroom.intel.com/artificial-intelligence/intel-to-expand-ai-accelerator-portfolio-with-new-gpu",
+        "https://newsroom.intel.com/data-center/intel-puts-agentic-ai-xeon-6-networking-ai-systems",
+        "https://www.intel.com/content/www/us/en/developer/articles/release-notes/oneapi-toolkit/2026.html"
+      ],
+      "research_priority": "very_high",
+      "open_questions": [
+        "physical memory bandwidth and exact LPDDR5X configuration",
+        "peak and sustained low-precision compute",
+        "standalone card and OEM system pricing",
+        "general availability and production shipment dates",
+        "independent LLM prefill/decode benchmarks",
+        "tokens per watt at the wall",
+        "multi-card scaling and interconnect topology"
+      ]
+    }
+  ]
+}
