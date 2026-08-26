@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0.0",
-  "last_updated": "2026-08-21",
-  "purpose": "OpenAI/Broadcom Jalapeño inference accelerator watch record.",
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-26",
+  "purpose": "OpenAI/Broadcom Jalapeño inference accelerator record with Hot Chips 2026 specifications and InferenceX results.",
   "hardware": [
     {
       "id": "openai-broadcom-jalapeno",
@@ -9,34 +9,85 @@
       "product": "Jalapeño Intelligence Processor",
       "compute_platform": "openai-broadcom-jalapeno-gen1",
       "category": "llm_inference_asic",
-      "status": "engineering_samples_predeployment",
-      "tier": "Experimental-datacenter-watch",
-      "architecture_note": "Blank-slate accelerator designed specifically for modern LLM inference; OpenAI says the design reduces data movement and balances compute, memory and networking resources for higher realized utilization.",
-      "memory_gb": null,
-      "memory_type": null,
-      "memory_bandwidth_gbps": null,
-      "power_w": null,
+      "status": "predeployment_production_qualification",
+      "tier": "Datacenter-research",
+      "architecture_note": "Purpose-built spatial LLM inference accelerator designed around locality, explicit placement of model state/KV cache, predictable synchronization, and a rack-scale connected domain.",
+      "memory_gib": 216,
+      "memory_type": "HBM4",
+      "memory_stacks": 6,
+      "memory_bandwidth_tbps": 15.4,
+      "peak_compute_pflops_mxfp4": 13.4,
+      "package_tdp_w": 700,
+      "measured_sustained_power_w_max_in_published_tests": 550,
+      "rack_accelerators": 128,
+      "rack_hbm_tib_approx": 27,
+      "pod_accelerators": 2048,
+      "networking_note": "Hot Chips reporting describes a 128-accelerator local domain and a 2,048-accelerator global domain; the architecture is designed to keep model state local and reduce communication stalls.",
       "pricing": [],
       "price_status": "not_publicly_sold_or_priced",
-      "availability_note": "Engineering samples are running ML workloads at production target frequency and power. OpenAI and Broadcom say initial deployment is planned by the end of 2026, with gigawatt-scale datacenter deployment over multiple generations.",
-      "software_evidence": ["Engineering samples reported running GPT-5.3-Codex-Spark"],
+      "availability_note": "OpenAI plans to begin deployment inside its own compute infrastructure by the end of 2026. Gen 2 is in development and Gen 3 is taking shape; Jalapeño is not a retail product.",
+      "software_evidence": [
+        "Engineering samples reported running GPT-5.3-Codex-Spark.",
+        "OpenAI reports that Codex with GPT-Astra helped bring GPT-OSS, DeepSeek R1, and Kimi K2.5 kernels to high performance; selected AI-generated attention/MoE blocks ran 1.5x-1.8x faster than prior expert-written implementations."
+      ],
       "performance_evidence": [
         {
-          "kind": "manufacturer_early_testing",
-          "claim": "performance per watt substantially better than current state-of-the-art",
-          "normalization_status": "not_comparable_without_detailed_technical_report"
+          "kind": "manufacturer_public_benchmark",
+          "benchmark": "SemiAnalysis InferenceX",
+          "models": ["GPT-OSS 120B", "DeepSeek R1 670B", "Kimi K2.5 1T"],
+          "summary": "Across the three models, OpenAI reports 1.5x-1.9x more peak AI work per watt and 1.7x-3.6x lower end-to-end latency than the compared commercial GB200/GB300 systems.",
+          "methodology_note": "Results use single-token prediction and normalize using published package TDP; production systems may use different serving techniques such as multi-token prediction."
+        },
+        {
+          "kind": "manufacturer_public_benchmark",
+          "model": "GPT-OSS 120B",
+          "quantization_or_datatype": "not fully specified on page",
+          "context": "nominal 8k input / 1k output, STP",
+          "peak_mixed_tps_per_kw": 85448,
+          "comparison_mixed_tps_per_kw": 44960,
+          "comparison_platform": "NVIDIA GB200",
+          "end_to_end_latency_s": 1.03,
+          "min_tbt_ms": 0.69,
+          "tokens_per_second_per_user_at_min_tbt": 1459
+        },
+        {
+          "kind": "manufacturer_public_benchmark",
+          "model": "DeepSeek R1 670B",
+          "quantization_or_datatype": "MXFP4",
+          "context": "nominal 8k input / 1k output, STP",
+          "peak_mixed_tps_per_kw": 19641,
+          "comparison_mixed_tps_per_kw": 11781,
+          "comparison_platform": "NVIDIA GB300",
+          "end_to_end_latency_s": 1.65,
+          "min_tbt_ms": 1.43,
+          "tokens_per_second_per_user_at_min_tbt": 700
+        },
+        {
+          "kind": "manufacturer_public_benchmark",
+          "model": "Kimi K2.5 1T",
+          "quantization_or_datatype": "MXFP4",
+          "context": "nominal 8k input / 1k output, STP",
+          "peak_mixed_tps_per_kw": 18195,
+          "comparison_mixed_tps_per_kw": 11862,
+          "comparison_platform": "NVIDIA GB300",
+          "end_to_end_latency_s": 1.56,
+          "min_tbt_ms": 1.44,
+          "tokens_per_second_per_user_at_min_tbt": 694
         }
       ],
-      "evidence": "manufacturer",
+      "evidence": "manufacturer_plus_hot_chips_reporting",
       "vendor_urls": [
         "https://openai.com/index/openai-broadcom-jalapeno-inference-chip/",
+        "https://openai.com/index/jalapeno-first-results/",
         "https://investors.broadcom.com/news-releases/news-release-details/openai-and-broadcom-unveil-llm-optimized-intelligence-processor"
       ],
-      "technical_documentation": [],
+      "technical_documentation": [
+        "https://openai.com/index/jalapeno-first-results/"
+      ],
       "research_notes": [
-        "Do not infer TOPS/FLOPS, memory capacity, memory bandwidth, process node, board power or price; none were published in the captured primary sources.",
-        "OpenAI says a detailed technical performance report will be presented in the coming months; that report is the primary promotion trigger.",
-        "This is a datacenter infrastructure platform rather than an expected retail/local inference accelerator, but it is directly relevant to LLM-specific ASIC architecture and performance-per-watt research."
+        "216 GiB HBM4, 15.4 TB/s memory bandwidth and 13.4 PFLOPS MXFP4 are Hot Chips 2026 presentation specifications reported by multiple technical outlets; OpenAI's benchmark page independently confirms the 700 W package rating and <=550 W sustained power in the tested workloads.",
+        "Do not treat the published InferenceX comparisons as a universal production-serving ranking: the comparison uses STP and package-TDP normalization, and serving stacks may use different speculative or multi-token techniques.",
+        "Jalapeño remains a datacenter infrastructure platform rather than a local/retail purchasing candidate."
       ]
     }
   ]
