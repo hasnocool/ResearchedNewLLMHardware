@@ -1,0 +1,182 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-26",
+  "purpose": "Manufacturer-verified records for Lantronix Open-M 720G and Open-M 520G production-ready system-on-modules based on MediaTek Genio 720/520, with emphasis on low-power edge GenAI and local inference constraints.",
+  "notes": [
+    "Lantronix markets both modules for edge AI/GenAI and states module-class power below 4 W; this is not a complete carrier-board or end-system wall-power measurement.",
+    "MediaTek documents TFLite Generative AI acceleration on the NPU for Genio 520/720 under Android and Yocto. ONNX Runtime is currently documented for analytical AI, not as a general ORT-GenAI path.",
+    "The full NeuroPilot 8 SDK bundle is access-controlled. Public developers can use supported LiteRT/TFLite delegate paths, but arbitrary GGUF/llama.cpp compatibility must not be inferred from the 10-TOPS headline.",
+    "No public per-unit Lantronix pricing was found; current purchasing is contact-sales/quote based."
+  ],
+  "hardware": [
+    {
+      "id": "lantronix-open-m-720g-8gb",
+      "manufacturer": "Lantronix",
+      "product": "Open-M 720G SOM 8GB",
+      "manufacturer_part_number": "MT0720-1WN-DL",
+      "category": "embedded_edge_ai_som",
+      "status": "production_ready_contact_sales",
+      "compute_platform": "mediatek-genio-720-mt8391",
+      "soc": "MediaTek Genio 720 (MT8391)",
+      "process_nm": 6,
+      "cpu": "2x Arm Cortex-A78 up to 2.6 GHz + 6x Arm Cortex-A55 up to 2.0 GHz",
+      "gpu": "Arm Mali-G57 MC2 up to 1.1 GHz",
+      "npu": "MediaTek 8th-generation NPU",
+      "ai_compute_tops_vendor": 10,
+      "ai_compute_metric_note": "Lantronix and MediaTek describe up to 10 TOPS of system AI acceleration. TOPS is not treated as an LLM token-generation benchmark.",
+      "memory_gb": 8,
+      "memory_type": "LPDDR5X",
+      "memory_bandwidth_gbps": null,
+      "storage": "64 GB UFS",
+      "power": {
+        "module_power_w_vendor": "<4",
+        "input_voltage_v_nominal": 3.7,
+        "notes": "Lantronix advertises efficient power below 4 W for the SOM family. Carrier-board, peripherals, radios and workload-dependent system power are additional."
+      },
+      "physical": {
+        "form_factor": "LGA system-on-module",
+        "dimensions_mm": "43 x 44 x 2.95",
+        "operating_temperature_c": "-35 to +75"
+      },
+      "interfaces": [
+        "PCIe Gen2 x1",
+        "1GbE",
+        "3x USB 3.2",
+        "3x USB 2.0",
+        "2x 4-lane MIPI-CSI",
+        "MIPI DSI",
+        "eDP",
+        "DisplayPort multiplexed from USB3",
+        "SD/SDIO",
+        "UART",
+        "I2C",
+        "I2S/PCM",
+        "SPI",
+        "GPIO"
+      ],
+      "wireless": [
+        "Wi-Fi 6/6E option",
+        "Bluetooth 5.x option"
+      ],
+      "software": [
+        "Android 15",
+        "Yocto Linux",
+        "Ubuntu roadmap",
+        "MediaTek NeuroPilot 8",
+        "TensorFlow Lite / LiteRT",
+        "ONNX Runtime analytical-AI path"
+      ],
+      "genai_runtime_support": "MediaTek IoT AI Hub currently documents TFLite Generative AI execution on the NPU for Genio 520/720 under Android and Yocto. General ONNX Runtime GenAI is not documented as the supported GAI path; MediaTek directs GAI workloads to the NeuroPilot GAI Toolkit/TFLite stack.",
+      "quantization_compatibility": "Runtime-specific. Do not infer arbitrary GGUF, GPTQ, AWQ or INT4 support from the 10-TOPS figure. Supported model conversion, precision and operator coverage should be verified against the current NeuroPilot 8 GAI toolchain for the exact model.",
+      "model_size_practicality": "8 GB of shared system memory makes this primarily a compact edge-GenAI platform. Small 1B-3B-class models are the safest capacity target; selected 7B-class models may fit only with aggressive low-bit quantization and constrained context/runtime overhead. Fit does not imply useful NPU acceleration unless the model is supported by MediaTek's GAI toolchain.",
+      "llm_inference_suitability": "moderate_for_supported_small_edge_genai_models",
+      "performance_per_watt": "promising_for_supported_edge_models_due_to_sub_4w_module_class_power, but no normalized public LLM tokens-per-watt benchmark was found",
+      "cost_efficiency": "unknown_quote_only",
+      "off_grid_suitability": "very_high_potential; sub-4 W module-class power and 3.7 V nominal input are attractive for battery/solar designs, but carrier-board and peripheral consumption must be added",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "contact_sales",
+          "observed_at": "2026-08-26",
+          "note": "Lantronix lists the production-ready SOM and part number but does not publish a stable unit price."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.lantronix.com/products/open-m-720g-520g-som-system-on-module/",
+        "https://genio.mediatek.com/genio-720"
+      ],
+      "technical_documentation": [
+        "https://cdn.lantronix.com/wp-content/uploads/pdf/Open-M-520G-720G-PB.pdf",
+        "https://genio.mediatek.com/doc/iot-aihub/ai_hub/related_resource.html",
+        "https://genio.mediatek.com/doc/iot-aihub/ai_hub/supported_os/yocto.html",
+        "https://genio.mediatek.com/doc/iot-aihub/ai_hub/software_architecture.html"
+      ],
+      "evidence": "manufacturer",
+      "research_priority": "high"
+    },
+    {
+      "id": "lantronix-open-m-520g-4gb",
+      "manufacturer": "Lantronix",
+      "product": "Open-M 520G SOM 4GB",
+      "manufacturer_part_number": "MT0520-1WN-BL",
+      "category": "embedded_edge_ai_som",
+      "status": "production_ready_contact_sales",
+      "compute_platform": "mediatek-genio-520-mt8371",
+      "soc": "MediaTek Genio 520 (MT8371)",
+      "process_nm": 6,
+      "cpu": "2x Arm Cortex-A78 up to 2.2 GHz + 6x Arm Cortex-A55 up to 2.0 GHz",
+      "gpu": "Arm Mali-G57 MC2 up to 880 MHz",
+      "npu": "MediaTek 8th-generation NPU",
+      "ai_compute_tops_vendor": 10,
+      "ai_compute_metric_note": "Lantronix and MediaTek describe up to 10 TOPS of system AI acceleration. TOPS is not treated as an LLM token-generation benchmark.",
+      "memory_gb": 4,
+      "memory_type": "LPDDR5X",
+      "memory_bandwidth_gbps": null,
+      "storage": "64 GB UFS",
+      "power": {
+        "module_power_w_vendor": "<4",
+        "input_voltage_v_nominal": 3.7,
+        "notes": "Lantronix advertises efficient power below 4 W for the SOM family; complete-system power depends on carrier and attached devices."
+      },
+      "physical": {
+        "form_factor": "LGA system-on-module",
+        "dimensions_mm": "43 x 44 x 2.95",
+        "operating_temperature_c": "-35 to +75"
+      },
+      "interfaces": [
+        "PCIe Gen2 x1",
+        "1GbE",
+        "3x USB 3.2",
+        "3x USB 2.0",
+        "2x 4-lane MIPI-CSI",
+        "MIPI DSI",
+        "eDP",
+        "DisplayPort multiplexed from USB3",
+        "SD/SDIO",
+        "UART",
+        "I2C",
+        "I2S/PCM",
+        "SPI",
+        "GPIO"
+      ],
+      "wireless": [
+        "Wi-Fi option",
+        "Bluetooth option"
+      ],
+      "software": [
+        "Android 15",
+        "Yocto Linux",
+        "Ubuntu roadmap",
+        "MediaTek NeuroPilot 8",
+        "TensorFlow Lite / LiteRT",
+        "ONNX Runtime analytical-AI path"
+      ],
+      "genai_runtime_support": "MediaTek IoT AI Hub documents TFLite Generative AI execution on the NPU for Genio 520/720 under Android and Yocto. The specialized GAI toolchain is distinct from unrestricted desktop GGUF runtimes.",
+      "quantization_compatibility": "Runtime-specific and model-dependent. No arbitrary GGUF/llama.cpp or universal INT4 compatibility is claimed.",
+      "model_size_practicality": "4 GB shared memory sharply limits language-model capacity. Best suited to sub-3B compact models, speech/vision pipelines, embeddings and task-specific GenAI models supported by MediaTek's deployment toolchain. Larger models generally require more memory or host-assisted execution.",
+      "llm_inference_suitability": "limited_to_very_small_supported_edge_models",
+      "performance_per_watt": "potentially_high_for_supported_small_models; no normalized public LLM tokens-per-watt benchmark was found",
+      "cost_efficiency": "unknown_quote_only",
+      "off_grid_suitability": "very_high_potential due to sub-4 W module-class power, with complete-system consumption dependent on carrier and peripherals",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "contact_sales",
+          "observed_at": "2026-08-26",
+          "note": "Lantronix lists the production-ready SOM and part number but does not publish a stable unit price."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.lantronix.com/products/open-m-720g-520g-som-system-on-module/",
+        "https://genio.mediatek.com/genio-720"
+      ],
+      "technical_documentation": [
+        "https://cdn.lantronix.com/wp-content/uploads/pdf/Open-M-520G-720G-PB.pdf",
+        "https://genio.mediatek.com/doc/iot-aihub/ai_hub/related_resource.html",
+        "https://genio.mediatek.com/doc/iot-aihub/ai_hub/supported_os/yocto.html"
+      ],
+      "evidence": "manufacturer",
+      "research_priority": "medium"
+    }
+  ]
+}
