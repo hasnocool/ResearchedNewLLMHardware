@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "observed_at": "2026-08-26",
   "observations": [
     {
@@ -77,10 +77,30 @@
       "manufacturer_summary": "4x faster than the nearest alternative platform",
       "url": "https://blogs.nvidia.com/blog/vera-rubin-lpx-spectrum-x-nvlink-fusion/",
       "notes": "Use the underlying Artificial Analysis comparison set and methodology before normalizing the 4x claim against other platforms."
+    },
+    {
+      "hardware_id": "cerebras-cs4",
+      "source_type": "manufacturer_public_benchmark",
+      "model": "GPT-OSS-120B",
+      "metric": "tokens_per_second_per_user",
+      "value_min": 4400,
+      "comparison_claim": "up to 30x faster inference than compared GPU solutions",
+      "url": "https://investors.cerebras.ai/news-releases/news-release-details/cerebras-unveils-cs-4-30-times-faster-gpu-based-solutions",
+      "notes": "Cerebras states identical prompts were used in the head-to-head comparison. Treat the >4,400 TPS/user result and 30x comparison as manufacturer evidence until an independent reproduction publishes full context, concurrency, output length, and serving methodology."
+    },
+    {
+      "hardware_id": "cerebras-cs4",
+      "source_type": "manufacturer_efficiency_claim",
+      "metric": "throughput_per_watt_generation_improvement",
+      "comparison_platform": "Cerebras CS-3",
+      "value_max_multiple": 10,
+      "url": "https://investors.cerebras.ai/news-releases/news-release-details/cerebras-unveils-cs-4-30-times-faster-gpu-based-solutions",
+      "notes": "Same-vendor generational efficiency claim; do not treat as an independent cross-vendor tokens-per-watt measurement."
     }
   ],
   "methodology_notes": [
     "Jalapeño comparisons normalize by published accelerator package TDP and use single-token prediction; they are not automatically equivalent to production serving configurations using speculative or multi-token prediction.",
-    "Groq 3 LPX's 3,400 tok/s result is tied to a named model and 100K context and is stronger evidence than a synthetic TOPS figure, but rack power and delivered system pricing remain unknown."
+    "Groq 3 LPX's 3,400 tok/s result is tied to a named model and 100K context and is stronger evidence than a synthetic TOPS figure, but rack power and delivered system pricing remain unknown.",
+    "Cerebras CS-4's >4,400 GPT-OSS-120B TPS/user and up-to-30x comparison are manufacturer-published results; normalize only after independent context/concurrency/methodology details are available."
   ]
 }
