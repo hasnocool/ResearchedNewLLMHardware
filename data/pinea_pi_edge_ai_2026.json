@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.2.0",
+  "last_updated": "2026-08-26",
+  "purpose": "New personal edge-AI appliances with explicit local-LLM positioning. Vendor claims are retained with provenance and are not treated as normalized cross-platform benchmarks.",
+  "hardware": [
+    {
+      "id": "pineapi-pinea-pi-pro-64gb",
+      "manufacturer": "Pinea Pi / ModelBest (Hong Kong) Limited",
+      "product": "PineaPi Pro",
+      "compute_platform": "nvidia-jetson-agx-orin-64gb",
+      "category": "personal_edge_ai_appliance",
+      "status": "preorder_or_reservation_campaign",
+      "tier": "A-edge-appliance",
+      "module": "NVIDIA Jetson AGX Orin 64GB",
+      "ai_compute": {
+        "int8_tops_vendor": 275,
+        "note": "Vendor/platform peak; not a token-generation benchmark."
+      },
+      "memory_gb": 64,
+      "memory_type": "LPDDR5 unified",
+      "memory_bandwidth_gbps": 204.8,
+      "storage": "1TB NVMe SSD",
+      "camera": "integrated 1080p FHD camera",
+      "audio": "six-microphone circular far-field array",
+      "networking": ["1GbE", "Wi-Fi 6", "Bluetooth 5.0"],
+      "interfaces": ["2x USB-A", "2x USB-C", "HDMI", "dedicated AI button"],
+      "dimensions_mm": {"width": 120, "depth": 120, "height": 75},
+      "weight_g": 1090,
+      "cooling": "active",
+      "operating_system": "Ubuntu 22.04",
+      "software": [
+        "MiniCPM edge AI stack",
+        "Piny local AI companion",
+        "NVIDIA JetPack/CUDA/TensorRT ecosystem via Jetson platform"
+      ],
+      "model_size_practicality": "64GB unified memory makes 7B-30B quantized models comfortable capacity targets and selected 70B-class 4-bit models capacity-plausible, subject to runtime overhead, context length, KV cache, and the 204.8GB/s memory-bandwidth ceiling.",
+      "quantization_compatibility": "Jetson/CUDA runtimes support common reduced-precision inference paths, but the product page does not publish a normalized GGUF/GPTQ/AWQ compatibility matrix. Treat MiniCPM-specific optimizations separately from generic CUDA support.",
+      "llm_inference_suitability": "Strong turnkey local-AI appliance for multimodal assistants, RAG, voice/vision agents, robotics prototyping and medium-to-large quantized LLMs. It packages a known 64GB Jetson platform with camera, far-field audio and local software rather than adding a new accelerator architecture.",
+      "performance_per_watt": {
+        "status": "not_normalized",
+        "note": "No defensible PineaPi Pro whole-system wall-power benchmark or normalized tokens-per-watt result was published in the sources checked on 2026-08-26."
+      },
+      "off_grid_suitability": "Moderate-to-good for a 64GB CUDA edge node, but a whole-system DC input specification and measured idle/load wall power should be captured before assigning a stronger off-grid score.",
+      "pricing": [
+        {
+          "amount": 2999,
+          "currency": "USD",
+          "region": "US/global web store",
+          "kind": "manufacturer_store_introductory",
+          "availability": "reservation_pre_kickstarter",
+          "observed_at": "2026-08-26",
+          "url": "https://pineapi.com/products/pineapi-pro",
+          "note": "Manufacturer store lists US$2,999, reduced from a displayed US$4,999 reference price. Company press material says Kickstarter is planned for late September through late October 2026, with US$30 reservations starting in late August."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://pineapi.com/products/pineapi-pro",
+        "manufacturer_site": "https://pineapi.com/",
+        "company_about": "https://pineapi.com/pages/about"
+      },
+      "technical_documentation": {
+        "nvidia_jetson_agx_orin": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/",
+        "nvidia_jetson_docs": "https://docs.nvidia.com/jetson/",
+        "campaign_announcement": "https://www.prnewswire.com/news-releases/pinea-pi-opens-pre-orders-defining-the-edge-ai-device-for-the-ai-native-generation-302860665.html"
+      },
+      "evidence": "manufacturer_plus_company_press_release"
+    }
+  ]
+}
