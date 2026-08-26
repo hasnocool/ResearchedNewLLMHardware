@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-08-26",
+  "catalog_updates": [
+    {
+      "target_ids": ["arduino-ventuno-q-16gb", "arduino-ventuno-q"],
+      "product": "Arduino VENTUNO Q",
+      "verified_status": "preorder",
+      "price": {"amount": 299, "currency": "USD", "kind": "manufacturer_store_introductory"},
+      "availability": "preorder_delivery_about_four_weeks",
+      "operating_system": "Ubuntu pre-installed on primary Qualcomm processor",
+      "sources": [
+        "https://store-usa.arduino.cc/products/ventuno-q",
+        "https://store.arduino.cc/products/ventuno-q",
+        "https://canonical.com/blog/arduino-ventuno-q-is-available-for-pre-order-with-ubuntu-pre-installed"
+      ],
+      "notes": "Verified update replacing the earlier coming-soon/no-price snapshot. Availability is region dependent."
+    }
+  ]
+}
