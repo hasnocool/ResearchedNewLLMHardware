@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-08-26",
+  "observations": [
+    {
+      "hardware_id": "openai-broadcom-jalapeno",
+      "source_type": "manufacturer_public_benchmark",
+      "benchmark": "SemiAnalysis InferenceX",
+      "model": "GPT-OSS 120B",
+      "context": "nominal 8k input / 1k output",
+      "serving_mode": "single-token prediction",
+      "package_tdp_w": 700,
+      "peak_mixed_tps_per_kw": 85448,
+      "end_to_end_latency_s": 1.03,
+      "min_tbt_ms": 0.69,
+      "tokens_per_second_per_user_at_min_tbt": 1459,
+      "comparison": {
+        "platform": "NVIDIA GB200",
+        "published_package_tdp_w": 1200,
+        "peak_mixed_tps_per_kw": 44960,
+        "end_to_end_latency_s": 1.8,
+        "min_tbt_ms": 1.87
+      },
+      "url": "https://openai.com/index/jalapeno-first-results/"
+    },
+    {
+      "hardware_id": "openai-broadcom-jalapeno",
+      "source_type": "manufacturer_public_benchmark",
+      "benchmark": "SemiAnalysis InferenceX",
+      "model": "DeepSeek R1 670B",
+      "datatype": "MXFP4",
+      "context": "nominal 8k input / 1k output",
+      "serving_mode": "single-token prediction",
+      "package_tdp_w": 700,
+      "peak_mixed_tps_per_kw": 19641,
+      "end_to_end_latency_s": 1.65,
+      "min_tbt_ms": 1.43,
+      "tokens_per_second_per_user_at_min_tbt": 700,
+      "comparison": {
+        "platform": "NVIDIA GB300",
+        "published_package_tdp_w": 1400,
+        "peak_mixed_tps_per_kw": 11781,
+        "end_to_end_latency_s": 5.99,
+        "min_tbt_ms": 5.9
+      },
+      "url": "https://openai.com/index/jalapeno-first-results/"
+    },
+    {
+      "hardware_id": "openai-broadcom-jalapeno",
+      "source_type": "manufacturer_public_benchmark",
+      "benchmark": "SemiAnalysis InferenceX",
+      "model": "Kimi K2.5 1T",
+      "datatype": "MXFP4",
+      "context": "nominal 8k input / 1k output",
+      "serving_mode": "single-token prediction",
+      "package_tdp_w": 700,
+      "peak_mixed_tps_per_kw": 18195,
+      "end_to_end_latency_s": 1.56,
+      "min_tbt_ms": 1.44,
+      "tokens_per_second_per_user_at_min_tbt": 694,
+      "comparison": {
+        "platform": "NVIDIA GB300",
+        "published_package_tdp_w": 1400,
+        "peak_mixed_tps_per_kw": 11862,
+        "end_to_end_latency_s": 5.31,
+        "min_tbt_ms": 5.48
+      },
+      "url": "https://openai.com/index/jalapeno-first-results/"
+    },
+    {
+      "hardware_id": "nvidia-groq-3-lpx",
+      "source_type": "independent_benchmark_cited_by_manufacturer",
+      "benchmark": "Artificial Analysis",
+      "model": "Gemma 4 31B",
+      "context_tokens": 100000,
+      "output_tokens_per_second": 3400,
+      "manufacturer_summary": "4x faster than the nearest alternative platform",
+      "url": "https://blogs.nvidia.com/blog/vera-rubin-lpx-spectrum-x-nvlink-fusion/",
+      "notes": "Use the underlying Artificial Analysis comparison set and methodology before normalizing the 4x claim against other platforms."
+    }
+  ],
+  "methodology_notes": [
+    "Jalapeño comparisons normalize by published accelerator package TDP and use single-token prediction; they are not automatically equivalent to production serving configurations using speculative or multi-token prediction.",
+    "Groq 3 LPX's 3,400 tok/s result is tied to a named model and 100K context and is stronger evidence than a synthetic TOPS figure, but rack power and delivered system pricing remain unknown."
+  ]
+}
