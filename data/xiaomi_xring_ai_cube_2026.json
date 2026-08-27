@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-27",
+  "purpose": "Track Xiaomi's newly demonstrated XRING AI Cube and distinguish its three memory/compute domains so prototype claims are not misrepresented as shipping-product performance.",
+  "hardware": [
+    {
+      "id": "xiaomi-ai-cube-xring-o3-o100-d100-prototype",
+      "manufacturer": "Xiaomi",
+      "product": "Xiaomi AI Cube Prototype",
+      "model": "AI Cube engineering prototype",
+      "compute_platform": "xiaomi-xring-o3-o100-d100",
+      "category": "prototype_local_ai_system",
+      "status": "engineering_prototype_not_for_sale",
+      "release_status_as_of": "2026-08-27",
+      "announced_at": "2026-08-24 XRING Chip Technology Communication Conference",
+      "processors": [
+        {
+          "name": "XRING O3",
+          "role": "general-purpose/mobile SoC",
+          "process_node": "3nm",
+          "cpu": "10-core all-big-core CPU",
+          "gpu": "16-core G2 Ultra NX GPU",
+          "npu_tops_vendor": 200,
+          "memory_type": "LPDDR6",
+          "memory_bandwidth_gbps_reported": 113.8,
+          "memory_bandwidth_note": "Reported for the O3 system-memory domain; it is not the O100 near-memory figure and not evidence for the D100 large-model memory pool."
+        },
+        {
+          "name": "XRING O100",
+          "role": "near-memory AI accelerator",
+          "process_node": "6nm logic/NPU layer with stacked DRAM",
+          "packaging": "wafer-level 3D stacking / hybrid bonding",
+          "effective_data_connections_vendor": 28672,
+          "near_memory_bandwidth_gbps_vendor": 1220,
+          "near_memory_bandwidth_note": "1.22 TB/s is the O100 near-memory bandwidth. It must not be presented as the bandwidth of the full large-model unified-memory pool.",
+          "prototype_llm_benchmark": {
+            "model": "Xiaomi MiMo edge model",
+            "output_tokens_per_second_vendor": 295,
+            "system_context": "separate O3+O100 mobile engineering prototype with active cooling",
+            "evidence": "manufacturer_social_post_reported_by_press",
+            "normalization_warning": "Model size, quantization, context length, prompt-processing rate and complete-system power were not sufficiently disclosed for cross-platform comparison."
+          }
+        },
+        {
+          "name": "XRING D100",
+          "role": "large-memory AI / intelligent-driving processor",
+          "process_node": "3nm",
+          "cpu": "20-core high-performance CPU",
+          "npu": "16-core NPU",
+          "memory_gb_max_vendor": 160,
+          "vendor_model_capacity_parameters_b_max": 200,
+          "large_memory_bandwidth_gbps": null,
+          "large_memory_bandwidth_note": "Xiaomi has not publicly disclosed a defensible bandwidth figure for the D100-attached large unified-memory pool in this research pass."
+        }
+      ],
+      "system_sustained_power_w_vendor": 150,
+      "system_power_note": "Reported sustained system performance/power target for the engineering prototype; independent wall-power measurements are not available.",
+      "enclosure": "aluminum unibody engineering chassis with 33,874 CNC-machined cooling openings",
+      "software": ["Xiaomi MiMo model stack", "proprietary XRING runtime"],
+      "framework_compatibility": "No public evidence was found for general CUDA, ROCm, MLX, OpenVINO, llama.cpp GGUF, vLLM, GPTQ or AWQ compatibility. Treat the runtime as proprietary until Xiaomi publishes SDK/toolchain details.",
+      "quantization_compatibility": "Undisclosed. Do not infer INT4/GGUF support from model-capacity or TOPS claims.",
+      "llm_suitability": {
+        "assessment": "high_interest_prototype_with_unresolved_memory_path",
+        "vendor_demo_model_parameters_b": [3, 120],
+        "d100_vendor_capacity_parameters_b_max": 200,
+        "practical_guidance": "The architecture is relevant to large local models because D100 supports up to 160GB unified memory, but large-model decode performance cannot be estimated defensibly until Xiaomi publishes bandwidth for that memory pool and sufficient 120B benchmark metadata.",
+        "important_correction": "The widely repeated 1.22 TB/s figure belongs to O100 near-memory and should not be attached to the 120B model's full weight-storage memory pool.",
+        "evidence_level": "manufacturer_conference_and_social_post_via_multiple_press_reports"
+      },
+      "off_grid_suitability": "potentially_moderate_but_prototype_only",
+      "efficiency_notes": "150W is notable for a system targeting 120B-class local workloads, but tokens/joule cannot be calculated because the public 120B decode rate and full power measurement are missing.",
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "engineering_prototype_no_announced_retail_product",
+          "observed_at": "2026-08-27",
+          "note": "No retail price, preorder, SKU or firm AI Cube ship date has been announced. O100 and D100 are reported as targeting commercial use in 2027, which does not guarantee a retail AI Cube product."
+        }
+      ],
+      "source_urls": [
+        "https://www.notebookcheck.net/Xiaomi-unveils-AI-Cube-mini-PC-with-three-Xring-chips-and-150-W-performance.1376717.0.html",
+        "https://videocardz.com/newz/xiaomi-shows-150w-ai-cube-mini-pc-with-xring-processor-lpddr6-memory-and-16-core-g2-ultra-nx-gpu",
+        "https://cnevpost.com/2026/08/24/xiaomi-unveils-xring-d100-smart-driving-chip/",
+        "https://tech.sina.cn/2026-08-25/detail-inippmes5518808.d.html"
+      ],
+      "technical_documentation": [],
+      "evidence": "prototype_manufacturer_disclosure_via_multiple_press_reports",
+      "research_priority": "very_high",
+      "open_questions": [
+        "D100 unified-memory type and bandwidth",
+        "exact AI Cube memory configuration and topology",
+        "120B model identity, quantization, context, prefill and decode throughput",
+        "O100 near-memory capacity",
+        "public SDK/framework support",
+        "whole-system idle and load power",
+        "retail product status, price and availability"
+      ]
+    }
+  ]
+}
