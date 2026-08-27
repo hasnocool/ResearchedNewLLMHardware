@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-27",
+  "purpose": "Normalized Taalas HC1 model-specific LLM inference silicon and service evidence.",
+  "hardware": [
+    {
+      "id": "taalas-hc1-llama31-8b",
+      "manufacturer": "Taalas",
+      "product": "HC1 Technology Demonstrator",
+      "category": "model_specific_llm_inference_asic",
+      "status": "technology_demonstrator_hosted_api_available",
+      "compute_platform": "taalas-hardcore-model-hc1",
+      "target_model": "Llama 3.1 8B",
+      "process_nm": 6,
+      "foundry": "TSMC",
+      "die_area_mm2": 815,
+      "transistors_billion": 53,
+      "server_power_w_vendor": 2500,
+      "server_power_kind": "vendor_server_configuration_not_benchmark_wall_measurement",
+      "benchmark_evidence": [
+        {
+          "model": "Llama 3.1 8B",
+          "output_tps_per_user_vendor": 17000,
+          "input_sequence_tokens": 1000,
+          "output_sequence_tokens": 1000,
+          "source_type": "vendor_benchmark",
+          "source_url": "https://taalas.com/products/",
+          "note": "Taalas comparison chart; numerical representation, concurrency and full power methodology are not sufficiently normalized for direct ranking against GPU results."
+        }
+      ],
+      "software": [
+        "Taalas hosted API",
+        "OpenAI-compatible chat completions",
+        "OpenAI-compatible text completions",
+        "streaming inference",
+        "tool-call fields",
+        "adapter-aware service metadata"
+      ],
+      "acquisition": {
+        "acquirer": "AMD",
+        "announced_at": "2026-08-06",
+        "status": "definitive_agreement_announced",
+        "integration_direction": "AMD states Taalas technology is intended to complement Instinct GPUs, EPYC CPUs, ROCm and system-level AI solutions."
+      },
+      "pricing": [
+        {
+          "kind": "not_retail_hardware",
+          "amount": null,
+          "currency": null,
+          "region": "global",
+          "availability": "hosted_service_or_demonstrator",
+          "observed_at": "2026-08-27",
+          "source_url": "https://taalas.com/products/",
+          "note": "No defensible public HC1 hardware purchase price captured."
+        }
+      ],
+      "vendor_urls": [
+        "https://taalas.com/",
+        "https://taalas.com/products/",
+        "https://api.taalas.com/"
+      ],
+      "technical_documentation": [
+        "https://api.taalas.com/v1/docs",
+        "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+      ],
+      "evidence": "manufacturer_and_vendor_benchmark",
+      "research_priority": "high_architecture_watch",
+      "research_gaps": [
+        "exact numeric format/quantization",
+        "benchmark wall power",
+        "realistic concurrent serving results",
+        "adapter/fine-tuning constraints",
+        "HC2 larger-model specifications",
+        "independent reproduction",
+        "post-acquisition AMD integration details"
+      ]
+    }
+  ]
+}
