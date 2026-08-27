@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "last_updated": "2026-08-20",
+  "last_updated": "2026-08-27",
   "purpose": "NVIDIA RTX Spark platform-family and OEM-system records for local LLM inference research.",
   "platforms": [
     {
@@ -8,14 +8,14 @@
       "manufacturer": "NVIDIA",
       "product": "RTX Spark N1X Superchip",
       "category": "unified_memory_windows_ai_soc",
-      "status": "announced_q4_2026",
+      "status": "announced_fall_2026_partner_systems",
       "compute_platform": "nvidia-rtx-spark-n1x",
       "cpu": "20-core NVIDIA Grace CPU",
       "gpu": "NVIDIA Blackwell RTX GPU",
       "gpu_cuda_cores_max": 6144,
       "ai_performance_fp4_pflops_max": 1.0,
       "memory_gb_max": 128,
-      "memory_type": "unified memory",
+      "memory_type": "unified LPDDR5X",
       "memory_bandwidth_gbps": null,
       "process_node": "TSMC 3nm",
       "transistors_billion": 70,
@@ -23,16 +23,19 @@
         "Windows 11",
         "CUDA",
         "TensorRT",
+        "PyTorch via CUDA",
         "NVIDIA RTX ecosystem"
       ],
+      "quantization_compatibility": "FP4/FP8/INT8 and other CUDA/TensorRT-supported low-precision paths are first-class platform targets. GGUF/llama.cpp compatibility should be verified against shipping Windows-on-Arm builds and exact backend versions rather than inferred from CUDA support alone.",
       "llm_positioning": {
         "vendor_claim_model_parameters_b_max": 120,
         "vendor_claim_context_tokens_max": 1000000,
+        "practical_guidance": "128GB unified memory is highly relevant to 70B-class and selected 120B-class low-bit models, but actual usable memory and decode performance depend on bandwidth, runtime overhead and context/KV cache requirements.",
         "evidence": "manufacturer_claim"
       },
       "pricing": [],
-      "price_note": "No stable manufacturer retail price captured as of 2026-08-20.",
-      "availability_note": "NVIDIA says partner systems arrive in fall 2026; current reporting indicates strong channel preorders ahead of Q4 launch.",
+      "price_note": "No stable manufacturer retail price captured as of 2026-08-27.",
+      "availability_note": "ASUS now exposes concrete ProArt P14, P16 and GR1X product pages; retail pricing and broad shipment dates remain region-dependent/prelaunch.",
       "evidence": "manufacturer",
       "vendor_urls": [
         "https://www.nvidia.com/en-us/products/rtx-spark/",
@@ -44,7 +47,7 @@
       "research_priority": "very_high",
       "open_questions": [
         "exact memory bandwidth",
-        "sustained SoC and whole-system power",
+        "sustained SoC and whole-system power by OEM implementation",
         "retail pricing by OEM and region",
         "real llama.cpp/TensorRT/PyTorch prefill and decode throughput",
         "battery-power performance behavior on laptop implementations"
@@ -56,22 +59,47 @@
       "id": "asus-proart-p16-h7607-rtx-spark",
       "manufacturer": "ASUS",
       "product": "ProArt P16 (H7607)",
+      "model": "H7607BA",
       "category": "laptop",
-      "status": "announced_prelaunch",
+      "status": "announced_prelaunch_product_page_live",
+      "release_status_as_of": "2026-08-27",
       "compute_platform": "nvidia-rtx-spark-n1x",
       "processor": "NVIDIA RTX Spark N1X",
+      "gpu": "NVIDIA Blackwell RTX GPU",
       "gpu_cuda_cores": 6144,
+      "cpu": "NVIDIA Grace CPU",
       "cpu_cores": 20,
-      "memory_gb_options": [64, 128],
+      "ai_performance_fp4_pflops_max": 1.0,
+      "memory_gb_options": [48, 64, 128],
       "memory_type": "LPDDR5X unified",
-      "display": "16-inch OLED",
+      "memory_data_rate_mt_s_max": 9400,
+      "memory_bandwidth_gbps": null,
+      "storage": "1TB or 2TB-class M.2 NVMe configurations shown by regional spec pages",
+      "storage_expansion": ["2x M.2 2280 PCIe 5.0 x4 slots"],
+      "interfaces": [
+        "3x USB4 Gen 3 Type-C up to 40Gb/s with display/power delivery",
+        "1x USB 3.2 Gen 2 Type-A",
+        "3.5mm combo audio"
+      ],
+      "display": "16-inch UHD+ OLED, 3840x2400, 120Hz",
+      "dimensions_profile_mm": 12.9,
+      "weight_kg": 1.77,
+      "software": ["Windows 11", "CUDA", "TensorRT", "NVIDIA RTX ecosystem"],
+      "llm_suitability": {
+        "assessment": "very_high_capacity_mobile_agent_pc",
+        "vendor_model_capacity_parameters_b_max": 120,
+        "practical_guidance": "The 128GB configuration is unusually capable for a laptop and should fit many 70B-class low-bit models plus selected larger models, subject to unified-memory allocation, context and runtime overhead.",
+        "evidence_level": "manufacturer"
+      },
+      "off_grid_suitability": "potentially_high_for_capacity_but_battery_and_sustained_power_unverified",
       "pricing": [],
-      "price_note": "No stable ASUS retail price captured as of 2026-08-20.",
+      "price_note": "No stable ASUS retail price captured as of 2026-08-27.",
       "vendor_urls": [
-        "https://www.asus.com/ca-en/laptops/for-creators/proart/proart-p16-h7607/"
+        "https://www.asus.com/ca-fr/laptops/for-creators/proart/proart-p16-h7607/"
       ],
       "technical_documentation": [
-        "https://www.asus.com/laptops/for-creators/proart/proart-p16-h7607/techspec/"
+        "https://www.asus.com/gr-en/laptops/for-creators/proart/proart-p16-h7607/techspec/",
+        "https://press.asus.com/news/press-releases/asus-proart-ai-creator-solutions-ibc-2026/"
       ],
       "evidence": "manufacturer"
     },
@@ -79,45 +107,93 @@
       "id": "asus-proart-p14-h7407-rtx-spark",
       "manufacturer": "ASUS",
       "product": "ProArt P14 (H7407)",
+      "model": "H7407BA",
       "category": "laptop",
-      "status": "announced_prelaunch",
+      "status": "announced_prelaunch_product_page_live",
+      "release_status_as_of": "2026-08-27",
       "compute_platform": "nvidia-rtx-spark-n1x",
       "processor": "NVIDIA RTX Spark N1X",
+      "gpu": "NVIDIA Blackwell RTX GPU",
       "gpu_cuda_cores": 6144,
+      "cpu": "NVIDIA Grace CPU",
       "cpu_cores": 20,
-      "memory_gb_options": [48, 64, 128],
+      "ai_performance_fp4_pflops_max": 1.0,
+      "memory_gb_options": [64, 128],
       "memory_type": "LPDDR5X unified",
-      "display": "14-inch OLED",
+      "memory_bandwidth_gbps": null,
+      "storage": "1TB M.2 NVMe PCIe 4.0 SSD shown on current regional specification page",
+      "storage_expansion": ["1x M.2 2280 PCIe 4.0 x4 slot"],
+      "interfaces": [
+        "3x USB4 Gen 3 Type-C up to 40Gb/s with display/power delivery",
+        "1x USB 3.2 Gen 2 Type-A",
+        "3.5mm combo audio"
+      ],
+      "display": "14-inch 3K OLED, 2880x1800, 120Hz",
+      "software": ["Windows 11", "CUDA", "TensorRT", "NVIDIA RTX ecosystem"],
+      "llm_suitability": {
+        "assessment": "very_high_capacity_mobile_agent_pc",
+        "vendor_model_capacity_parameters_b_max": 120,
+        "practical_guidance": "The 128GB option is a rare mobile capacity tier for 70B-class and selected larger low-bit models; sustained throughput and battery behavior remain unbenchmarked.",
+        "evidence_level": "manufacturer"
+      },
+      "off_grid_suitability": "potentially_high_for_capacity_but_battery_and_sustained_power_unverified",
       "pricing": [],
-      "price_note": "No stable ASUS retail price captured as of 2026-08-20.",
+      "price_note": "No stable ASUS retail price captured as of 2026-08-27.",
       "vendor_urls": [
-        "https://www.asus.com/ca-en/laptops/for-creators/proart/proart-p14-h7407/"
+        "https://www.asus.com/rs-en/laptops/for-creators/proart/proart-p14-h7407/techspec/"
       ],
       "technical_documentation": [
-        "https://www.asus.com/laptops/for-creators/proart/proart-p14-h7407/techspec/"
+        "https://www.asus.com/rs-en/laptops/for-creators/proart/proart-p14-h7407/techspec/",
+        "https://press.asus.com/news/press-releases/asus-proart-ai-creator-solutions-ibc-2026/"
       ],
       "evidence": "manufacturer"
     },
     {
       "id": "asus-proart-mini-pc-rtx-spark",
       "manufacturer": "ASUS",
-      "product": "ProArt Mini PC with RTX Spark",
+      "product": "ProArt GR1X Mini PC",
+      "model": "GR1X",
       "category": "mini_pc",
-      "status": "announced_prelaunch",
+      "status": "announced_prelaunch_product_page_live",
+      "release_status_as_of": "2026-08-27",
       "compute_platform": "nvidia-rtx-spark-n1x",
+      "processor": "NVIDIA RTX Spark N1X",
+      "cpu": "NVIDIA Grace CPU up to 20 cores",
+      "gpu": "NVIDIA Blackwell RTX GPU up to 6,144 CUDA cores",
+      "ai_performance_fp4_pflops_max": 1.0,
       "memory_gb_max": 128,
-      "memory_type": "unified memory",
-      "thermal_headroom_w": 140,
-      "networking": ["10GbE"],
-      "storage_expansion": ["M.2 PCIe Gen5 x4"],
+      "memory_type": "shared unified memory",
+      "memory_bandwidth_gbps": null,
+      "networking": ["10GbE", "Wi-Fi 7", "Bluetooth 5.4"],
+      "storage_expansion": ["M.2 NVMe PCIe 5.0 / 4.0 SSD slots"],
+      "interfaces": [
+        "3x USB 3.2 Gen 2x2 Type-C 20Gb/s with DisplayPort Alt Mode",
+        "1x USB 3.2 Gen 2x2 Type-C with 180W EPR PD 3.1 input",
+        "HDMI 2.1",
+        "10GbE LAN",
+        "Kensington lock"
+      ],
+      "power_input_w_max": 180,
+      "power_input_note": "180W is the USB-C EPR PD input capability, not a measured sustained wall draw.",
       "dimensions_mm": [150, 150, 51],
+      "cooling": "engineered dual-fan cooling; ASUS states 218 fan blades and seven-level fan control for sustained workloads",
+      "software": ["Windows", "CUDA", "TensorRT", "NVIDIA RTX ecosystem"],
+      "llm_suitability": {
+        "assessment": "very_high_capacity_compact_cuda_node",
+        "vendor_model_capacity_parameters_b_max": 120,
+        "practical_guidance": "Up to 128GB unified memory and native CUDA make GR1X especially relevant to 70B-class and selected 120B-class low-bit local models, but memory bandwidth and independent decode benchmarks remain unpublished.",
+        "evidence_level": "manufacturer"
+      },
+      "off_grid_suitability": "moderate_pending_measured_load_power",
       "pricing": [],
-      "price_note": "No stable ASUS retail price captured as of 2026-08-20.",
+      "price_note": "ASUS product pages remain notify-me/prelaunch with no stable numeric price captured as of 2026-08-27.",
       "vendor_urls": [
-        "https://www.asus.com/us/business/resources/news/computex-2026-proart-pcs/"
+        "https://www.asus.com/be-nl/displays-desktops/mini-pcs/proart-mini-pc-series/proart-gr1x-mini-pc/",
+        "https://www.asus.com/ca-en/proart/desktops-mini-pcs-home/"
       ],
       "technical_documentation": [
-        "https://www.asus.com/us/business/resources/news/computex-2026-proart-pcs/"
+        "https://www.asus.com/be-nl/displays-desktops/mini-pcs/proart-mini-pc-series/proart-gr1x-mini-pc/",
+        "https://press.asus.com/news/press-releases/asus-proart-ai-creator-solutions-ibc-2026/"
       ],
       "evidence": "manufacturer"
     }
