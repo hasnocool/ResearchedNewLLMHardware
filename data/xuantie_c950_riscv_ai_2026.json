@@ -77,12 +77,13 @@
       "evidence": "Alibaba/DAMO announcement corroborated by Reuters and Chinese technology press; August LLM numbers are vendor-slide claims reported by independent press",
       "research_priority": "high",
       "vendor_urls": [
-        "https://www.reuters.com/world/asia-pacific/alibaba-develops-next-gen-chip-agentic-ai-chinese-media-says-2026-03-24/"
+        "https://www.t-head.cn/"
       ],
       "technical_documentation": [
         "https://th.cnx-software.com/2026/03/26/alibaba-xuantie-c950-powerful-rva23-complaint-64-bit-risc-v-core-edge-ai-computing/"
       ],
       "independent_sources": [
+        "https://www.reuters.com/world/asia-pacific/alibaba-develops-next-gen-chip-agentic-ai-chinese-media-says-2026-03-24/",
         "https://xenospectrum.com/en/xuantie-c950-qwen38-27b-shl-inference/",
         "https://www.scmp.com/tech/big-tech/article/3347684/alibaba-debuts-its-latest-risc-v-based-chip-amid-shift-ai-agents",
         "https://www.stdaily.com/web/gdxw/2026-03/24/content_491691.html"
