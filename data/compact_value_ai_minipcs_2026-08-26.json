@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.2.0",
+  "last_updated": "2026-08-26",
+  "purpose": "Compact, low-power local-AI mini PCs that add useful deployment or value characteristics without treating platform TOPS as LLM token-generation performance.",
+  "hardware": [
+    {
+      "id": "pistonv-ryzen-ai-9-365-64gb-max",
+      "manufacturer": "PistonV",
+      "product": "Piston V",
+      "compute_platform": "amd-strix-point-ryzen-ai-9-365",
+      "category": "crowdfunded_ai_mini_pc",
+      "status": "crowdfunding_funded_not_yet_shipping",
+      "tier": "B-experimental-value",
+      "cpu": "AMD Ryzen AI 9 365",
+      "cpu_architecture": "4x Zen 5 + 6x Zen 5c",
+      "cpu_cores": 10,
+      "cpu_threads": 20,
+      "gpu": "AMD Radeon 880M",
+      "gpu_architecture": "RDNA 3.5",
+      "gpu_compute_units": 12,
+      "npu": "AMD XDNA 2",
+      "npu_tops_int8_vendor": 50,
+      "platform_total_ai_tops_vendor": 73,
+      "processor_power_w": {"default_tdp": 28, "configurable_min": 15, "configurable_max": 54},
+      "memory_gb_base": 16,
+      "memory_gb_max": 64,
+      "memory_type": "DDR5-5600 system memory",
+      "memory_bandwidth": {
+        "status": "configuration_dependent",
+        "theoretical_max_gbps_if_dual_channel_ddr5_5600": 89.6,
+        "note": "Derived from AMD's dual-channel DDR5-5600 platform capability; PistonV has not published a measured system-memory bandwidth result."
+      },
+      "storage_base": "500GB NVMe SSD",
+      "storage_max_tb": 4,
+      "networking": ["2x 2.5GbE", "Wi-Fi 7", "Bluetooth 5.3"],
+      "interfaces": ["USB4", "2x USB-A", "HDMI 2.1", "OCuLink PCIe 4.0 x4-class eGPU link", "4-inch 720x720 touch display"],
+      "operating_system": ["Windows 11", "Bazzite / SteamOS-style Linux option"],
+      "software": ["ROCm/Vulkan support is platform/runtime dependent", "llama.cpp", "Ollama", "ONNX Runtime", "AMD Ryzen AI software for XDNA 2 workloads"],
+      "model_size_practicality": "The base 16GB configuration is mainly suitable for small quantized models. A 64GB configuration can hold many 7B-32B GGUF models in system RAM and selected larger quantized models, but DDR5 bandwidth and shared CPU/GPU memory make capacity much less important than throughput for large-model decode.",
+      "quantization_compatibility": "CPU and Vulkan/llama.cpp paths can use common GGUF quantizations. XDNA 2 acceleration depends on supported Ryzen AI/ONNX models and must not be assumed to accelerate arbitrary GGUF, GPTQ or AWQ models.",
+      "llm_inference_suitability": "Interesting low-cost expandable mini PC for small-to-medium local LLMs, RAG, agent orchestration and experimentation. OCuLink can add a discrete GPU later without relying on USB4 bandwidth.",
+      "performance_per_watt": {"status": "not_measured", "note": "AMD publishes a 15-54W processor cTDP range, but no defensible Piston V whole-system tokens-per-watt measurement is available."},
+      "off_grid_suitability": "Potentially good for a compact x86 node because the processor can operate in a 15-54W envelope, but whole-system idle/load power and DC-input details are not yet published.",
+      "pricing": [
+        {
+          "amount": 589,
+          "currency": "USD",
+          "region": "Kickstarter",
+          "kind": "crowdfunding_early_bird",
+          "availability": "campaign_active_reward_tier",
+          "observed_at": "2026-08-26",
+          "url": "https://www.kickstarter.com/projects/pistonv/pistonv-dual-os-gaming-beast-in-a-gadget-form-factor",
+          "note": "Current early-bird campaign tier reported at US$589 for the base 16GB/500GB configuration; crowdfunding carries delivery and final-spec risk. The sold-out super-early-bird tier was US$559, standard campaign tier US$679, and stated post-campaign retail target US$799."
+        }
+      ],
+      "vendor_urls": {"campaign": "https://www.kickstarter.com/projects/pistonv/pistonv-dual-os-gaming-beast-in-a-gadget-form-factor"},
+      "technical_documentation": {
+        "amd_ryzen_ai_9_365": "https://www.amd.com/en/products/processors/laptop/ryzen/ai-300-series/amd-ryzen-ai-9-365.html",
+        "campaign_faq": "https://www.kickstarter.com/projects/pistonv/pistonv-dual-os-gaming-beast-in-a-gadget-form-factor/faqs"
+      },
+      "evidence": "manufacturer_platform_spec_plus_campaign_and_current_reporting"
+    },
+    {
+      "id": "minix-n304-ai-16gb-512gb",
+      "manufacturer": "MINIX",
+      "product": "N304-AI",
+      "compute_platform": "intel-wildcat-lake-core-3-304",
+      "category": "entry_level_ai_mini_pc",
+      "status": "channel_listed_out_of_stock",
+      "tier": "C-lightweight-edge",
+      "cpu": "Intel Core 3 processor 304",
+      "cpu_architecture": "Wildcat Lake / Intel 18A",
+      "cpu_cores": 5,
+      "cpu_threads": 5,
+      "cpu_topology": "1 Performance-core + 4 Low Power Efficient-cores",
+      "cpu_max_turbo_ghz": 4.3,
+      "gpu": "Intel Graphics",
+      "gpu_xe_cores": 1,
+      "gpu_int8_tops_vendor": 9,
+      "npu": "Intel AI Boost",
+      "npu_tops_int8_vendor": 15,
+      "platform_total_ai_tops_vendor": 24,
+      "processor_power_w": {"base": 15, "minimum_assured": 10, "maximum_turbo": 35},
+      "memory_gb": 16,
+      "memory_type": "LPDDR5X",
+      "memory_upgradeable": false,
+      "storage": "512GB PCIe 3.0 x4 NVMe SSD",
+      "networking": ["2x 1GbE", "Wi-Fi 6", "Bluetooth 5.3"],
+      "interfaces": ["USB 3.2 Gen 2 Type-C", "HDMI 2.1", "DisplayPort 1.4", "triple-display support"],
+      "operating_system": "Windows 11 Pro",
+      "software": ["OpenVINO", "WindowsML", "DirectML", "ONNX Runtime", "WebNN"],
+      "model_size_practicality": "16GB soldered memory makes small quantized models the practical target. Roughly 1B-7B GGUF-class models can fit depending on quantization and context, but this is an entry-level AI/edge system rather than a high-throughput LLM node.",
+      "quantization_compatibility": "CPU inference can use common GGUF quantizations. Intel's NPU supports OpenVINO/ONNX-oriented INT8 workflows; the 15-TOPS NPU figure does not imply generic llama.cpp/GGUF acceleration.",
+      "llm_inference_suitability": "Best suited to lightweight local assistants, embeddings, OCR, speech, small RAG pipelines and always-on edge tasks. The single Xe core and 16GB fixed RAM substantially limit larger-model inference.",
+      "performance_per_watt": {"status": "processor_spec_only", "note": "Intel specifies 15W base and 35W maximum turbo processor power. MINIX has not published a normalized whole-system LLM tokens-per-watt result."},
+      "off_grid_suitability": "Potentially good for lightweight always-on AI because of the 10-35W processor envelope, but complete-system idle/load power and input-voltage details should be measured before deployment planning.",
+      "pricing": [
+        {
+          "amount": 749.99,
+          "currency": "EUR",
+          "region": "EU",
+          "kind": "authorized_channel_listing",
+          "availability": "out_of_stock",
+          "observed_at": "2026-08-26",
+          "url": "https://www.pepper-jobs.eu/en/n304-ai.html",
+          "note": "Authorized European channel lists the 16GB/512GB Windows 11 Pro configuration at €749.99 but out of stock."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_announcement": "https://www.minix.com.hk/blogs/blog-center/n304-ai-brings-ai-computing",
+        "eu_channel_listing": "https://www.pepper-jobs.eu/en/n304-ai.html"
+      },
+      "technical_documentation": {
+        "intel_core_3_304": "https://www.intel.com/content/www/us/en/products/sku/246020/intel-core-3-processor-304-6m-cache-up-to-4-30-ghz/specifications.html",
+        "minix_product_announcement": "https://www.minix.com.hk/blogs/blog-center/n304-ai-brings-ai-computing"
+      },
+      "evidence": "manufacturer_plus_intel_spec_plus_authorized_channel"
+    }
+  ]
+}
