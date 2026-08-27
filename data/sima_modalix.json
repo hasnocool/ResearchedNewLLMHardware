@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-27",
+  "purpose": "Normalized SiMa.ai Modalix hardware records for low-power local LLM, VLM and Physical AI inference research.",
+  "notes": [
+    "Current SiMa.ai developer documentation lists 16GB or 32GB LPDDR5 for the Modalix PCIe card, while the March 2026 product brief listed 8GB or 16GB. Both are preserved as revision/configuration evidence rather than silently reconciled.",
+    "Current developer documentation describes a PCIe Gen5 x4 host link, while the product brief and product-family page describe a Gen5 x8 interface/form factor. This discrepancy remains an explicit research item.",
+    "Sub-10W is a manufacturer platform/card-class claim, not a measured whole-host wall-power result.",
+    "TOPS figures are not directly comparable across architectures, datatypes or sparsity assumptions."
+  ],
+  "hardware": [
+    {
+      "id": "sima-modalix-hhhl-pcie-2026",
+      "manufacturer": "SiMa.ai",
+      "product": "Modalix HHHL PCIe Card",
+      "category": "low_power_genai_pcie_accelerator",
+      "status": "available_inquiry_channel",
+      "compute_platform": "sima-modalix-mlsoc",
+      "machine_learning_accelerator_tops_vendor": 50,
+      "supported_accelerator_datatypes": ["BF16", "INT8", "INT16"],
+      "cpu": "8x Arm Cortex-A65 @ approximately 1.4GHz",
+      "memory_gb_current_docs": [16, 32],
+      "memory_gb_launch_brief": [8, 16],
+      "memory_type": "128-bit LPDDR5",
+      "memory_data_rate_mbps": 6400,
+      "power": {
+        "vendor_claim_w_lt": 10,
+        "kind": "platform_or_card_class_claim_not_measured_host_wall_power"
+      },
+      "cooling": "passive_fanless",
+      "host_interface": {
+        "current_developer_docs": "PCIe Gen5 x4",
+        "product_brief_or_family_page": "PCIe Gen5 x8",
+        "note": "Preserve discrepancy until SiMa.ai publishes revision/configuration mapping."
+      },
+      "networking": ["10Gb Ethernet"],
+      "camera_interfaces": ["2x GMSL2 FAKRA"],
+      "storage": ["32GB eMMC", "microSD", "QSPI NOR"],
+      "software": [
+        "SiMa.ai Palette",
+        "LLiMa",
+        "GGUF model support",
+        "Qwen VL runtime",
+        "LFM2 runtime",
+        "Whisper + LLM on-device pipeline",
+        "Ubuntu 24.04 PCIe host driver"
+      ],
+      "llm_inference_suitability": "promising_low_power_edge",
+      "cluster_role": ["edge_llm", "vlm", "speech_plus_llm", "industrial_agent", "multimodal_helper_node"],
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "amount": null,
+          "currency": null,
+          "region": "global",
+          "availability": "product_inquiry",
+          "observed_at": "2026-08-27",
+          "source_url": "https://sima.ai/mlsoc-family/",
+          "note": "Current manufacturer page exposes Product Inquiry rather than a stable numeric PCIe-card price."
+        }
+      ],
+      "vendor_urls": [
+        "https://sima.ai/mlsoc-family/",
+        "https://sima.ai/press-release/sima-ai-launches-modalix-pcie-card-for-industrial-edge-ai-llms/"
+      ],
+      "technical_documentation": [
+        "https://developer.sima.ai/hardware/devkit/modalix-pcie-card",
+        "https://sima.ai/wp-content/uploads/2026/03/Modalix-HHHL-PCIe-Product-Brief_01.2-1.pdf",
+        "https://docs.sima.ai/v2.1.2/pages/release_notes/2.1.html",
+        "https://docs.sima.ai/pages/release_notes/2.0.html"
+      ],
+      "evidence": "manufacturer",
+      "research_priority": "high",
+      "research_gaps": [
+        "independent named-model prefill/decode benchmarks",
+        "measured wall power",
+        "public card price",
+        "memory revision mapping",
+        "PCIe x4/x8 documentation clarification",
+        "multi-card scaling"
+      ]
+    },
+    {
+      "id": "sima-modalix-devkit-3-0",
+      "manufacturer": "SiMa.ai",
+      "product": "Modalix DevKit 3.0",
+      "category": "edge_ai_development_kit",
+      "status": "available_in_stock",
+      "compute_platform": "sima-modalix-mlsoc",
+      "machine_learning_accelerator_tops_vendor": 50,
+      "included_storage_gb": 500,
+      "included_storage_type": "M.2 NVMe",
+      "included_power_adapter": "12V 5A universal adapter",
+      "software": ["SiMa.ai Palette", "LLiMa", "GGUF model support"],
+      "pricing": [
+        {
+          "kind": "manufacturer_store",
+          "amount": 1499,
+          "currency": "USD",
+          "region": "US_Europe_store",
+          "availability": "in_stock",
+          "observed_at": "2026-08-27",
+          "source_url": "https://devkit.sima.ai/products/development-kit-3-0"
+        }
+      ],
+      "vendor_urls": ["https://devkit.sima.ai/products/development-kit-3-0"],
+      "technical_documentation": [
+        "https://docs.sima.ai/pages/overview/devkit.html",
+        "https://docs.sima.ai/v2.1.2/pages/release_notes/2.1.html"
+      ],
+      "evidence": "manufacturer",
+      "research_priority": "medium_high"
+    },
+    {
+      "id": "sima-modalix-som",
+      "manufacturer": "SiMa.ai",
+      "product": "Modalix SoM",
+      "category": "edge_ai_system_on_module",
+      "status": "production_available",
+      "compute_platform": "sima-modalix-mlsoc",
+      "machine_learning_accelerator_tops_vendor": 50,
+      "memory_gb_known_configs": [8, 32],
+      "memory_type": "LPDDR5",
+      "software": ["SiMa.ai Palette", "LLiMa", "GGUF model support"],
+      "pricing": [
+        {
+          "kind": "manufacturer_family_from",
+          "amount": 449,
+          "currency": "USD",
+          "region": "global_manufacturer_page",
+          "availability": "available_contact_or_channel",
+          "observed_at": "2026-08-27",
+          "source_url": "https://sima.ai/mlsoc-family/",
+          "note": "Current manufacturer family page states Price From $449 without tying the displayed starting price to a specific memory capacity. Older 2025 launch material listed different 1K-unit reference pricing and should be retained as historical context."
+        }
+      ],
+      "vendor_urls": ["https://sima.ai/mlsoc-family/"],
+      "technical_documentation": [
+        "https://docs.sima.ai/pages/overview/devkit.html",
+        "https://sima.ai/press-release/sima-ai-next-gen-platform-for-physical-ai-in-production/"
+      ],
+      "evidence": "manufacturer",
+      "research_priority": "medium_high"
+    }
+  ]
+}
