@@ -1,6 +1,6 @@
 # Qualcomm Dragonwing Edge AI Hardware
 
-Last updated: **2026-08-19**
+Last updated: **2026-08-27**
 
 This page tracks Qualcomm Dragonwing embedded/industrial AI platforms that have enough memory, Linux support, and public LLM evidence to matter to the local/distributed inference catalog.
 
@@ -19,14 +19,28 @@ Qualcomm now documents a substantially clearer end-to-end GenAI path for Dragonw
 - **GenieX** in developer preview, with CLI, Python SDK, Android SDK, Docker and OpenAI-compatible API interfaces;
 - **QAIRT-backed GenieX** for maximum Qualcomm hardware/NPU optimization;
 - **llama.cpp-backed GenieX** for broader GGUF/open-source compatibility;
-- **Qualcomm Intelligent Multimedia SDK** for camera, media and GStreamer-oriented edge applications.
+- **Qualcomm IMSDK 2.0**, released August 26, for integrated GenAI + multimedia + deployment pipelines.
 
-This is a meaningful software-maturity improvement for local/edge LLM use because it provides both a highly optimized NPU path and a familiar llama.cpp/GGUF compatibility path. GenieX is still a **developer preview**, so production maturity should not be overstated.
+### IMSDK 2.0 changes the deployment story
+
+Qualcomm IMSDK 2.0 is explicitly designed across Dragonwing platforms and adds several capabilities that matter for deployable local AI systems:
+
+- GenAI, LLM and VLM inferencing microservices;
+- OpenAI-compatible **chat-completion** microservices;
+- Python and C++ Pipeline APIs/app builders;
+- memory-optimized Docker deployment;
+- QAIRT, ONNX Runtime and TFLite inference routes that can map to CPU, GPU or NPU;
+- camera, video, audio, preprocessing, analytics and platform services in the same pipeline architecture;
+- model sourcing through Qualcomm AI Hub, Hugging Face, Edge Impulse or bring-your-own-model workflows;
+- Kafka, MQTT, AWS IoT, Azure IoT and other edge/cloud integration paths.
+
+This improves **productization and integration maturity**, not raw LLM throughput. Qualcomm has not published new normalized token-generation results showing that IMSDK 2.0 itself makes a model faster. Features Qualcomm says are planned for a later release, including Responses API and model lifecycle management, are not counted as currently available.
 
 Qualcomm also published a real IQ-9075 application showing **Llama 3.2 Instruct 3B + BAAI BGE-large embeddings + Whisper-small ASR** running on-device for LLM+RAG+speech workloads, distributed across the IQ-9075's two Hexagon HTP cores. Qualcomm did not publish a normalized tok/s or wall-power number for this combined workload, so this evidence improves the software/deployment score rather than the performance score.
 
 Official references:
 
+- https://www.qualcomm.com/developer/blog/2026/08/introducing-qimsdk2-unified-framework-multmedia-ai
 - https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge
 - https://www.qualcomm.com/developer/blog/2026/07/genai-rag-iq9075-factorypulse
 - https://www.qualcomm.com/developer/artificial-intelligence
@@ -62,7 +76,7 @@ The newer FactoryPulse application adds deployment evidence for **Llama 3.2 Inst
 
 A 36 GB industrial platform running 7B–13B-class models at a SoC envelope below 20 W is a materially different operating point from conventional GPUs. It is potentially useful for always-on agents, robotics, industrial inference, remote/off-grid nodes, and distributed helper roles.
 
-The addition of QAIRT, GenieX and llama.cpp/GGUF deployment paths materially reduces the previous software-risk penalty, although independent benchmark coverage is still weak.
+QAIRT, GenieX, llama.cpp/GGUF and now IMSDK 2.0 reduce the software-risk penalty substantially. IMSDK 2.0 is especially relevant when the product needs to combine a local LLM/VLM with cameras, audio, analytics and OpenAI-compatible service interfaces.
 
 ### Pricing
 
@@ -74,6 +88,7 @@ No stable defensible public price was captured in this maintenance pass. Qualcom
 - https://www.qualcomm.com/internet-of-things/products/iq9-series/iq-9075
 - https://docs.qualcomm.com/doc/87-97354-1/87-97354-1_REV_C_Qualcomm_Dragonwing_IQ-9075_Module_Product_Brief.pdf
 - https://docs.qualcomm.com/doc/87-83840-1/87-83840-1_REV_A_Qualcomm_IQ9_Series_Product_Brief.pdf
+- https://www.qualcomm.com/developer/blog/2026/08/introducing-qimsdk2-unified-framework-multmedia-ai
 - https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge
 - https://www.qualcomm.com/developer/blog/2026/07/genai-rag-iq9075-factorypulse
 
@@ -94,12 +109,13 @@ No stable defensible public price was captured in this maintenance pass. Qualcom
 
 Qualcomm states that the IQ-8275 EVK can run **13B-parameter models at approximately 9 tokens/s**. The EVK's 12 GB memory is restrictive, so this should be interpreted as architecture/runtime evidence rather than proof that every arbitrary 13B model configuration fits locally.
 
-The platform is more interesting when packaged with larger memory configurations. Qualcomm's August 2026 Dragonwing guidance explicitly covers IQ8 as part of the same QAIRT + AI Hub + GenieX + llama.cpp software journey, though the strongest multi-workload GenAI demo located in this pass is on IQ-9075.
+Qualcomm IMSDK 2.0 is designed across Dragonwing platforms, so IQ-8275 now inherits a clearer deployable path for GenAI/LLM/VLM microservices, OpenAI-compatible chat completion, Python/C++ pipelines and QAIRT/ONNX/TFLite runtime selection. The strongest public multi-workload GenAI demo located remains on IQ-9075, not this EVK.
 
 ### Vendor / technical documentation
 
 - https://www.qualcomm.com/developer/hardware/qualcomm-iq-8275-evaluation-kit-evk
 - https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275
+- https://www.qualcomm.com/developer/blog/2026/08/introducing-qimsdk2-unified-framework-multmedia-ai
 - https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge
 
 ---
@@ -112,19 +128,18 @@ The platform is more interesting when packaged with larger memory configurations
 **RAM:** 16 GB  
 **Storage:** 64 GB eMMC plus M.2 NVMe Gen4 expansion  
 **Networking:** 2.5GbE, Wi-Fi 6, Bluetooth 5.3  
-**Software:** Linux, ROS 2, QAIRT, AI Hub, GenieX developer preview, llama.cpp/GGUF path, Arduino ecosystem
+**Software:** Linux, ROS 2, QAIRT, AI Hub, GenieX developer preview, llama.cpp/GGUF path, IMSDK 2.0, Arduino ecosystem
 
-VENTUNO Q is notable because it packages IQ-8275 in a practical SBC-like platform with more memory than the 12 GB Qualcomm EVK and useful storage/networking expansion.
+VENTUNO Q is notable because it packages IQ-8275 in a practical SBC-like platform with more memory than the 12 GB Qualcomm EVK and useful storage/networking expansion. IMSDK 2.0 strengthens its potential as a robotics/multimodal appliance because Qualcomm now documents local LLM/VLM inference services that can be composed with camera, audio, analytics and message-bus/cloud connectors.
 
 ### Promotion criteria
 
-Do not give VENTUNO Q a normal buy ranking until the following are confirmed:
+Keep board-specific ranking dependent on:
 
-- stable public retail price;
-- broad orderable availability;
+- stable current orderability and dated pricing observations;
 - exact board-level wall power under LLM load;
 - reproducible model/quantization/context benchmark data;
-- supported-model conversion/deployment workflow;
+- supported-model conversion/deployment workflow on the board image;
 - measured performance relative to Raspberry Pi + Hailo, RK3588, Jetson and low-power x86 nodes.
 
 ### Vendor / platform documentation
@@ -132,14 +147,15 @@ Do not give VENTUNO Q a normal buy ranking until the following are confirmed:
 - https://www.qualcomm.com/developer/iot
 - https://www.qualcomm.com/developer/hardware
 - https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275
+- https://www.qualcomm.com/developer/blog/2026/08/introducing-qimsdk2-unified-framework-multmedia-ai
 - https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge
 
 ## Current assessment
 
 | Platform | Capacity | Public LLM evidence | Power evidence | Software maturity | Catalog role |
 |---|---:|---|---|---|---|
-| IQ-9075 EVK | 36 GB | Named 7B/13B throughput + LLM/RAG/ASR application demo | Strong SoC-level evidence | **Good and improving:** QAIRT + GenieX preview + llama.cpp/GGUF | High-priority edge candidate |
-| IQ-8275 EVK | 12 GB EVK / 32 GB platform | Manufacturer 13B / 9 tok/s claim | Platform designed for low-power edge use | **Good and improving:** shared Dragonwing GenAI stack | Medium/high edge candidate |
-| VENTUNO Q | 16 GB | Inherits IQ-8275 platform capability; board-specific results needed | Board-level data needed | Promising Linux/ROS/Arduino + Dragonwing GenAI stack | Watch / SBC candidate |
+| IQ-9075 EVK | 36 GB | Named 7B/13B throughput + LLM/RAG/ASR application demo | Strong SoC-level evidence | **Good:** QAIRT + GenieX preview + llama.cpp/GGUF + IMSDK 2.0 deployment stack | High-priority edge candidate |
+| IQ-8275 EVK | 12 GB EVK / 32 GB platform | Manufacturer 13B / 9 tok/s claim | Platform designed for low-power edge use | **Good:** shared Dragonwing GenAI stack + IMSDK 2.0 | Medium/high edge candidate |
+| VENTUNO Q | 16 GB | Inherits IQ-8275 platform capability; board-specific results needed | Board-level data needed | Promising Linux/ROS/Arduino + Dragonwing GenAI + IMSDK 2.0 | Watch / SBC candidate |
 
 The next useful evidence is **wall-power + decode testing with named quantized models**, because that would allow direct tokens/watt comparison against Hailo-10H, RK3588 NPU paths, Jetson, Raspberry Pi CPU, and low-power x86 APUs.
