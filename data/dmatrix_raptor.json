@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-27",
+  "hardware": [
+    {
+      "id": "dmatrix-raptor-3dimc",
+      "manufacturer": "d-Matrix",
+      "product": "Raptor",
+      "compute_platform": "dmatrix-raptor-3dimc",
+      "category": "datacenter_ai_inference_accelerator",
+      "status": "announced_preproduction",
+      "tier": "S-potential",
+      "architecture": [
+        "3DIMC stacked DRAM",
+        "digital in-memory compute",
+        "RISC-V orchestration/vector compute"
+      ],
+      "memory_gb": 32,
+      "memory_type": "custom stacked 3D DRAM",
+      "memory_bandwidth_tb_s_reported": 100,
+      "memory_bandwidth_evidence": "independent_hot_chips_report",
+      "memory_movement_energy_pj_per_bit_measured_early_silicon": 0.37,
+      "memory_movement_energy_note": "Hot Chips reporting attributes 0.37 pJ/bit to a measured working-silicon result; d-Matrix's March 2026 official material reports approximately 0.3-0.4 pJ/bit on Pavehawk across tested conditions.",
+      "host_form_factor": "PCIe accelerator family; final Raptor card details not fully published",
+      "software": [
+        "PyTorch",
+        "MLIR",
+        "Triton DSL",
+        "d-Matrix Aviator"
+      ],
+      "cpu_ip": "AndesCore AX46MPV RISC-V",
+      "power_w": null,
+      "pricing": [],
+      "availability_note": "Commercial debut is planned for Raptor; no firm public shipment date or stable price captured as of 2026-08-27.",
+      "benchmark_evidence": [
+        {
+          "model": "Kimi K3",
+          "parameters_t": 2.8,
+          "context_tokens": 1000000,
+          "tokens_per_second_per_user_projected": 988,
+          "source_type": "vendor_projection_reported_by_independent_press",
+          "note": "Projection from early silicon/architecture presented at Hot Chips 2026; not an independently reproduced production benchmark."
+        }
+      ],
+      "evidence": "manufacturer_plus_independent_hot_chips_reporting",
+      "research_priority": "very_high",
+      "vendor_urls": [
+        "https://www.d-matrix.ai/",
+        "https://www.d-matrix.ai/technology/"
+      ],
+      "technical_documentation": [
+        "https://www.d-matrix.ai/announcements/d-matrix-and-alchip-announce-collaboration-on-worlds-first-3d-dram-solution-to-supercharge-ai-inference/",
+        "https://www.d-matrix.ai/going-vertical-why-we-created-a-3d-dram-solution-to-advance-low-latency-ai-inference/",
+        "https://www.d-matrix.ai/announcements/d-matrix-and-andes-team-on-worlds-highest-performing-most-efficient-accelerator-for-ai-inference-at-scale/"
+      ],
+      "independent_sources": [
+        "https://www.tomshardware.com/tech-industry/semiconductors/d-matrix-stacks-its-ai-accelerator-directly-on-custom-dram-for-100-tbs-per-card",
+        "https://www.hotchips.org/"
+      ],
+      "open_questions": [
+        "final production card power/TDP",
+        "stable list or street price",
+        "firm shipment/volume-production date",
+        "production memory capacity variants",
+        "independent LLM prefill/decode benchmarks",
+        "multi-card scaling and usable model/KV memory behavior",
+        "runtime/model compatibility matrix"
+      ]
+    }
+  ]
+}
