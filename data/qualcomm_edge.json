@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1.0",
-  "last_updated": "2026-08-19",
+  "last_updated": "2026-08-27",
   "purpose": "Qualcomm Dragonwing embedded and industrial AI candidates with public LLM evidence.",
   "hardware": [
     {
@@ -34,18 +34,22 @@
         "ONNX Runtime",
         "LiteRT / TensorFlow Lite",
         "PyTorch",
-        "Qualcomm Intelligent Multimedia SDK"
+        "Qualcomm Intelligent Multimedia SDK 2.0"
       ],
       "genai_interfaces": [
         "GenieX CLI",
         "GenieX Python SDK",
         "GenieX Android SDK",
         "GenieX Docker containers",
-        "GenieX OpenAI-compatible API"
+        "GenieX OpenAI-compatible API",
+        "IMSDK 2.0 OpenAI-compatible chat-completion microservices",
+        "IMSDK 2.0 Python and C++ Pipeline APIs",
+        "IMSDK 2.0 memory-optimized Docker microservices"
       ],
       "runtime_paths": [
         {"runtime": "QAIRT", "role": "maximum Qualcomm hardware optimization and Hexagon NPU acceleration"},
-        {"runtime": "llama.cpp", "role": "broader GGUF and open-source model compatibility"}
+        {"runtime": "llama.cpp", "role": "broader GGUF and open-source model compatibility"},
+        {"runtime": "Qualcomm IMSDK 2.0", "role": "compose GenAI/LLM/VLM inference with camera, audio, analytics and platform services using QAIRT, ONNX Runtime or TFLite backends; deployment includes containerized microservices and OpenAI-compatible chat completion"}
       ],
       "llm_evidence": [
         {
@@ -72,7 +76,7 @@
       "price_status": "no_stable_public_price_captured",
       "evidence": "manufacturer",
       "research_priority": "high_for_edge",
-      "software_maturity_note": "Materially improved public GenAI deployment story as of August 2026: Qualcomm documents QAIRT NPU acceleration, llama.cpp/GGUF compatibility, GenieX developer-preview interfaces including an OpenAI-compatible API, and a real IQ-9075 LLM+RAG+ASR application. GenieX remains developer preview, so production maturity should not be overstated.",
+      "software_maturity_note": "Public GenAI deployment support improved again on 2026-08-26 with Qualcomm IMSDK 2.0. Qualcomm now documents GenAI/LLM/VLM inferencing microservices, OpenAI-compatible chat completion, Python/C++ Pipeline APIs, memory-optimized Docker deployment, and QAIRT/ONNX/TFLite runtime selection across Dragonwing platforms. GenieX remains developer preview, and the announced future IMSDK Responses API/model-lifecycle features are not treated as currently available.",
       "vendor_urls": [
         "https://www.qualcomm.com/developer/hardware/qualcomm-iq-9075-evaluation-kit-evk",
         "https://www.qualcomm.com/internet-of-things/products/iq9-series/iq-9075"
@@ -80,11 +84,12 @@
       "technical_documentation": [
         "https://docs.qualcomm.com/doc/87-97354-1/87-97354-1_REV_C_Qualcomm_Dragonwing_IQ-9075_Module_Product_Brief.pdf",
         "https://docs.qualcomm.com/doc/87-83840-1/87-83840-1_REV_A_Qualcomm_IQ9_Series_Product_Brief.pdf",
+        "https://www.qualcomm.com/developer/blog/2026/08/introducing-qimsdk2-unified-framework-multmedia-ai",
         "https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge",
         "https://www.qualcomm.com/developer/blog/2026/07/genai-rag-iq9075-factorypulse",
         "https://www.qualcomm.com/developer/artificial-intelligence"
       ],
-      "notes": "Interesting because Qualcomm publishes both SoC power and named LLM throughput. Do not compare dense INT8 TOPS directly with GPU FP4/FP8 figures."
+      "notes": "Interesting because Qualcomm publishes both SoC power and named LLM throughput. Do not compare dense INT8 TOPS directly with GPU FP4/FP8 figures. IMSDK 2.0 strengthens productization/deployment support but does not itself establish higher LLM tokens/s."
     },
     {
       "id": "qualcomm-dragonwing-iq-8275-evk",
@@ -114,9 +119,20 @@
         "ONNX Runtime",
         "LiteRT / TensorFlow Lite",
         "PyTorch",
-        "Qualcomm Intelligent Multimedia SDK"
+        "Qualcomm Intelligent Multimedia SDK 2.0"
       ],
-      "genai_interfaces": ["GenieX CLI", "GenieX Python SDK", "GenieX Docker containers", "GenieX OpenAI-compatible API"],
+      "genai_interfaces": [
+        "GenieX CLI",
+        "GenieX Python SDK",
+        "GenieX Docker containers",
+        "GenieX OpenAI-compatible API",
+        "IMSDK 2.0 OpenAI-compatible chat-completion microservices",
+        "IMSDK 2.0 Python and C++ Pipeline APIs",
+        "IMSDK 2.0 memory-optimized Docker microservices"
+      ],
+      "runtime_paths": [
+        {"runtime": "Qualcomm IMSDK 2.0", "role": "productize edge GenAI/LLM/VLM pipelines with QAIRT, ONNX Runtime or TFLite inference, multimedia, analytics and containerized platform services"}
+      ],
       "llm_evidence": [
         {
           "model": "unspecified 13B-class supported model",
@@ -130,17 +146,18 @@
       "price_status": "no_stable_public_price_captured",
       "evidence": "manufacturer",
       "research_priority": "medium_high_for_edge",
-      "software_maturity_note": "Qualcomm's August 2026 Dragonwing software guidance explicitly spans IQ8 and IQ9 with QAIRT, AI Hub, GenieX and llama.cpp paths. The strongest multi-workload GenAI demonstration located in this pass was on IQ-9075, not this EVK.",
+      "software_maturity_note": "Qualcomm IMSDK 2.0, released 2026-08-26, is designed across Dragonwing platforms and adds deployable GenAI microservices, OpenAI-compatible chat completion, Python/C++ Pipeline APIs, memory-optimized Docker support, and QAIRT/ONNX/TFLite runtime selection. The strongest public multi-workload GenAI demonstration located remains on IQ-9075, not this EVK.",
       "vendor_urls": [
         "https://www.qualcomm.com/developer/hardware/qualcomm-iq-8275-evaluation-kit-evk",
         "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275"
       ],
       "technical_documentation": [
         "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275",
+        "https://www.qualcomm.com/developer/blog/2026/08/introducing-qimsdk2-unified-framework-multmedia-ai",
         "https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge",
         "https://www.qualcomm.com/developer/artificial-intelligence"
       ],
-      "notes": "The 12GB EVK is capacity-constrained for general LLM use, but the IQ-8275 platform supports up to 32GB and has unusually explicit edge-LLM evidence."
+      "notes": "The 12GB EVK is capacity-constrained for general LLM use, but the IQ-8275 platform supports up to 32GB and has unusually explicit edge-LLM evidence. IMSDK 2.0 improves deployment ergonomics without changing the underlying memory-capacity constraint."
     },
     {
       "id": "arduino-ventuno-q",
@@ -157,9 +174,10 @@
       "storage_type": "eMMC",
       "storage_expansion": ["M.2 NVMe Gen4"],
       "networking": ["2.5GbE", "Wi-Fi 6", "Bluetooth 5.3"],
-      "software": ["Linux", "ROS 2", "Qualcomm AI Runtime (QAIRT)", "Qualcomm AI Hub", "GenieX developer preview", "llama.cpp / GGUF path", "Arduino ecosystem"],
+      "software": ["Linux", "ROS 2", "Qualcomm AI Runtime (QAIRT)", "Qualcomm AI Hub", "GenieX developer preview", "llama.cpp / GGUF path", "Qualcomm Intelligent Multimedia SDK 2.0", "Arduino ecosystem"],
+      "genai_interfaces": ["IMSDK 2.0 OpenAI-compatible chat-completion microservices", "IMSDK 2.0 Python and C++ Pipeline APIs"],
       "pricing": [],
-      "price_status": "no_defensible_public_price_captured",
+      "price_status": "no_defensible_public_price_captured_in_this_record; see dated catalog update/price observations",
       "evidence": "manufacturer_and_platform_vendor",
       "research_priority": "medium_high_for_edge",
       "vendor_urls": [
@@ -168,9 +186,10 @@
       ],
       "technical_documentation": [
         "https://www.qualcomm.com/internet-of-things/products/iq8-series/iq-8275",
+        "https://www.qualcomm.com/developer/blog/2026/08/introducing-qimsdk2-unified-framework-multmedia-ai",
         "https://www.qualcomm.com/developer/blog/2026/08/from-models-to-ai-native-applications--building-intelligent-edge"
       ],
-      "notes": "A practical SBC-style packaging of IQ-8275 with 16GB RAM, 2.5GbE and NVMe expansion. Track price, broad retail availability and reproducible board-specific LLM benchmarks before assigning a normal buying rank."
+      "notes": "A practical SBC-style packaging of IQ-8275 with 16GB RAM, 2.5GbE and NVMe expansion. Qualcomm IMSDK 2.0 adds a stronger path for deployable multimodal/LLM edge services on Dragonwing-class systems; board-specific reproducible LLM benchmarks are still needed."
     }
   ]
 }
