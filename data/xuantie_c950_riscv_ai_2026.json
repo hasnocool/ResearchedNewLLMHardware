@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-27",
+  "hardware": [
+    {
+      "id": "alibaba-xuantie-c950-riscv",
+      "manufacturer": "Alibaba DAMO Academy / XuanTie",
+      "product": "XuanTie C950",
+      "compute_platform": "xuantie-c950-riscv-ai",
+      "category": "riscv_server_cpu_ai_acceleration",
+      "status": "announced_ip_target_configuration",
+      "tier": "A-potential",
+      "architecture": {
+        "isa": "RISC-V RVA23.1",
+        "process_nm": 5,
+        "max_clock_ghz": 3.2,
+        "decode_width_instructions": 8,
+        "pipeline_stages": 16,
+        "out_of_order_window_instructions_reported": ">1000",
+        "vector": "RISC-V Vector 1.0 / XuanTie wide-vector acceleration",
+        "matrix": "XuanTie AME / matrix acceleration; public descriptions vary between integrated/attachable AI engines"
+      },
+      "core_scaling": {
+        "cores_per_cluster_max_reported": 8,
+        "benchmark_target_configuration_cores": 64,
+        "note": "The August LLM benchmark is described as a 64-core C950 target configuration, not a retail board or independently characterized production server."
+      },
+      "memory": {
+        "capacity_gb": null,
+        "type": null,
+        "bandwidth_gbps": null,
+        "note": "Alibaba publicized more than 4x memory-bandwidth improvement versus C920, but no defensible absolute capacity/bandwidth figure for the 64-core benchmark system was found."
+      },
+      "power_w": null,
+      "pricing": [],
+      "availability_note": "Announced in March 2026 as high-performance RISC-V CPU/IP for cloud, generative AI, robotics and edge designs. No public retail board/system price or broadly orderable standalone C950 server was verified.",
+      "software": [
+        "GNU toolchain",
+        "LLVM",
+        "QEMU",
+        "Linux",
+        "XuanTie SHL heterogeneous neural-network library"
+      ],
+      "framework_runtime_notes": "Public August benchmark reporting attributes inference optimization to XuanTie SHL and dedicated MatMul/Linear, Softmax and RMSNorm kernels. This is not evidence of drop-in CUDA, ROCm, MLX, vLLM, GGUF or generic llama.cpp compatibility.",
+      "llm_suitability": {
+        "verified_vendor_targets": [
+          "Qwen3 family",
+          "DeepSeek V3 family"
+        ],
+        "model_size_practicality": "Potentially relevant to 27B and much larger server-side models in sufficiently provisioned multi-core systems, but actual capacity depends on undisclosed system memory.",
+        "quantization_compatibility": "Not publicly specified for the August benchmark; do not infer INT4/GGUF compatibility from model size or decode rate.",
+        "local_llm_assessment": "Interesting RISC-V CPU-centric inference path for server/edge research, but not yet a consumer/local purchasable platform."
+      },
+      "benchmark_evidence": [
+        {
+          "model": "Qwen3.8-27B",
+          "configuration": "64-core C950 target configuration",
+          "decode_tokens_s_reported": ">30",
+          "time_to_first_token_s_reported": 1.9,
+          "source_type": "vendor_slide_reported_by_independent_press",
+          "observed_report_date": "2026-08-19",
+          "note": "Not independently reproduced. Quantization/precision, memory configuration, prompt/context, batch size, power and exact system implementation were not disclosed."
+        },
+        {
+          "model": "Qwen3.8-2.4T-A95B",
+          "configuration": "C950 target configuration",
+          "decode_tokens_s_reported": 7.2,
+          "time_to_first_token_s_reported": 8.5,
+          "source_type": "vendor_slide_reported_by_independent_press",
+          "observed_report_date": "2026-08-19",
+          "note": "Target/configuration details are incomplete; this should not be compared directly with GPU or Apple Silicon benchmarks."
+        }
+      ],
+      "performance_per_watt": "unknown; no defensible board/server power measurement was found",
+      "cost_efficiency": "unknown; no stable public system or IP pricing was found",
+      "off_grid_suitability": "unknown/low confidence; no complete-system power data or retail hardware exists for evaluation",
+      "evidence": "Alibaba/DAMO announcement corroborated by Reuters and Chinese technology press; August LLM numbers are vendor-slide claims reported by independent press",
+      "research_priority": "high",
+      "vendor_urls": [
+        "https://www.reuters.com/world/asia-pacific/alibaba-develops-next-gen-chip-agentic-ai-chinese-media-says-2026-03-24/"
+      ],
+      "technical_documentation": [
+        "https://th.cnx-software.com/2026/03/26/alibaba-xuantie-c950-powerful-rva23-complaint-64-bit-risc-v-core-edge-ai-computing/"
+      ],
+      "independent_sources": [
+        "https://xenospectrum.com/en/xuantie-c950-qwen38-27b-shl-inference/",
+        "https://www.scmp.com/tech/big-tech/article/3347684/alibaba-debuts-its-latest-risc-v-based-chip-amid-shift-ai-agents",
+        "https://www.stdaily.com/web/gdxw/2026-03/24/content_491691.html"
+      ],
+      "open_questions": [
+        "absolute memory capacity and memory bandwidth of the 64-core benchmark system",
+        "board/server power consumption and efficiency",
+        "precision/quantization used for reported Qwen benchmarks",
+        "exact production SoC/server implementation and shipping status",
+        "public price or licensing model",
+        "independent prefill/decode benchmarks",
+        "availability of upstream llama.cpp/vLLM/PyTorch backends versus XuanTie-specific SHL"
+      ]
+    }
+  ]
+}
