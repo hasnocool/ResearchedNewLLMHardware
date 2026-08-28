@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-28",
+  "hardware": [
+    {
+      "id": "sambanova-sn50-rdu",
+      "manufacturer": "SambaNova Systems",
+      "product": "SN50 RDU",
+      "compute_platform": "sambanova-sn50-rdu",
+      "category": "datacenter_ai_inference_accelerator",
+      "status": "preproduction_customer_rollout_2h_2026",
+      "tier": "S-potential",
+      "generation": "fifth-generation RDU",
+      "architecture": [
+        "reconfigurable dataflow architecture",
+        "programmable compute units",
+        "programmable memory units",
+        "software-managed dataflow",
+        "three-tier memory hierarchy"
+      ],
+      "memory_tiers": [
+        "on-chip SRAM",
+        "HBM2e",
+        "large-capacity DDR"
+      ],
+      "memory_capacity_gb": null,
+      "memory_bandwidth_gbps": null,
+      "compute_vs_previous_generation_vendor": "5x compute per accelerator versus SN40 generation",
+      "network_vs_previous_generation_vendor": "4x network bandwidth versus previous generation",
+      "scale_up_rdu_max": 256,
+      "scale_out_rdu_max_vendor": 32000,
+      "scale_out_network": "400Gb-class networking reported for scale-out; exact production topology/configuration depends on deployment",
+      "software": [
+        "SambaStack",
+        "vLLM",
+        "SGLang",
+        "PyTorch-oriented model workflows"
+      ],
+      "power_w": null,
+      "pricing": [],
+      "availability_note": "SambaNova says SN50 begins shipping to customers in the second half of 2026. Public standalone accelerator pricing is not available.",
+      "benchmark_evidence": [
+        {
+          "model": "MiniMax M2.7",
+          "deployment": "16 SN50 RDUs for decode with 4 NVIDIA H200 GPUs handling prefill",
+          "runtime": "vLLM",
+          "decode_tokens_per_second_short_context_vendor_summary": 850,
+          "decode_tokens_per_second_long_context_vendor_summary_min": 450,
+          "independent_short_context_tokens_per_second_reported": 763,
+          "independent_short_context_tokens": 10000,
+          "source_type": "independent_benchmark_plus_vendor_summary",
+          "note": "The result is for a heterogeneous disaggregated-inference system, not SN50-only end-to-end inference. Artificial Analysis reported 763 tok/s at a 10k-token workload; SambaNova summarized peak short-context results up to 850 tok/s and SemiAnalysis results around 800 tok/s."
+        }
+      ],
+      "evidence": "manufacturer_plus_independent_benchmark_reporting",
+      "research_priority": "very_high",
+      "vendor_urls": [
+        "https://sambanova.ai/products/rdu-ai-chips",
+        "https://sambanova.ai/products/sambarack"
+      ],
+      "technical_documentation": [
+        "https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference",
+        "https://sambanova.ai/products/dataflow-architecture",
+        "https://sambanova.ai/blog/semianalysis-benchmarks-sambarack-sn50-with-fast-inference-on-minimax-m2.7"
+      ],
+      "independent_sources": [
+        "https://www.servethehome.com/sambanovas-sn50-rdu-for-ai-at-hot-chips-2026/",
+        "https://www.theregister.com/ai-and-ml/2026/07/08/intel-backed-ai-chip-startup-sambanova-breathes-new-life-into-aging-nvidia-gpus-in-latest-benchmarks/5268721",
+        "https://artificialanalysis.ai/models/minimax-m2-7/providers"
+      ],
+      "open_questions": [
+        "exact per-RDU SRAM, HBM2e, and DDR capacity",
+        "exact per-RDU physical HBM bandwidth",
+        "production per-RDU board power",
+        "public system pricing or quote ranges",
+        "independent SN50-only end-to-end prefill plus decode measurements",
+        "tokens per watt under comparable workloads",
+        "production model coverage and compiler/runtime limitations"
+      ]
+    },
+    {
+      "id": "sambanova-sambarack-sn50-16rdu",
+      "manufacturer": "SambaNova Systems",
+      "product": "SambaRack SN50",
+      "compute_platform": "sambanova-sn50-rdu",
+      "category": "rack_scale_inference_system",
+      "status": "preproduction_customer_rollout_2h_2026",
+      "tier": "S-potential",
+      "accelerator_count": 16,
+      "accelerator": "SN50 RDU",
+      "rack_cooling": "air-cooled",
+      "rack_average_power_kw_vendor": 20,
+      "rack_power_note": "SambaNova states an average of about 20 kW for SambaRack SN50; this is a vendor operational figure rather than an independently measured maximum rack draw.",
+      "scale_up_rdu_max": 256,
+      "scale_out_rdu_max_vendor": 32000,
+      "model_capacity_parameters_trillion_vendor": 10,
+      "context_length_tokens_max_vendor": 10000000,
+      "memory_architecture": [
+        "on-chip SRAM",
+        "HBM2e",
+        "DDR"
+      ],
+      "aggregate_memory_capacity_gb": null,
+      "aggregate_model_bandwidth_tb_s": null,
+      "hot_chips_scaling_note": "Hot Chips 2026 reporting says model-bandwidth utilization remains about 45% at 256 RDUs and a 512-RDU configuration exceeds 350 TB/s aggregate model bandwidth; the 512-RDU figure is a scale-out example rather than one rack.",
+      "software": [
+        "SambaStack",
+        "vLLM",
+        "SGLang"
+      ],
+      "pricing": [],
+      "availability_note": "Customer shipments are planned for the second half of 2026; quote-based enterprise deployment, with no stable public price captured.",
+      "evidence": "manufacturer_plus_hot_chips_reporting",
+      "research_priority": "very_high",
+      "vendor_urls": [
+        "https://sambanova.ai/products/sambarack"
+      ],
+      "technical_documentation": [
+        "https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference",
+        "https://sambanova.ai/products/dataflow-architecture"
+      ],
+      "independent_sources": [
+        "https://www.servethehome.com/sambanovas-sn50-rdu-for-ai-at-hot-chips-2026/"
+      ],
+      "open_questions": [
+        "exact rack memory capacity across SRAM/HBM2e/DDR tiers",
+        "rack maximum rather than average power",
+        "delivered rack pricing",
+        "independent sustained tokens per watt",
+        "scale-up efficiency from 16 to 64/128/256 RDUs"
+      ]
+    }
+  ]
+}
