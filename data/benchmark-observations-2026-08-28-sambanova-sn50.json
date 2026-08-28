@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-08-28",
+  "benchmarks": [
+    {
+      "hardware_id": "sambanova-sambarack-sn50-16rdu",
+      "compute_platform": "sambanova-sn50-rdu",
+      "model": "MiniMax M2.7",
+      "serving_architecture": "disaggregated_prefill_decode",
+      "prefill_hardware": "4x NVIDIA H200",
+      "decode_hardware": "16x SambaNova SN50 RDU",
+      "runtime": "vLLM",
+      "input_context_tokens": 10000,
+      "output_tokens_per_second": 763,
+      "metric_scope": "end-user decode/output rate for heterogeneous serving system",
+      "evidence": "independent",
+      "source": "https://www.theregister.com/ai-and-ml/2026/07/08/intel-backed-ai-chip-startup-sambanova-breathes-new-life-into-aging-nvidia-gpus-in-latest-benchmarks/5268721",
+      "original_benchmark_attribution": "Artificial Analysis",
+      "notes": "Do not attribute 763 tok/s to SN50-only end-to-end inference. H200 GPUs generated the prefill/KV state and SN50 handled decode."
+    },
+    {
+      "hardware_id": "sambanova-sambarack-sn50-16rdu",
+      "compute_platform": "sambanova-sn50-rdu",
+      "model": "MiniMax M2.7",
+      "serving_architecture": "16-rdu tensor-parallel decode configuration",
+      "decode_hardware": "16x SambaNova SN50 RDU",
+      "runtime": "vLLM",
+      "output_tokens_per_second_approx": 800,
+      "metric_scope": "maximum-interactivity decode point",
+      "evidence": "independent_benchmark_reported_by_vendor",
+      "source": "https://sambanova.ai/blog/semianalysis-benchmarks-sambarack-sn50-with-fast-inference-on-minimax-m2.7",
+      "original_benchmark_attribution": "SemiAnalysis",
+      "notes": "Vendor-hosted summary of an independent SemiAnalysis benchmark. Preserve as separate evidence until the complete independent methodology/results are available directly."
+    },
+    {
+      "hardware_id": "sambanova-sambarack-sn50-16rdu",
+      "compute_platform": "sambanova-sn50-rdu",
+      "model": "MiniMax M2.7",
+      "serving_architecture": "two data-parallel replicas, each 8-rdu tensor parallel",
+      "decode_hardware": "16x SambaNova SN50 RDU total",
+      "runtime": "vLLM",
+      "output_tokens_per_second_approx": 400,
+      "metric_scope": "higher-throughput serving configuration",
+      "evidence": "independent_benchmark_reported_by_vendor",
+      "source": "https://sambanova.ai/blog/semianalysis-benchmarks-sambarack-sn50-with-fast-inference-on-minimax-m2.7",
+      "original_benchmark_attribution": "SemiAnalysis",
+      "notes": "Different serving objective from the 16-way TP maximum-interactivity point; do not compare as if it were an identical concurrency configuration."
+    }
+  ]
+}
