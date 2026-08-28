@@ -1,0 +1,208 @@
+{
+  "schema_version": "1.3.0",
+  "last_updated": "2026-08-27",
+  "purpose": "New low-power GenAI accelerator variants and high-bandwidth edge-AI memory hardware. Memory-only products are not standalone compute accelerators and must be paired with a compatible host.",
+  "hardware": [
+    {
+      "id": "asus-ugen300-usb-8g",
+      "manufacturer": "ASUS",
+      "product": "UGen300 USB AI Accelerator 8GB",
+      "model": "UGen300-USB-8G",
+      "compute_platform": "hailo-10h",
+      "category": "usb_ai_accelerator",
+      "status": "available_region_dependent",
+      "accelerator": "Hailo-10H",
+      "ai_performance_tops": {"int4": 40, "int8": 20, "kind": "manufacturer_peak"},
+      "memory_gb": 8,
+      "memory_type": "LPDDR4",
+      "memory_data_rate_mt_s": 4266,
+      "power_w": {"typical": 2.5, "kind": "manufacturer_device_typical"},
+      "interface": "USB 3.1 Gen 2 Type-C 10Gbps",
+      "dimensions_mm": {"length": 105, "width": 50, "height": 18},
+      "weight_g": 150,
+      "host_architectures": ["x86", "Arm"],
+      "supported_os": ["Windows", "Linux", "Android (B2B support currently broader than consumer support)"],
+      "frameworks": ["HailoRT", "Hailo Dataflow Compiler", "Hailo-Ollama", "Keras", "TensorFlow", "TensorFlow Lite", "PyTorch", "ONNX"],
+      "quantization": {
+        "verified_hailo_llm_path": "A8W4 is used by current Hailo-10H model-zoo LLMs; Hailo also documents 4-bit group-wise weights with 8-bit activations/KV cache.",
+        "not_generic_gguf": true,
+        "notes": "Models generally require Hailo compilation/HEF artifacts; do not assume arbitrary GGUF/GPTQ/AWQ binaries can execute unchanged."
+      },
+      "llm_suitability": {
+        "class": "small_edge_llm_and_vlm_accelerator",
+        "practical_guidance": "Best suited to roughly 1B-3B compiled LLM/VLM workloads and speech/vision pipelines. The 8GB dedicated memory is useful, but current public Hailo model evidence is concentrated on small models rather than unrestricted 7B+ deployment.",
+        "platform_reference_benchmarks": [
+          {
+            "model": "Qwen2-1.5B-Instruct",
+            "device": "Hailo-10H reference",
+            "context_tokens": 2048,
+            "weight_quantization": "static 4-bit symmetric group-wise",
+            "activation_quantization": "static 8-bit asymmetric per-tensor",
+            "kv_cache_quantization": "static 8-bit asymmetric per-tensor",
+            "decode_tokens_per_second": 9.45,
+            "average_accelerator_power_w": 2.1,
+            "evidence": "manufacturer_benchmark_not_measured_on_asus_usb_variant"
+          },
+          {
+            "model": "Llama-3.2-1B-Instruct",
+            "device": "Hailo-10H reference",
+            "context_tokens": 2048,
+            "numerical_scheme": "A8W4 symmetric group-wise",
+            "decode_tokens_per_second": 9.89,
+            "evidence": "manufacturer_benchmark_not_measured_on_asus_usb_variant"
+          }
+        ]
+      },
+      "off_grid_suitability": "excellent_accelerator_power",
+      "off_grid_notes": "2.5W typical accelerator consumption is extremely low; complete-system consumption depends on the host and USB power path.",
+      "pricing": [
+        {
+          "amount": 6380,
+          "currency": "TWD",
+          "region": "Taiwan",
+          "kind": "observed_new",
+          "availability": "listed_for_sale",
+          "observed_at": "2026-08-27",
+          "vendor": "CoolPC",
+          "url": "https://www.coolpc.com.tw/tw/shop/usbmachine/asus-ugen300-ai/",
+          "note": "Current Taiwan retail listing for UGen300 USB 8G."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.asus.com/ca-fr/motherboards-components/ai-accelerator/ugen/ugen300-usb-8g/techspec/",
+        "https://press.asus.com/news/press-releases/asus-ugen300-usb-ai-accelerator-generative-ai-edge/"
+      ],
+      "technical_documentation": [
+        "https://hailo.ai/blog/bringing-generative-ai-to-the-edge-llm-on-hailo-10h/",
+        "https://hailo.ai/products/hailo-software/model-explorer/generative-ai/qwen3-1-7b-instruct/",
+        "https://hailo.ai/products/hailo-software/model-explorer/generative-ai/llama3-2-1b-instruct/"
+      ],
+      "evidence": "manufacturer_plus_current_retailer_plus_manufacturer_reference_benchmark",
+      "notes": "The Hailo reference LLM benchmarks are not claimed as measured UGen300 USB results; USB transport and host integration can affect end-to-end behavior."
+    },
+    {
+      "id": "asus-ugen300-m2-8g",
+      "manufacturer": "ASUS",
+      "product": "UGen300 M.2 AI Accelerator 8GB",
+      "model": "UGen300-M2-8G",
+      "compute_platform": "hailo-10h",
+      "category": "m2_ai_accelerator",
+      "status": "available_region_dependent",
+      "accelerator": "Hailo-10H",
+      "ai_performance_tops": {"int4": 40, "int8": 20, "kind": "manufacturer_peak"},
+      "memory_gb": 8,
+      "memory_type": "LPDDR4",
+      "memory_data_rate_mt_s": 4266,
+      "power_w": {"typical": 2.5, "kind": "manufacturer_device_typical"},
+      "interface": "PCIe 3.0 x4, M.2 2280 Key-M",
+      "dimensions_mm": {"length": 80, "width": 22},
+      "weight_g": 6,
+      "host_architectures": ["x86", "Arm"],
+      "supported_os": ["Windows", "Linux", "Android"],
+      "frameworks": ["HailoRT", "Hailo Dataflow Compiler", "Hailo-Ollama", "Keras", "TensorFlow", "TensorFlow Lite", "PyTorch", "ONNX"],
+      "quantization": {
+        "verified_hailo_llm_path": "A8W4 / 4-bit group-wise weight quantization with 8-bit activations is documented for Hailo-10H LLM deployment.",
+        "not_generic_gguf": true
+      },
+      "llm_suitability": {
+        "class": "small_edge_llm_and_vlm_accelerator",
+        "practical_guidance": "Same Hailo-10H compute/memory class as the USB variant, with PCIe attachment better suited to embedded systems. Current public model evidence is strongest for 1B-3B compiled models."
+      },
+      "off_grid_suitability": "excellent_accelerator_power",
+      "pricing": [
+        {
+          "amount": 5880,
+          "currency": "TWD",
+          "region": "Taiwan",
+          "kind": "observed_new",
+          "availability": "listed_for_sale",
+          "observed_at": "2026-08-27",
+          "vendor": "CoolPC",
+          "url": "https://www.coolpc.com.tw/tw/shop/usbmachine/asus-ugen300-ai/",
+          "note": "Current Taiwan retail listing for UGen300 M.2 8G."
+        }
+      ],
+      "vendor_urls": ["https://www.asus.com/motherboards-components/ai-accelerator/ugen/"],
+      "technical_documentation": [
+        "https://press.asus.com/news/press-releases/asus-ugen300-usb-ai-accelerator-generative-ai-edge/",
+        "https://hailo.ai/blog/bringing-generative-ai-to-the-edge-llm-on-hailo-10h/"
+      ],
+      "evidence": "manufacturer_plus_current_retailer",
+      "notes": "Do not confuse the 8GB version with lower-memory Hailo-10H M.2 variants; 2GB modules can be materially more constrained for GenAI."
+    },
+    {
+      "id": "longsys-aidimm-128gb",
+      "manufacturer": "Longsys",
+      "product": "AIDIMM 128GB",
+      "category": "ai_memory_module",
+      "status": "announced_precommercial_or_oem",
+      "memory_gb_max": 128,
+      "memory_type": "LPDDR5X",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps_max": 307.2,
+      "layout": "single-sided four-LPDDR5X-chip module",
+      "voltage_v": {"min": 0.9, "max": 1.05, "dynamic": true},
+      "power_management": ["FDVFS dynamic voltage/frequency optimization"],
+      "interface_notes": "High-density/high-pin-count removable connector intended for compatible AI-agent host motherboards; not a JEDEC DDR5 DIMM and not universally socket-compatible.",
+      "compute": "none_memory_only",
+      "frameworks": [],
+      "quantization_compatibility": "host_and_runtime_dependent",
+      "llm_suitability": {
+        "class": "high_capacity_high_bandwidth_edge_ai_memory",
+        "vendor_claim": "Longsys says one module can stably support 70B+ edge LLMs.",
+        "caveat": "Memory capacity/bandwidth does not by itself determine token throughput; a compatible SoC/APU/GPU and software stack are required."
+      },
+      "cost_efficiency": "unknown_no_public_unit_price",
+      "off_grid_suitability": "potentially_good_but_unverified",
+      "off_grid_notes": "Dynamic voltage scaling and FDVFS target lower power, but Longsys has not published a defensible module wattage.",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "oem_partner_or_sample_channel",
+          "observed_at": "2026-08-27",
+          "note": "No stable public unit price found."
+        }
+      ],
+      "vendor_urls": ["https://www.longsys.com/", "https://cn.longsys.com/about/news/13961.html"],
+      "technical_documentation": ["https://cn.longsys.com/about/news/13961.html"],
+      "evidence": "manufacturer",
+      "notes": "Treat as a memory technology, not an accelerator. Compatibility with any specific Ryzen AI/Intel/Arm host must be verified at the motherboard/platform level."
+    },
+    {
+      "id": "longsys-ailpbga-64gb",
+      "manufacturer": "Longsys",
+      "product": "AILPBGA high-bandwidth AI memory",
+      "category": "embedded_ai_memory",
+      "status": "announced_precommercial_or_oem",
+      "memory_capacity_gb": {"min": 24, "max": 64},
+      "memory_type": "LPDDR-compatible proprietary high-bandwidth memory architecture",
+      "memory_bus_bits": 256,
+      "memory_bandwidth_gbps_max": 307,
+      "package_mm": {"width": 22, "length": 22},
+      "compute": "none_memory_only",
+      "interface_notes": "Designed for native LPDDR-compatible integration in embedded AI systems; soldered/package-level component rather than user-replaceable DIMM.",
+      "frameworks": [],
+      "quantization_compatibility": "host_and_runtime_dependent",
+      "llm_suitability": {
+        "class": "embedded_high_bandwidth_model_memory",
+        "practical_guidance": "24-64GB capacity can materially improve model fit for embedded systems, but exact model size and speed depend on the attached compute SoC and software.",
+        "vendor_positioning": "Longsys positions AILPBGA for compact edge inference and medium/lightweight model deployment."
+      },
+      "cost_efficiency": "unknown_no_public_unit_price",
+      "off_grid_suitability": "potentially_good_but_unverified",
+      "off_grid_notes": "Longsys describes a low-power design but has not published defensible wattage.",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "oem_partner_or_sample_channel",
+          "observed_at": "2026-08-27",
+          "note": "No stable public unit price found."
+        }
+      ],
+      "vendor_urls": ["https://www.longsys.com/", "https://cn.longsys.com/about/news/13961.html"],
+      "technical_documentation": ["https://cn.longsys.com/about/news/13961.html"],
+      "evidence": "manufacturer",
+      "notes": "Do not compare the 307 GB/s memory figure to accelerator TOPS or tokens/sec; this part provides memory bandwidth/capacity, not compute."
+    }
+  ]
+}
