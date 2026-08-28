@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-28",
+  "purpose": "Google eighth-generation TPU systems for inference/reasoning and large-scale training. Public Google specifications are retained separately from derived capacity guidance; unpublished per-chip power, pricing and deployment details remain explicitly unknown.",
+  "hardware": [
+    {
+      "id": "google-tpu-8i-288gb",
+      "manufacturer": "Google",
+      "product": "TPU 8i",
+      "model": "Google eighth-generation inference TPU",
+      "compute_platform": "google-tpu-v8i",
+      "category": "datacenter_ai_accelerator",
+      "status": "announced_coming_soon_cloud",
+      "release_status_as_of": "2026-08-28",
+      "announced_at": "2026-04-22",
+      "architecture": "Eighth-generation Google TPU specialized for post-training, inference, reinforcement learning and reasoning; two Tensor Core dies plus a Collectives Acceleration Engine (CAE) on the chiplet die",
+      "primary_workload": "sampling_serving_reasoning_and_post_training",
+      "memory_gb": 288,
+      "memory_type": "HBM",
+      "memory_bandwidth_gbps": 8601,
+      "on_chip_sram_mb": 384,
+      "peak_compute_pflops_fp4": 10.1,
+      "native_precision_features": [
+        "FP4",
+        "Google TPU mixed-precision/XLA execution"
+      ],
+      "tdp_w": null,
+      "power_note": "Google has not published a defensible per-chip TPU 8i TDP in the cited public material. Google claims up to 2x better performance per watt versus Ironwood at the system/generation level; this is not converted into an absolute watt estimate.",
+      "interconnect": "Boardfly hierarchical ICI topology; Google states 19.2 Tb/s ICI bandwidth and up to 1,152 chips in a pod, with a 1,024-active-chip topology described in the architecture deep dive",
+      "networking_features": [
+        "Boardfly ICI",
+        "Optical Circuit Switch links between groups",
+        "Collectives Acceleration Engine for reduction/synchronization",
+        "Arm Axion CPU header"
+      ],
+      "physical_constraints": "Google Cloud datacenter system; not a retail PCIe accelerator or conventional workstation component. Exact standalone chip/card dimensions, cooling and connector details are not publicly exposed as a user-installable product.",
+      "software": [
+        "JAX",
+        "PyTorch / TorchTPU preview",
+        "Keras",
+        "XLA",
+        "vLLM",
+        "Pathways",
+        "Pallas",
+        "Mosaic"
+      ],
+      "framework_runtime_compatibility": {
+        "verified": [
+          "JAX",
+          "native PyTorch/TorchTPU preview",
+          "Keras",
+          "XLA",
+          "vLLM",
+          "Pathways",
+          "Pallas",
+          "Mosaic"
+        ],
+        "not_applicable_or_not_verified_as_drop_in": [
+          "CUDA",
+          "ROCm/HIP",
+          "MLX",
+          "llama.cpp CUDA/ROCm backends",
+          "TensorRT-LLM"
+        ]
+      },
+      "quantization_compatibility": "Google explicitly documents native FP4 support in the eighth-generation TPU architecture. Actual model quantization support depends on XLA/JAX/PyTorch/vLLM software paths and model kernels; do not assume arbitrary GGUF, GPTQ, AWQ or EXL2 artifacts are drop-in compatible.",
+      "llm_suitability": {
+        "assessment": "excellent_cloud_scale_inference_and_reasoning_capacity_not_local_hardware",
+        "practical_guidance": "288 GB HBM gives unusually large accelerator-local capacity and 8.601 TB/s bandwidth for large dense and MoE inference, long-context KV cache and reasoning workloads. Capacity alone could hold very large quantized weight sets, but real model placement is compiler/runtime dependent and large workloads are normally sharded across TPU systems. This is not a local desktop purchasing option.",
+        "evidence_level": "manufacturer_current"
+      },
+      "performance_per_watt": "Absolute tokens-per-watt cannot be calculated because Google does not publish a per-chip TDP. Google claims up to 2x better performance per watt versus seventh-generation Ironwood and up to 80% better inference performance per dollar for TPU 8i, both as generation/system-level vendor claims.",
+      "cost_efficiency": "cloud_price_not_yet_public_for_tpu8i; Google states up to 80% better inference performance per dollar versus Ironwood but no public unit purchase price exists",
+      "off_grid_suitability": "not_applicable_datacenter_cloud_infrastructure",
+      "pricing": [
+        {
+          "kind": "not_yet_public",
+          "availability": "coming_soon_google_cloud",
+          "observed_at": "2026-08-28",
+          "vendor": "Google Cloud",
+          "url": "https://cloud.google.com/tpu",
+          "note": "Google lists TPU 8i as coming soon. No retail hardware price or public TPU 8i Cloud hourly price was verified."
+        }
+      ],
+      "vendor_urls": [
+        "https://cloud.google.com/tpu",
+        "https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive",
+        "https://cloud.google.com/blog/products/compute/ai-infrastructure-at-next26"
+      ],
+      "technical_documentation": [
+        "https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive",
+        "https://cloud.google.com/tpu"
+      ],
+      "source_caveats": [
+        "Google's public deep dive states up to 1,152 TPU 8i chips can be connected while its detailed Boardfly example describes 36 groups and up to 1,024 active chips. This record preserves both descriptions rather than forcing them into one unsupported topology count.",
+        "No absolute per-chip TDP, retail price, Cloud hourly price, card dimensions or end-user installation interface is publicly specified in the cited Google sources.",
+        "Peak FP4 PFLOPS and HBM bandwidth are hardware specifications, not LLM tokens/sec."
+      ],
+      "evidence": "manufacturer_current"
+    },
+    {
+      "id": "google-tpu-8t-216gb",
+      "manufacturer": "Google",
+      "product": "TPU 8t",
+      "model": "Google eighth-generation training TPU",
+      "compute_platform": "google-tpu-v8t",
+      "category": "datacenter_ai_accelerator",
+      "status": "announced_coming_soon_cloud",
+      "release_status_as_of": "2026-08-28",
+      "announced_at": "2026-04-22",
+      "architecture": "Eighth-generation Google TPU specialized for large-scale pre-training and embedding-heavy workloads, with SparseCore, LLM Decoder Engine, VPU/MXU overlap and native FP4",
+      "primary_workload": "large_scale_pretraining_and_embedding_heavy_workloads",
+      "memory_gb": 216,
+      "memory_type": "HBM",
+      "memory_bandwidth_gbps": 6528,
+      "on_chip_sram_mb": 128,
+      "peak_compute_pflops_fp4": 12.6,
+      "native_precision_features": [
+        "FP4",
+        "Google TPU mixed-precision/XLA execution"
+      ],
+      "tdp_w": null,
+      "power_note": "Google does not publish a defensible per-chip TPU 8t TDP in the cited public material. Google claims up to 2x better performance per watt versus Ironwood at generation/system level.",
+      "interconnect": "3D torus ICI; 9,600 chips per superpod; Google states 2x scale-up bandwidth versus prior generation and Virgo can link more than 134,000 TPU 8t chips with up to 47 Pb/s non-blocking bisection bandwidth",
+      "networking_features": [
+        "3D torus ICI",
+        "Virgo scale-out network",
+        "TPUDirect RDMA",
+        "TPU Direct Storage",
+        "Arm Axion CPU header"
+      ],
+      "physical_constraints": "Google Cloud datacenter system; not a retail PCIe accelerator or conventional workstation component. Deployment is pod/rack infrastructure with specialized networking, hosts, storage and cooling.",
+      "software": [
+        "JAX",
+        "PyTorch / TorchTPU preview",
+        "Keras",
+        "XLA",
+        "Pathways",
+        "Pallas",
+        "Mosaic"
+      ],
+      "framework_runtime_compatibility": {
+        "verified": [
+          "JAX",
+          "native PyTorch/TorchTPU preview",
+          "Keras",
+          "XLA",
+          "Pathways",
+          "Pallas",
+          "Mosaic"
+        ],
+        "not_applicable_or_not_verified_as_drop_in": [
+          "CUDA",
+          "ROCm/HIP",
+          "MLX",
+          "llama.cpp CUDA/ROCm backends",
+          "TensorRT-LLM"
+        ]
+      },
+      "quantization_compatibility": "Google explicitly documents native FP4 support and describes overlapping quantization operations with matrix math. Model-format compatibility remains tied to Google TPU software/compiler paths; arbitrary GGUF/GPTQ/AWQ artifacts should not be assumed drop-in compatible.",
+      "llm_suitability": {
+        "assessment": "frontier_training_and_large_scale_llm_system_not_local_hardware",
+        "practical_guidance": "216 GB HBM per chip and 6.528 TB/s bandwidth are substantial for large-model training and inference, but TPU 8t is optimized primarily for massive distributed training rather than single-user local inference. Google scales it to 9,600 chips per superpod and beyond via Virgo/Pathways.",
+        "evidence_level": "manufacturer_current"
+      },
+      "performance_per_watt": "Absolute performance per watt cannot be derived without a per-chip TDP. Google claims up to 2x better performance per watt and up to 2.7x training performance per dollar versus Ironwood.",
+      "cost_efficiency": "cloud_price_not_yet_public_for_tpu8t; Google publishes relative 2.7x training performance-per-dollar versus Ironwood but no public retail unit price",
+      "off_grid_suitability": "not_applicable_datacenter_cloud_infrastructure",
+      "pricing": [
+        {
+          "kind": "not_yet_public",
+          "availability": "coming_soon_google_cloud",
+          "observed_at": "2026-08-28",
+          "vendor": "Google Cloud",
+          "url": "https://cloud.google.com/tpu",
+          "note": "Google lists TPU 8t as coming soon. No retail hardware price or public TPU 8t Cloud hourly price was verified."
+        }
+      ],
+      "vendor_urls": [
+        "https://cloud.google.com/tpu",
+        "https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive",
+        "https://cloud.google.com/blog/products/compute/ai-infrastructure-at-next26"
+      ],
+      "technical_documentation": [
+        "https://cloud.google.com/blog/products/compute/tpu-8t-and-tpu-8i-technical-deep-dive",
+        "https://cloud.google.com/tpu"
+      ],
+      "source_caveats": [
+        "No absolute per-chip TDP, retail price, Cloud hourly price, card dimensions or end-user installation interface is publicly specified in the cited Google sources.",
+        "Google's performance-per-watt and price-performance improvements are vendor comparisons to Ironwood and should not be converted into absolute system efficiency without measured power and workload data.",
+        "Peak FP4 PFLOPS and HBM bandwidth are hardware specifications, not LLM tokens/sec."
+      ],
+      "evidence": "manufacturer_current"
+    }
+  ]
+}
