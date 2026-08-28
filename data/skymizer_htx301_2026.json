@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-28",
+  "purpose": "Purpose-built language-model accelerator hardware with unusually large on-card memory and low claimed board power. Vendor capacity and performance claims are retained with explicit provenance and are not treated as independent benchmarks.",
+  "hardware": [
+    {
+      "id": "skymizer-htx301-384gb",
+      "manufacturer": "Skymizer",
+      "product": "HTX301",
+      "model": "HTX301 six-chip PCIe reference card",
+      "compute_platform": "hyperthought-lisa-v3-lpu",
+      "category": "llm_inference_accelerator_pcie",
+      "status": "early_access_reference_platform",
+      "release_status_as_of": "2026-08-28",
+      "announced_at": "2026-04-23",
+      "architecture": "Six HTX301 Language Processing Unit (LPU) chips using Skymizer LISA v3; decode-first design with prefill/decode disaggregation",
+      "process_node": "T28nm mature-node process (manufacturer description)",
+      "lpu_chips_per_card": 6,
+      "memory_gb": 384,
+      "memory_type": "standard LPDDR-class; Skymizer HyperThought material references LPDDR4/LPDDR5",
+      "memory_bandwidth_gbps": null,
+      "tdp_w_vendor_approx": 240,
+      "memory_capacity_per_watt_gb_per_w": 1.6,
+      "host_interface": "PCIe card; exact PCIe generation and lane width not publicly specified",
+      "form_factor": "single PCIe accelerator card / evaluation board; exact dimensions, slot width and auxiliary-power connectors not publicly specified",
+      "cooling": "not publicly specified; complete chassis airflow requirements remain to be verified",
+      "model_reach_vendor_claim": "4B to 700B parameters on the six-chip HTX301 reference card",
+      "software": [
+        "HyperThought compiler/runtime stack",
+        "LISA v3 instruction-set architecture",
+        "Skymizer proprietary LPU orchestration for prefill/decode disaggregation"
+      ],
+      "vendor_benchmarks_and_claims": [
+        {
+          "claim": "HTX301 six-chip PCIe reference card supports up to 700B-parameter LLM inference with 384GB on-card memory at approximately 240W",
+          "evidence_scope": "manufacturer product page and launch announcement",
+          "normalization_caveat": "No independent benchmark, model identity, quantization, context length, prefill/decode rate or end-to-end host power is published for the 700B claim."
+        },
+        {
+          "claim": "HyperThought octa-core HTX301 processor reaches 240 tokens/s for Llama 2 7B prefill; multi-chip HyperThought scales to 1200 tokens/s for Llama 7B prefill",
+          "evidence_scope": "manufacturer HyperThought platform page",
+          "normalization_caveat": "These are platform-level prefill claims and should not be interpreted as verified six-chip-card decode throughput."
+        },
+        {
+          "claim": "HyperThought efficiency point of 30 tokens/s at 100GB/s memory bandwidth and 0.5 TOPS",
+          "evidence_scope": "manufacturer HyperThought platform page",
+          "normalization_caveat": "The vendor does not identify this as the six-chip HTX301 card configuration, so it is retained only as architecture-level evidence."
+        }
+      ],
+      "quantization_compatibility": "Skymizer states HyperThought can execute multiple quantized LLMs and uses proprietary weight and KV-cache compression. Public material does not specify drop-in GGUF, GPTQ, AWQ, EXL2, FP8, INT8 or INT4 file compatibility, so those formats must not be assumed. Deployment uses Skymizer's compiler/runtime path.",
+      "llm_suitability": {
+        "assessment": "potentially_extreme_capacity_specialized_inference_pending_independent_validation",
+        "practical_guidance": "384GB of on-card memory is enough capacity for many very large quantized models and is marketed for models through 700B, but practical tokens/s cannot be inferred without memory-bandwidth, quantization, context and decode measurements. Treat the current platform as an early-access inference appliance/reference card rather than a general CUDA/ROCm replacement.",
+        "training_suitability": "not_positioned_for_general_training",
+        "evidence_level": "manufacturer_current_early_access"
+      },
+      "framework_runtime_compatibility": {
+        "verified": [
+          "Skymizer HyperThought/LISA compiler-runtime stack"
+        ],
+        "not_verified": [
+          "CUDA",
+          "ROCm/HIP",
+          "MLX",
+          "llama.cpp GGUF backend",
+          "vLLM native backend",
+          "TensorRT-LLM",
+          "OpenVINO"
+        ]
+      },
+      "off_grid_suitability": "low_to_moderate_for_card_level_capacity; approximately 240W board power is unusually low for the claimed memory/model capacity, but a host system and unknown cooling overhead are required",
+      "efficiency_notes": "384GB / ~240W gives a simple specification-derived capacity ratio of about 1.6GB of on-card memory per board watt. This is not tokens/joule and does not include host, cooling or power-supply losses.",
+      "cost_efficiency": "unknown_quote_only; no defensible public numeric card price was verified",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "early_access_request_program",
+          "observed_at": "2026-08-28",
+          "vendor": "Skymizer",
+          "url": "https://skymizer.com/products/htx301/",
+          "note": "Skymizer offers an early-access/request-preview form but no public card MSRP or distributor street price."
+        }
+      ],
+      "vendor_urls": [
+        "https://skymizer.com/products/htx301/",
+        "https://skymizer.com/products/hyperthought/",
+        "https://skymizer.com/announcements/htx301-on-prem-ai-inference/"
+      ],
+      "technical_documentation": [
+        "https://skymizer.com/products/htx301/",
+        "https://skymizer.com/products/hyperthought/"
+      ],
+      "source_caveats": [
+        "The HTX301 product page states 4B-700B reach for the six-chip reference card, while the broader HyperThought platform page currently states model reach up to 600B. This record uses the product-specific 700B claim and preserves the discrepancy.",
+        "Skymizer says figures reflect the HTX301 reference platform and are subject to change ahead of general availability.",
+        "The exact on-card LPDDR generation/mix, aggregate memory bandwidth, PCIe generation/lanes, card dimensions, cooling requirement, power connectors, supported model formats and independent token-generation performance are not publicly specified.",
+        "The product is early access, not verified broadly retail-available hardware."
+      ],
+      "evidence": "manufacturer_current_early_access"
+    }
+  ]
+}
