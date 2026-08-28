@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-28",
+  "purpose": "Normalize AWS Trainium3 and Trainium4 for distributed LLM inference research without treating cloud-only accelerators as locally purchasable cards.",
+  "hardware": [
+    {
+      "id": "aws-trainium3",
+      "manufacturer": "Amazon Web Services",
+      "product": "AWS Trainium3",
+      "compute_platform": "aws-trainium3",
+      "category": "datacenter_ai_accelerator_cloud",
+      "status": "available_cloud",
+      "availability": {
+        "delivery_model": "Amazon EC2 Trn3 UltraServers",
+        "state": "generally_available",
+        "standalone_hardware_sale": false
+      },
+      "process_nm": 3,
+      "compute": {
+        "fp8_pflops_per_chip": 2.52,
+        "supported_low_precision_formats": ["FP8", "MXFP8", "MXFP4"]
+      },
+      "memory": {
+        "capacity_gb_per_chip": 144,
+        "type": "HBM3e",
+        "bandwidth_tb_s_per_chip": 4.9
+      },
+      "scale_up": {
+        "max_chips_per_ultraserver": 144,
+        "aggregate_hbm_tb_max": 20.7,
+        "aggregate_memory_bandwidth_tb_s_max": 706,
+        "fabric": "NeuronSwitch-v1 / NeuronLink-v4",
+        "interconnect_bandwidth_tb_s_per_chip": 2.0
+      },
+      "software": [
+        "AWS Neuron",
+        "PyTorch",
+        "JAX",
+        "Hugging Face Optimum Neuron",
+        "NxD Inference",
+        "vLLM integration paths",
+        "Amazon SageMaker",
+        "Amazon EKS",
+        "Amazon ECS",
+        "AWS Batch",
+        "AWS ParallelCluster"
+      ],
+      "manufacturer_claims": [
+        {
+          "claim": "up to 4.4x higher performance than Trn2 UltraServers",
+          "evidence": "manufacturer"
+        },
+        {
+          "claim": "more than 4x better performance per watt than Trn2 UltraServers",
+          "evidence": "manufacturer"
+        },
+        {
+          "claim": "up to 3x Trainium2 performance and more than 5x output tokens per megawatt at similar per-user latency on Amazon Bedrock",
+          "evidence": "manufacturer"
+        }
+      ],
+      "pricing": [],
+      "pricing_note": "Cloud service pricing is region, tenancy and commitment dependent. No standalone hardware purchase price applies; no numeric EC2 observation was captured in this record.",
+      "vendor_urls": [
+        "https://aws.amazon.com/ai/machine-learning/trainium/",
+        "https://aws.amazon.com/ec2/instance-types/trn3/"
+      ],
+      "technical_documentation": [
+        "https://awsdocs-neuron.readthedocs-hosted.com/",
+        "https://aws.amazon.com/about-aws/whats-new/2025/12/amazon-ec2-trn3-ultraservers/"
+      ],
+      "evidence": "manufacturer",
+      "research_priority": "high"
+    },
+    {
+      "id": "aws-trainium4",
+      "manufacturer": "Amazon Web Services / Annapurna Labs",
+      "product": "AWS Trainium4",
+      "compute_platform": "aws-trainium4-nvlink-fusion-nvhbm",
+      "category": "future_datacenter_ai_accelerator_cloud",
+      "status": "announced",
+      "availability": {
+        "expected_delivery": "2027",
+        "standalone_hardware_sale": false
+      },
+      "compute_targets_vs_trainium3": {
+        "fp4_processing_multiplier_min": 6,
+        "fp8_processing_multiplier_min": 3
+      },
+      "memory": {
+        "capacity_gb": null,
+        "type": "NVHBM-based next-generation high-bandwidth memory implementation",
+        "bandwidth_tb_s": null,
+        "bandwidth_multiplier_vs_trainium3_target_min": 4
+      },
+      "interconnect": [
+        "NVIDIA NVLink Fusion",
+        "sixth-generation NVLink rack-scale fabric planned"
+      ],
+      "nvhbm_vendor_claims": {
+        "comparison_baseline": "standard HBM4e",
+        "memory_bandwidth_improvement_percent_up_to": 30,
+        "hbm_power_reduction_percent_up_to": 15,
+        "compute_die_area_gain_percent_up_to": 25,
+        "end_to_end_xpu_performance_gain_percent_up_to": 30,
+        "note": "NVIDIA architecture claims for NVHBM, not measured Trainium4 production results."
+      },
+      "power_w": null,
+      "pricing": [],
+      "pricing_note": "Final Trainium4 cloud pricing and hardware configuration have not been published.",
+      "software": ["AWS Neuron expected", "PyTorch ecosystem expected"],
+      "vendor_urls": [
+        "https://www.aboutamazon.com/news/aws/trainium-3-ultraserver-faster-ai-training-lower-cost",
+        "https://developer.nvidia.com/blog/nvidia-nvlink-fusion-brings-nvhbm-to-next-generation-ai-infrastructure/"
+      ],
+      "technical_documentation": [
+        "https://developer.nvidia.com/blog/nvidia-nvlink-fusion-brings-nvhbm-to-next-generation-ai-infrastructure/",
+        "https://investor.nvidia.com/news/press-release-details/2026/AWS-and-NVIDIA-to-Deliver-2-Million-Additional-GPUs-and-Next-Generation-Infrastructure-for-Agentic-and-Physical-AI/default.aspx"
+      ],
+      "evidence": "manufacturer_roadmap",
+      "research_priority": "very_high",
+      "research_gaps": [
+        "final HBM capacity",
+        "final physical memory bandwidth",
+        "chip and system power",
+        "EC2 instance and UltraServer pricing",
+        "named-model prefill/decode benchmarks",
+        "independent tokens per watt",
+        "production NVHBM behavior",
+        "heterogeneous Trainium plus NVIDIA GPU scaling over NVLink Fusion"
+      ]
+    }
+  ]
+}
