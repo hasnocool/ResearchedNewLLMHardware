@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import {
   catalog,
   HardwareRecord,
@@ -252,7 +252,7 @@ function CompareWorkbench({
     [selected, activeHours],
   );
 
-  const row = (label: string, render: (record: HardwareRecord) => React.ReactNode) => (
+  const row = (label: string, render: (record: HardwareRecord) => ReactNode) => (
     <tr key={label}><th>{label}</th>{selected.map((record) => <td key={record.id}>{render(record)}</td>)}</tr>
   );
 
