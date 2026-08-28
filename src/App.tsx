@@ -152,13 +152,13 @@ function Explore() {
       <section className="filters" aria-label="Catalog filters">
         <input aria-label="Search hardware" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search products, runtimes, notes, model fit…" />
         <select aria-label="Manufacturer" value={manufacturer} onChange={(event) => setManufacturer(event.target.value)}>
-          <option value="all">All manufacturers</option>{manufacturers.map((item) => <option key={item}>{item}</option>)}
+          <option value="all">All manufacturers</option>{manufacturers.map((item) => <option key={item} value={item}>{item}</option>)}
         </select>
         <select aria-label="Category" value={category} onChange={(event) => setCategory(event.target.value)}>
-          <option value="all">All categories</option>{categories.map((item) => <option key={item}>{titleCase(item)}</option>)}
+          <option value="all">All categories</option>{categories.map((item) => <option key={item} value={item}>{titleCase(item)}</option>)}
         </select>
         <select aria-label="Status" value={status} onChange={(event) => setStatus(event.target.value)}>
-          <option value="all">All statuses</option>{statuses.map((item) => <option key={item}>{titleCase(item)}</option>)}
+          <option value="all">All statuses</option>{statuses.map((item) => <option key={item} value={item}>{titleCase(item)}</option>)}
         </select>
         <select aria-label="Sort" value={sort} onChange={(event) => setSort(event.target.value as Sort)}>
           <option value="name">Sort: name</option><option value="memory">Sort: memory</option><option value="bandwidth">Sort: bandwidth</option><option value="power">Sort: lowest power</option>
