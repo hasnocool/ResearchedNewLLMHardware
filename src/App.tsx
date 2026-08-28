@@ -9,16 +9,19 @@ import {
   powerWatts,
   primaryPrice,
 } from './lib/catalog';
+import { comparisonMetrics } from './lib/comparison';
 
-type Tab = 'explore' | 'benchmarks' | 'health';
+type Tab = 'explore' | 'compare' | 'benchmarks' | 'health';
 type Sort = 'name' | 'memory' | 'bandwidth' | 'power';
 
 function titleCase(value: string): string {
   return value.replaceAll('_', ' ').replaceAll('-', ' ').replace(/\b\w/g, (match) => match.toUpperCase());
 }
 
-function formatNumber(value?: number, suffix = ''): string {
-  return value === undefined ? '—' : `${new Intl.NumberFormat('en-CA', { maximumFractionDigits: 1 }).format(value)}${suffix}`;
+function formatNumber(value?: number, suffix = '', maximumFractionDigits = 1): string {
+  return value === undefined
+    ? '—'
+    : `${new Intl.NumberFormat('en-CA', { maximumFractionDigits }).format(value)}${suffix}`;
 }
 
 function formatPrice(price?: JsonRecord): string {
@@ -31,6 +34,11 @@ function formatPrice(price?: JsonRecord): string {
   }
 }
 
+function formatPerCurrency(value: number | undefined, currency: string | undefined, unit: string): string {
+  if (value === undefined || !currency) return '—';
+  return `${currency} ${formatNumber(value, ` ${unit}`, 3)}`;
+}
+
 function unique(values: string[]): string[] {
   return [...new Set(values)].sort((a, b) => a.localeCompare(b));
 }
@@ -38,6 +46,12 @@ function unique(values: string[]): string[] {
 function software(record: HardwareRecord): string[] {
   const value = record.software ?? record.frameworks ?? record.runtimes;
   return Array.isArray(value) ? value.filter((entry): entry is string => typeof entry === 'string').slice(0, 5) : [];
+}
+
+function textValue(value: unknown): string {
+  if (typeof value === 'string') return value;
+  if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+  return '—';
 }
 
 function Metric({ label, value }: { label: string; value: string }) {
@@ -48,10 +62,22 @@ function Stat({ value, label }: { value: string | number; label: string }) {
   return <div className="stat"><strong>{value}</strong><span>{label}</span></div>;
 }
 
-function HardwareCard({ record, onOpen }: { record: HardwareRecord; onOpen: () => void }) {
+function HardwareCard({
+  record,
+  onOpen,
+  compared,
+  onToggleCompare,
+  compareDisabled,
+}: {
+  record: HardwareRecord;
+  onOpen: () => void;
+  compared: boolean;
+  onToggleCompare: () => void;
+  compareDisabled: boolean;
+}) {
   const price = primaryPrice(record, catalog.observations);
   return (
-    <article className="hardware-card">
+    <article className={`hardware-card${compared ? ' compared' : ''}`}>
       <div className="card-topline">
         <span className="eyebrow">{record.manufacturer}</span>
         <span className="status-chip">{titleCase(record.status)}</span>
@@ -69,7 +95,17 @@ function HardwareCard({ record, onOpen }: { record: HardwareRecord; onOpen: () =
       </div>
       <div className="card-footer">
         <small>{record.__source.split('/').at(-1)}</small>
-        <button type="button" onClick={onOpen}>Inspect</button>
+        <div className="card-actions">
+          <button
+            type="button"
+            className={compared ? 'selected-action' : ''}
+            onClick={onToggleCompare}
+            disabled={compareDisabled && !compared}
+          >
+            {compared ? 'Compared' : 'Compare'}
+          </button>
+          <button type="button" onClick={onOpen}>Inspect</button>
+        </div>
       </div>
     </article>
   );
@@ -113,7 +149,13 @@ function DetailDialog({ record, onClose }: { record: HardwareRecord; onClose: ()
   );
 }
 
-function Explore() {
+function Explore({
+  compareIds,
+  onToggleCompare,
+}: {
+  compareIds: string[];
+  onToggleCompare: (id: string) => void;
+}) {
   const [search, setSearch] = useState('');
   const [manufacturer, setManufacturer] = useState('all');
   const [category, setCategory] = useState('all');
@@ -124,6 +166,7 @@ function Explore() {
   const manufacturers = useMemo(() => unique(catalog.hardware.map((item) => item.manufacturer)), []);
   const categories = useMemo(() => unique(catalog.hardware.map((item) => item.category)), []);
   const statuses = useMemo(() => unique(catalog.hardware.map((item) => item.status)), []);
+  const compareSet = useMemo(() => new Set(compareIds), [compareIds]);
 
   const records = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -164,12 +207,141 @@ function Explore() {
           <option value="name">Sort: name</option><option value="memory">Sort: memory</option><option value="bandwidth">Sort: bandwidth</option><option value="power">Sort: lowest power</option>
         </select>
       </section>
-      <div className="results-line"><strong>{records.length}</strong> matching records</div>
+      <div className="results-line"><strong>{records.length}</strong> matching records · <strong>{compareIds.length}/10</strong> selected to compare</div>
       <section className="catalog-grid">
-        {records.map((record) => <HardwareCard key={record.id} record={record} onOpen={() => setSelected(record)} />)}
+        {records.map((record) => <HardwareCard
+          key={record.id}
+          record={record}
+          compared={compareSet.has(record.id)}
+          compareDisabled={compareIds.length >= 10}
+          onToggleCompare={() => onToggleCompare(record.id)}
+          onOpen={() => setSelected(record)}
+        />)}
       </section>
       {selected && <DetailDialog record={selected} onClose={() => setSelected(null)} />}
     </>
+  );
+}
+
+function CompareWorkbench({
+  compareIds,
+  onToggleCompare,
+  onClear,
+}: {
+  compareIds: string[];
+  onToggleCompare: (id: string) => void;
+  onClear: () => void;
+}) {
+  const [search, setSearch] = useState('');
+  const [activeHours, setActiveHours] = useState(8);
+  const selected = useMemo(
+    () => compareIds.map((id) => catalog.hardware.find((record) => record.id === id)).filter((record): record is HardwareRecord => Boolean(record)),
+    [compareIds],
+  );
+  const selectedSet = useMemo(() => new Set(compareIds), [compareIds]);
+  const candidates = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    return catalog.hardware
+      .filter((record) => !selectedSet.has(record.id))
+      .filter((record) => !query || record.__search.includes(query))
+      .sort((a, b) => `${a.manufacturer} ${a.product}`.localeCompare(`${b.manufacturer} ${b.product}`))
+      .slice(0, 12);
+  }, [search, selectedSet]);
+  const metrics = useMemo(
+    () => new Map(selected.map((record) => [record.id, comparisonMetrics(record, catalog.observations, activeHours)])),
+    [selected, activeHours],
+  );
+
+  const row = (label: string, render: (record: HardwareRecord) => React.ReactNode) => (
+    <tr key={label}><th>{label}</th>{selected.map((record) => <td key={record.id}>{render(record)}</td>)}</tr>
+  );
+
+  return (
+    <div className="compare-workbench">
+      <section className="panel compare-picker-panel">
+        <div className="section-heading">
+          <div><span className="eyebrow">Workbench</span><h2>Compare 2–10 devices</h2></div>
+          <button type="button" className="secondary-button" onClick={onClear} disabled={!compareIds.length}>Clear selection</button>
+        </div>
+        <p className="compare-note">Derived value metrics are only directly comparable when prices use the same currency and equivalent condition/configuration. Power-based estimates use the repository's normalized board/TDP/system power field, not measured wall power.</p>
+        <div className="compare-controls">
+          <label>
+            <span>Find hardware</span>
+            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search catalog to add…" />
+          </label>
+          <label>
+            <span>Active hours/day for energy estimate</span>
+            <input
+              type="number"
+              min="1"
+              max="24"
+              value={activeHours}
+              onChange={(event) => setActiveHours(Math.min(24, Math.max(1, Number(event.target.value) || 1)))}
+            />
+          </label>
+        </div>
+        <div className="compare-candidates">
+          {candidates.map((record) => (
+            <button key={record.id} type="button" onClick={() => onToggleCompare(record.id)} disabled={compareIds.length >= 10}>
+              <span>{record.manufacturer}</span><strong>{record.product}</strong><small>{formatNumber(memoryGb(record), ' GB')} · {formatNumber(powerWatts(record), ' W')}</small>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="selected-tray" aria-label="Selected comparison hardware">
+        {selected.map((record) => (
+          <button type="button" key={record.id} onClick={() => onToggleCompare(record.id)} title="Remove from comparison">
+            <span>{record.manufacturer}</span><strong>{record.product}</strong><b>×</b>
+          </button>
+        ))}
+        {!selected.length && <p>Select hardware from Explore or use the search above.</p>}
+      </section>
+
+      {selected.length < 2 && <section className="panel compare-empty"><strong>Select at least two devices</strong><span>The workbench will calculate capacity, bandwidth, value, energy, model-fit, and runtime comparisons.</span></section>}
+
+      {selected.length >= 2 && (
+        <section className="panel comparison-panel">
+          <div className="section-heading"><div><span className="eyebrow">Side by side</span><h2>Comparison matrix</h2></div><span>{selected.length} devices</span></div>
+          <div className="comparison-table-wrap">
+            <table className="comparison-table">
+              <thead><tr><th>Metric</th>{selected.map((record) => <th key={record.id}><span>{record.manufacturer}</span><strong>{record.product}</strong></th>)}</tr></thead>
+              <tbody>
+                {row('Status', (record) => titleCase(record.status))}
+                {row('Category', (record) => titleCase(record.category))}
+                {row('Memory', (record) => formatNumber(metrics.get(record.id)?.memoryGb, ' GB'))}
+                {row('Memory bandwidth', (record) => formatNumber(metrics.get(record.id)?.bandwidthGbps, ' GB/s'))}
+                {row('Power reference', (record) => formatNumber(metrics.get(record.id)?.powerWatts, ' W'))}
+                {row('Latest observed price', (record) => formatPrice(metrics.get(record.id)?.price))}
+                {row('Cost per GB', (record) => {
+                  const metric = metrics.get(record.id);
+                  return formatPerCurrency(metric?.costPerGb, metric?.priceCurrency, '/GB');
+                })}
+                {row('Bandwidth per currency unit', (record) => {
+                  const metric = metrics.get(record.id);
+                  return formatPerCurrency(metric?.bandwidthPerCurrencyUnit, metric?.priceCurrency, 'GB/s per unit');
+                })}
+                {row('Memory per watt', (record) => formatNumber(metrics.get(record.id)?.memoryPerWatt, ' GB/W', 3))}
+                {row('Bandwidth per watt', (record) => formatNumber(metrics.get(record.id)?.bandwidthPerWatt, ' GB/s/W', 3))}
+                {row(`Energy at ${activeHours} active h/day`, (record) => formatNumber(metrics.get(record.id)?.activeEnergyKwhDay, ' kWh/day', 3))}
+                {row('Capacity-only model-fit estimate', (record) => metrics.get(record.id)?.modelFit ?? '—')}
+                {row('Explicit runtimes/frameworks', (record) => {
+                  const values = metrics.get(record.id)?.runtimes ?? [];
+                  return values.length ? <div className="comparison-chips">{values.map((value) => <span key={value}>{value}</span>)}</div> : '—';
+                })}
+                {row('Quantization notes', (record) => {
+                  const values = metrics.get(record.id)?.quantization ?? [];
+                  return values.length ? <div className="comparison-chips">{values.map((value) => <span key={value}>{value}</span>)}</div> : '—';
+                })}
+                {row('LLM suitability', (record) => textValue(record.llm_inference_suitability))}
+                {row('Off-grid suitability', (record) => textValue(record.off_grid_suitability))}
+              </tbody>
+            </table>
+          </div>
+          <p className="comparison-disclaimer">Model-fit tiers are rough weight-memory guidance only. They do not account for KV cache, context length, batching, runtime overhead, split memory topologies, host RAM offload, or whether the stated memory is fully accelerator-addressable.</p>
+        </section>
+      )}
+    </div>
   );
 }
 
@@ -204,6 +376,16 @@ function Health() {
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('explore');
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+
+  function toggleCompare(id: string) {
+    setCompareIds((current) => {
+      if (current.includes(id)) return current.filter((entry) => entry !== id);
+      if (current.length >= 10) return current;
+      return [...current, id];
+    });
+  }
+
   return (
     <div className="app-shell">
       <header className="hero">
@@ -211,9 +393,19 @@ export default function App() {
         <div className="freshness"><span>Catalog date</span><strong>{catalog.lastUpdated ?? 'unknown'}</strong><small>{catalog.files.length} data files loaded</small></div>
       </header>
       <nav className="tabs" aria-label="Views">
-        {([['explore', 'Explore'], ['benchmarks', 'Benchmarks'], ['health', 'Data health']] as const).map(([key, label]) => <button key={key} type="button" className={tab === key ? 'active' : ''} onClick={() => setTab(key)}>{label}</button>)}
+        {([
+          ['explore', 'Explore'],
+          ['compare', `Compare${compareIds.length ? ` (${compareIds.length})` : ''}`],
+          ['benchmarks', 'Benchmarks'],
+          ['health', 'Data health'],
+        ] as const).map(([key, label]) => <button key={key} type="button" className={tab === key ? 'active' : ''} onClick={() => setTab(key)}>{label}</button>)}
       </nav>
-      <main>{tab === 'explore' ? <Explore /> : tab === 'benchmarks' ? <Benchmarks /> : <Health />}</main>
+      <main>
+        {tab === 'explore' && <Explore compareIds={compareIds} onToggleCompare={toggleCompare} />}
+        {tab === 'compare' && <CompareWorkbench compareIds={compareIds} onToggleCompare={toggleCompare} onClear={() => setCompareIds([])} />}
+        {tab === 'benchmarks' && <Benchmarks />}
+        {tab === 'health' && <Health />}
+      </main>
       <footer>Built directly from repository data. Unknown future fields remain visible in the record inspector instead of being discarded.</footer>
     </div>
   );
