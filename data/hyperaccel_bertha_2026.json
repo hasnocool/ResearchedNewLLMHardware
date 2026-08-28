@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.1.0",
+  "last_updated": "2026-08-28",
+  "purpose": "Manufacturer-verified HyperAccel Bertha LPU accelerator records for LLM inference, preserving announced/coming-soon status and explicitly separating vendor performance claims from independently reproduced results.",
+  "hardware": [
+    {
+      "id": "hyperaccel-bertha-500",
+      "manufacturer": "HyperAccel",
+      "product": "Bertha 500",
+      "model": "B500",
+      "compute_platform": "hyperaccel-lpu",
+      "category": "llm_inference_accelerator",
+      "status": "sampling_preproduction",
+      "release_status_as_of": "2026-08-28",
+      "architecture": "HyperAccel LPU; inference-specialized coarse-core architecture with streamlined dataflow, hardware-native batching and multi-chip scaling",
+      "process_node": "4nm",
+      "fp16_tflops": 384,
+      "fp8_tflops": 768,
+      "supported_number_formats": ["FP16", "FP8", "FP4", "INT8", "INT4"],
+      "target_frequency_ghz": 1.5,
+      "memory_gb": {"base": 128, "max": 256},
+      "memory_type": "LPDDR5X, 8 channels",
+      "memory_bandwidth_gbps": 546,
+      "sram_mb": 256,
+      "tdp_w": 250,
+      "host_interface": "PCIe Gen5",
+      "form_factor": "dual-slot accelerator",
+      "batch_size_vendor": "1-1024",
+      "software": ["HyperDex", "PyTorch", "ONNX", "vLLM"],
+      "quantization_compatibility": ["FP16", "FP8", "FP4", "INT8", "INT4"],
+      "model_size_practicality": "128GB base memory provides enough raw capacity for many 70B-class 4-bit models with useful headroom; 256GB configurations can accommodate substantially larger quantized models. Actual usable model size depends on runtime overhead, KV cache, context, batching and whether all memory is exposed to a given execution path.",
+      "llm_inference_suitability": "very_high_capacity_specialized_inference",
+      "off_grid_suitability": "low_to_moderate; 250W accelerator TDP is relatively efficient for 128-256GB capacity but requires a host, cooling and external AC/DC infrastructure",
+      "efficiency_notes": "Specification-derived memory capacity per accelerator watt is 0.512GB/W at 128GB and 1.024GB/W at 256GB. These are capacity ratios, not measured tokens/joule.",
+      "vendor_benchmarks_and_claims": [
+        {
+          "claim": "Bertha 500 supports 1024 concurrent requests and 768 TFLOPS FP8 with approximately 90% hardware utilization during inference.",
+          "evidence_scope": "manufacturer product page",
+          "normalization_caveat": "Utilization is a vendor architecture claim and has not been independently reproduced here."
+        },
+        {
+          "claim": "Against an NVIDIA H100 comparison, HyperAccel reports 1,645 vs 804 tokens/s, 411,225 vs 22,970 tokens/s per $1M and 13,700 vs 1,149 tokens/s/kW.",
+          "evidence_scope": "manufacturer comparison chart",
+          "normalization_caveat": "Model, quantization, serving settings, system configuration and price basis are not sufficiently disclosed for normalized cross-platform ranking; retain as vendor evidence only."
+        }
+      ],
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "sampling_preproduction",
+          "observed_at": "2026-08-28",
+          "vendor": "HyperAccel",
+          "url": "https://hyperaccel.ai/ha_product/bertha-500/",
+          "note": "No public numeric MSRP or broadly orderable retail price was verified. HyperAccel provides an inquiry path."
+        }
+      ],
+      "vendor_urls": ["https://hyperaccel.ai/ha_product/bertha-500/", "https://hyperaccel.ai/"],
+      "technical_documentation": ["https://hyperaccel.ai/ha_product/bertha-500/", "https://hyperaccel.ai/ha_product/lpu-ip/", "https://docs.hyperaccel.ai/"],
+      "source_caveats": [
+        "HyperAccel public materials describe B500 samples in 2026 and mass production targeted for 2027; status is therefore not recorded as generally available.",
+        "No independent retail price or independently reproduced end-to-end LLM benchmark was verified in this pass."
+      ],
+      "evidence": "manufacturer_current"
+    },
+    {
+      "id": "hyperaccel-bertha-100",
+      "manufacturer": "HyperAccel",
+      "product": "Bertha 100",
+      "model": "B100",
+      "compute_platform": "hyperaccel-lpu-edge",
+      "category": "edge_llm_accelerator_m2",
+      "status": "announced_q4_2026",
+      "release_status_as_of": "2026-08-28",
+      "architecture": "HyperAccel LPU-based edge SoC/accelerator for multimodal inference",
+      "process_node": "4nm",
+      "fp8_tflops": 32.768,
+      "target_frequency_ghz": 1.0,
+      "supported_number_formats": ["BF16", "FP8", "FP4", "INT8", "INT4"],
+      "memory_gb": 16,
+      "memory_type": "LPDDR5X",
+      "memory_bandwidth_gbps": 64,
+      "form_factor": "M.2",
+      "software": ["HyperDex", "PyTorch", "ONNX", "vLLM"],
+      "quantization_compatibility": ["BF16", "FP8", "FP4", "INT8", "INT4"],
+      "model_size_practicality": "16GB places B100 primarily in the small-to-mid local model tier. Roughly 7B-14B quantized workloads are plausible by capacity, but real fit depends on model format, context, KV cache and HyperDex support.",
+      "llm_inference_suitability": "promising_edge_specialized_inference",
+      "off_grid_suitability": "potentially_high_pending_power_disclosure; compact M.2 format and LPDDR5X target edge deployments, but HyperAccel does not publish a final B100 board/system power figure on the current product page",
+      "efficiency_notes": "HyperAccel positions B100 for IoT, smart appliances and on-premise edge systems; do not infer watts or tokens/joule from the architecture-level LPU IP figures.",
+      "pricing": [
+        {
+          "kind": "quote_only",
+          "availability": "coming_q4_2026",
+          "observed_at": "2026-08-28",
+          "vendor": "HyperAccel",
+          "url": "https://hyperaccel.ai/ha_product/bertha-100/",
+          "note": "No public numeric MSRP or retail listing verified. Product page states Coming Q4, 2026."
+        }
+      ],
+      "vendor_urls": ["https://hyperaccel.ai/ha_product/bertha-100/", "https://hyperaccel.ai/"],
+      "technical_documentation": ["https://hyperaccel.ai/ha_product/bertha-100/", "https://hyperaccel.ai/ha_product/lpu-ip/", "https://docs.hyperaccel.ai/"],
+      "source_caveats": [
+        "The current B100 product page states 32.768 TFLOPS FP8, while descriptive marketing text also references a rounded 48 TFLOPS balanced specification. This record uses the explicit specification table value and preserves the discrepancy here.",
+        "A final B100 accelerator TDP, public MSRP and independent LLM tokens/s benchmark were not verified."
+      ],
+      "evidence": "manufacturer_current_announced"
+    }
+  ]
+}
