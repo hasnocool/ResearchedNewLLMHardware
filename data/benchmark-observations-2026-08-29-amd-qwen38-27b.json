@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-08-14",
+  "product": "GMKtec EVO X2 AI Mini PC",
+  "platform": "AMD Ryzen AI Max+ 395 with 128GB system memory",
+  "model": "Qwen 3.8 27B",
+  "quantization": "not stated in result snippet",
+  "evidence_quality": "vendor_benchmark",
+  "runtime": "llama.cpp with Vulkan backend",
+  "settings": {
+    "system_memory_gb": 128,
+    "virtual_graphics_memory_gb": 64,
+    "operating_system": "Windows 11 Pro 25H2",
+    "driver": "AMD Software Adrenalin Edition 26.7.1",
+    "chipset_driver": "8.05.04.516",
+    "measurement": "average token generation throughput over three or more runs",
+    "mtp": 4
+  },
+  "results": [],
+  "source_url": "https://www.amd.com/en/blogs/2026/run-qwen-3-8-27b-on-amd-ryzen-ai-max-and-radeon-graphics-cards-day-0.html",
+  "notes": "AMD page exposes a current vendor benchmark configuration and result context, but the accessible public result snippet did not include the numeric token/s value in this observation. Do not infer throughput until the full table is captured."
+}
