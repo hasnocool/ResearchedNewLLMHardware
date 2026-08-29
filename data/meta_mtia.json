@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-28",
+  "purpose": "Meta MTIA internal datacenter accelerator roadmap for GenAI and LLM inference research.",
+  "hardware": [
+    {
+      "id": "meta-mtia-300",
+      "manufacturer": "Meta",
+      "product": "MTIA 300",
+      "category": "internal_datacenter_ai_accelerator",
+      "status": "production_internal",
+      "compute_platform": "meta-mtia-300",
+      "target_workloads": ["ranking_recommendation_training", "platform_baseline"],
+      "memory_gb": 216,
+      "memory_type": "HBM",
+      "memory_bandwidth_tbps": 6.1,
+      "peak_compute": {
+        "fp8_or_mx8_pflops": 1.2,
+        "bf16_pflops": 0.6
+      },
+      "module_tdp_w": 800,
+      "scale_up_domain_devices": 16,
+      "scale_up_bandwidth_tbps_unidirectional": 1.0,
+      "scale_out_bandwidth_gbps_unidirectional": 200,
+      "software": ["PyTorch", "torch.compile", "torch.export", "TorchInductor", "Triton", "MLIR", "LLVM", "vLLM", "HCCL"],
+      "availability": {
+        "channel": "Meta internal infrastructure only",
+        "public_purchase": false
+      },
+      "pricing": [],
+      "evidence_quality": "manufacturer_with_secondary_crosscheck",
+      "vendor_urls": [
+        "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/",
+        "https://about.fb.com/news/2026/03/expanding-metas-custom-silicon-to-power-our-ai-workloads/"
+      ],
+      "technical_documentation": [
+        "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/"
+      ],
+      "source_urls": [
+        "https://www.tomshardware.com/tech-industry/semiconductors/metas-mtia-chip-lineup-joins-hyperscaler-push-to-replace-nvidia-at-inference"
+      ]
+    },
+    {
+      "id": "meta-mtia-400",
+      "manufacturer": "Meta",
+      "product": "MTIA 400",
+      "category": "internal_datacenter_genai_accelerator",
+      "status": "lab_testing_complete_deployment_path",
+      "compute_platform": "meta-mtia-400",
+      "target_workloads": ["genai_inference", "general_ai", "ranking_recommendation"],
+      "architecture_notes": [
+        "two compute chiplets",
+        "integrated network chiplets",
+        "72-accelerator switched-backplane scale-up domain",
+        "shared chassis/rack/network infrastructure with MTIA 450 and MTIA 500"
+      ],
+      "memory_gb": 288,
+      "memory_type": "HBM",
+      "memory_bandwidth_tbps": 9.2,
+      "peak_compute": {
+        "mx4_pflops": 12,
+        "fp8_or_mx8_pflops": 6,
+        "bf16_pflops": 3
+      },
+      "module_tdp_w": 1200,
+      "scale_up_domain_devices": 72,
+      "scale_up_bandwidth_tbps_unidirectional": 1.2,
+      "scale_out_bandwidth_gbps_unidirectional": 100,
+      "software": ["PyTorch", "torch.compile", "torch.export", "TorchInductor", "Triton", "MLIR", "LLVM", "vLLM", "HCCL", "Rust user-space driver"],
+      "llm_evidence": [
+        {
+          "kind": "manufacturer_platform_evidence",
+          "statement": "Meta states MTIA has been tested with Llama-family LLMs and MTIA 400 is designed to support GenAI workloads.",
+          "normalized_benchmark": false
+        }
+      ],
+      "availability": {
+        "channel": "Meta internal infrastructure only",
+        "public_purchase": false,
+        "deployment_note": "Meta says lab testing is complete and the device is on the path to datacenter deployment."
+      },
+      "pricing": [],
+      "evidence_quality": "manufacturer_with_hot_chips_secondary_crosscheck",
+      "vendor_urls": [
+        "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/",
+        "https://about.fb.com/news/2026/03/expanding-metas-custom-silicon-to-power-our-ai-workloads/"
+      ],
+      "technical_documentation": [
+        "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/"
+      ],
+      "source_urls": [
+        "https://www.tomshardware.com/tech-industry/semiconductors/metas-mtia-chip-lineup-joins-hyperscaler-push-to-replace-nvidia-at-inference",
+        "https://thequantumdispatch.com/articles/meta-mtia-400-fp4-inference-accelerator"
+      ]
+    },
+    {
+      "id": "meta-mtia-450",
+      "manufacturer": "Meta",
+      "product": "MTIA 450",
+      "category": "internal_datacenter_genai_inference_accelerator",
+      "status": "planned_mass_deployment_early_2027",
+      "compute_platform": "meta-mtia-450",
+      "target_workloads": ["genai_inference", "moe_inference", "attention_heavy_inference"],
+      "memory_gb": 288,
+      "memory_type": "HBM",
+      "memory_bandwidth_tbps": 18.4,
+      "peak_compute": {
+        "mx4_pflops": 21,
+        "fp8_or_mx8_pflops": 7,
+        "bf16_pflops": 3.5
+      },
+      "module_tdp_w": 1400,
+      "scale_up_domain_devices": 72,
+      "scale_up_bandwidth_tbps_unidirectional": 1.2,
+      "scale_out_bandwidth_gbps_unidirectional": 100,
+      "inference_acceleration": ["FlashAttention bottleneck acceleration", "Softmax acceleration", "MoE feed-forward-network acceleration", "mixed low-precision execution", "custom low-precision datatypes"],
+      "software": ["PyTorch", "torch.compile", "torch.export", "TorchInductor", "Triton", "MLIR", "LLVM", "vLLM", "HCCL"],
+      "availability": {
+        "channel": "Meta internal infrastructure only",
+        "public_purchase": false,
+        "deployment_note": "Mass deployment scheduled by Meta for early 2027."
+      },
+      "pricing": [],
+      "evidence_quality": "manufacturer_with_secondary_crosscheck",
+      "vendor_urls": [
+        "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/"
+      ],
+      "technical_documentation": [
+        "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/"
+      ],
+      "source_urls": [
+        "https://www.tomshardware.com/tech-industry/semiconductors/metas-mtia-chip-lineup-joins-hyperscaler-push-to-replace-nvidia-at-inference"
+      ]
+    },
+    {
+      "id": "meta-mtia-500",
+      "manufacturer": "Meta",
+      "product": "MTIA 500",
+      "category": "internal_datacenter_genai_inference_accelerator",
+      "status": "planned_mass_deployment_2027",
+      "compute_platform": "meta-mtia-500",
+      "target_workloads": ["genai_inference", "large_model_inference", "moe_inference"],
+      "architecture_notes": [
+        "2x2 configuration of smaller compute chiplets",
+        "HBM surrounding compute chiplets",
+        "two network chiplets",
+        "SoC chiplet for PCIe host and scale-out connectivity"
+      ],
+      "memory_gb": {
+        "min": 384,
+        "max": 512
+      },
+      "memory_type": "HBM",
+      "memory_bandwidth_tbps": 27.6,
+      "peak_compute": {
+        "mx4_pflops": 30,
+        "fp8_or_mx8_pflops": 10,
+        "bf16_pflops": 5
+      },
+      "module_tdp_w": 1700,
+      "scale_up_domain_devices": 72,
+      "scale_up_bandwidth_tbps_unidirectional": 1.2,
+      "scale_out_bandwidth_gbps_unidirectional": 100,
+      "software": ["PyTorch", "torch.compile", "torch.export", "TorchInductor", "Triton", "MLIR", "LLVM", "vLLM", "HCCL"],
+      "availability": {
+        "channel": "Meta internal infrastructure only",
+        "public_purchase": false,
+        "deployment_note": "Mass deployment scheduled by Meta for 2027."
+      },
+      "pricing": [],
+      "evidence_quality": "manufacturer_with_secondary_crosscheck",
+      "research_gaps": ["final production HBM capacity SKU", "named-model prefill/decode throughput", "tokens_per_watt", "realized multi-device scaling efficiency"],
+      "vendor_urls": [
+        "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/"
+      ],
+      "technical_documentation": [
+        "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/"
+      ],
+      "source_urls": [
+        "https://www.tomshardware.com/tech-industry/semiconductors/metas-mtia-chip-lineup-joins-hyperscaler-push-to-replace-nvidia-at-inference"
+      ]
+    }
+  ]
+}
