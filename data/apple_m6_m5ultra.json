@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-29",
+  "purpose": "Apple M6 Mac mini and M5 Ultra Mac Studio records for local and distributed LLM inference.",
+  "platforms": [
+    {
+      "id": "apple-m6",
+      "manufacturer": "Apple",
+      "product": "Apple M6",
+      "category": "compact_unified_memory_soc",
+      "status": "preorder",
+      "availability": "Apple Canada says pre-order with availability starting 2026-09-22.",
+      "cpu_cores": 12,
+      "gpu_cores": 12,
+      "neural_engine_cores": 32,
+      "memory_bandwidth_gbps": 170,
+      "unified_memory_gb_max": 32,
+      "software": ["macOS 27", "Core AI", "Core ML", "Metal", "MLX", "llama.cpp"],
+      "clusterability": ["Thunderbolt", "RDMA-capable Apple Silicon clustering via supported software"],
+      "pricing": [
+        {
+          "kind": "manufacturer_store_starting",
+          "amount": 1249,
+          "currency": "CAD",
+          "region": "CA",
+          "observed_at": "2026-08-29",
+          "availability": "preorder",
+          "source_url": "https://www.apple.com/ca/shop/buy-mac/mac-mini/m6-chip-12-core-cpu-12-core-gpu-16gb-memory-512gb-storage"
+        }
+      ],
+      "vendor_urls": ["https://www.apple.com/ca/mac-mini/", "https://www.apple.com/ca/shop/buy-mac/mac-mini"],
+      "technical_documentation": ["https://www.apple.com/ca/newsroom/2026/08/apple-unveils-a-more-powerful-mac-mini-featuring-the-all-new-m6-and-m5-pro/"],
+      "evidence": "manufacturer",
+      "research_note": "Interesting low-power local inference node; 32GB maximum unified memory limits larger models. Independent LLM throughput and whole-system power remain open research items."
+    },
+    {
+      "id": "apple-m5-ultra",
+      "manufacturer": "Apple",
+      "product": "Apple M5 Ultra",
+      "category": "high_capacity_unified_memory_soc",
+      "status": "preorder",
+      "availability": "Apple Canada says pre-order with availability starting 2026-09-22; 512GB configuration is expected in late October 2026.",
+      "cpu_cores_max": 36,
+      "gpu_cores_max": 80,
+      "neural_engine_cores": 32,
+      "memory_bandwidth_gbps": 1200,
+      "unified_memory_gb_max": 512,
+      "software": ["macOS 27", "Core AI", "Core ML", "Metal", "MLX", "llama.cpp"],
+      "clusterability": ["Thunderbolt 5", "RDMA-capable Apple Silicon clustering via supported software"],
+      "pricing": [
+        {
+          "kind": "manufacturer_store_starting",
+          "amount": 7799,
+          "currency": "CAD",
+          "region": "CA",
+          "observed_at": "2026-08-29",
+          "availability": "preorder",
+          "source_url": "https://www.apple.com/ca/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra/"
+        },
+        {
+          "kind": "manufacturer_store_exact",
+          "amount": 15749,
+          "currency": "CAD",
+          "region": "CA",
+          "observed_at": "2026-08-29",
+          "availability": "preorder",
+          "configuration": "36-core CPU, 80-core GPU, 256GB memory, 1TB storage",
+          "source_url": "https://www.apple.com/ca/shop/buy-mac/mac-studio/m5-ultra-chip-36-core-cpu-80-core-gpu-256gb-memory-1tb-storage"
+        }
+      ],
+      "vendor_urls": ["https://www.apple.com/ca/mac-studio/", "https://www.apple.com/ca/shop/buy-mac/mac-studio"],
+      "technical_documentation": ["https://www.apple.com/ca/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra/"],
+      "evidence": "manufacturer",
+      "research_note": "This is a major new coherent-memory capacity tier for local inference. Apple reports up to 512GB unified memory and 1.2TB/s bandwidth; independent decode throughput, power, and multi-node scaling remain open research items."
+    }
+  ]
+}
