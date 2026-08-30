@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-29",
+  "purpose": "ASUS host-attached Hailo-10H edge GenAI accelerator variants.",
+  "hardware": [
+    {
+      "id": "asus-ugen300-usb-hailo-10h",
+      "manufacturer": "ASUS",
+      "product": "UGen300 USB AI Accelerator",
+      "category": "host_attached_edge_accelerator",
+      "status": "announced",
+      "compute_platform": "hailo-10h",
+      "accelerator": "Hailo-10H",
+      "peak_ai_tops_vendor": 40,
+      "memory_gb": 8,
+      "memory_type": "LPDDR4",
+      "form_factor": "USB-C",
+      "host_interfaces": ["USB Type-C"],
+      "host_os": ["Windows", "Linux", "Android"],
+      "software": ["Hailo GenAI runtime", "TensorFlow", "PyTorch", "ONNX"],
+      "llm_role": ["small_model_inference", "host_offload", "edge_agent", "VLM"],
+      "pricing": [],
+      "vendor_urls": ["https://press.asus.com/news/press-releases/asus-ugen300-usb-ai-accelerator-generative-ai-edge/"],
+      "technical_documentation": ["https://hailo.ai/products/ai-accelerators/hailo-10h/"],
+      "evidence": "manufacturer",
+      "evidence_quality": "manufacturer_primary",
+      "notes": "No stable public retail price captured. 40 TOPS is a vendor peak-compute figure, not an LLM throughput result. Independent decode, sustained-power and host-bus overhead measurements remain open."
+    },
+    {
+      "id": "asus-ugen300-m2-hailo-10h",
+      "manufacturer": "ASUS",
+      "product": "UGen300 M.2 AI Accelerator",
+      "category": "host_attached_edge_accelerator",
+      "status": "announced",
+      "compute_platform": "hailo-10h",
+      "accelerator": "Hailo-10H",
+      "peak_ai_tops_vendor": 40,
+      "memory_gb": 8,
+      "memory_type": "LPDDR4",
+      "form_factor": "M.2",
+      "host_os": ["Windows", "Linux", "Android"],
+      "software": ["Hailo GenAI runtime", "TensorFlow", "PyTorch", "ONNX"],
+      "llm_role": ["small_model_inference", "host_offload", "edge_agent", "VLM"],
+      "pricing": [],
+      "vendor_urls": ["https://press.asus.com/news/press-releases/asus-ugen300-usb-ai-accelerator-generative-ai-edge/"],
+      "technical_documentation": ["https://hailo.ai/products/ai-accelerators/hailo-10h/"],
+      "evidence": "manufacturer",
+      "evidence_quality": "manufacturer_primary",
+      "notes": "Tracked separately as a purchasable-form-factor candidate, but shares the same Hailo-10H compute platform as the USB variant."
+    }
+  ]
+}
