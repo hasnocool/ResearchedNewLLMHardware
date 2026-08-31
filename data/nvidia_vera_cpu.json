@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-30",
+  "platforms": [
+    {
+      "id": "nvidia-vera-cpu",
+      "manufacturer": "NVIDIA",
+      "product": "Vera CPU",
+      "compute_platform": "nvidia-vera-cpu",
+      "category": "heterogeneous_inference_host_cpu",
+      "status": "announced",
+      "tier": "A",
+      "cpu_architecture": "custom Arm-compatible Olympus cores",
+      "cpu_cores": 88,
+      "cpu_threads": 176,
+      "memory_gb_max": 1500,
+      "memory_type": "LPDDR5X SOCAMM",
+      "memory_bandwidth_tb_s_max": 1.2,
+      "nvlink_c2c_bandwidth_tb_s_max": 1.8,
+      "fabric_bisection_bandwidth_tb_s": 3.4,
+      "pcie": "up to 88 PCIe Gen6 lanes; CXL 3.1 platform support",
+      "power_w": {"min": 250, "max": 450, "kind": "configurable_tdp"},
+      "software": ["Linux Arm64", "NVIDIA Dynamo", "TensorRT-LLM ecosystem", "CUDA-adjacent heterogeneous serving", "CXL 3.1"],
+      "pricing": [{"kind": "unavailable", "availability": "quote_only_or_not_public", "observed_at": "2026-08-30", "note": "No public standalone or OEM pricing found."}],
+      "vendor_urls": {
+        "manufacturer_product": "https://www.nvidia.com/en-us/data-center/vera-cpu/",
+        "manufacturer_announcement": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Vera-CPU-Purpose-Built-for-Agentic-AI/default.aspx"
+      },
+      "technical_documentation": {
+        "product_page": "https://www.nvidia.com/en-us/data-center/vera-cpu/",
+        "rack_page": "https://www.nvidia.com/en-us/data-center/products/vera-rack/"
+      },
+      "benchmarks": [
+        {
+          "kind": "independent_memory_bandwidth",
+          "source": "Phoronix",
+          "result": "about 90% of rated STREAM TRIAD peak bandwidth",
+          "evidence": "independent",
+          "url": "https://www.phoronix.com/review/nvidia-vera-cpu"
+        }
+      ],
+      "research_priority": "high",
+      "evidence": "manufacturer",
+      "notes": [
+        "Track as a CPU/host and orchestration platform, not as a standalone LLM accelerator.",
+        "Do not compare 1.2 TB/s CPU bandwidth directly with HBM accelerator bandwidth.",
+        "Open gaps: model-specific tok/s, sustained wall power, exact SKU memory configurations, OEM pricing and shipment timing."
+      ]
+    }
+  ]
+}
