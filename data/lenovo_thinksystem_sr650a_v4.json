@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-31",
+  "purpose": "Normalized heterogeneous host/platform record for LLM inference infrastructure.",
+  "hardware": [
+    {
+      "id": "lenovo-thinksystem-sr650a-v4",
+      "manufacturer": "Lenovo",
+      "product": "ThinkSystem SR650a V4",
+      "category": "heterogeneous_inference_host",
+      "status": "available_channel_dependent",
+      "form_factor": "2U rack server",
+      "cpu": {
+        "family": "Intel Xeon 6",
+        "socket_count": 2,
+        "max_cores_per_cpu_vendor": 86,
+        "max_tdp_per_cpu_w_vendor": 350,
+        "features": ["Intel AMX on supported Xeon 6 SKUs"]
+      },
+      "accelerator_capacity": {
+        "double_width_gpu_count_max": 4,
+        "single_width_accelerator_count_max": 8,
+        "note": "Actual accelerator mix depends on chassis configuration, power and cooling options."
+      },
+      "memory": {
+        "inference_model_system_memory_gb": 512,
+        "memory_type": "system DRAM; exact DIMM population not captured"
+      },
+      "io": ["PCIe 5.0 throughout"],
+      "cooling": ["air cooling configurations", "optional Neptune Core liquid cooling"],
+      "pricing": [],
+      "vendor_urls": [
+        "https://builders.intel.com/ecosystem-engagement/solution-hub/edge-ai-catalog/partner-spotlight/lenovo-thinksystem-sr650a-v4-279",
+        "https://lenovopress.lenovo.com/lp2124-thinksystem-sr650a-v4"
+      ],
+      "technical_documentation": [
+        "https://builders.intel.com/ecosystem-engagement/solution-hub/edge-ai-catalog/partner-spotlight/lenovo-thinksystem-sr650a-v4-279",
+        "https://lenovopress.lenovo.com/lp2124-thinksystem-sr650a-v4"
+      ],
+      "software": ["Linux ecosystem", "PyTorch/vLLM/SGLang depend on selected accelerator and host stack"],
+      "llm_benchmarks": [],
+      "evidence": "manufacturer_partner_listing",
+      "research_gaps": [
+        "public street price or regional quote",
+        "named accelerator configuration",
+        "independent end-to-end LLM throughput",
+        "whole-system wall power",
+        "multi-accelerator scaling efficiency"
+      ],
+      "notes": "Track as a heterogeneous host/platform and do not count as a new accelerator architecture. The 512GB inference-model memory figure is useful for CPU-side staging, retrieval, batching and KV-cache management, but does not imply accelerator memory capacity."
+    }
+  ]
+}
