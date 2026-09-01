@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-08-31",
+  "hardware": [
+    {
+      "id": "microsoft-maia-200",
+      "manufacturer": "Microsoft",
+      "product": "Maia 200",
+      "compute_platform": "microsoft-maia-200",
+      "category": "cloud_inference_accelerator",
+      "status": "deployed_cloud",
+      "tier": "S-potential",
+      "memory_gb": 216,
+      "memory_type": "HBM3e",
+      "memory_bandwidth_tb_s": 7.0,
+      "on_chip_sram_mb": 272,
+      "compute": {
+        "fp4_pflops": 10.0,
+        "fp8_pflops": 5.0,
+        "qualifier": "greater_than"
+      },
+      "power_w": 750,
+      "interconnect": {
+        "scale_up_bandwidth_tb_s_bidirectional": 2.8,
+        "cluster_max_accelerators": 6144,
+        "fabric": "custom Maia transport over Ethernet"
+      },
+      "software": {
+        "frameworks": ["PyTorch", "Triton"],
+        "sdk": "Maia SDK preview",
+        "low_level": "NPL",
+        "deployment": "Azure cloud"
+      },
+      "pricing": [
+        {
+          "kind": "unavailable",
+          "availability": "cloud_only",
+          "observed_at": "2026-08-31",
+          "currency": null,
+          "amount": null,
+          "region": "Azure US Central and announced additional regions",
+          "source_url": "https://blogs.microsoft.com/blog/2026/01/26/maia-200-the-ai-accelerator-built-for-inference/",
+          "note": "No public retail or tenant price captured."
+        }
+      ],
+      "vendor_urls": {
+        "manufacturer_product": "https://blogs.microsoft.com/blog/2026/01/26/maia-200-the-ai-accelerator-built-for-inference/",
+        "manufacturer_resources": "https://www.microsoft.com/en-us/maia"
+      },
+      "technical_documentation": {
+        "sdk": "https://www.microsoft.com/en-us/maia"
+      },
+      "evidence": "manufacturer",
+      "evidence_quality": "high_for_published_specs_low_for_independent_llm_performance",
+      "research_priority": "very_high",
+      "notes": [
+        "Cloud-only hyperscaler accelerator; do not count as a retail PCIe card.",
+        "No normalized public end-to-end LLM tokens/second benchmark captured.",
+        "FP4/FP8 figures are published peak claims."
+      ]
+    }
+  ]
+}
