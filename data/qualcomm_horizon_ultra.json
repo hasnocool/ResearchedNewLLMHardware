@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "updated": "2026-09-01",
+  "platforms": [
+    {
+      "id": "qualcomm-snapdragon-x2-elite-horizon-ultra",
+      "manufacturer": "Qualcomm / HUMAIN",
+      "product": "Horizon Ultra",
+      "category": "heterogeneous_ai_pc",
+      "status": "announced_enterprise_availability",
+      "announcement_date": "2026-08-31",
+      "availability": {
+        "status": "enterprise_purchase_starting_2026-09-20",
+        "region": "initial launch announced in Riyadh; broader sales scope undisclosed",
+        "stock_state": "not_listed"
+      },
+      "compute_platform": {
+        "soc": "Qualcomm Snapdragon X2 Elite",
+        "cpu": "18-core Qualcomm Oryon",
+        "gpu": "integrated Qualcomm Adreno (exact SKU undisclosed)",
+        "npu": {
+          "name": "Qualcomm Hexagon",
+          "tops_int8": "platform family up to 80-85; Horizon Ultra-specific SKU undisclosed"
+        }
+      },
+      "memory": {
+        "type": "LPDDR5X",
+        "capacity_gb": null,
+        "capacity_note": "Qualcomm product brief lists up to 128 GB for X2 Elite family; Horizon Ultra-specific configuration not disclosed",
+        "bandwidth_gbps": 152,
+        "bandwidth_note": "platform-family figure from Qualcomm product brief; exact Horizon Ultra SKU not disclosed"
+      },
+      "power": {
+        "system_power_w": null,
+        "note": "not disclosed"
+      },
+      "llm_evidence": [],
+      "software": {
+        "os": ["Windows 11"],
+        "runtimes": ["Qualcomm Snapdragon X2 Elite AI ecosystem"],
+        "frameworks": [],
+        "maturity": "platform-level only; no Horizon Ultra-specific local-LLM benchmark or runtime details captured"
+      },
+      "clusterability": {
+        "networking": null,
+        "notes": "not disclosed"
+      },
+      "pricing": [],
+      "urls": {
+        "manufacturer_product": "https://www.humain.ai/",
+        "manufacturer_announcement": "https://www.qualcomm.com/news/releases/2026/08/qualcomm-and-humain-unveil-horizon-ultra-ai-pc-at-leap-2026--bri",
+        "technical_documentation": "https://www.qualcomm.com/laptops/products/snapdragon-x2-elite",
+        "product_brief": "https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/Snapdragon-X2-Elite-Product-Brief.pdf"
+      },
+      "evidence_quality": {
+        "hardware": "manufacturer",
+        "memory_bandwidth": "manufacturer_platform_level",
+        "llm_performance": "unknown",
+        "pricing": "unknown",
+        "availability": "manufacturer"
+      },
+      "research_gaps": [
+        "Horizon Ultra-specific memory capacity and exact X2 Elite SKU",
+        "sustained package/system power",
+        "local LLM backend and model coverage",
+        "reproducible tok/s and tokens/watt",
+        "public enterprise pricing and reseller availability"
+      ],
+      "deduplication": {
+        "shared_silicon_platform": "qualcomm-snapdragon-x2-elite",
+        "counts_as_new_architecture": false
+      },
+      "sources": [
+        {
+          "type": "manufacturer",
+          "url": "https://www.qualcomm.com/news/releases/2026/08/qualcomm-and-humain-unveil-horizon-ultra-ai-pc-at-leap-2026--bri",
+          "accessed": "2026-09-01"
+        },
+        {
+          "type": "manufacturer",
+          "url": "https://www.qualcomm.com/laptops/products/snapdragon-x2-elite",
+          "accessed": "2026-09-01"
+        },
+        {
+          "type": "manufacturer",
+          "url": "https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/Snapdragon-X2-Elite-Product-Brief.pdf",
+          "accessed": "2026-09-01"
+        }
+      ]
+    }
+  ]
+}
