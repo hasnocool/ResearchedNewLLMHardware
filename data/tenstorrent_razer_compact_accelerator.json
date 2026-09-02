@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-09-02",
+  "purpose": "Track the announced Tenstorrent/Razer compact Thunderbolt AI accelerator for local and distributed LLM inference research.",
+  "notes": [
+    "This is an announced external accelerator device, not a confirmed retail product at the time of observation.",
+    "Tenstorrent's announcement does not disclose memory capacity, memory bandwidth, power, exact Wormhole SKU, price, shipping date, or reproducible LLM throughput.",
+    "The four-device daisy-chain statement is recorded as a manufacturer capability claim and should not be treated as measured scaling efficiency."
+  ],
+  "hardware": [
+    {
+      "id": "tenstorrent-razer-compact-accelerator",
+      "manufacturer": "Tenstorrent / Razer",
+      "product": "Compact AI Accelerator Device",
+      "category": "external_llm_accelerator",
+      "status": "announced_availability_unknown",
+      "compute_platform": "tenstorrent-wormhole",
+      "host_interface": ["Thunderbolt 4", "Thunderbolt 5"],
+      "multi_device_scaling": "up_to_4_devices_daisy_chained_per_manufacturer_announcement",
+      "memory_gb": null,
+      "memory_bandwidth_gbps": null,
+      "power_w": null,
+      "cooling": null,
+      "software": [
+        "Tenstorrent open-source software stack",
+        "LLM workload support stated by manufacturer"
+      ],
+      "llm_inference_suitability": "promising_for_developer_edge_ai_and_small_cluster_experiments_but_unquantified",
+      "cluster_role": ["portable_edge_accelerator", "developer_test_node", "small_multi_device_cluster"],
+      "benchmarks": [],
+      "pricing": [
+        {
+          "kind": "not_published",
+          "amount": null,
+          "currency": null,
+          "region": "global",
+          "availability": "not_published",
+          "observed_at": "2026-09-02",
+          "source_url": "https://tenstorrent.com/en/newsroom/tenstorrent-unveils-first-gen-compact-ai-accelerator-device",
+          "note": "Tenstorrent said more information on pricing and availability was forthcoming."
+        }
+      ],
+      "vendor_urls": [
+        "https://tenstorrent.com/en/newsroom/tenstorrent-unveils-first-gen-compact-ai-accelerator-device",
+        "https://github.com/tenstorrent"
+      ],
+      "technical_documentation": [
+        "https://tenstorrent.com/en/newsroom/tenstorrent-unveils-first-gen-compact-ai-accelerator-device",
+        "https://github.com/tenstorrent"
+      ],
+      "evidence": "manufacturer_announcement",
+      "research_priority": "high",
+      "research_gaps": [
+        "final product name and exact Wormhole configuration",
+        "on-device memory capacity and bandwidth",
+        "whole-device power and cooling",
+        "operating-system support",
+        "official order page and price",
+        "reproducible LLM throughput",
+        "multi-device scaling efficiency"
+      ]
+    }
+  ]
+}
