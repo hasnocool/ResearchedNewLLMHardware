@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-09-01",
+  "purpose": "Normalized Rockchip RK182X companion-accelerator records for low-power local LLM/VLM inference.",
+  "notes": [
+    "RK1820 and RK1828 are tracked as companion accelerators rather than standalone SBCs; they are intended to pair with RK3576/RK3588-class host SoCs.",
+    "The strongest public technical and benchmark evidence in this record comes from BesTom, a Rockchip AIoT design partner; Rockchip primary datasheets and public retail pricing were not located in this pass.",
+    "TOPS is a vendor peak-compute figure and is not directly comparable with measured tok/s.",
+    "RK1828 model capability is limited by its onboard memory; public partner material positions it around 3B-class Qwen3 workloads, while other partner material advertises 7B-class support. Preserve this as configuration/software evidence, not a guaranteed model-size limit."
+  ],
+  "hardware": [
+    {
+      "id": "rockchip-rk1828-companion-accelerator",
+      "manufacturer": "Rockchip",
+      "product": "RK1828 AI companion accelerator",
+      "category": "low_power_llm_companion_accelerator",
+      "status": "mass_production_partner_channel",
+      "compute_platform": "rockchip-rk182x",
+      "machine_learning_accelerator_tops_vendor": 20,
+      "supported_accelerator_datatypes": ["INT8", "INT4", "FP8", "FP16", "BF16"],
+      "controller_cpu": "3x 64-bit RISC-V control cores (partner documentation)",
+      "memory_gb": 5,
+      "memory_type": "3D-stacked DRAM / LPDDR4X-class partner description",
+      "interface": ["PCIe 2.1", "RGMII", "USB 3.1"],
+      "power": {
+        "typical_w": 5,
+        "kind": "partner_reported_typical_accelerator_power"
+      },
+      "cooling": "passive_possible_per_partner_material",
+      "deployment": ["M.2 2280 accelerator card", "SO-DIMM-style module", "RK3588/RK3576 companion"],
+      "software": [
+        "RK182X SDK 1.1.0 Preview (partner-reported)",
+        "Rockchip companion-accelerator runtime path",
+        "Qwen3 model examples"
+      ],
+      "llm_inference_suitability": "promising_for_small_local_llm_vlm_edge_nodes",
+      "cluster_role": ["edge_llm", "vlm_helper", "low_power_inference_node"],
+      "benchmarks": [
+        {
+          "model": "Qwen3-1.7B",
+          "quantization": "W4A16",
+          "context_tokens": 1024,
+          "input_output_tokens": "128/128",
+          "prefill_tok_s": 2387.5,
+          "decode_tok_s": 137.98,
+          "ttft_ms": 53.6,
+          "memory_mb": 1333,
+          "bandwidth_mb_s": 16150,
+          "evidence": "partner_reported_sdk_summary",
+          "source_url": "https://bestom.net/solutions/edge-ai-host.html"
+        },
+        {
+          "model": "Qwen3-4B",
+          "quantization": "W4A16",
+          "context_tokens": 1024,
+          "input_output_tokens": "128/128",
+          "prefill_tok_s": 1187.5,
+          "decode_tok_s": 84.1,
+          "ttft_ms": 107.8,
+          "memory_mb": 2696,
+          "bandwidth_mb_s": 220029,
+          "evidence": "partner_reported_sdk_summary",
+          "source_url": "https://bestom.net/solutions/edge-ai-host.html"
+        }
+      ],
+      "pricing": [
+        {
+          "kind": "not_published",
+          "amount": null,
+          "currency": null,
+          "region": "global",
+          "availability": "partner_channel_only",
+          "observed_at": "2026-09-01",
+          "source_url": "https://bestom.net/platforms.html",
+          "note": "No stable public numeric price located; do not infer from host-system pricing."
+        }
+      ],
+      "vendor_urls": [
+        "https://www.rock-chips.com/",
+        "https://bestom.net/platforms.html",
+        "https://bestom.net/solutions/edge-ai-host.html"
+      ],
+      "technical_documentation": [
+        "https://bestom.net/platforms.html",
+        "https://bestom.net/solutions/edge-ai-host.html"
+      ],
+      "evidence": "partner_and_secondary",
+      "research_priority": "high",
+      "research_gaps": [
+        "Rockchip primary datasheet and SDK publication",
+        "independent reproduction of tok/s and power",
+        "public board-level price and stock",
+        "multi-card scaling",
+        "exact memory bandwidth specification",
+        "model-size support clarification across RK1820/RK1828 configurations"
+      ]
+    },
+    {
+      "id": "rockchip-rk1820-companion-accelerator",
+      "manufacturer": "Rockchip",
+      "product": "RK1820 AI companion accelerator",
+      "category": "low_power_llm_companion_accelerator",
+      "status": "mass_production_partner_channel",
+      "compute_platform": "rockchip-rk182x",
+      "machine_learning_accelerator_tops_vendor": 20,
+      "memory_gb": 2.5,
+      "memory_type": "3D-stacked DRAM",
+      "interface": ["PCIe 2.1", "RGMII", "USB 3.1"],
+      "software": ["RK182X SDK 1.1.0 Preview (partner-reported)"],
+      "llm_inference_suitability": "small_model_edge_acceleration",
+      "pricing": [
+        {
+          "kind": "not_published",
+          "amount": null,
+          "currency": null,
+          "region": "global",
+          "availability": "partner_channel_only",
+          "observed_at": "2026-09-01",
+          "source_url": "https://bestom.net/platforms.html"
+        }
+      ],
+      "vendor_urls": [
+        "https://www.rock-chips.com/",
+        "https://bestom.net/platforms.html"
+      ],
+      "technical_documentation": [
+        "https://bestom.net/platforms.html"
+      ],
+      "evidence": "partner_and_secondary",
+      "research_priority": "medium",
+      "research_gaps": [
+        "primary datasheet",
+        "independent LLM benchmark",
+        "public pricing",
+        "exact host integration requirements"
+      ]
+    }
+  ]
+}
