@@ -1,65 +1,45 @@
 # Intel Crescent Island
 
-Last updated: **2026-08-26**
+**Status:** announced / pre-release architecture  
+**First documented:** 2026-08-24 (Intel Hot Chips 2026 disclosure)  
+**Category:** inference-optimized PCIe datacenter GPU  
+**Evidence:** manufacturer
 
-Intel Crescent Island is a purpose-built **Xe3P inference GPU** aimed at large-model and agentic AI workloads in conventional air-cooled enterprise servers.
+## Published specifications
 
-## Why it matters
+Intel describes Crescent Island as a next-generation Xe3P-based inference GPU for agentic AI workloads:
 
-The most important new Hot Chips 2026 disclosure is memory capacity: Intel now specifies **up to 480 GB LPDDR5X on a 350 W air-cooled PCIe card**. That is an unusually large single-card memory pool for an accelerator that does not require liquid cooling.
+- 32 Xe cores
+- 256 XMX engines
+- Up to 480 GB LPDDR5X memory
+- 350 W air-cooled PCIe add-in card
+- Intended to maximize sustained inference throughput and token output while reducing cooling demand
 
-Intel positions Crescent Island around sustained token throughput, larger models, longer context windows and higher concurrent-agent density rather than training-first peak FLOPS.
+Intel has not yet published a defensible public memory-bandwidth figure, SKU matrix, clock targets, driver maturity statement, price, or reproducible model-specific LLM benchmark. Those fields remain unknown.
 
-## Manufacturer specifications
+## LLM relevance
 
-- Architecture: **Xe3P**
-- Xe cores: **32**
-- XMX engines: **256**
-- Memory: **up to 480 GB LPDDR5X**
-- Power: **350 W**
-- Form factor: PCIe accelerator
-- Cooling: air cooled
-- Intended workload: large-scale inference / agentic AI
+The unusual feature is the combination of very large LPDDR5X capacity with a standard 350 W PCIe card. If the final product preserves enough bandwidth and exposes mature oneAPI/SYCL/XMX kernels, it could become a lower-cost capacity-oriented alternative to HBM accelerators for large quantized models. The tradeoff is that LPDDR5X bandwidth is expected to be materially below current HBM parts, so decode performance and multi-card scaling require measurement.
 
-Intel's original October 2025 announcement described a 160 GB target. Its May and August 2026 disclosures supersede that capacity figure with **up to 480 GB**, so the repository treats 480 GB as the current manufacturer specification while preserving the older announcement as historical context.
+## Software and clusterability
 
-## Software maturity
-
-Intel oneAPI 2026.1 explicitly lists **Crescent Island** GPU support for Ubuntu Server 24.04 and 26.04. Relevant software paths include:
-
-- stock PyTorch through `torch.xpu`;
-- oneDNN;
-- oneCCL for distributed workloads;
-- SYCL / oneAPI tooling.
-
-This is important because high memory capacity only becomes useful when models can be deployed through a practical framework stack.
+Intel positions Crescent Island within its Xe / XMX software ecosystem. The public disclosure does not yet provide a complete supported-runtime matrix for llama.cpp, vLLM, PyTorch, OpenVINO, oneAPI or distributed collectives. PCIe form factor is favorable for server integration, but detailed fabric/interconnect support is not yet public.
 
 ## Pricing and availability
 
-No defensible public standalone price is captured yet.
+No stable public numeric price or release date was found in the manufacturer material reviewed on 2026-09-03. Track as announced/watch rather than purchasable hardware.
 
-Intel previously targeted customer sampling in the **second half of 2026**. The Hot Chips disclosure materially improves the specification picture, but it does not by itself establish broad production availability.
+## Research gaps
 
-## Current ranking
+- exact memory bandwidth and memory organization
+- final SKU(s), board dimensions and auxiliary power
+- sustained board and whole-system power
+- Linux driver/runtime availability and supported frameworks
+- reproducible prefill/decode results for named models and quantizations
+- multi-card scaling and peer-to-peer behavior
+- vendor and secondary-market pricing
 
-**S-potential / watch.**
+## Sources
 
-Crescent Island could become one of the most interesting inference cards in the catalog if its physical memory bandwidth, price and real token throughput are competitive. The 480 GB capacity at 350 W is already significant enough to warrant a dedicated record.
-
-## Open questions
-
-- physical LPDDR5X bandwidth;
-- exact low-precision peak/sustained compute;
-- standalone/OEM pricing;
-- production shipment dates;
-- independent prefill/decode results;
-- whole-system tokens per watt;
-- multi-card scale-up topology and efficiency.
-
-## Primary sources
-
-- https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026
-- https://newsroom.intel.com/data-center/intel-puts-agentic-ai-xeon-6-networking-ai-systems
-- https://newsroom.intel.com/artificial-intelligence/intel-to-expand-ai-accelerator-portfolio-with-new-gpu
-- https://www.intel.com/content/www/us/en/developer/articles/release-notes/oneapi-toolkit/2026.html
-- https://www.intel.com/content/www/us/en/developer/tools/oneapi/optimization-for-pytorch.html
+- Intel Newsroom, “Intel Outlines Architectures for Agentic AI at Hot Chips 2026,” 2026-08-24: https://www.intel.com/content/www/us/en/newsroom/news/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026.html
+- Intel Newsroom localized release with the same published figures: https://newsroom.intel.com/pt/client-computing/intel-apresenta-arquiteturas-para-ia-agentica-na-hot-chips-2026
