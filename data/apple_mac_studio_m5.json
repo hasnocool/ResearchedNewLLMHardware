@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-09-04",
+  "id": "apple-mac-studio-m5-family",
+  "manufacturer": "Apple",
+  "product": "Mac Studio with M5 Max and M5 Ultra",
+  "category": "unified_memory_workstation",
+  "status": "preorder",
+  "compute_platforms": ["apple-m5-max", "apple-m5-ultra"],
+  "variants": [
+    {
+      "id": "apple-mac-studio-m5-max",
+      "cpu_cores_max": 18,
+      "gpu_cores_max": 40,
+      "gpu_neural_accelerators": true,
+      "unified_memory_gb_max": 128,
+      "memory_bandwidth_gbps_max": 614,
+      "pricing": [
+        {
+          "kind": "manufacturer_starting_price",
+          "amount": 2499,
+          "currency": "USD",
+          "region": "US",
+          "observed_at": "2026-08-25",
+          "availability": "preorder",
+          "source_url": "https://www.apple.com/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra/"
+        }
+      ],
+      "benchmark_evidence": [
+        {
+          "source_type": "manufacturer",
+          "metric": "LLM_prompt_processing_relative",
+          "value": 3.9,
+          "comparison_baseline": "Mac Studio M4 Max",
+          "workload": "LM Studio",
+          "source_url": "https://www.apple.com/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra/"
+        }
+      ]
+    },
+    {
+      "id": "apple-mac-studio-m5-ultra",
+      "cpu_cores_max": 36,
+      "gpu_cores_max": 80,
+      "gpu_neural_accelerators": true,
+      "unified_memory_gb_max": 512,
+      "memory_bandwidth_gbps_max": 1200,
+      "pricing": [
+        {
+          "kind": "manufacturer_starting_price",
+          "amount": 5499,
+          "currency": "USD",
+          "region": "US",
+          "observed_at": "2026-08-25",
+          "availability": "preorder",
+          "source_url": "https://www.apple.com/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra/"
+        }
+      ],
+      "benchmark_evidence": [
+        {
+          "source_type": "manufacturer",
+          "metric": "LLM_prompt_processing_relative",
+          "value": 4.0,
+          "comparison_baseline": "Mac Studio M3 Ultra",
+          "workload": "LM Studio",
+          "source_url": "https://www.apple.com/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra/"
+        }
+      ]
+    }
+  ],
+  "software": ["Core AI", "Metal", "MLX", "llama.cpp ecosystem"],
+  "clusterability": {
+    "interconnect": ["Thunderbolt 5", "RDMA"],
+    "manufacturer_claim": "Up to 3x faster AI inference for a four-system cluster versus one system",
+    "evidence_quality": "manufacturer"
+  },
+  "availability": {
+    "announced_at": "2026-08-25",
+    "shipping_start": "2026-09-22",
+    "512gb_variant_expected": "late October 2026",
+    "source_url": "https://www.apple.com/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra/"
+  },
+  "evidence": "manufacturer",
+  "research_gaps": [
+    "Independent sustained decode tok/s",
+    "Whole-system wall power and tokens per joule",
+    "Independent multi-node RDMA/sharding validation",
+    "Regional CTO pricing outside the US"
+  ],
+  "sources": [
+    "https://www.apple.com/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra/",
+    "https://www.apple.com/mac-studio/",
+    "https://developer.apple.com/metal/",
+    "https://ml-explore.github.io/mlx/build/html/index.html"
+  ]
+}
