@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-09-03",
+  "updates": [
+    {
+      "hardware_id": "distributed-local-fleet",
+      "compute_platform": "mixed-rtx-dgx-spark-apple-silicon",
+      "kind": "software_runtime_update",
+      "product": "NVIDIA Personal AI Router (PAIR)",
+      "summary": "PAIR routes independent local inference requests across compatible Windows, Linux and macOS nodes and exposes Ollama-compatible and OpenAI-compatible endpoints.",
+      "supported_scope": {
+        "operating_systems": ["Windows 11", "Linux", "macOS"],
+        "architectures": ["x64", "arm64"],
+        "engines": ["Ollama", "LM Studio"],
+        "hardware": ["GeForce RTX 20-series and newer", "RTX PRO workstation GPUs", "DGX Spark", "Apple M4 and newer"],
+        "windows_on_arm": "experimental"
+      },
+      "distributed_behavior": {
+        "routes_independent_requests": true,
+        "pools_gpu_memory": false,
+        "shards_one_model": false,
+        "splits_in_flight_request": false,
+        "primary_benefit": "higher concurrent throughput for multi-agent or queued workloads"
+      },
+      "published_benchmark": {
+        "workload": "five-subagent Hermes Desktop + Ollama demonstration",
+        "cluster_nodes": 3,
+        "cluster_time_minutes": 8.8,
+        "single_rtx_spark_laptop_time_minutes": 18.0,
+        "evidence": "manufacturer",
+        "caution": "Workload-specific demonstration; not a normalized model/runtime benchmark."
+      },
+      "security_and_discovery": ["mDNS discovery", "six-digit PIN pairing", "mTLS-secured cluster communication"],
+      "evidence": "manufacturer + open-source documentation",
+      "source_urls": [
+        "https://github.com/NVIDIA/Personal-AI-Router",
+        "https://developer.nvidia.com/blog/nvidia-pair-virtual-inference-router-expands-available-compute-on-your-local-network/",
+        "https://www.nvidia.com/en-gb/ai-on-rtx/personal-ai-router/",
+        "https://github.com/NVIDIA/Personal-AI-Router/blob/main/docs/overview.mdx"
+      ],
+      "research_gaps": [
+        "independent mixed-node scaling",
+        "network overhead under realistic agent workloads",
+        "model warmness and cache effects",
+        "failure and rejoin behavior",
+        "comparison with Ray, vLLM multi-node serving, llama.cpp RPC and Kubernetes schedulers"
+      ]
+    }
+  ]
+}
