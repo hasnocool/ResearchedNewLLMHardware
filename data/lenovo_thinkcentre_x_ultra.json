@@ -1,0 +1,79 @@
+{
+  "id": "lenovo-thinkcentre-x-ultra",
+  "manufacturer": "Lenovo",
+  "product": "ThinkCentre X Ultra",
+  "compute_platform": "amd-gorgon-halo-ryzen-ai-max-pro-495",
+  "category": "compact_unified_memory_workstation",
+  "status": "announced",
+  "tier": "S-potential",
+  "announcement_date": "2026-09-03",
+  "availability": {
+    "status": "planned",
+    "expected_start": "2026-11",
+    "region": "not yet fully specified"
+  },
+  "cpu": "AMD Ryzen AI Max+ PRO 495",
+  "cpu_cores": 16,
+  "cpu_threads": 32,
+  "gpu": "Integrated AMD Radeon 8065S",
+  "gpu_compute_units": 40,
+  "npu_tops_max": 55,
+  "memory_gb_max": 128,
+  "memory_type": "LPDDR5X unified",
+  "memory_data_rate_mts": 8533,
+  "gpu_addressable_memory_gb_max": 96,
+  "storage": {
+    "max_tb": 8,
+    "interface": "2x M.2 2280 Gen5 Performance SSD"
+  },
+  "networking": [
+    "10GbE",
+    "Wi-Fi 7",
+    "Bluetooth 5.4"
+  ],
+  "ports": [
+    "2x Thunderbolt 4",
+    "DisplayPort 2.1",
+    "HDMI 2.1"
+  ],
+  "dimensions_mm": [183, 183, 51],
+  "weight_kg_starting": 2.0,
+  "clusterability": {
+    "max_systems": 4,
+    "mode": "task/model-service scaling; exact model-sharding behavior not published"
+  },
+  "software": [
+    "Windows 11",
+    "Linux AMD AI OS",
+    "Ubuntu certification",
+    "AMD Ryzen AI Developer Center",
+    "ROCm ecosystem"
+  ],
+  "power": {
+    "value_w": null,
+    "kind": "unknown"
+  },
+  "pricing": [
+    {
+      "kind": "unavailable",
+      "availability": "not_yet_priced",
+      "observed_at": "2026-09-04",
+      "note": "No authoritative Lenovo price found in this research pass."
+    }
+  ],
+  "vendor_urls": {
+    "manufacturer_product": "https://news.lenovo.com/pressroom/press-releases/hybrid-ai-for-business-devices-displays-solutions/"
+  },
+  "technical_documentation": {
+    "product_specification": "https://news.lenovo.com/pressroom/press-releases/hybrid-ai-for-business-devices-displays-solutions/",
+    "amd_platform": "https://www.amd.com/en/blogs/2026/amd-powers-next-generation-agent-computers-with-new-ryzen-ai-hal.html"
+  },
+  "evidence_quality": "manufacturer",
+  "research_notes": [
+    "Treat as an OEM system variant of the AMD Ryzen AI Max PRO 400/Gorgon Halo platform; do not count the silicon as a new architecture.",
+    "Lenovo states up to four systems can be connected in a cluster-ready architecture, but interconnect topology and single-model sharding performance are not published.",
+    "AMD lists 192 GB platform support for the Ryzen AI Max+ PRO 495 family, while this Lenovo system is specified at up to 128 GB.",
+    "No reproducible independent LLM benchmark or whole-system power measurement found."
+  ],
+  "last_verified": "2026-09-04"
+}
