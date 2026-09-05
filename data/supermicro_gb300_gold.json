@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-09-05",
+  "purpose": "Normalize the Supermicro Gold Super AIstation GB300 as an OEM/system variant under the shared NVIDIA GB300 platform.",
+  "manufacturer": "Supermicro",
+  "product": "Gold Super AIstation GB300",
+  "model": "ARS-511GD-NB-LCC-01-G2",
+  "compute_platform": "nvidia-gb300-grace-blackwell-ultra-desktop",
+  "category": "deskside_ai_supercomputer",
+  "status": "shipping_or_channel_orderable",
+  "release_status_as_of": "2026-09-05",
+  "memory": {
+    "coherent_memory_gb": 748,
+    "gpu_memory_gb": 252,
+    "gpu_memory_type": "HBM3e",
+    "cpu_memory_gb": 496,
+    "cpu_memory_type": "LPDDR5X"
+  },
+  "power": {
+    "system_power_class_w": 1600,
+    "cooling": "direct_to_chip_liquid_cooling"
+  },
+  "networking": ["2x 400 GbE / ConnectX-8 class"],
+  "storage_observed": "2x 1 TB M.2 + 2x 2 TB M.2",
+  "pricing": [
+    {
+      "observed_at": "2026-09-01",
+      "region": "US",
+      "amount": 92887.47,
+      "currency": "USD",
+      "kind": "observed_new",
+      "stock_state": "selling_or_quote_to_order",
+      "source_url": "https://www.techradar.com/pro/nvidia-gb300-dgx-station-desktop-pc-goes-on-sale-for-almost-usd91-100-7x-costlier-than-a-256gb-ram-mac-studio-m5-ultra-but-with-748gb-ram",
+      "evidence_quality": "reputable_secondary_reporting"
+    },
+    {
+      "observed_at": "2026-09-05",
+      "region": "CA",
+      "amount": 136734,
+      "currency": "CAD",
+      "kind": "observed_new",
+      "stock_state": "add_to_cart_new_arrival",
+      "source_url": "https://www.directdial.com/ca/item/supermicro-optimized-gold-super-aistation-gb300-w-2x-1tb-m-2-2x-2t/ars-511gd-nb-lcc-01-",
+      "evidence_quality": "reputable_vendor_listing"
+    }
+  ],
+  "software": ["CUDA", "TensorRT", "PyTorch ecosystem", "NVIDIA AI software stack"],
+  "vendor_urls": [
+    "https://www.supermicro.com/en/products/system/ai",
+    "https://www.nvidia.com/en-us/products/workstations/dgx-station/"
+  ],
+  "technical_documentation": [
+    "https://docs.nvidia.com/dgx/dgx-station-development-guide/Intro.html"
+  ],
+  "benchmarks": [],
+  "evidence": "manufacturer_platform_plus_reputable_vendor_and_secondary_sources",
+  "research_gaps": [
+    "No independent model-specific tok/s result located",
+    "Exact Supermicro configuration sheet was not publicly indexed in this pass",
+    "Delivered cost varies with tax, shipping, warranty and reseller configuration"
+  ]
+}
