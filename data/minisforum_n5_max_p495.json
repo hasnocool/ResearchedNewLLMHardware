@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-09-05",
+  "id": "minisforum-n5-max-p495",
+  "manufacturer": "Minisforum",
+  "product": "N5 MAX AI NAS P495",
+  "compute_platform": "amd-gorgon-halo-ryzen-ai-max-pro-495",
+  "category": "ai_nas",
+  "status": "announced_exhibited",
+  "tier": "A-potential",
+  "deduplication": {
+    "is_new_silicon": false,
+    "shared_platform": "AMD Ryzen AI Max PRO 400 / Gorgon Halo family",
+    "notes": ["Tracked as an OEM system variant; do not count as a separate accelerator architecture."]
+  },
+  "cpu": "AMD Ryzen AI Max+ Pro 495",
+  "gpu": "Radeon 8065S",
+  "memory_gb_max": 192,
+  "memory_type": "unified system memory",
+  "storage_capacity_claim_tb_max": 200,
+  "llm_relevance": {
+    "strengths": ["Large unified memory potential", "NAS/storage-oriented chassis", "Suitable target for local agentic workflows"],
+    "limitations": ["No reproducible independent LLM throughput found", "N5 MAX-specific memory bandwidth and final configuration not published"]
+  },
+  "pricing": [{
+    "kind": "unavailable",
+    "availability": "not_yet_public",
+    "observed_at": "2026-09-05",
+    "note": "No defensible public price found; do not infer from other Minisforum systems."
+  }],
+  "availability": {
+    "status": "exhibited",
+    "regions": ["global event availability only"],
+    "observed_at": "2026-09-05",
+    "note": "Displayed at IFA 2026; launch timing and channel availability not published."
+  },
+  "software": ["Windows", "Linux", "AMD Ryzen AI Software", "ROCm", "Vulkan"],
+  "vendor_urls": {
+    "manufacturer": "https://www.minisforum.com/",
+    "event_product_coverage": "https://www.tomshardware.com/pc-components/nas/minisforum-launches-local-ai-solutions-at-ifa-2026-ai-agent-nas-n5-and-ai-mini-workstation-ms-s1-use-amd-ryzen-ai-max-pro-495-processors-designed-to-run-models-locally"
+  },
+  "technical_documentation": {
+    "ryzen_ai_software": "https://ryzenai.docs.amd.com/en/latest/"
+  },
+  "evidence": {
+    "quality": "manufacturer_partner_announcement_plus_reputable_secondary_coverage",
+    "independent_benchmark": false,
+    "missing": ["exact N5 MAX memory configuration", "memory bandwidth", "sustained power", "thermals", "independent LLM tokens_per_second", "final storage topology", "regional pricing"]
+  },
+  "research_priority": "high"
+}
