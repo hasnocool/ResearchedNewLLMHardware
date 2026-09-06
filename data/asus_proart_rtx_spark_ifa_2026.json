@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-09-06",
+  "id": "asus-proart-rtx-spark-ifa-2026",
+  "manufacturer": "ASUS",
+  "product_family": "ProArt P14 / ProArt P16 / ProArt GR1X",
+  "shared_compute_platform": "nvidia-rtx-spark-n1x",
+  "category": "oem_system_update",
+  "status": "announced_prelaunch",
+  "announcement_date": "2026-09-02",
+  "availability": {
+    "state": "prelaunch",
+    "region": "global_showcase",
+    "stock": "not_publicly_orderable_in_stable_retail_channels_as_of_2026-09-06"
+  },
+  "llm_relevance": {
+    "vendor_claim_model_parameters_b_max": 120,
+    "evidence": "manufacturer_claim",
+    "caveat": "This is not an independent benchmark and does not establish usable context length, throughput or model fit for every SKU."
+  },
+  "known_system_facts": {
+    "gr1x_memory_gb_max": 128,
+    "gr1x_networking": ["10GbE", "Wi-Fi 7", "Bluetooth 5.4"],
+    "gr1x_power_input_w_max": 180,
+    "gr1x_dimensions_mm": [150, 150, 51],
+    "p14_p16_memory_gb_max": 128
+  },
+  "pricing": [],
+  "price_note": "No stable numeric ASUS retail price captured as of 2026-09-06.",
+  "software": ["Windows", "CUDA", "TensorRT", "NVIDIA RTX ecosystem"],
+  "clusterability": {
+    "useful_networking": ["10GbE on GR1X"],
+    "supported_pattern": "request_routing_or_multi-node_orchestration",
+    "not_established": ["single-model memory pooling", "efficient tensor parallelism"]
+  },
+  "evidence": "manufacturer",
+  "sources": [
+    {
+      "date": "2026-09-02",
+      "type": "manufacturer_press_release",
+      "url": "https://press.asus.com/news/press-releases/asus-proart-p16-p14-gr1x-rtx-spark-ifa-2026/"
+    },
+    {
+      "type": "platform_reference",
+      "url": "https://www.nvidia.com/en-us/products/rtx-spark/"
+    }
+  ],
+  "open_questions": [
+    "final regional SKUs and shipment dates",
+    "retail pricing by region",
+    "exact RTX Spark memory bandwidth",
+    "sustained whole-system power",
+    "independent prefill and decode throughput",
+    "shipping Windows-on-Arm runtime support for llama.cpp, vLLM and PyTorch"
+  ],
+  "deduplication_note": "This record is an OEM availability/source update for the existing NVIDIA RTX Spark N1X platform; it is not new silicon."
+}
