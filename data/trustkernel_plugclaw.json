@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "updated": "2026-09-06",
+  "platforms": [
+    {
+      "id": "trustkernel-plugclaw",
+      "manufacturer": "TrustKernel",
+      "product": "PlugClaw",
+      "category": "specialty_edge_ai_computer",
+      "status": "shipping_general_availability_claimed",
+      "announcement_date": "2026-09-04",
+      "availability": {
+        "status": "general_availability_claimed",
+        "region": "worldwide shipping claimed by manufacturer",
+        "stock_state": "shipping_claimed"
+      },
+      "compute_platform": {
+        "soc": "MediaTek Helio G80",
+        "cpu": null,
+        "gpu": null,
+        "npu": null
+      },
+      "memory": {
+        "type": null,
+        "capacity_gb": 6,
+        "bandwidth_gbps": null,
+        "capacity_note": "up to 6 GB; exact memory type and usable capacity not disclosed"
+      },
+      "storage": {
+        "capacity_gb": 128,
+        "type": "encrypted storage",
+        "note": "up to 128 GB"
+      },
+      "power": {
+        "system_power_w": null,
+        "note": "not disclosed"
+      },
+      "llm_evidence": [],
+      "software": {
+        "os": ["PlugOS", "Ubuntu runtime"],
+        "runtimes": [],
+        "frameworks": [],
+        "maturity": "device/runtime positioning disclosed; no public LLM backend or benchmark details captured"
+      },
+      "clusterability": {
+        "networking": null,
+        "notes": "USB-C host-attached device; no cluster interconnect claim captured"
+      },
+      "pricing": [],
+      "urls": {
+        "manufacturer_product": "https://trustkernel.com/",
+        "announcement": "https://www.prnewswire.com/news-releases/trustkernel-ships-plugclaw-a-thumb-sized-private-ai-computer-and-opens-free-confidential-inference-302869347.html"
+      },
+      "evidence_quality": {
+        "hardware": "manufacturer_press_release",
+        "availability": "manufacturer_press_release",
+        "llm_performance": "unknown",
+        "pricing": "unknown",
+        "software": "manufacturer_press_release"
+      },
+      "research_gaps": [
+        "exact RAM configuration and usable memory",
+        "Linux GPU/NPU acceleration support",
+        "supported local LLM backends and model coverage",
+        "sustained power draw and thermal behavior",
+        "retail price and regional stock",
+        "independent benchmark evidence"
+      ],
+      "deduplication": {
+        "shared_silicon_platform": "mediatek-helio-g80",
+        "counts_as_new_architecture": false,
+        "notes": "tracked as a specialty complete system rather than a new accelerator architecture"
+      },
+      "sources": [
+        {
+          "type": "manufacturer_press_release",
+          "url": "https://www.prnewswire.com/news-releases/trustkernel-ships-plugclaw-a-thumb-sized-private-ai-computer-and-opens-free-confidential-inference-302869347.html",
+          "accessed": "2026-09-06"
+        }
+      ]
+    }
+  ]
+}
